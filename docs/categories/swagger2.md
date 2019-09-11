@@ -39,7 +39,7 @@ catagories:
 
 - 配置完成后，通过访问`http://localhost:8080/swagger-ui.html`（自己的项目访问路径/swagger-ui.html）来访问接口文档就可以了。
 
-![](/img/swagger2/swagger2.png)
+![](/znote/img/swagger2/swagger2.png)
 
 ### 添加依赖
 

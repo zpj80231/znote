@@ -1,6 +1,6 @@
 ---
 home: true
-heroImage: /topic.png
+heroImage: /vuepress/topic.png
 heroImageStyle: {
   maxWidth: '800px',
   width: '100%',

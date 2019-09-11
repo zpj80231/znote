@@ -24,10 +24,10 @@ git checkout -b gh-pages
 git push -u origin gh-pages -f
 
 cd ..
-git init
-git remote add origin git@github.com:zpj80231/znote.git
+#git init
+#git remote add origin git@github.com:zpj80231/znote.git
 git add .
-git commit -m 'commit'
+git commit -m '修复图片不展示'
 git push origin master
 
 

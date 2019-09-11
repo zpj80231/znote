@@ -33,4 +33,4 @@ catagories:
 - 如果你喜欢的话还可以为你自己的浏览器（手机电脑都OK哟）设置为这个主页！o(*￣▽￣*)ブ
 
 ## 首页如下
-![](/img/viaStart/thumb.png)
+![](/znote/img/viaStart/thumb.png)
