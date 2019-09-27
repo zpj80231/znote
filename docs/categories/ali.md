@@ -69,11 +69,11 @@ catagories:
      **说明：** 将设计模式体现在名字中，有利于阅读者快速理解架构设计思想。  
      **正例：**  
 
-     ```java
-     public class OrderFactory;
-     public class LoginProxy;
-     public class ResourceObserver;
-     ```
+```java
+public class OrderFactory;
+public class LoginProxy;
+public class ResourceObserver;
+```
 
 12. 【推荐】接口类中的方法和属性不要加任何修饰符号（`public` 也不要加），保持代码的简洁性，并加上有效的 Javadoc 注释。尽量不要在接口里定义变量，如果一定要定义变量，肯定是与接口方法相关，并且是整个应用的基础常量。  
      **正例：** 接口方法签名：`void f();`  
@@ -110,30 +110,30 @@ catagories:
 1. 【强制】不允许任何魔法值（即未经定义的常量）直接出现在代码中。  
     **反例：** 
 
-    ```java
-    String key = "Id#taobao_" + tradeId;  
+```java
+String key = "Id#taobao_" + tradeId;  
 cache.put(key, value);
-    ```
-    
+```
+
 2. 【强制】long 或者 Long 初始赋值时，必须使用大写的 L，不能是小写的 l，小写容易跟数字 1 混淆，造成误解。
     说明：`Long a = 2l;` 写的是数字的 21，还是 Long 型的 2?
-
 3. 【推荐】不要使用一个常量类维护所有常量，应该按常量功能进行归类，分开维护。如：缓存相关的常量放在类：CacheConsts 下；系统配置相关的常量放在类：ConfigConsts 下。  
     **说明：** 大而全的常量类，非得使用查找功能才能定位到修改的常量，不利于理解和维护。
-
 4. 【推荐】常量的复用层次有五层：跨应用共享常量、应用内共享常量、子工程内共享常量、包内共享常量、类内共享常量。
     1） 跨应用共享常量：放置在二方库中，通常是 `client.jar` 中的 `constant` 目录下。  
     2） 应用内共享常量：放置在一方库的 `modules` 中的 `constant` 目录下。  
         **反例：** 易懂变量也要统一定义成应用内共享常量，两位攻城师在两个类中分别定义了表示“是”的变量：  
 
-    ```java
-        类 A 中：public static final String YES = "yes";  
-        类 B 中：public static final String YES = "y";  
-        A.YES.equals(B.YES)，预期是 true，但实际返回为 false，导致线上问题。  
-    ```
-    3） 子工程内部共享常量：即在当前子工程的 `constant` 目录下。  
-    4） 包内共享常量：即在当前包下单独的 `constant` 目录下。  
-    5） 类内共享常量：直接在类内部 `private static final` 定义。  
+```java
+类 A 中：public static final String YES = "yes";  
+类 B 中：public static final String YES = "y";  
+A.YES.equals(B.YES)，预期是 true，但实际返回为 false，导致线上问题。  
+```
+
+​		3） 子工程内部共享常量：即在当前子工程的 `constant` 目录下。  
+​		4） 包内共享常量：即在当前包下单独的 `constant` 目录下。  
+​		5） 类内共享常量：直接在类内部 `private static final` 定义。
+
 5. 【推荐】如果变量值仅在一个范围内变化，且带有名称之外的延伸属性，定义为枚举类。下面正例中的数字就是延伸信息，表示星期几。  
     **正例：** `public Enum { MONDAY(1), TUESDAY(2), WEDNESDAY(3), THURSDAY(4), FRIDAY(5), SATURDAY(6),
 SUNDAY(7);}`
@@ -160,25 +160,25 @@ SUNDAY(7);}`
     **正例：** （涉及 1-5 点）  
 
   ```java
-   public static void main(String[] args) {
-       // 缩进 4 个空格
-       String say = "hello";
-       // 运算符的左右必须有一个空格
-       int flag = 0;
-       // 关键词 if 与括号之间必须有一个空格，括号内的 f 与左括号，0 与右括号不需要空格
-       if (flag == 0) {
-           System.out.println(say);
-       }
-   
-       // 左大括号前加空格且不换行；左大括号后换行
-       if (flag == 1) {
-           System.out.println("world");
-       // 右大括号前换行，右大括号后有 else，不用换行
-       } else {
-           System.out.println("ok");
-       // 在右大括号后直接结束，则必须换行
-       }
-   } 
+public static void main(String[] args) {
+    // 缩进 4 个空格
+    String say = "hello";
+    // 运算符的左右必须有一个空格
+    int flag = 0;
+    // 关键词 if 与括号之间必须有一个空格，括号内的 f 与左括号，0 与右括号不需要空格
+    if (flag == 0) {
+        System.out.println(say);
+    }
+
+    // 左大括号前加空格且不换行；左大括号后换行
+    if (flag == 1) {
+        System.out.println("world");
+        // 右大括号前换行，右大括号后有 else，不用换行
+    } else {
+        System.out.println("ok");
+        // 在右大括号后直接结束，则必须换行
+    }
+} 
   ```
 
 6. 【强制】单行字符数限制不超过 120 个，超出需要换行，换行时遵循如下原则：  
@@ -218,12 +218,14 @@ SUNDAY(7);}`
 9. 【推荐】没有必要增加若干空格来使某一行的字符与上一行对应位置的字符对齐。  
     **正例：** 
 
-        int a = 3;
-        long b = 4L;
-        float c = 5F;
-        StringBuffer sb = new StringBuffer();
+  ```java
+    int a = 3;
+    long b = 4L;
+    float c = 5F;
+    StringBuffer sb = new StringBuffer();
+  ```
 
-    **说明：** 增加 sb 这个变量，如果需要对齐，则给 a、b、c 都要增加几个空格，在变量比较多的情况下，是一种累赘的事情。
+​		**说明：**  增加 sb 这个变量，如果需要对齐，则给 a、b、c 都要增加几个空格，在变量比较多的情况下，是一种累赘的事情。
 
 10. 【推荐】方法体内的执行语句组、变量的定义语句组、不同的业务逻辑之间或者不同的语义之间插入一个空行。相同业务逻辑和语义之间不需要插入空行。  
     **说明：** 没有必要插入多个空行进行隔开。
@@ -282,12 +284,12 @@ NPE 问题，或者入库检查，都由使用者来保证。
 13. 【推荐】使用索引访问用 `String` 的 `split` 方法得到的数组时，需做最后一个分隔符后有无内容的检查，否则会有抛 `IndexOutOfBoundsException` 的风险。  
     **说明：** 
 
-    ```java
-    String str = "a,b,c,,";
-    String[] ary = str.split(",");
-    //预期大于 3，结果是 3
-    System.out.println(ary.length);
-    ```
+ ```java
+ String str = "a,b,c,,";
+ String[] ary = str.split(",");
+ //预期大于 3，结果是 3
+ System.out.println(ary.length);
+ ```
 
 14. 【推荐】当一个类有多个构造方法，或者多个同名方法，这些方法应该按顺序放置在一起，便于阅读。
 
@@ -298,26 +300,26 @@ NPE 问题，或者入库检查，都由使用者来保证。
 16. 【推荐】`setter` 方法中，参数名称与类成员变量名称一致，`this.成员名 = 参数名`。在 `getter/setter` 方法中，不要增加业务逻辑，增加排查问题的难度。  
     **反例：** 
 
-    ```java
-    public Integer getData() {
-        if (true) {
-            return this.data + 100;
-        } else {
-            return this.data - 100;
-        }
-    }
-    ```
+ ```java
+ public Integer getData() {
+     if (true) {
+    	 return this.data + 100;
+     } else {
+     	return this.data - 100;
+     }
+ }
+ ```
 
 17. 【推荐】循环体内，字符串的连接方式，使用 `StringBuilder` 的 `append` 方法进行扩展。  
     **说明：** 反编译出的字节码文件显示每次循环都会 `new` 出一个 `StringBuilder` 对象，然后进行 `append` 操作，最后通过 `toString` 方法返回 `String` 对象，造成内存资源浪费。  
     **反例：** 
 
-    ```java
-        String str = "start";
-        for (int i = 0; i < 100; i++) {
-            str = str + "hello";
-        }
-    ```
+ ```java
+String str = "start";
+for (int i = 0; i < 100; i++) {
+    str = str + "hello";
+}
+ ```
 
 18. 【推荐】`final` 可以声明类、成员变量、方法、以及本地变量，下列情况使用 `final` 关键字：  
 1） 不允许被继承的类，如：`String` 类。  
@@ -389,31 +391,31 @@ NPE 问题，或者入库检查，都由使用者来保证。
 7. 【强制】不要在 `foreach` 循环里进行元素的 `remove/add` `操作。remove` 元素请使用 `Iterator` 方式，如果并发操作，需要对 `Iterator` 对象加锁。  
     **正例：** 
 
-    ```java
-    Iterator<String> it = a.iterator();
-    while (it.hasNext()) {
-        String temp = it.next();
-        if (删除元素的条件) {
-            it.remove();
-        }
+ ```java
+Iterator<String> it = a.iterator();
+while (it.hasNext()) {
+    String temp = it.next();
+    if (删除元素的条件) {
+        it.remove();
+    }
 }
-    ```
+ ```
 
-    **反例：** 
-    
-    ```java
-    List<String> a = new ArrayList<String>();
-    a.add("1");
-    a.add("2");
-    for (String temp : a) {
-        if ("1".equals(temp)) {
+​		**反例：** 
+
+ ```java
+List<String> a = new ArrayList<String>();
+a.add("1");
+a.add("2");
+for (String temp : a) {
+    if ("1".equals(temp)) {
         a.remove(temp);
-        }
+    }
 }
-    ```
-    
-    **说明：** 以上代码的执行结果肯定会出乎大家的意料，那么试一下把“1”换成“2”，会是同样的结果吗？
-    
+ ```
+
+​		**说明：** 以上代码的执行结果肯定会出乎大家的意料，那么试一下把“1”换成“2”，会是同样的结果吗？
+
 8. 【强制】 在 JDK7 版本及以上，`Comparator` 要满足如下三个条件，不然 `Arrays.sort`，`Collections.sort` 会报 `IllegalArgumentException` 异常。  
     **说明：**   
     1） x，y 的比较结果和 y，x 的比较结果相反。  
@@ -441,14 +443,14 @@ NPE 问题，或者入库检查，都由使用者来保证。
 
 11. 【推荐】高度注意 Map 类集合 K/V 能不能存储 null 值的情况，如下表格：
 
-    |集合类|Key|Value|Super|说明|
-    |:-----|:--|:----|:----|:---|
-    |HashTable|不允许为 null|不允许为 null|Dictionary|线程安全|
-    |ConcurrentHashMap| 不允许为 null |不允许为 null |AbstractMap|分段锁技术|
-    |TreeMap| 不允许为 null| 允许为 null| AbstractMap| 线程不安全|
-    |HashMap| 允许为 null| 允许为 null| AbstractMap| 线程不安全|
+|集合类|Key|Value|Super|说明|
+|:-----|:--|:----|:----|:---|
+|HashTable|不允许为 null|不允许为 null|Dictionary|线程安全|
+|ConcurrentHashMap| 不允许为 null |不允许为 null |AbstractMap|分段锁技术|
+|TreeMap| 不允许为 null| 允许为 null| AbstractMap| 线程不安全|
+|HashMap| 允许为 null| 允许为 null| AbstractMap| 线程不安全|
 
-    **反例：** 由于 `HashMap` 的干扰，很多人认为 `ConcurrentHashMap` 是可以置入 `null` 值，而事实上，存储 `null` 值时会抛出 NPE 异常。
+​		**反例：** 由于 `HashMap` 的干扰，很多人认为 `ConcurrentHashMap` 是可以置入 `null` 值，而事实上，存储 `null` 值时会抛出 NPE 异常。
 
 12. 【参考】合理利用好集合的有序性(sort)和稳定性(order)，避免集合的无序性(unsort)和不稳定性(unorder)带来的负面影响。  
 **说明：** 有序性是指遍历的结果是按某种比较规则依次排列的。稳定性指集合每次遍历的元素次
@@ -484,55 +486,57 @@ NPE 问题，或者入库检查，都由使用者来保证。
         允许的创建线程数量为 `Integer.MAX_VALUE`，可能会创建大量的线程，从而导致 OOM。
 
 5. 【强制】`SimpleDateFormat` 是线程不安全的类，一般不要定义为 `static` 变量，如果定义为 `static`，必须加锁，或者使用 `DateUtils` 工具类。  
-**正例：** 注意线程安全，使用 `DateUtils`。亦推荐如下处理：
+    **正例：** 注意线程安全，使用 `DateUtils`。亦推荐如下处理：
 
-        private static final ThreadLocal<DateFormat> df = new ThreadLocal<DateFormat>() {
-            @Override
-            protected DateFormat initialValue() {
-                return new SimpleDateFormat("yyyy-MM-dd");
-            }
-        };
+ ```java
+   private static final ThreadLocal<DateFormat> df = new ThreadLocal<DateFormat>() {
+       @Override
+       protected DateFormat initialValue() {
+           return new SimpleDateFormat("yyyy-MM-dd");
+       }
+   };
+ ```
 
-    **说明：** 如果是 JDK8 的应用，可以使用 `Instant` 代替 `Date`，`LocalDateTime` 代替 `Calendar`，`DateTimeFormatter` 代替 `Simpledateformatter`，官方给出的解释：simple beautiful strong
-immutable thread-safe。
+   **说明：** 如果是 JDK8 的应用，可以使用 `Instant` 代替 `Date`，`LocalDateTime` 代替 `Calendar`，`DateTimeFormatter` 代替 `Simpledateformatter`，官方给出的解释：simple beautiful strong
+  immutable thread-safe。
 
 6. 【强制】高并发时，同步调用应该去考量锁的性能损耗。能用无锁数据结构，就不要用锁；能锁区块，就不要锁整个方法体；能用对象锁，就不要用类锁。  
-**说明：** 尽可能使加锁的代码块工作量尽可能的小，避免在锁代码块中调用 RPC 方法。
+    **说明：** 尽可能使加锁的代码块工作量尽可能的小，避免在锁代码块中调用 RPC 方法。
 
 7. 【强制】对多个资源、数据库表、对象同时加锁时，需要保持一致的加锁顺序，否则可能会造成死锁。  
-**说明：** 线程一需要对表 A、B、C 依次全部加锁后才可以进行更新操作，那么线程二的加锁顺序也必须是 A、B、C，否则可能出现死锁。
+    **说明：** 线程一需要对表 A、B、C 依次全部加锁后才可以进行更新操作，那么线程二的加锁顺序也必须是 A、B、C，否则可能出现死锁。
 
 8. 【强制】并发修改同一记录时，避免更新丢失，需要加锁。要么在应用层加锁，要么在缓存加锁，要么在数据库层使用乐观锁，使用 version 作为更新依据。  
-**说明：** 如果每次访问冲突概率小于 20%，推荐使用乐观锁，否则使用悲观锁。乐观锁的重试次数不得小于 3 次。
+    **说明：** 如果每次访问冲突概率小于 20%，推荐使用乐观锁，否则使用悲观锁。乐观锁的重试次数不得小于 3 次。
 
 9. 【强制】多线程并行处理定时任务时，`Timer` 运行多个 `TimeTask` 时，只要其中之一没有捕获抛出的异常，其它任务便会自动终止运行，使用 `ScheduledExecutorService` 则没有这个问题。
 
 10. 【推荐】使用 `CountDownLatch` 进行异步转同步操作，每个线程退出前必须调用 `countDown` 方法，线程执行代码注意 catch 异常，确保 `countDown` 方法可以执行，避免主线程无法执行至 `await` 方法，直到超时才返回结果。  
-**说明：** 注意，子线程抛出异常堆栈，不能在主线程 try-catch 到。
+    **说明：** 注意，子线程抛出异常堆栈，不能在主线程 try-catch 到。
 
 11. 【推荐】避免 `Random` 实例被多线程使用，虽然共享该实例是线程安全的，但会因竞争同一 seed 导致的性能下降。  
-**说明：** `Random` 实例包括 `java.util.Random` 的实例或者 `Math.random()` 的方式。  
-**正例：** 在 JDK7 之后，可以直接使用 API `ThreadLocalRandom`，而在 JDK7 之前，需要编码保证每个线程持有一个实例。
+    **说明：** `Random` 实例包括 `java.util.Random` 的实例或者 `Math.random()` 的方式。  
+    **正例：** 在 JDK7 之后，可以直接使用 API `ThreadLocalRandom`，而在 JDK7 之前，需要编码保证每个线程持有一个实例。
 
 12. 【推荐】在并发场景下，通过双重检查锁（double-checked locking）实现延迟初始化的优化问题隐患(可参考 The "Double-Checked Locking is Broken" Declaration)，推荐问题解决方案中较为简单一种（适用于 JDK5 及以上版本），将目标属性声明为 `volatile` 型。  
     **反例：** 
 
-    ```java
-    class Foo {
-        private Helper helper = null;
-        public Helper getHelper() {
-            if (helper == null) synchronized(this) {
-                if (helper == null)
-                    helper = new Helper();
-            }
-            return helper;
+```java
+class Foo {
+    private Helper helper = null;
+    public Helper getHelper() {
+        if (helper == null) synchronized(this) {
+            if (helper == null)
+                helper = new Helper();
         }
-        // other functions and members...
+        return helper;
     }
-    ```
+    // other functions and members...
+}
+```
 
 13. 【参考】volatile 解决多线程内存不可见问题。对于一写多读，是可以解决变量同步问题，但是如果多写，同样无法解决线程安全问题。如果是 count++操作，使用如下类实现：
-`AtomicInteger count = new AtomicInteger(); count.addAndGet(1);` 如果是 JDK8，推荐使用 `LongAdder` 对象，比 `AtomicLong` 性能更好（减少乐观锁的重试次数）。
+    `AtomicInteger count = new AtomicInteger(); count.addAndGet(1);` 如果是 JDK8，推荐使用 `LongAdder` 对象，比 `AtomicLong` 性能更好（减少乐观锁的重试次数）。
 
 14. 【参考】  在容量不够进行 resize 时由于高并发可能出现死链，导致 CPU 飙升，在开发过程中可以使用其它数据结构或加锁来规避此风险。
 
@@ -546,29 +550,32 @@ immutable thread-safe。
 
 3. 【推荐】表达异常的分支时，少用 if-else 方式，这种方式可以改写成：
 
-    ```java
+```java
     if (condition) {
      ...
      return obj;
     }
     // 接着写 else 的业务逻辑代码;
-    ```
+```
 
-    **说明：** 如果非得使用 if()...else if()...else...方式表达逻辑，【强制】避免后续代码维护困难，请勿超过 3 层。  
-    **正例：** 逻辑上超过 3 层的 if-else 代码可以使用卫语句，或者状态模式来实现。卫语句示例如下：
+​		**说明：** 如果非得使用 if()...else if()...else...方式表达逻辑，【强制】避免后续代码维护困难，请勿超过 3 层。  
 
-        public void today() {
-            if (isBusy()) {
-                System.out.println(“change time.”);
-                return;
-            }
-            if (isFree()) {
-                System.out.println(“go to travel.”);
-                return;
-            }
-            System.out.println(“stay at home to learn Alibaba Java Coding Guideline.”);
+​		**正例：** 逻辑上超过 3 层的 if-else 代码可以使用卫语句，或者状态模式来实现。卫语句示例如下：
+
+```java
+    public void today() {
+        if (isBusy()) {
+            System.out.println(“change time.”);
             return;
         }
+        if (isFree()) {
+            System.out.println(“go to travel.”);
+            return;
+        }
+        System.out.println(“stay at home to learn Alibaba Java Coding Guideline.”);
+        return;
+    }
+```
 
 4. 【推荐】除常用方法（如 getXxx/isXxx）等外，不要在条件判断中执行其它复杂的语句，将复杂逻辑判断的结果赋值给一个有意义的布尔变量名，以提高可读性。  
     **说明：** 很多 if 语句内的逻辑相当复杂，阅读者需要分析条件表达式的最终结果，才能明确什么样的条件执行什么样的语句，那么，如果阅读者分析逻辑表达式错误呢？  
@@ -639,13 +646,13 @@ immutable thread-safe。
 10. 【参考】好的命名、代码结构是自解释的，注释力求精简准确、表达到位。避免出现注释的一个极端：过多过滥的注释，代码的逻辑一旦修改，修改注释是相当大的负担。  
     **反例：**  
 
-    ```java
-    // put elephant into fridge
+```java
+// put elephant into fridge
 put(elephant, fridge);
-    ```
+```
 
-    方法名 put，加上两个有意义的变量名 elephant 和 fridge，已经说明了这是在干什么，语义清晰的代码不需要额外的注释。
-    
+​		方法名 put，加上两个有意义的变量名 elephant 和 fridge，已经说明了这是在干什么，语义清晰的代码不需要额外的注释。
+
 11. 【参考】特殊注释标记，请注明标记人与标记时间。注意及时处理这些标记，通过标记扫描，经常清理此类标记。线上故障有时候就是来源于这些标记处的代码。  
     1） 待办事宜（TODO）:（ 标记人，标记时间，[预计处理时间]）表示需要实现，但目前还未实现的功能。这实际上是一个 Javadoc 的标签，目前的 Javadoc 还没有实现，但已经被广泛使用。只能应用于类，接口和方法（因为它是一个 Javadoc 标签）。  
     2） 错误，不能工作（FIXME）:（标记人，标记时间，[预计处理时间]）在注释中用 FIXME 标记某代码是错误的，而且不能工作，需要及时纠正的情况。
@@ -729,11 +736,11 @@ NumberFormatException 来实现。
 
 1. 【强制】应用中不可直接使用日志系统（Log4j、Logback）中的 API，而应依赖使用日志框架 SLF4J 中的 API，使用门面模式的日志框架，有利于维护和各个类的日志处理方式统一。
 
-    ```java
-    import org.slf4j.Logger;
-    import org.slf4j.LoggerFactory;
-    private static final Logger logger = LoggerFactory.getLogger(Abc.class);
-    ```
+```java
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+private static final Logger logger = LoggerFactory.getLogger(Abc.class);
+```
 
 2. 【强制】日志文件推荐至少保存 15 天，因为有些异常具备以“周”为频次发生的特点。
 
@@ -743,17 +750,21 @@ NumberFormatException 来实现。
 通过日志对系统进行及时监控。
 
 4. 【强制】对 trace/debug/info 级别的日志输出，必须使用条件输出形式或者使用占位符的方
-式。  
-**说明：** logger.debug("Processing trade with id: " + id + " symbol: " + symbol);如果日志级别是 warn，上述日志不会打印，但是会执行字符串拼接操作，如果 symbol 是对象，会执行 toString() 方法，浪费了系统资源，执行了上述操作，最终日志却没有打印。  
-    **正例：** （条件）
+    式。  
+    **说明：** logger.debug("Processing trade with id: " + id + " symbol: " + symbol);如果日志级别是 warn，上述日志不会打印，但是会执行字符串拼接操作，如果 symbol 是对象，会执行 toString() 方法，浪费了系统资源，执行了上述操作，最终日志却没有打印。  
+   **正例：** （条件）
 
-        if (logger.isDebugEnabled()) {
-            logger.debug("Processing trade with id: " + id + " symbol: " + symbol);
-        }
+```java
+if (logger.isDebugEnabled()) {
+    logger.debug("Processing trade with id: " + id + " symbol: " + symbol);
+}
+```
 
-    **正例：** （占位符）
+​	   **正例：** （占位符）
 
-        logger.debug("Processing trade with id: {} symbol : {} ", id, symbol);
+```java
+logger.debug("Processing trade with id: {} symbol : {} ", id, symbol);
+```
 
 5. 【强制】避免重复打印日志，浪费磁盘空间，务必在 log4j.xml 中设置 additivity=false。  
 **正例：** `<logger name="com.taobao.dubbo.config" additivity="false">`
@@ -817,12 +828,12 @@ NumberFormatException 来实现。
 15. 【参考】合适的字符存储长度，不但节约数据库表空间、节约索引存储，更重要的是提升检索速度。  
 **正例：** 如下表，其中无符号值可以避免误存负数，且扩大了表示范围。
 
-    |对象 |年龄区间 |类型 |表示范围|
-    |:----|:--------|:----|:-------|
-    |人| 150 岁之内| unsigned tinyint| 无符号值：0 到 255|
-    |龟 |数百岁| unsigned smallint| 无符号值：0 到 65535|
-    |恐龙化石 |数千万年| unsigned int| 无符号值：0 到约 42.9 亿|
-    |太阳| 约 50 亿年| unsigned bigint| 无符号值：0 到约 10 的 19 次方|
+|对象 |年龄区间 |类型 |表示范围|
+|:----|:--------|:----|:-------|
+|人| 150 岁之内| unsigned tinyint| 无符号值：0 到 255|
+|龟 |数百岁| unsigned smallint| 无符号值：0 到 65535|
+|恐龙化石 |数千万年| unsigned int| 无符号值：0 到约 42.9 亿|
+|太阳| 约 50 亿年| unsigned bigint| 无符号值：0 到约 10 的 19 次方|
 
 ### 索引规约
 
