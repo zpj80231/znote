@@ -1,6 +1,13 @@
 module.exports = [
 	'',
 	{
+	  title:'规范',
+	  collapsable: true,
+	  children:[
+		'ali'
+	  ]
+	},
+	{
 	  title:'前端',
 	  collapsable: true,
 	  children:[
