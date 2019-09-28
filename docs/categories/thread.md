@@ -6,7 +6,6 @@ tags:
 - Java
 catagories:
 - Java
-prev: ./swagger2.md
 ---
 
 ::: tip 杰弗逊	

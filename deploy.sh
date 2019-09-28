@@ -27,7 +27,7 @@ cd ..
 #git init
 #git remote add origin git@github.com:zpj80231/znote.git
 git add .
-git commit -m '添加阿里规范'
+git commit -m 'add docs'
 git push origin master
 
 

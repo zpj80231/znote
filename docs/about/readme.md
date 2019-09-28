@@ -21,7 +21,7 @@ isComment: false
 
 ### 兴趣方向
 
-- 虽然是个后端，但前端也不能少了我！
+- 后端 + 前端
 
 ### 参与社区
 
@@ -32,5 +32,8 @@ isComment: false
 ### 联系我
 
 - Email： [zpj80231@163.com](zpj80231@163.com)
-
 - 微信：[点我](https://mp.weixin.qq.com/s?__biz=MzU4MDY1NjE1MQ==&mid=100000001&idx=1&sn=033d582767fdbf07d2b6e0a003f83deb&chksm=7d52cc794a25456f76837040379b8840e990e81dff3fff91abb5001d18c991b8f1b0817c8a43&scene=18#wechat_redirect)
+
+### 友链
+
+- [晓风轻技术小站](https://xwjie.github.io)
