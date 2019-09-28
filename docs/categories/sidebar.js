@@ -22,7 +22,15 @@ module.exports = [
 	  collapsable: true,
 	  children:[
 	  	'ArrayList','docker','HashMap','itext','poi','quartz',
-	  	'rabbitmq','redis','SSH','swagger2','多线程',
+	  	'rabbitmq','redis','SSH','swagger2','thread',
+	  ]
+	},
+	{
+	  title:'生活',
+	  collapsable: true,
+	  children:[
+	  	'wuliao'
 	  ]
 	}
+
 ]
