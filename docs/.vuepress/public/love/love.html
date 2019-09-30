@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>html</title>
+    <title>爱您</title>
     <style>
         *{
             padding: 0;
@@ -60,6 +60,39 @@
                 box-shadow: 0 0 40px #d5093c;;
             }
         }
+        @keyframes a {
+            0%{
+                transform: scale(1) rotate(0deg);
+            }
+            50%{
+                transform: scale(1.1) rotate(0deg);
+            }
+            100%{
+                transform: scale(1) rotate(0deg);
+            }
+        }
+
+        #z{
+        	/*right: 60%;left: 40%;*/
+        	margin: -23% 30% ;
+        	position: absolute;
+        	animation: a .8s ease infinite normal;
+        }
+        #w{
+        	margin: -23% 67% ;
+            position: absolute;
+        	animation: a .8s ease infinite normal;
+        }
+        #con{
+        	/*margin: -3% 48% 3% 38%;*/
+        	position: relative;
+            width: 500px;
+            height: 300px;
+            margin: -100px auto;
+            /*position: absolute;*/
+            /*width: 480px;*/
+        	animation: a .8s ease infinite normal;
+        }
     </style>
 </head>
 <body>
@@ -67,6 +100,17 @@
         <div class="heart left"></div>
         <div class="heart right"></div>
         <div class="heart bottom"></div>
+    </div>
+    <div id='z'>
+    	<H2>ZPJ</H2>
+    </div>
+    <div id='w'>
+    	<H2>WYL</H2>
+    </div>
+    <div id='con'>
+    	<h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    		字里行间，全都是你。
+    	</h1>
     </div>
 </body>
 </html>

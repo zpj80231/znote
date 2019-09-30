@@ -31,7 +31,9 @@ isComment: false
 
 ### 联系我
 
-- Email： [zpj80231@163.com](zpj80231@163.com)
+- 爱您：[80231](https://zpj80231.github.io/znote/love/love.html)
+
+- Email： [zpj80231@163.com](zpj80231@163.com)、[zpj80231@gmail.com](zpj80231@gmail.com)
 - 微信：[点我](https://mp.weixin.qq.com/s?__biz=MzU4MDY1NjE1MQ==&mid=100000001&idx=1&sn=033d582767fdbf07d2b6e0a003f83deb&chksm=7d52cc794a25456f76837040379b8840e990e81dff3fff91abb5001d18c991b8f1b0817c8a43&scene=18#wechat_redirect)
 
 ### 友链
