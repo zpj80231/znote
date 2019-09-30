@@ -5,7 +5,7 @@ module.exports = [
       	icon: 'reco-category',
       	items: [
 		  { text: '笔记概览', link: '/categories/'},
-		  { text: 'love', link: '/html/love.html'},
+		  { text: 'love', link: 'https://zpj80231.github.io/znote/html/love.html'},
 		]
       },
       { text: '标签', link: '/tags/', icon: 'reco-tag' },
