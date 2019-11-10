@@ -8,7 +8,7 @@ isComment: false
 
 ::: tip 介绍
 
-世界上最远的距离，是我在 if 里你在 else 里，虽然经常一起出现，但却永不结伴执行。
+世界上最远的距离，是我在 if 里你在 else 里，虽然经常一起出现，但却永不结伴执行
 :::
 
 ### 一句话
@@ -31,11 +31,17 @@ isComment: false
 
 ### 联系我
 
-- 爱您：[80231](https://zpj80231.github.io/znote/love/love.html)
-
-- Email： [zpj80231@163.com](zpj80231@163.com)、[zpj80231@gmail.com](zpj80231@gmail.com)
+- Email：[zpj80231@163.com](zpj80231@163.com) or [zpj80231@gmail.com](zpj80231@gmail.com)
 - 微信：[点我](https://mp.weixin.qq.com/s?__biz=MzU4MDY1NjE1MQ==&mid=100000001&idx=1&sn=033d582767fdbf07d2b6e0a003f83deb&chksm=7d52cc794a25456f76837040379b8840e990e81dff3fff91abb5001d18c991b8f1b0817c8a43&scene=18#wechat_redirect)
 
 ### 友链
 
-- [晓风轻技术小站](https://xwjie.github.io)
+-	[午后南杂](https://www.recoluan.com) | 
+	[晓风轻技术小站](https://xwjie.github.io) | 
+	[友人c](https://www.ihewro.com) | 
+	[SigureMo](https://www.sigure.xyz) |
+	[有梦想的咸鱼](https://blog.liudongyang.top)
+
+### 其他
+
+- 爱您：[80231](https://zpj80231.github.io/znote/love/love.html)
