@@ -26,10 +26,11 @@ module.exports = [
 	  ]
 	},
 	{
-	  title:'生活',
+	  title:'随笔',
 	  collapsable: true,
 	  children:[
-	  	'wuliao'
+	  	'look_back',
+	  	'wuliao',
 	  ]
 	}
 
