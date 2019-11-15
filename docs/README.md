@@ -5,7 +5,7 @@ heroImageStyle: {
   maxWidth: '800px',
   width: '100%',
   display: block,
-  margin: '3rem auto -4rem auto',
+  margin: '10rem auto -11rem auto',
   background: '#fff',
   borderRadius: '1rem',
 }
@@ -21,6 +21,7 @@ features:
   details: 把所有的希望给明天
 footer: MIT Licensed | Copyright © 2018-present Evan You
 ---
+
 
 ::: tip 昨天今天明天
 
@@ -47,3 +48,26 @@ footer: MIT Licensed | Copyright © 2018-present Evan You
 而我依然在你心间  
 
 :::
+
+<Clock/>
+
+<style>
+	html {overflow:auto !important; overflow:hidden;}
+
+.wrap {
+    width: 100%;
+    height: 20%;
+    min-height: 10vh;
+    background: #fff;
+    display: flex;
+    position:fixed;
+    top:-105%;
+    left: -1.5%;
+    justify-content: center;
+    align-items: center;
+
+	/*right:0; top:0; width:100%; position:fixed; padding:10px; text-align:center; font-weight:bold; background:#ccc;
+	position:absolute; right:16px;*/
+
+}
+</style>
