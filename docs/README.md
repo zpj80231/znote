@@ -7,8 +7,10 @@ heroImageStyle: {
   height: '15%',,
   display: block,
   margin: '24% auto -26% auto',
+  border: '1px dashed #000',
+  box-shadow: '8px 8px 20px #032',
   borderRadius: '1rem',
-  background: 'rgba(0, 0, 0, 0.9) none repeat scroll !important',
+  background: 'rgba(0, 0, 0, 0.8) none repeat scroll !important',
   transform: scale(0.8,0.8),
 }
 isShowTitleInHome: true
