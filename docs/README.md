@@ -8,7 +8,7 @@ heroImageStyle: {
   display: block,
   margin: '24% auto -26% auto',
   border: '1px dashed #000',
-  box-shadow: '8px 8px 20px #032',
+  box-shadow: '8px 8px 20px #022',
   borderRadius: '1rem',
   background: 'rgba(0, 0, 0, 0.8) none repeat scroll !important',
   transform: scale(0.8,0.8),
@@ -74,8 +74,17 @@ footer: MIT Licensed | Copyright © 2018-present Evan You
     justify-content: center;
     align-items: center;
 
+
 	/*right:0; top:0; width:100%; position:fixed; padding:10px; text-align:center; font-weight:bold; background:#ccc;
 	position:absolute; right:16px;*/
-
 }
+
+
+@media screen and (max-width: 960px){
+  .wrap {
+    top:-113%;
+    transform: scale(0.68);
+  }
+}
+
 </style>

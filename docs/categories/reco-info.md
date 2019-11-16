@@ -91,7 +91,7 @@ Dev
 
   在浏览器地址输入：` http://localhost:8080 `即可看到界面：
 
-  ![](/znote/vuepress/znote-1.png)
+  ![](/znote/vuepress/znote.png)
 
 - 如果想直接使用 .html文件的话将 .html文件放在 .vuepress/public 目录下即可（需自己配置引用路径）。
 
