@@ -4,9 +4,8 @@ date: 2019-06-23 15:31:26
 tags:
 - JavaScript
 - json
-catagories:
-- JavaScript
-- json
+categories:
+- '前端'
 ---
 
 ::: tip 居里夫人

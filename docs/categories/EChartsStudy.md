@@ -3,8 +3,8 @@ title: ECharts常用图表
 date: 2019-08-03 17:37:25
 tags:
 - ECharts
-catagories:
-- ECharts
+categories:
+- "前端"
 ---
 
 ::: tip 唐.杜甫《奉赠韦左丞丈二十二韵》

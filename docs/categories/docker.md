@@ -3,8 +3,8 @@ title: Docker的基本了解和使用
 date: 2019-04-09 09:56:47
 tags:
 - Docker
-catagories:
-- Docker
+categories:
+- "后端"
 ---
 
 ::: tip 鲁迅

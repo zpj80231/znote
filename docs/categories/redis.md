@@ -4,8 +4,8 @@ date: 2019-08-04 18:41:12
 tags: 
 - Java
 - Redis
-catagories:
-- Redis
+categories:
+- '后端'
 ---
 
 ::: tip 唐.韩愈《调张籍》 
