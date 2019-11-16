@@ -5,7 +5,7 @@ tags:
 - Java
 - RabbitMQ
 catagories:
-- RabbitMQ
+- '后端'
 ---
 
 ::: tip 唐.李绅《悯农》 

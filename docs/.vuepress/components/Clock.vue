@@ -35,8 +35,9 @@
 <style lang="stylus" scoped>
 	.wrap {
       width: 100%;
+      height: 200px;
       min-height: 10vh;
-      background: #fff;
+      background: rgba(0, 0, 0, 0) none repeat scroll !important;
       display: flex;
       justify-content: center;
       align-items: center;

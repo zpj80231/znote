@@ -4,8 +4,8 @@ date: 2019-07-15 21:51:41
 tags:
 - "多线程"
 - Java
-catagories:
-- Java
+categories:
+- "后端"
 ---
 
 ::: tip 杰弗逊	
