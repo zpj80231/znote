@@ -3,8 +3,8 @@ title: "SSH架构知识点概览"
 date: 2018-08-24 16:41:12
 tags: 
 - Java
-catagories:
-- Java
+categories:
+- '后端'
 ---
 
 ::: tip 唐.李绅《答章孝标》

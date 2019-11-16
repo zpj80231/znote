@@ -3,8 +3,8 @@ title: "Quartz定时任务"
 date: 2019-09-15
 tags:
 - Java
-catagories:
-- Java
+categories:
+- '后端'
 ---
 
 ::: tip 唐.孟浩然《江上寄山阴崔少府国辅》 

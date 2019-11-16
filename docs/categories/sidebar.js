@@ -11,10 +11,7 @@ module.exports = [
 	  title:'前端',
 	  collapsable: true,
 	  children:[
-		'EChartsStudy',
-		'js-json',
-		'viaStart',
-		'vue-demo',
+		'EChartsStudy','js-json','viaStart','vue-demo','reco-info',
 	  ]
 	},
 	{
@@ -29,8 +26,7 @@ module.exports = [
 	  title:'随笔',
 	  collapsable: true,
 	  children:[
-	  	'look_back',
-	  	'wuliao',
+	  	'20190928','20191109','20191116',
 	  ]
 	}
 

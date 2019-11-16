@@ -4,12 +4,14 @@ heroImage: /vuepress/topic.png
 heroImageStyle: {
   maxWidth: '800px',
   width: '100%',
+  height: '15%',,
   display: block,
-  margin: '10rem auto -11rem auto',
-  background: '#fff',
+  margin: '24% auto -26% auto',
   borderRadius: '1rem',
+  background: 'rgba(0, 0, 0, 0.8) none repeat scroll !important',
+  transform: scale(0.8,0.8),
 }
-isShowTitleInHome: false
+isShowTitleInHome: true
 actionText: 开启进阶之路
 actionLink: /categories/
 features:
@@ -22,6 +24,9 @@ features:
 footer: MIT Licensed | Copyright © 2018-present Evan You
 ---
 
+<!-- <h3 class='home_h3'>&nbsp;</h3> -->
+
+<Clock/>
 
 ::: tip 昨天今天明天
 
@@ -49,20 +54,21 @@ footer: MIT Licensed | Copyright © 2018-present Evan You
 
 :::
 
-<Clock/>
+
 
 <style>
-	html {overflow:auto !important; overflow:hidden;}
+.home .hero img {
 
+    transform: scale(0.8);
+}
 .wrap {
     width: 100%;
-    height: 20%;
+    height: 200px;
     min-height: 10vh;
-    background: #fff;
     display: flex;
     position:fixed;
-    top:-105%;
-    left: -1.5%;
+    top:-120%;
+    left: -1%;
     justify-content: center;
     align-items: center;
 

@@ -3,8 +3,8 @@ title: Swagger2的基本了解和使用
 date: 2019-08-11 19:29:56
 tags:
 - Swagger2
-catagories:
-- Swagger2
+categories:
+- "后端"
 ---
 
 ::: tip 唐.刘禹锡《酬乐天扬州初逢席上见赠》 

@@ -3,8 +3,8 @@ title: viaStart
 date: 2019-06-23 15:31:26
 tags: 
 - Via
-catagories:
-- Via
+categories:
+- "前端"
 ---
 
 ::: tip 宋.王安石《登飞来峰》 

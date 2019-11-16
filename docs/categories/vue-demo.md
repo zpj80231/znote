@@ -4,8 +4,8 @@ catalog: true
 date: 2019-06-12 13:59:44
 tags: 
 - 'Vue'
-catagories:
-- 'Vue'
+categories:
+- '前端'
 ---
 
 ::: tip 清.赵翼《论诗》

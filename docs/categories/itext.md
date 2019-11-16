@@ -5,8 +5,8 @@ sidebar: true
 tags:
 - Java
 - pdf
-catagories:
-- pdf
+categories:
+- '后端'
 ---
 
 ::: tip 《诗经.鹤鸣》 
