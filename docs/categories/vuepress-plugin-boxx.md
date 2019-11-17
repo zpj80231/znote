@@ -13,6 +13,18 @@ categories:
 
 - 由于在引入默认的VuePress Custom Containers太过笨重了，故闲来无事对其做一层封装简化使用
 
+## 安装
+
+- 在文件`package.json`中的`devDependencies`下加入`"vuepress-plugin-boxx": "0.0.1"`：
+
+```json
+	"devDependencies": {
+        "vuepress-plugin-boxx": "0.0.1"
+    }
+```
+- 执行命令：`npm install`
+- 正常启动项目，接着如下使用即可
+
 ## 使用
 
 - 引入：只需在你想要插入的地方加入 `<Boxx/>` 即可（如上）
