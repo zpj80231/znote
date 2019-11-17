@@ -6,7 +6,7 @@
     },
     "devDependencies": {
         "vuepress": "^0.14.4",
-        "vuepress-theme-reco": "^0.3.11"
+        "vuepress-theme-reco": "^0.3.11",
+        "vuepress-plugin-boxx": "0.0.1"
     }
-    
 }

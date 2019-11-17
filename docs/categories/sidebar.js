@@ -11,7 +11,7 @@ module.exports = [
 	  title:'前端',
 	  collapsable: true,
 	  children:[
-		'EChartsStudy','js-json','viaStart','vue-demo','reco-info','vuepress-aphorisms'
+		'EChartsStudy','js-json','viaStart','vue-demo','reco-info','vuepress-plugin-boxx'
 	  ]
 	},
 	{
