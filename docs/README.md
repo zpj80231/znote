@@ -59,10 +59,6 @@ footer: MIT Licensed | Copyright © 2018-present Evan You
 
 
 <style>
-.home .hero img {
-
-    transform: scale(0.8);
-}
 .wrap {
     width: 100%;
     height: 200px;
@@ -73,17 +69,25 @@ footer: MIT Licensed | Copyright © 2018-present Evan You
     left: -1%;
     justify-content: center;
     align-items: center;
-
-
-	/*right:0; top:0; width:100%; position:fixed; padding:10px; text-align:center; font-weight:bold; background:#ccc;
-	position:absolute; right:16px;*/
 }
 
 
 @media screen and (max-width: 960px){
   .wrap {
-    top:-113%;
+    top:-114%;
     transform: scale(0.68,0.58);
+  }
+  .clock {
+    background: rgba(0, 0, 0, 0) none repeat scroll !important;
+    background-image: url() !important;
+  }
+  img {    
+    margin: 24% auto -24% auto !important;
+  }
+  .home .feature {
+    width: 100%;
+    text-align:center;
+    padding: 0;
   }
 }
 
