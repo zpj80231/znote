@@ -9,6 +9,10 @@ module.exports = {
     ['meta', { name: 'viewport', content: 'width=device-width,initial-scale=1,user-scalable=no' }]
   ],
   theme: 'reco',
+  // 插件
+  plugins: [
+    "vuepress-plugin-boxx"
+  ],
   themeConfig: {
     nav: require("./nav.js"),
     //logo: '/head.png',
