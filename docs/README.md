@@ -81,7 +81,7 @@ footer: MIT Licensed | Copyright © 2018-present Evan You
     background: rgba(0, 0, 0, 0) none repeat scroll !important;
     background-image: url() !important;
   }
-  img {    
+  .home img {    
     margin: 24% auto -24% auto !important;
   }
   .home .feature {
