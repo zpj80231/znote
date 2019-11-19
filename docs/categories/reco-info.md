@@ -9,11 +9,7 @@ categories:
 - vuepress
 ---
 
-::: tip 德国
-
-只有在人群中间，才能认识自己
-
- :::
+<Boxx/>
 
 [[toc]]
 
