@@ -22,7 +22,16 @@ categories:
         "vuepress-plugin-boxx": "0.0.2"
     }
 ```
-- 执行命令：`npm install`
+
+- 在 vuepress 的`config.js`中配置`plugins`：
+
+```json
+plugins: [
+    ["vuepress-plugin-boxx"]
+  ],
+```
+
+- 在`package.json`目录下执行命令：`npm install`
 - 正常启动项目，接着如下使用即可
 
 ## 使用
@@ -34,11 +43,11 @@ categories:
 
 ## 默认样式
 
-<Boxx type="tip" title="tip" content="只需一行：<Boxx type='tip' title='自定义' content='自定义' />" />
+<Boxx type="tip" title="tip" content="只需一行：<code> &#60;Boxx type='tip' title='自定义' content='自定义' /> </code> " />
 
-<Boxx type="warning" title="warning" content="只需一行：<Boxx type='warning' title='自定义' content='自定义' />" />
+<Boxx type="warning" title="warning" content="只需一行：<code> &#60;Boxx type='warning' title='自定义' content='自定义' /> </code>" />
 
-<Boxx type="danger" title="danger" content="只需一行：<Boxx type='danger' title='自定义' content='自定义' />" />
+<Boxx type="danger" title="danger" content="只需一行：<code> &#60;Boxx type='danger' title='自定义' content='自定义' /> </code>" />
 
 ## 自定义标题和内容
 
@@ -51,8 +60,8 @@ categories:
 
 - 当然你也可以只输入`title`或`content`，如下：
 
-  <Boxx type="warning" :blockStyle="title01" title="短短的 title：<Boxx type='warning' title='自定义' />"/>
-  <Boxx type="danger" :blockStyle="content01" content="更短短的 content：<Boxx type='danger' content='自定义' />"/>
+  <Boxx type="warning" :blockStyle="title01" title="短短的 title：<code> &#60;Boxx type='warning' title='自定义' /> </code>"/>
+  <Boxx type="danger" :blockStyle="content01" content="更短短的 content：<code> &#60;Boxx type='danger' content='自定义' /> </code>"/>
 
 ## 自定义样式
 
@@ -64,7 +73,7 @@ categories:
 
  </marquee>
 
-- 指定三个属性值实现
+- 可以通过以下几个属性实现
 
 | Name         | Type   | Description           |
 | :----------- | ------ | --------------------- |
