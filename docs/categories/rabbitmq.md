@@ -139,41 +139,30 @@ firewall-cmd --reload
 1.  \* 号表示可以精确匹配一个单词
 2.  \# 号可以匹配0个或者多个单词
 
-##### 工厂类连接
+##### 多个消费者公平分发
 
 ```java
-package cn.saytime.rabbitmq.util;
-
-import com.rabbitmq.client.Connection;
-import com.rabbitmq.client.ConnectionFactory;
+package com.zpj.electric.rabbitMq;
 
 import java.io.IOException;
-import java.util.concurrent.TimeoutException;
 
 /**
- * RabbitMQ连接工具类
+ * Created by admin on 2019/12/2.
+ * 用的是：
+  		<dependency>
+            <groupId>com.rabbitmq</groupId>
+            <artifactId>amqp-client</artifactId>
+            <version>3.0.4</version>
+        </dependency>
  */
-public class ConnectionUtil {
+public class TestConsumer {
+    public static void main(String[] args) throws IOException {
+        //测试公平分发
+        Consumer recv1 = new Consumer("A",500);
+        recv1.recv_2();
 
-    private static final String host = "192.168.239.128";
-    private static final int port = 5672;
-
-    /**
-     * 获取RabbitMQ Connection连接
-     * @return
-     * @throws IOException
-     * @throws TimeoutException
-     */
-    public static Connection getConnection() throws IOException, TimeoutException {
-        ConnectionFactory connectionFactory = new ConnectionFactory();
-        connectionFactory.setHost(host);
-        connectionFactory.setPort(port);
-
-//        connectionFactory.setUsername("test");
-//        connectionFactory.setPassword("123456");
-//        connectionFactory.setVirtualHost("/vhost_test");
-
-        return connectionFactory.newConnection();
+        Consumer recv2_2 = new Consumer("B",2000);
+        recv2_2.recv_2();
     }
 }
 ```
@@ -181,41 +170,49 @@ public class ConnectionUtil {
 ##### 生产者
 
 ```java
-package cn.saytime.rabbitmq.topic;
+package com.zpj.electric.rabbitMq;
 
-import cn.saytime.rabbitmq.util.ConnectionUtil;
-import com.rabbitmq.client.BuiltinExchangeType;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
+import com.rabbitmq.client.ConnectionFactory;
+import com.rabbitmq.client.MessageProperties;
 
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
-/**
- * 生产者
- */
-public class Send {
+public class Producter {
 
     private static final String EXCHANGE_NAME = "test_exchange_topic";
 
     public static void main(String[] args) throws IOException, TimeoutException {
         // 获取连接
-        Connection connection = ConnectionUtil.getConnection();
+        ConnectionFactory factory = new ConnectionFactory();
+        factory.setHost("127.0.0.1");
+        factory.setUsername("guest");
+        factory.setPassword("guest");
+        factory.setPort(5672);
+        Connection connection = factory.newConnection();
         // 从连接开一个通道
         Channel channel = connection.createChannel();
-        // 声明一个topic路由交换机
-        channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.TOPIC);
+        // 声明一个topic路由交换机，交换机持久化
+//        channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.TOPIC);
+        channel.exchangeDeclare(EXCHANGE_NAME, "topic", true);
 
         // 发送消息
         String message = "hello, quick.orange.rabbit";
         /*参数说明：
-        	String exchange -- 交换机名称
+            String exchange -- 交换机名称
         	String routingKey -- 路由关键字
         	BasicProperties props -- 消息的基本属性，例如路由头等
         	byte[] body -- 消息体
         */
-        channel.basicPublish(EXCHANGE_NAME, "quick.orange.rabbit", null, message.getBytes());
-        System.out.println(" [x] Sent message : '" + message + "'");
+        for (int i = 0; i < 100; i++) {
+            message = "hello, quick.orange.rabbit" + "  -------  " + i;
+
+            //参数：交换机名，路由键，消息持久化的，消息体
+            channel.basicPublish(EXCHANGE_NAME, "quick.orange.rabbit", MessageProperties.PERSISTENT_TEXT_PLAIN, message.getBytes());
+            System.out.println(" [x] Sent message : '" + message + "'");
+        }
 
         channel.close();
         connection.close();
@@ -227,53 +224,66 @@ public class Send {
 ##### 消费者
 
 ```java
-package cn.saytime.rabbitmq.topic;
+package com.zpj.electric.rabbitMq;
 
-import cn.saytime.rabbitmq.util.ConnectionUtil;
 import com.rabbitmq.client.*;
 
 import java.io.IOException;
-import java.util.concurrent.TimeoutException;
 
-/**
- * 消费者
- */
-public class Recv {
+public  class Consumer {
 
     private static final String QUEUE_NAME = "test_queue_topic_1";
     private static final String EXCHANGE_NAME = "test_exchange_topic";
 
-    public static void main(String[] args) throws IOException, TimeoutException {
-        // 获取连接
-        Connection connection = ConnectionUtil.getConnection();
+    //消费者名称
+    private String name;
+    //休眠时间
+    private int sleepTime;
+
+    public Consumer(String name, int sleepTime) {
+        this.name = name;
+        this.sleepTime = sleepTime;
+    }
+
+    public void recv_2() throws IOException {
+        ConnectionFactory factory = new ConnectionFactory();
+        factory.setHost("127.0.0.1");
+        factory.setUsername("guest");
+        factory.setPassword("guest");
+        factory.setPort(5672);
+        Connection connection = factory.newConnection();
 
         // 打开通道
         Channel channel = connection.createChannel();
 
+        //交换机
+        channel.exchangeDeclare(EXCHANGE_NAME, "topic", true);
+
         // 申明要消费的队列
-        //创建一个非持久化 不排他的 非自动删除的队列
-        channel.queueDeclare(QUEUE_NAME, false, false, false, null);
+        //创建一个持久化的 不排他的 非自动删除的队列
+        channel.queueDeclare(QUEUE_NAME, true, false, false, null);
 
         // 绑定队列到交换机
         channel.queueBind(QUEUE_NAME, EXCHANGE_NAME, "*.orange.*");
 
         // 这样RabbitMQ就会使得每个Consumer在同一个时间点最多处理一个Message。换句话说，在接收到该Consumer的ack前，他它不会将新的Message分发给它。
+        //mq的公平分发也用到这个
         channel.basicQos(1);
 
         // 创建一个回调的消费者处理类
-        Consumer consumer = new DefaultConsumer(channel) {
+        com.rabbitmq.client.Consumer consumer = new DefaultConsumer(channel) {
             @Override
             public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body) throws IOException {
                 // 接收到的消息
                 String message = new String(body);
-                System.out.println(" [1] Received '" + message + "'");
+                System.out.println(name + " Received '" + message + "'");
 
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(sleepTime);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } finally {
-                    System.out.println(" [1] done ");
+                    System.out.println(name + " 完成： done ");
                     channel.basicAck(envelope.getDeliveryTag(), false);
                 }
             }
