@@ -7,7 +7,9 @@ categories:
 - "vuepress"
 ---
 
-<Boxx changeTime='500'/>
+<div style="height: 120px">
+<Boxx changeTime='500' />
+</div>
 
 ## 序言
 
