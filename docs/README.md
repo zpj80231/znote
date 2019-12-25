@@ -90,7 +90,7 @@ footer: MIT Licensed | Copyright © 2018-present Evan You
 
 @media screen and (max-width: 960px){
   .wrap {
-    top:-101%;
+    top:-107%;
     transform: scale(0.68,0.58);
   }
   .clock {
@@ -104,7 +104,7 @@ footer: MIT Licensed | Copyright © 2018-present Evan You
     width: 100%;
     text-align: center;
     color: rgb(71, 101, 130) !important;
-    padding: 0 !important;
+    padding: 5px !important;
     margin: -12px;
     margin-left: 0px;
   }
