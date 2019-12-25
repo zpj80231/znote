@@ -1,21 +1,21 @@
 ---
 home: true
-heroImage: '/vuepress/topic.png'
-faceImage: '/vuepress/head.png'
+heroImage: /vuepress/topic.png
 heroImageStyle: {
   maxWidth: '800px',
   width: '100%',
   height: '15%',,
   display: block,
-  margin: '24% auto -18% auto',
+  margin: '24% auto -26% auto',
   border: '1px dashed #000',
   box-shadow: '8px 8px 20px #022',
   borderRadius: '1rem',
   background: 'rgba(0, 0, 0, 0.8) none repeat scroll !important',
+  transform: scale(0.8,0.8),
 }
 isShowTitleInHome: true
-actionText: '开启进阶之路'
-actionLink: /categorie/
+actionText: 开启进阶之路
+actionLink: /categories/
 features:
 - title: 
   details: 把所有的不快给昨天
@@ -25,6 +25,8 @@ features:
   details: 把所有的希望给明天
 footer: MIT Licensed | Copyright © 2018-present Evan You
 ---
+
+<!-- <h3 class='home_h3'>&nbsp;</h3> -->
 
 <Clock/>
 
@@ -57,40 +59,22 @@ footer: MIT Licensed | Copyright © 2018-present Evan You
 
 
 <style>
-.home .content__default:not(.custom) {
-  max-width: 100% !important;
-  margin: 0  !important;
-  padding: 0 !important;
-}
-.home .hero h1 {
-    display: none;
-}
-.home img {
-   transform: scale(0.8,0.8) !important;
-}
-.home .feature p {
-    color: #476582 !important;
-}
-.home .hero .description {
-    color: #476582 !important;
-}
 .wrap {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     width: 100%;
     height: 200px;
     min-height: 10vh;
-    background: transparent none repeat scroll!important;
-    position: fixed;
-    top: -120%;
+    display: flex;
+    position:fixed;
+    top:-120%;
     left: -1%;
+    justify-content: center;
+    align-items: center;
 }
 
 
 @media screen and (max-width: 960px){
   .wrap {
-    top:-101%;
+    top:-114%;
     transform: scale(0.68,0.58);
   }
   .clock {
@@ -98,15 +82,12 @@ footer: MIT Licensed | Copyright © 2018-present Evan You
     background-image: url() !important;
   }
   .home img {    
-    margin: 24% auto -6% auto !important;
+    margin: 24% auto -24% auto !important;
   }
   .home .feature {
     width: 100%;
-    text-align: center;
-    color: rgb(71, 101, 130) !important;
-    padding: 0 !important;
-    margin: -12px;
-    margin-left: 0px;
+    text-align:center;
+    padding: 0;
   }
 }
 
