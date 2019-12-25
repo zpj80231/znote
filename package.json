@@ -1,12 +1,18 @@
 {
-    "scripts": {
-        "docs:dev": "vuepress dev docs",
-        "docs:build": "vuepress build docs",
-        "deploy": "bash deploy.sh"
-    },
-    "devDependencies": {
-        "vuepress": "^0.14.4",
-        "vuepress-theme-reco": "^0.3.11",
-        "vuepress-plugin-boxx": "0.0.1"
-    }
+				"scripts": {
+								"docs:dev": "vuepress dev docs",
+								"docs:build": "vuepress build docs",
+								"deploy": "bash deploy.sh"
+				},
+				"dependencies": {
+								"vuepress": "1.2.0",
+								"vuepress-theme-reco": "1.2.0-alpha.13",
+								"whatwg-fetch": "3.0.0",
+								"@vuepress/plugin-pwa": "1.2.0",
+								"@vuepress/plugin-register-components": "1.2.0",
+								"@vuepress/plugin-google-analytics": "1.2.0",
+								"vuepress-plugin-flowchart": "1.4.3",
+								"vuepress-plugin-sitemap": "2.3.0",
+								"@vuepress-reco/vuepress-plugin-rss": "1.0.0"
+				}
 }
