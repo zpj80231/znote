@@ -1,54 +1,105 @@
+const path = require('path')
+const nav = require('./config/nav/')
+const sidebar = require('./config/sidebar/')
+
 module.exports = {
-  title: "znote",
-  description: '荷尽已无擎雨盖，菊残犹有傲霜枝。',
   dest: 'gb-pages',
-  port: '8080',
   base: '/znote/',
+    title: "znote",
+    description: '荷尽已无擎雨盖，菊残犹有傲霜枝。',
   head: [
     ['link', { rel: 'icon', href: 'https://infinitypro-img.infinitynewtab.com/custom-icon/8001de1jd3n68lbfnxxt564xvb0vl5.png?imageMogr2/thumbnail/240x/format/webp/blur/1x0/quality/100|imageslim' }],
-    ['meta', { name: 'viewport', content: 'width=device-width,initial-scale=1,user-scalable=no' }]
+    ['meta', { name: 'viewport', content: 'width=device-width,initial-scale=1,user-scalable=no' }],
+    // ['link', { rel: 'manifest', href: '/manifest.json' }],
+    ['meta', { name: 'theme-color', content: '#3eaf7c' }],
+    ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }],
+    ['meta', { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }],
+    ['link', { rel: 'apple-touch-icon', href: 'https://infinitypro-img.infinitynewtab.com/custom-icon/8001de1jd3n68lbfnxxt564xvb0vl5.png?imageMogr2/thumbnail/240x/format/webp/blur/1x0/quality/100|imageslim' }],
+    ['link', { rel: 'mask-icon', href: 'https://infinitypro-img.infinitynewtab.com/custom-icon/8001de1jd3n68lbfnxxt564xvb0vl5.png?imageMogr2/thumbnail/240x/format/webp/blur/1x0/quality/100|imageslim'}],
+    ['meta', { name: 'msapplication-TileImage', content: 'https://infinitypro-img.infinitynewtab.com/custom-icon/8001de1jd3n68lbfnxxt564xvb0vl5.png?imageMogr2/thumbnail/240x/format/webp/blur/1x0/quality/100|imageslim' }],
+    ['meta', { name: 'msapplication-TileColor', content: '#000000' }]
   ],
-  // 插件
-  plugins: [
-    ["vuepress-plugin-boxx"],
-  ],
-  theme: 'reco',
-  themeConfig: {
-    nav: require("./nav.js"),
-    //logo: '/head.png',
-    // 搜索设置
-    search: true,
-    searchMaxSuggestions: 10,
-    // sidebar: 'auto',// 自动形成侧边导航
-     sidebar: require("./sidebar.js"),
-     sidebarDepth: 2,
-    // 最后更新时间
-    lastUpdated: true,
-    lastUpdated: '最后更新时间', // string | boolean
-    // 作者
-    author: 'zhangpengjun',
-    serviceWorker: {
-        updatePopup: {
-            message: "有新的内容",
-            buttonText: '更新'
-        }
+
+    theme: 'reco',
+    themeConfig: {
+        nav: nav,
+        // logo: '/vuepress/head.png',
+        // 搜索设置
+        search: true,
+        searchMaxSuggestions: 10,
+        // sidebar: 'auto',// 自动形成侧边导航
+        sidebar: sidebar,
+        sidebarDepth: 2,
+        blogConfig: {
+            category: {
+                location: 2,     // 在导航栏菜单中所占的位置，默认2
+                text: '分类' // 默认文案 “分类”
+            },
+            tag: {
+                location: 3,     // 在导航栏菜单中所占的位置，默认3
+                text: '标签'      // 默认文案 “标签”
+            }
+        },
+        // 最后更新时间
+        lastUpdated: true,
+        lastUpdated: '最后更新时间', // string | boolean
+        // 作者
+        author: 'zhangpengjun',
+        // 备案号
+        record: '京ICP备17067634号-1',
+        // 项目开始时间
+        startYear: '2019',
+        //git地址
+        repo: 'zpj80231/znote',
+        // 如果你的文档不在仓库的根部
+        docsDir: 'docs',
+        // 可选，默认为 master
+        //docsBranch: 'vuepress',
+        editLinks: true,
+        editLinkText: '在 GitHub 上编辑此页！',
+        //评论
+      /*valineConfig: {
+       appId: '...',// your appId
+       appKey: '...', // your appKey
+       placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!',//评论框占位提示符
+       },*/
     },
-    //git地址
-    repo: 'zpj80231/znote',
-    // 如果你的文档不在仓库的根部
-    docsDir: 'docs',
-    // 可选，默认为 master
-    //docsBranch: 'vuepress',
-    editLinks: true,
-    editLinkText: '在 GitHub 上编辑此页！',
-    //评论
-    /*valineConfig: {
-      appId: '...',// your appId
-      appKey: '...', // your appKey
-      placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!',//评论框占位提示符
-    },*/
-  },
+
   markdown: {
     lineNumbers: true
-  } 
+  },
+
+  plugins: [
+    [
+      '@vuepress/pwa', 
+      {
+        serviceWorker: true,
+        updatePopup: {
+          message: "发现新内容可用",
+          buttonText: "刷新"
+        }
+      }
+    ],
+    [
+      '@vuepress/google-analytics',
+      {
+        ga: 'UA-149716079-1'
+      }
+    ],
+    // [
+    //   '@vuepress/plugin-register-components',
+    //   {
+    //     components: [
+    //       {
+    //         name: 'reco-home-page-one',
+    //         path: path.resolve(__dirname, './components/HomePageOne.vue')
+    //       }
+    //     ],
+    //     componentsDir: path.resolve(__dirname, './demo')
+    //   }
+    // ],
+    '@vuepress-reco/extract-code',
+    'flowchart',
+    // require('./plugins/notification/index')
+  ]
 }  
