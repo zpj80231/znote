@@ -27,7 +27,7 @@ cd ..
 #git init
 #git remote add origin git@github.com:zpj80231/znote.git
 git add .
-git commit -m 'update home style'
+git commit -m 'update Overview style'
 git push origin master
 
 

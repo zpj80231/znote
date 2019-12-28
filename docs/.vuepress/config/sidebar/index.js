@@ -1,34 +1,35 @@
 //侧边栏
 module.exports = {
-    '/categorie/': [
+    '/views/': [
         '',
         {
             title:'规范',
             collapsable: true,
             children:[
-                'ali'
+                'specification/ali'
             ]
         },
         {
             title:'前端',
             collapsable: true,
             children:[
-                'EChartsStudy','js-json','viaStart','vue-demo','reco-info','vuepress-plugin-boxx'
+                'front-end/EChartsStudy','front-end/js-json','front-end/viaStart','front-end/vue-demo',
+                'front-end/reco-info','front-end/vuepress-plugin-boxx'
             ]
         },
         {
             title:'后端',
             collapsable: true,
             children:[
-                'ArrayList','docker','HashMap','itext','poi','quartz',
-                'rabbitmq','redis','SSH','swagger2','thread',
+                'java/ArrayList','java/docker','java/HashMap','java/itext','java/poi','java/quartz',
+                'java/rabbitmq','java/redis','java/SSH','java/swagger2','java/thread',
             ]
         },
         {
             title:'随笔',
             collapsable: true,
             children:[
-                '20190928','20191109','20191116','20191130'
+                'essay/20190928','essay/20191109','essay/20191116','essay/20191130'
             ]
         }
 

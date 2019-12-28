@@ -15,7 +15,7 @@ heroImageStyle: {
 }
 isShowTitleInHome: true
 actionText: '开启进阶之路'
-actionLink: /categorie/
+actionLink: /views/
 features:
 - title: 
   details: 把所有的不快给昨天
