@@ -92,6 +92,21 @@ module.exports = {
     // ],
     '@vuepress-reco/extract-code',
     'flowchart',
-    // require('./plugins/notification/index')
+    // // require('./plugins/notification/index'),
+    
+    // [
+    //   '@vuepress-reco/vuepress-plugin-bgm-player',
+      
+    //     // 网络文件示例
+    //     {
+    //       name: '강남역 4번 출구',
+    //       artist: 'Plastic / Fallin` Dild',
+    //       url: 'https://assets.smallsunnyfox.com/music/2.mp3',
+    //       cover: 'https://assets.smallsunnyfox.com/music/2.jpg'
+    //     }
+      
+    // ]
+
+
   ]
 }  
