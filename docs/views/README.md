@@ -106,7 +106,11 @@ isComment: true
 	}
 
 	#category p,#tag p {
-		padding: 18px;
+		    margin: 0;
+		    padding-top: 35px;
+		    padding-left: 15px;
+		    /*padding-right: 15px;*/
+		    font-size: 16px;
 	}
 
 	#fj,#se {
