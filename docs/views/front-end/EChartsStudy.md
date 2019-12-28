@@ -31,7 +31,7 @@ categories:
 
 - 饼图
 
-![](/znote/categories/img/EChartsStudy/饼图.png)
+![](/znote/img/EChartsStudy/饼图.png)
 
 - 迁徙图
 
