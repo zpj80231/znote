@@ -27,7 +27,7 @@ cd ..
 #git init
 #git remote add origin git@github.com:zpj80231/znote.git
 git add .
-git commit -m 'update Overview style'
+git commit -m 'fix 404 and update plugins'
 git push origin master
 
 

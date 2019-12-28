@@ -64,7 +64,7 @@ isComment: true
 	}
 </script>
 
-<style> 
+<style lang='stylus' scoped> 
 	.content__default:not(.custom) img {
 	    max-width: 20% !important;
 	    margin-top: -10px;

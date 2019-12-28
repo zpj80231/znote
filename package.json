@@ -13,6 +13,8 @@
 								"@vuepress/plugin-google-analytics": "1.2.0",
 								"vuepress-plugin-flowchart": "1.4.3",
 								"vuepress-plugin-sitemap": "2.3.0",
-								"@vuepress-reco/vuepress-plugin-rss": "1.0.0"
+								"@vuepress/plugin-medium-zoom": "^1.0.2",
+								"@vuepress-reco/vuepress-plugin-rss": "1.0.0",
+								"@vuepress-reco/vuepress-plugin-bgm-player": "1.1.0"
 				}
 }
