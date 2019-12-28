@@ -52,18 +52,19 @@
 				style_boxx: {},
 				style_title: {},
 				style_content: {},
+				interval: {} //定时器
 			}
 		},
 		mounted() {
 			this.checkTitleAndConten();
 			this.checkStyleWithTitleAndContenAndBlock();
 			this.getShowType(this.type);
-			if(this.changeTime != '' && this.changeTime != 'false' && /^\d+$/.test(this.changeTime)) {
-				this.dynamicUpdateType(this.changeTime);	
-			}
+			this.dynamicUpdateType(this.changeTime);
 		},
-		computed: {
-			
+	  	watch: {
+			changeTime(newValue, oldValue) {
+				this.dynamicUpdateType(newValue);
+			}
 		},
 		methods: {
 			getShowType(type) {
@@ -112,18 +113,26 @@
 				}
 			},
 			dynamicUpdateType(time) {
-				var index = 0;
-				for(var i in type_boxx_list){
-		            if(this.type == type_boxx_list[i].type){
-		              index = i;
-		            };
-		        };
-				setInterval((time) => {	
-					index++;
-					if(index == type_boxx_list.length) {index=0;}
-					this.getShowType(type_boxx_list[index].type);
-					this.checkTitleAndConten();
-				}, time);
+				if(time != '' && time != 'false' && /^\d+$/.test(time)) {
+					var index = 0;
+					for(var i in type_boxx_list){
+			            if(this.type == type_boxx_list[i].type){
+			              index = i;
+			            };
+			        };
+
+					clearInterval(this.interval);//停止
+
+					this.interval = setInterval(() => {	
+						index++;
+						if(index == type_boxx_list.length) {index=0;}
+						this.getShowType(type_boxx_list[index].type);
+						this.checkTitleAndConten();
+					}, time);
+
+			        
+						
+				}
 			},
 			
 			
@@ -173,5 +182,6 @@
 </script>
 
 <style lang="stylus" scoped>
+
 	
 </style>
