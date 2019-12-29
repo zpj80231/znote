@@ -92,6 +92,7 @@ module.exports = {
     // ],
     '@vuepress-reco/extract-code',
     'flowchart',
+    "vuepress-plugin-boxx",
     // // require('./plugins/notification/index'),
     
     // [
