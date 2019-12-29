@@ -21,7 +21,7 @@ categories:
 
 ```json
 	"devDependencies": {
-        "vuepress-plugin-boxx": "0.0.2"
+        "vuepress-plugin-boxx": "0.0.3"
     }
 ```
 

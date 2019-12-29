@@ -149,6 +149,26 @@ isComment: true
 			-o-transform:rotate(360deg	); /* Opera */
 		}
 	}
+
+	@media screen and (max-width: 360px){
+		#fj {
+			font-size: 12px;
+			margin-top: 28px;
+		}
+		#se {
+			font-size: 12px;
+		}
+	}
+	@media screen and (max-width: 320px){
+		#fj {
+			font-size: 12px;
+			margin-top: 26px;
+		}
+		#se {
+			font-size: 12px;
+			margin-top: -10px;
+		}
+	}
 </style>
 
 

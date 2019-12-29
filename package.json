@@ -15,6 +15,7 @@
 								"vuepress-plugin-sitemap": "2.3.0",
 								"@vuepress/plugin-medium-zoom": "^1.0.2",
 								"@vuepress-reco/vuepress-plugin-rss": "1.0.0",
+								"vuepress-plugin-boxx": "0.0.3",
 								"@vuepress-reco/vuepress-plugin-bgm-player": "1.1.0"
 				}
 }
