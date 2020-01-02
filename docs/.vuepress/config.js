@@ -15,7 +15,8 @@ module.exports = {
     theme: 'reco',
     themeConfig: {
         nav: nav,
-        // logo: '/vuepress/head.png',
+        // logo: '/vuepress/head.png',//导航栏头像
+        authorAvatar: '/vuepress/head.png',//首页右侧头像
         // 搜索设置
         search: true,
         searchMaxSuggestions: 10,
