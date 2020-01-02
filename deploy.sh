@@ -27,7 +27,7 @@ cd ..
 #git init
 #git remote add origin git@github.com:zpj80231/znote.git
 git add .
-git commit -m 'Add plugin boxx and adapt phone style'
+git commit -m 'update sidebar-links style'
 git push origin master
 
 
