@@ -22,7 +22,7 @@ module.exports = {
             collapsable: true,
             children:[
                 'java/ArrayList','java/docker','java/HashMap','java/itext','java/poi','java/quartz',
-                'java/rabbitmq','java/redis','java/SSH','java/swagger2','java/thread',
+                'java/rabbitmq','java/redis','java/SSH','java/swagger2','java/thread','java/jvm'
             ]
         },
         {
