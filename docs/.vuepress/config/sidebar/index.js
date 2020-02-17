@@ -3,6 +3,13 @@ module.exports = {
     '/views/': [
         '',
         {
+            title:'QAQ',
+            collapsable: true,
+            children: [
+                'qaq/KnowledgeReview'
+            ]
+        },
+        {
             title:'规范',
             collapsable: true,
             children:[

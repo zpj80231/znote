@@ -63,6 +63,15 @@ module.exports = {
   },
 
   plugins: [
+   [
+      'vuepress-plugin-container',
+      {
+        type: 'details',
+        before: info => `<details class="custom-block details"><summary>${info}</summary>`,
+        after: '</details>',
+        defaultTitle: '详细信息'
+      },
+    ],
     [
       '@vuepress/pwa', 
       {
