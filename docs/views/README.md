@@ -74,7 +74,7 @@ isComment: true
 		width:100px;
 		height:100px;
 		float: right;
-		background:yellow;
+		background:#ffff0059;
 		transition:width 2s;
 		-moz-transition:width 2s; /* Firefox 4 */
 		-webkit-transition:width 2s; /* Safari and Chrome */
@@ -89,7 +89,7 @@ isComment: true
 		width:100px;
 		height:100px;
 		float: right;
-		background:yellow;
+		background:#ffff0059;
 		transition:width 2s, height 2s;
 		-moz-transition:width 2s, height 2s, -moz-transform 2s; /* Firefox 4 */
 		-webkit-transition:width 2s, height 2s, -webkit-transform 2s; /* Safari and Chrome */
@@ -134,7 +134,7 @@ isComment: true
 			width:100px;
 			height:100px;
 			float: right;
-			background:yellow;
+			background:#ffff0059;
 			transition:width 2s, height 2s;
 			-moz-transition:width 2s, height 2s, -moz-transform 2s; /* Firefox 4 */
 			-webkit-transition:width 2s, height 2s, -webkit-transform 2s; /* Safari and Chrome */
