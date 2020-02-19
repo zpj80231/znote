@@ -1,5 +1,5 @@
 ---
-title: "面试宝典-入门"
+title: "面试宝典-基础篇"
 date: 2020-02-17
 tags:
 - 面试题
@@ -213,5 +213,62 @@ sbuff.append("b")相当于还是在原先的对象上进行修改值。
 抽象类可以实现接口，而且可以暂时不实现接口当中要求的抽象方法，因为抽象类中本身就可以有抽象方法留待子类具体实现；
 
 抽象类可以继承实体类，如果继承的实体类没有默认的无参构造方法，需要写出抽象类的构造方法并在其构造方法的首行使用super()传参来明确指定调用父类的哪个构造方法。
+
+:::
+
+## 第四天
+
+::: details 1. ==和equals的区别？
+
+- ==：是一个运算符，用于比较两端的内容是否相等
+  基本数据类型：两端的值是否相等
+  引用类型：内存地址是否相等
+- equals：是Object类的一个方法，子类继承这个方法之后可以按照自己的逻辑需求覆盖这个方法，从而描述自己的比较规则
+  例如：String类就将equals()方法覆盖为比较字符串的内容
+
+:::
+
+::: details 2. 怎么解决死锁？
+
+使用wait()让当前线程(a)放弃锁标记进入等待池当中阻塞，从而成全另外的线程(b)能够成功获得它(b)需要的锁标记之后再调用notify()或者notifyAll()唤醒线程(a)，让线程(a)从等待池进入锁池等待获得锁标记
+
+> [注意这三个方法都必须已经持有锁标记才能调用所以他们只能出现在synchronized代码块当中]
+
+:::
+
+::: details 3. 线程的生命周期
+
+新生 就绪 运行 消亡 阻塞（等待池 锁池）
+
+:::
+
+::: details 4. 线程池
+
+- 可重用的线程池，方法的参数表示同一时间允许多少个线程并发执行，当线程执行完时，线程将被归还给线程池  Executors.newFixedThreadPool(2);
+
+- 带缓存机制的线城池，当线程执行完时，线程将被归还给线程池，如果一分钟之内没有其他线程被提交， 线程将会消亡  Executors.newCachedThreadPool();  
+
+- 单一执行器：同一时间仅允许一条线程执行  Executors.newSingleThreadExcutor()
+
+:::
+
+::: details 5. 简述JDBC中Statement和PrepareStatement的区别
+
+1. 两者同为接口	PreparedStatement是Statement得子类
+2. Statement 只能执行静态语句
+   PreparedStatement存在一个强大缓存区，相同的sql语句执行相同语句结构仅仅编译一次，PreparedStatement仅对改动数据进行修改而不再进行编译，而Statement只要语句发生了改变，则必须重新进行编译
+3. PreparedStatement支持对sql语句使用?占位符，杜绝了 sql注入安全隐患
+4. 如果sql语句不需要多次执行，或者?过多，则效率可能较Statement低
+
+:::
+
+::: details 6. 简述 execute() executeUpdate() executeQuery() executeBatch()的使用场合，返回值?
+
+|                 | 返回类型  | 使用场合                                |
+| --------------- | --------- | --------------------------------------- |
+| execute()       | boolean   | 执行dql语句返回true，dml语句返回false   |
+| executeUpdate() | int       | 执行dml返回更改记录数，dql立刻报错      |
+| executeQuery()  | ResultSet | 执行dql语句返回结果集                   |
+| executeBatch()  | int[]     | 只能执行dml语句，返回更改的记录数的数组 |
 
 :::
