@@ -2,6 +2,8 @@
 
 > 积丝成寸，积寸成尺；寸尺水已，遂成丈匹。
 
+- 已全局适配`手机模式`和`暗黑模式（iOS）`请自行体验
+
 - 国内访问：[https://zpj80231.gitee.io/znote/](https://zpj80231.gitee.io/znote/)
 
 ![](/docs/.vuepress/public/vuepress/znote.png)

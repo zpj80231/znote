@@ -8,7 +8,7 @@ heroImageStyle: {
   height: '15%',,
   display: block,
   margin: '24% auto -18% auto',
-  border: '1px dashed #000',
+  //border: '1px dashed #000',
   box-shadow: '8px 8px 20px #022',
   borderRadius: '1rem',
   background: 'rgba(0, 0, 0, 0.8) none repeat scroll !important',

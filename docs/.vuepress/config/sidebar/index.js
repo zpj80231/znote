@@ -6,7 +6,7 @@ module.exports = {
             title:'QAQ',
             collapsable: true,
             children: [
-                'qaq/KnowledgeReview'
+                'qaq/collection01'
             ]
         },
         {
