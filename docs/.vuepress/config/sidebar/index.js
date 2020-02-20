@@ -4,21 +4,21 @@ module.exports = {
         '',
         {
             title:'QAQ',
-            collapsable: true,
+            collapsable: false,
             children: [
-                'qaq/collection01'
+                'qaq/ms001','qaq/collection01','qaq/collection02'
             ]
         },
         {
             title:'规范',
-            collapsable: true,
+            collapsable: false,
             children:[
                 'specification/ali'
             ]
         },
         {
             title:'前端',
-            collapsable: true,
+            collapsable: false,
             children:[
                 'front-end/EChartsStudy','front-end/js-json','front-end/viaStart','front-end/vue-demo',
                 'front-end/reco-info','front-end/vuepress-plugin-boxx'
@@ -26,7 +26,7 @@ module.exports = {
         },
         {
             title:'后端',
-            collapsable: true,
+            collapsable: false,
             children:[
                 'java/ArrayList','java/docker','java/HashMap','java/itext','java/poi','java/quartz',
                 'java/rabbitmq','java/redis','java/SSH','java/swagger2','java/thread','java/jvm'
@@ -34,7 +34,7 @@ module.exports = {
         },
         {
             title:'随笔',
-            collapsable: true,
+            collapsable: false,
             children:[
                 'essay/20190928','essay/20191109','essay/20191116','essay/20191130'
             ]
