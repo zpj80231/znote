@@ -4,7 +4,7 @@ date: 2019-11-17 15:53:26
 tags:
 - "vuepress"
 categories:
-- "vuepress"
+- "前端"
 ---
 
 <div style="height: 120px">
@@ -17,7 +17,7 @@ categories:
 
 ## 安装
 
-- 在文件`package.json`中的`devDependencies`下加入`"vuepress-plugin-boxx": "0.0.2"`：
+- 在文件`package.json`中的`devDependencies`下加入`"vuepress-plugin-boxx": "0.0.3"`：
 
 ```json
 	"devDependencies": {

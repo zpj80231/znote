@@ -6,7 +6,7 @@ sidebarDepth: 5
 tags: 
 - vuepress
 categories:
-- vuepress
+- 前端
 ---
 
 <Boxx/>
@@ -93,11 +93,9 @@ Dev
 
 ## 可能遇到的问题
 
-1. 插件解析失败问题
+### 1. 插件解析失败问题
 
-![](/znote/img/essay/reco-info-1.png)
-
-​	有这几个解决办法，就是无法解析node_modules依赖关系
+> **`有这几个解决办法，就是无法解析node_modules依赖关系`**
 
 - 根目录下安装一下vuepress-theme-reco这个依赖
 - 最直接的就是在主题目录执行一下npm install
