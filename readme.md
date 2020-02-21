@@ -2,25 +2,24 @@
 
 > 积丝成寸，积寸成尺；寸尺水已，遂成丈匹。
 
-- 已全局适配`手机模式`和`暗黑模式（iOS）`请自行体验
+- 已全局适配`手机模式`和`暗黑模式（iOS自适应）`请自行体验
 
 - 国内访问：[https://zpj80231.gitee.io/znote/](https://zpj80231.gitee.io/znote/)
 
-![](/docs/.vuepress/public/vuepress/znote.png)
+![](/docs/.vuepress/public/vuepress/znote.png) 速度加载会快一点
 
-## 运行项目
+## 项目运行
 
 - 在项目文件夹下执行命令，加载依赖：`npm install`
 - 在项目文件夹下执行命令，运行项目：`npm run docs:dev`
-- 待启动成功后打开地址即可：` http://localhost:8080/znote/`
+- 待启动成功后打开地址即可：[http://localhost:8080/znote/](http://localhost:8080/znote/)
 
 ## 项目架构
 
-- 采用vuepress构建，主题vuepress-theme-reco
+- 采用vuepress构建
 
 ```lua
-##复制node_modules/vuepress-theme-reco 文件夹
-##粘贴至.vuepress/ 下并更名为theme
+##需要自己写主题样式的话，在.vuepress/ 下新建theme文件夹并按如下目录布局
 Dev
 ├─── docs
 │   └── .vuepress   // 配置目录
@@ -38,6 +37,13 @@ Dev
 │   │    └── config.js
 │   ├── about   // 项目模块
 │   ├── views   // 项目模块
-│   └── README.md   // 博客首页
+│   └── README.md   // 首页
 └── package.json //项目依赖
 ```
+
+## 项目介绍
+
+- 知识点复习和面试总结（不断完善中，欢迎加入！）
+- 技术栈知识点笔记总结（知识小结）
+- 个人牢骚发布点（生活随笔）
+- 其它...
