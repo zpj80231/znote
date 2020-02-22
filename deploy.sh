@@ -1,4 +1,5 @@
-#!/usr/bin/env sh
+# 现已通过GitHub Actions自动部署，提交只需 'git push' 即可
+# 若不想使用自动部署，可以直接运行命令 'npm run deploy' 本地自动提交部署
 
 # 确保脚本抛出遇到的错误
 set -e
@@ -7,7 +8,7 @@ set -e
 npm run docs:build
 
 # 进入生成的文件夹
-cd gb-pages
+cd docs/.vuepress/dist/
 
 # 如果是发布到自定义域名
 # echo 'www.example.com' > CNAME
@@ -27,7 +28,7 @@ cd ..
 #git init
 #git remote add origin git@github.com:zpj80231/znote.git
 git add .
-git commit -m 'deploy' 
+git commit -m 'update docs' 
 git push origin master
 
 
