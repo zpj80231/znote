@@ -3,7 +3,7 @@ const nav = require('./config/nav/')
 const sidebar = require('./config/sidebar/')
 
 module.exports = {
-  dest: 'gb-pages',
+  // dest: 'gb-pages',
   base: '/znote/',
     title: "znote",
     description: '荷尽已无擎雨盖，菊残犹有傲霜枝。',
