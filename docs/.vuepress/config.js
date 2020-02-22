@@ -103,7 +103,8 @@ module.exports = {
     '@vuepress-reco/extract-code',
     'flowchart',
     "vuepress-plugin-boxx",
-    // // require('./plugins/notification/index'),
+    // require('./plugins/notification/index'),
+    require('./plugins/detailsOpenFlag/index'),
     
     // [
     //   '@vuepress-reco/vuepress-plugin-bgm-player',
