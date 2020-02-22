@@ -2,7 +2,7 @@
 	<div>
 
 	<div @click="updateOpen()" v-if="showButtonFlag" class="DetailsOpenFlag"
-		style="right: 1rem; bottom: 9rem; width: 2.5rem; height: 2.5rem; border-radius: 0.25rem; line-height: 2.5rem;background-color: rgba(231, 234, 241, 0.5);font-size: 14px;font-weight: 500;">
+		style="right: 1rem; bottom: 9rem; width: 2.5rem; height: 2.5rem; border-radius: 0.25rem; line-height: 2.5rem;font-size: 14px;font-weight: 500;">
 	 {{text}} 
 
 	</div>

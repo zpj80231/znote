@@ -27,7 +27,7 @@ cd ..
 #git init
 #git remote add origin git@github.com:zpj80231/znote.git
 git add .
-git commit -m 'add globalUIComponents globalComponents DetailsOpenFlag'
+git commit -m 'deploy'
 git push origin master
 
 
