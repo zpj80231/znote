@@ -51,15 +51,20 @@
           $route(to,from){
             if(to.path == from.path) {
               this.showButton()
+            }else if(to.path == '/' || to.path == '/about/') {
+              this.showButtonFlag = false;
             }else {
-              this.showButton()
               this.openFlag = false;
               this.text = "展开";
+              this.showButton()
             }
           }        
         },
         mounted() {
           // this.showButton()
+        },
+        updated() {
+
         }
   }
 </script>
