@@ -105,7 +105,7 @@ module.exports = {
     "vuepress-plugin-boxx",
     // require('./plugins/notification/index'),
     require('./plugins/detailsOpenFlag/index'),
-    
+    require('./plugins/musicPlayer/index'),
     // [
     //   '@vuepress-reco/vuepress-plugin-bgm-player',
       
