@@ -187,7 +187,7 @@ export default {
         this.Player();
         this._getMusicType(1);
     },
-    created() 
+    created() {
     },
     computed: {
         thisMusicList(){
