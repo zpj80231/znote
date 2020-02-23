@@ -1,8 +1,8 @@
 <template>
 	<div>
 
-	<div @click="updateOpen()" v-if="showButtonFlag" class="DetailsOpenFlag"
-		style="right: 1rem; bottom: 9rem; width: 2.5rem; height: 2.5rem; border-radius: 0.25rem; line-height: 2.5rem;font-size: 14px;font-weight: 500;">
+	<div @click="updateOpen()" v-show="showButtonFlag" class="DetailsOpenFlag"
+		:style="detailsStyle">
 	 {{text}} 
 
 	</div>
@@ -17,7 +17,13 @@
         return {
           showButtonFlag: false,
           openFlag: false,
-          text: "展开"
+          text: "展开",
+          visible: false,
+          interval: null,
+          isMoving: false,
+          /* eslint-disable no-undef */
+          detailsStyle: DETAILS_STYLE,
+          visibilityHeight: VISIBILITY_HEIGHT
         }
       },
         methods: {
@@ -40,11 +46,14 @@
             // this.$route.path 
           	var objs = document.getElementsByTagName('details');
           	//当details的数量至少3时才显示展开按钮
-            if(objs!=null && objs.length>2) {
+            if(objs!=null && objs.length>2 && this.visible) {
           		this.showButtonFlag = true;
           	}else {
           		this.showButtonFlag = false;
           	}
+          },
+          handleScroll () {
+            this.visible = window.pageYOffset > this.visibilityHeight
           }
         },
         watch: {
@@ -60,18 +69,21 @@
             }
           }        
         },
-        mounted() {
-          // this.showButton()
+        mounted () {
+          window.addEventListener('scroll', this.handleScroll)
         },
-        updated() {
-
-        }
+        beforeDestroy () {
+          window.removeEventListener('scroll', this.handleScroll)
+          if (this.interval) {
+            alert(this.interval);
+            clearInterval(this.interval)
+          }
+        },
   }
 </script>
 
 <style lang="stylus" scoped>
 	.DetailsOpenFlag
-    
 	  background-color: var(--background-color)
 	  box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.2)
 	  box-shadow: var(--box-shadow)
