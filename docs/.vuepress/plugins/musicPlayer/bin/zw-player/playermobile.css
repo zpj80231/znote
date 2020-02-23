@@ -1,0 +1,8 @@
+@media screen and (max-width: 960px){
+	#musicPlayer {
+	    display: none;
+	}
+	#music {
+		
+	}
+}
