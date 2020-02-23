@@ -175,10 +175,11 @@ export default {
         
     },
     created() {
-        var check_flag = this.check();
-        if(!check_flag) {
-            return;
-        }
+        // var check_flag = this.check();
+        // if(!check_flag) {
+        //     return;
+        // }
+        // var userAgentInfo=navigator.userAgent;
         this._getMusicType(1);
     },
     computed: {
@@ -204,7 +205,7 @@ export default {
     },
     methods: {
         //返回true表示为pc端打开，返回false表示为手机端打开
-        check() { 
+        check() {
           var userAgentInfo=navigator.userAgent; 
           var Agents =new Array("Android","iPhone","SymbianOS","Windows Phone","iPad","iPod"); 
           var flag=true; 
