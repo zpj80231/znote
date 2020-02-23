@@ -104,6 +104,15 @@
     
 </template>
 <script>
+// var jsdom = require('jsdom').jsdom;
+// global.document = jsdom('');
+// global.window = document.defaultView;
+// Object.keys(document.defaultView).forEach((property) => {
+//   if (typeof global[property] === 'undefined') {
+//     global[property] = document.defaultView[property];
+//   }
+// });
+
 import { getWords,getMusicInfo,getMusicUrl,getHotMusic,getSearchSuggest,getHotTalk } from './api/music'
 import pan from './img/pan.png'
 import play from './img/play.png'
@@ -171,16 +180,14 @@ export default {
         }
     },
     mounted() {
+        var check_flag = this.check();
+        if(!check_flag) {
+            return;
+        }
         this.Player();
-        
-    },
-    created() {
-        // var check_flag = this.check();
-        // if(!check_flag) {
-        //     return;
-        // }
-        // var userAgentInfo=navigator.userAgent;
         this._getMusicType(1);
+    },
+    created() 
     },
     computed: {
         thisMusicList(){
@@ -206,16 +213,8 @@ export default {
     methods: {
         //返回true表示为pc端打开，返回false表示为手机端打开
         check() {
-          var userAgentInfo=navigator.userAgent; 
-          var Agents =new Array("Android","iPhone","SymbianOS","Windows Phone","iPad","iPod"); 
-          var flag=true; 
-          for(var v=0;v<Agents.length;v++) { 
-             if(userAgentInfo.indexOf(Agents[v])>0) { 
-               flag=false; 
-               break; 
-             } 
-           } 
-           return flag; 
+          let flag = navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)
+          return !flag;
         },
         MusicAlert(val){
             this.musicAlertState=true;
@@ -393,10 +392,6 @@ export default {
             return {timeArr:timeArr,wordArr:wordArr}
         },
         Player(){
-            var check_flag = this.check();
-            if(!check_flag) {
-                return;
-            }
             let self=this;
             let player=$('#music')[0];
             let playerTimer=setInterval(timer,1000);
