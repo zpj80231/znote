@@ -46,7 +46,7 @@
             // this.$route.path 
           	var objs = document.getElementsByTagName('details');
           	//当details的数量至少3时才显示展开按钮
-            if(objs!=null && objs.length>2 && this.visible) {
+            if(objs!=null && objs.length>2) {
           		this.showButtonFlag = true;
           	}else {
           		this.showButtonFlag = false;
@@ -70,14 +70,14 @@
           }        
         },
         mounted () {
-          window.addEventListener('scroll', this.handleScroll)
+          // window.addEventListener('scroll', this.handleScroll)
         },
         beforeDestroy () {
-          window.removeEventListener('scroll', this.handleScroll)
-          if (this.interval) {
-            alert(this.interval);
-            clearInterval(this.interval)
-          }
+          // window.removeEventListener('scroll', this.handleScroll)
+          // if (this.interval) {
+          //   alert(this.interval);
+          //   clearInterval(this.interval)
+          // }
         },
   }
 </script>

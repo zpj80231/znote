@@ -88,7 +88,7 @@ footer: MIT Licensed | Copyright © 2018-present Evan You
 }
 
 
-@media screen and (max-width: 960px){
+@media screen and (max-width: 700px){
   .wrap {
     top:-107%;
     transform: scale(0.68,0.58);
