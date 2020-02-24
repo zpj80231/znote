@@ -6,7 +6,8 @@ module.exports = {
             title:'QAQ',
             collapsable: false,
             children: [
-                'qaq/ms001','qaq/collection01','qaq/collection02'
+                'qaq/sum_ms_001','qaq/sum_fe_001','qaq/sum_java_001','qaq/sum_db_001','qaq/sum_spring_001',
+                'qaq/sum_fe_002'
             ]
         },
         {
