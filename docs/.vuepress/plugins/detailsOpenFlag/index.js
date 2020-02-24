@@ -2,9 +2,8 @@ const { path } = require('@vuepress/shared-utils')
 
 module.exports = (options, context) => ({
   define () {
-    const { icon, detailsStyle, visibilityHeight } = options
+    const { detailsStyle } = options
     return {
-      ICON: icon || 'reco-up',
       DETAILS_STYLE: detailsStyle || {
         right: '1rem',
         bottom: '9rem',
@@ -15,8 +14,7 @@ module.exports = (options, context) => ({
         //backgroundColor: 'rgba(231, 234, 241,.5)',
         'font-size': '14px',
         'font-weight': '500'
-      },
-      VISIBILITY_HEIGHT: visibilityHeight || 400
+      }
     }
   },
   name: 'vuepress-plugin-DetailsOpenFlag',
