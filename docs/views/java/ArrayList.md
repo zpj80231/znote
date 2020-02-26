@@ -1,6 +1,6 @@
 ---
 title: ArrayList底层实现和原理
-date: 2018-06-13 20:53:26
+date: 2017-06-13 20:53:26
 tags:
 - "源码分析"
 - Java
@@ -29,7 +29,7 @@ categories:
 package com.zpj.electric.SourceCodeAnalysis;
 
 /**
- * Created by admin on 2018/6/10.
+ * Created by admin on 2017/6/10.
  */
 public class MyArrayList {
 

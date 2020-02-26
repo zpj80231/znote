@@ -1,6 +1,6 @@
 ---
 title: "poi多线程多sheet导出Excel,csv"
-date: 2019-07-20 16:41:12
+date: 2018-08-20 16:41:12
 tags:
 - Java
 - poi
@@ -85,9 +85,7 @@ import com.alibaba.druid.util.StringUtils;
 
 /**
  * @className: CSVUtils
- * @descripe: 来自博客园齐华枫
- * @author: zpj
- * @date: 2019/7/16
+ * @date: 2018/7/16
  * @version: 1.0
  */
 
