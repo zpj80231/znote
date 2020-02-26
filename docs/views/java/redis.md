@@ -1,5 +1,5 @@
 ---
-title: "Redis知识点概览"
+title: "Redis知识点基础"
 date: 2019-08-04 18:41:12
 tags: 
 - Java

@@ -1,6 +1,6 @@
 ---
 title: "面试宝典-试炼篇"
-date: 2020-01-31
+date: 2019-01-31
 tags:
 - 面试
 categories:
@@ -10,6 +10,7 @@ categories:
 
 <Boxx/>
 
+- 试炼篇统一没有答案！！
 
 ## java基础知识
 1. 栈和队列的区别
