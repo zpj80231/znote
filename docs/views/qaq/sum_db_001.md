@@ -1,6 +1,6 @@
 ---
 title: "面试宝典-数据库基础篇"
-date: 2020-02-20
+date: 2019-10-20
 tags:
 - 面试
 categories:
