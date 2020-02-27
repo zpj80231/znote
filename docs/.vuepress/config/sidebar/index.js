@@ -6,8 +6,8 @@ module.exports = {
             title:'QAQ',
             collapsable: false,
             children: [
-                'qaq/sum_ms_001','qaq/sum_fe_001','qaq/sum_java_001','qaq/sum_db_001','qaq/sum_spring_002',
-                'qaq/sum_spring_001','qaq/sum_fe_002'
+                'qaq/sum_ms_001','qaq/sum_fe_001','qaq/sum_fe_002','qaq/sum_java_001','qaq/sum_java_002','qaq/sum_db_001','qaq/sum_spring_001',
+                'qaq/sum_spring_002','qaq/sum_spring_003'
             ]
         },
         {
@@ -38,7 +38,7 @@ module.exports = {
             title:'随笔',
             collapsable: false,
             children:[
-                'essay/20190928','essay/20191109','essay/20191116','essay/20191130'
+                'essay/20190928','essay/20191109','essay/20191116','essay/20191130','essay/20200227'
             ]
         }
 

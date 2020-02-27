@@ -15,7 +15,7 @@ categories:
 
 > Swagger 是一款RESTFUL接口的文档在线自动生成+功能测试功能组件，随着现在许多公司实现了前后端分离，swagger越来越受欢迎了。
 
-我是怎么学swagger的呢，经过我一步一步的经验，推荐大家去以下三个网址去学习即可：
+我是怎么学swagger的呢，经过我一步一步的经验，推荐以下三个网址去学习即可：
 
 - 基础篇：虽然是老外写的入门，但凭我这个英语垃圾的一批的渣渣都能看懂，相信大部分人一定可以读懂！另外作者的写作风格我很喜欢，欢迎大家去看看。[传送们](https://www.vojtechruzicka.com/documenting-spring-boot-rest-api-swagger-springfox/#gatsby-focus-wrapper)
 - 中极篇：一篇不错的文章，从基础到配置到实现写的很详细。[传送们](https://blog.csdn.net/qq122516902/article/details/89417964)
