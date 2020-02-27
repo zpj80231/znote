@@ -1,6 +1,7 @@
 ---
-title: "面试宝典-spring基础篇"
-date: 2020-02-16
+
+title: "面试宝典-spring入门篇"
+date: 2019-12-06
 tags:
 - 面试
 categories:
@@ -10,715 +11,446 @@ categories:
 
 <Boxx/>
 
-## Spring基础
+## Spring入门
 
-::: details 1. Spring两大核心？
+:::details 1.hibernate 和 mybatis 区别？
 
-IOC控制反转， AOP面向切面编程
+1. hibernate**自动**，mybatis半自动
+2. **日志** hibernate自带
+3. **移植性** hibernate：hql qbc面向对象,更换数据库,只更换方言即可
+4. **优化**	  mybatis自己写sql灵活方便
+5. 一级**缓存**<br/>
+   		hibernate底层是Hashtable 线程安全<br/>
+      		mybatis底层是HashMap		线程不安全
 
-:::
+:::details 2.spring容器启动流程、配置
 
-::: details 2. IOC控制反转到底反转了什么？
+- 配置spring.xml
 
-​	**创建对象的过程，形成对象与对象之间依赖关系的操作**<br/>
-​	(Martin: 依赖对象的获得被反转了，本来应该是我们自己new， 现在是通过SpringIOC容器注入)
+1. 初始化springIOC容器,加载spring.xml<br/>
+    		`ApplicatonContext ac =
+        			new ClassPathXmlApplicationContext("spring.xml");`
+  
+2. 扫描注解<br/>`<context:component-scan base-package="com.etoak">`
 
-:::
+3. 配置spring加载数据源
 
-::: details 3. 什么是AOP？
+   - DriverManagerDataSource
 
-​	AOP即**面向切面编程**，关注的是`非核心业务的处理`<br/>
-​	**用到的地方**：比如日志、网站的访问次数等<br/>
-​	**主要目的**:：核心业务和非核心业务之间的解耦<br/>
-​	底层使用了**动态代理**模式<br/>
-​	**要素**：advice(非核心业务的载体)， pointcut(非核心业务的放置位置)，
-​		advisor(建立advice和pointcut之间的联系)
+4. 配置spring整合mybatis
 
-:::
+   - 注入数据源
+   - 设置别名(包下所有类类名全部小写)
+   - 加载 sql.xml映射文件
+   - 加载 PageHelper等插件
 
-::: details 4. 反转之后的好处？
+5. 配置扫描接口(sql.xml文件所在包)
 
-​	有助于类与类之间的**解耦**
+   - 获得sqlSessionFactory(上一步的3以获得)
+       			sqlSessionFactoryBeanName
+   - 实例化接口
+       			basePackage
 
-:::
+6. 配置事务管理器(只需注入数据源)
 
-::: details 5. IOC的好处？
+   ```xml
+   <bean id="tx" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+       <property name="dataSource" ref="dataSource"></property>
+   </bean>
+   ```
 
-​	将对象的创建和属性的赋值完全转交给Spring，
-​	从而降低类与类之间的依赖关系，达到松散耦合的目的
+   
 
-:::
+7. 注解(在需要事务的方法上@Transactional)使用声明事务(底层我们用cglib动态代理)
 
-::: details 6. ICO的核心？
+   注意属性readOnly="true"为只读，在select时可以设置<br/>
 
-​	IOC容器之所以叫IOC容器， 是因为其中的IOC指的是`将主动new变成了被动注入`<br/>
-​	从此角度出发， IOC的核心是`DI依赖注入`
+   ```xml
+   <!-- 配置事务管理器 -->
+   <bean id="tx" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+       <!-- 注入数据源  加入事务   但是没有开启事务 -->
+       <property name="dataSource" ref="dataSource"></property>
+   </bean>
+   
+   <!-- 声明式事务  aop环绕通知-->
+   <tx:annotation-driven proxy-target-class="true" transaction-manager="tx" />
+   ```
 
-:::
-
-::: details 7. DI是什么？
-
-​	依赖注入，指的是建立每个对象之间关系的方式，也就是对属性赋值的操作
-
-:::
-
-::: details 8. Bean的属性都有？
-
-​	***id***：(每个IOC容器对象的唯一标识)，<br/>
-​	***class***：(当前类对应的类型)，<br/>
-​	***scope***：(作用范围)，<br/>
-​	***lazy-init***：(是否 延迟加载)，<br/>
-​	***factory-method***：(指定返回返回该对象的方法名称)，<br/>
-​	***factory-bean***：(指定工厂实例)，<br/>
-​	***init-method***：(对象初始化调用的方法)，<br/>
-​	***destroy-method***
-
-:::
-
-::: details 9. scope分别有几种情况？如何配置？
-
-- singleton，prototype，request，session，globalSession
-
-- 一般`无状态的类的对象都配置成singleton`，无状态的类一般指像Service和Dao层这样逻辑处理类<br/>`
-  有状态的类需要设置成prototype或request`，一般指像Action一样存在多实例， 并且其中数据都不同
+   
 
 :::
 
-::: details 10. Spring创建对象的方式？
+:::details 3.什么是事务?
 
-1. 构造方法创建(id+class)；
-2. 静态工厂创建(class+factory-method)；
-3. 实例工厂创建(factory-bean+factory-method)
+​	多条sql语句作为一个执行单元,**要么全部执行,要么全不执行**
 
-:::
-
-::: details 11. 完成注入的方式？
-
-1. setter注入 <property ...>
-2. 构造方法注入 <constructor-arg ...>
+- 原子性、一致性、隔离性、持久性
 
 :::
 
-::: details 12. Schema是什么？优势？
+:::details 4.spring创建事物的方式?(两种)
 
-- 用来校验xml文件规范的xsd的文件
-
-	1. 基于xml语法
-	2. 扩充了数据类型
-	3. 支持命名空间
-	* schema最重要的能力之一就是对数据类型的支持
+1. **声明式事务** 在xml中配置信息
+2. **编程式事务** 在代码中编写
 
 :::
 
-::: details 13. 复杂属性如何注入？
+:::details 5.软编码硬编码
 
-- 数组/List/Set <br/>\<property><array/list/set>\<value>value\</value>
-- Map <br/> \<map>\<entry key="" value=""/>
-- Properties <br/> \<props>\<prop key="">vlaue\</prop>
-
-:::
-
-::: details 14. 常用Spring注解？
-
-@Component， @Repository， @Service， @Controller
-	@Autowired， @Qualifier， @Scope，@Value
-	@Aspect， @Pointcut， @Before， @After， @AfterReturning， @Around， @AfterThrowing
+- **硬编码**：就是在程序中将代码写死,维护不方便
+- **软编码**：可以在运行时确定,软编码只支持post请求
 
 :::
 
-::: details 15. 接受文件:
+:::details 6.web.xml文件加载先后顺寻
 
-​	@RequestParam(value="file") MultipartFile file
-
-:::
-
-::: details 16. 关于日期、时间
-
-- 映射类声明变量前，加入此注解:
-  1. **@DatetimeFormat**是将String转换成Date，一般前台给后台传值时用(springmvc用)
-  2. 将Date转换成String  一般后台传值给前台时设置响应方式为
-     			**@JsonFormat(pattern="yyyy-MM-dd")**
-  3. **@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss"，timezone = "GMT+8")**<br/>只争对json响应式的处理(中国为东8区)
-  4. **@JsonIgnore** json响应式忽略这个属性
-         private Date hiredate;
+1. ***listener***<br/>
+   ​		多个监听器	谁在前	谁先被加载
+2. ***filter***<br/>
+   		多个过滤器	谁在前	谁先被加载
+3. ***servlet***<br/>
+   		启动不会被加载
+      		当第一个请求发送过来时`<url-pattern>*.do</url-pattern>` 才会被实例化
 
 :::
 
-::: details 17. 使用注解完成IOC的流程？
+:::details 7.HttPServlet声明周期
 
-1. 添加context命名空间以及schemaLocation
-2. 配置文件中添加上下文组件扫描<context:component-scan base-package="com"/>
-3. 给所有需要放入IOC容器中的组件添加注解@Component/@S../@C../@R../@Scope
-4. 给所有需要注入的属性添加注解@Autowired或@Resource
-
-:::
-
-::: details 18. @Resource和@Autowired的区别？
-
-1. **来源不同**<br/>
-   **@Autowired**来自Spring类库中，**@Resource**是J2EE官方类库中的
-3. **底层匹配机制不同**<br/>
-   **@Autowired**优先按照类型进行匹配，如果存在一个接口多个实现类， 再去按照属性名匹配，
-   	如果匹配不到，抛出异常NoUniqueBeanDefinitionException，
-   	此时，可通过 **Qualifier("对象名")** 指定注入对象<br/>
-   **@Resource**优先按照属性名进行匹配，如果匹配不到，再去按照类型进行匹配，
-   如果匹配到多个类型，抛出异常NoUniqueBeanDefinitionException
-   	此时，可通过 **@Resource(name="对象名")** 指定注入对象
+1. 实例化 
+2. 初始化方法
+3. 运行(doGet/doPost) 
+4. 消亡
 
 :::
 
-::: details 19. 反射涉及到哪些类？分别对应哪些方法？
+:::details 8.springmvc提供的两种视图类型
 
-- ***Class***：太多， 比如getDeclaredConstructors()， c.newInstance()
-- ***Field***： get(obj)，set(obj,value)
-- ***Method***： invoke(obj, a.class, b.class, ...)
-- ***Constructor***： newInstance(a.class, b.class ...)，setAccessible(true)
+1. **ModelAndView**
+2. **String**
 
 :::
 
-::: details 20. 常用设计模式？
+:::details 9.重定向和请求转发
 
-​	单例模式， 工厂模式， 观察者模式(监听器)， 装饰者模式(包装流)， 代理模式(AOP)
-
-:::
-
-::: details 21. spring有几种通知(增强)？
-
-1. 前置通知  before
-2. 后置通知  after
-   			 afterReturnning
-3. 环绕通知  aroud
-4. 异常通知  throws
+1. **请求转发**：发送一次请求,跳转后地址栏不发生改变
+2. **重定向**：跳转后地址栏发生改变<br/>
+   主要用在防止表单重复提交、
+   不能使用request范围、
+   跳转之后肯定执行doGet方法
 
 :::
 
-::: details 22. 都有哪几种动态代理？
+:::details 10.springmvc流程
 
-- jdk     依赖接口
-- cglib	继承关系
+1. 新建一个页面,发送**第一次请求地址**
 
-:::
+2. **到达web.xml**，web.xml依次加载
 
-## SpringMVC
+   - ***listener***：初始化spring容器
+   - ***filter***：设置请求、响应编码
+   - ***servlet***：
+     				默认加载WEB-INF/某某某(注意名字保持一致,可自定义)-servlet.xml配置文件
+     				拦截请求
 
-::: details 1、什么是Spring MVC ？简单介绍下你对springMVC的理解?
+3. 加载XXX-servlet.xml配置文件并解析<br/>
 
-Spring MVC是一个基于MVC架构的用来简化web应用程序开发的应用开发框架，它是Spring的一个模块,无需中间整合层来整合。
+   ​		[1] context注解扫描<br/>
+   ​			  springmvc必须的有@Controller注解(得在这层接收客户端请求)<br/>
 
-它和Struts2一样都属于**表现层框架**。在web模型中，MVC是一种很流行的框架，通过把Model，View，Controller分离，把较为复杂的web应用分成逻辑清晰的几部分，简化开发，减少出错，方便组内开发人员之间的配合。
+   ​		[2] 配置映射器、适配器 、类型转换(底层自动实现)<br/>
+   ​			<mvc:acnotation-driven />
 
-::: 
+   ​		[3] 实例化视图解析器<br/>
 
-::: details 2、SpringMVC的流程？
+   ```xml
+   <!-- 视图解析器 -->
+   <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+       <!-- 前缀 -->
+       <property name="prefix"
+                 value="/pages/"></property>
+       <!-- 后缀 -->
+       <property name="suffix"
+                 value=".jsp"></property>
+   </bean>
+   ```
 
-（1）用户发送请求至<u>前端控制器</u> ***DispatcherServlet***；
+   
 
-（2） DispatcherServlet收到请求后，调用 ***HandlerMapping*** <u>处理器映射器</u>，请求获取Handle；
+   ​		[4] 文件上传解析器,id必须是这个
 
-（3）处理器映射器根据请求url找到具体的处理器，生成处理器对象及处理器拦截器(如果有则生成)一并返回给DispatcherServlet；
+   ```xml
+   <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+       <property name="defaultEncoding" value="utf-8" />
+       <property name="maxUploadSize" value="3000000000" />
+   </bean>
+   ```
 
-（4）DispatcherServlet通过 ***HandlerAdapter*** <u>处理器适配器</u>调用处理器；
+   
 
-（5）<u>执行处理器</u>(***Handler***，也叫后端控制器)；
+4. 通过拦截的请求来**匹配@Controller层**
 
-（6）Handler执行完成<u>**返回ModelAndView**</u>；
+   ​		[1] 映射器匹配拿到的请求
+   ​			在某个方法上@RequestMappeing(value="/login")
 
-（7）HandlerAdapter将Handler执行结果ModelAndView返回给DispatcherServlet；
+   ​		[2] 适配器指定执行这个方法
 
-（8）DispatcherServlet将ModelAndView传给 ***ViewReslover*** <u>视图解析器</u>进行解析；
+   ​		[3] 接受请求参数,并经行类型转换
+   @RequestParam(valeu="前台name")<br/>
+   ​			注意日期不能自动转,所以有个注解@DateTimeFormat(pattern="yyyy-MM-dd")
 
-（9）ViewReslover解析后返回具体View；
+5. **执行方法**里的业务逻辑
+   
+6. **ModelAndView**跳转视图<br/>
+   ModelAndView mv = new ModelAndView("除前后缀页面");
+   ​		return mv;
 
-（10）DispatcherServlet对View进行渲染视图（即将模型数据填充至视图中）
-
-（11）DispatcherServlet响应用户。
-
-:::
-
-::: details 3、Springmvc的优点:
-
-（1）它是基于**组件技术**的。全部的应用对象,无论控制器和视图,还是业务对象之类的都是 java组件，并且和Spring提供的其他基础结构紧密集成
-
-（2）不依赖于Servlet API(目标虽是如此,但是在实现的时候确实是依赖于Servlet的)
-
-（3）可以任意使用各种视图技术，而不仅仅局限于JSP
-
-（4）支持各种请求资源的映射策略
-
-（5）它应是易于扩展的
-
-:::
-
-::: details 4、Spring MVC的主要组键？
-
-（1）**前端控制器**DispatcherServlet（不需要程序员开发）
-
-作用：接收请求、响应结果 相当于转发器，有了DispatcherServlet 就减少了其它组件之间的耦合度。
-
-（2）**处理器映射器**HandlerMapping（不需要程序员开发）
-
-作用：根据请求的URL来查找Handler
-
-（3）**处理器适配器**HandlerAdapter
-
-注意：在编写Handler的时候要按照HandlerAdapter要求的规则去编写，这样适配器HandlerAdapter才可以正确的去执行Handler。
-
-（4）**处理器**Handler（需要程序员开发）
-
-（5）**视图解析器** ViewResolver（不需要程序员开发）
-
-作用：进行视图的解析 根据视图逻辑名解析成真正的视图（view）
-
-（6）**视图**View（需要程序员开发jsp）
-
-View是一个接口， 它的实现类支持不同的视图类型（jsp，freemarker，pdf等等）
+7. 视图解析器**渲染视图**名称,完成之后跳转视图
 
 :::
 
-::: details 5、springMVC和struts2的区别有哪些?
+:::details 11.springmvc组成部分
 
-（1）**入口不同**：springmvc的入口是一个`servlet`即前端控制器（DispatchServlet）<br/>struts2入口是一个`filter`过虑器（StrutsPrepareAndExecuteFilter）。
-
-（2）**实现方式不同**：springmvc是**基于方法开发**(一个url对应一个方法)，请求`参数传递到方法的形参`，可以设计为**单例**或多例(建议单例)<br/>struts2是**基于类开发**，`传递参数是通过类的属性`，只能设计为**多例**。
-
-（3）**参数解析不同**：Struts采用值栈存储请求和响应的数据，通过OGNL存取数据<br/>springmvc通过参数解析器是将request请求内容解析，并给方法形参赋值，将数据和视图封装成ModelAndView对象，最后又将ModelAndView中的模型数据通过reques域传输到页面。Jsp视图解析器默认使用jstl。
-
-:::
-
-::: details 6、SpringMVC怎么样设定重定向和转发的？
-
-（1）在返回值前面加"`forward:`"就可以让结果转发,譬如"`forward:user.do?name=method4`"
-
-（2）在返回值前面加"`redirect:`"就可以让返回值重定向,譬如"`redirect:http://www.baidu.com`"
+1. **自中央处理器**	DispatcherServlet<br/>
+2. **映射器**		mvc:annotation-driven	@RequestMappeing<br/>
+3. **适配器**		mvc:annotation-driven	执行方法
+4. **处理器**		@Controller<br/>
+5. **视图解析器**	InternalResourceViewResolver<br/>
+6. **视图**         我们看不见，底层动的<br/>
+7. **异常处理器**<br/>
+8. **上传解析器**
 
 :::
 
-::: details 7、SpringMvc怎么和AJAX相互调用的？
+:::details 12.spring Bean 声明周期
 
-通过Jackson框架就可以把Java里面的对象直接转化成Js可以识别的Json对象。具体步骤如下 ：
-
-（1）加入Jackson.jar
-
-（2）在配置文件中配置json的映射
-
-（3）在接受Ajax的方法里面可以直接返回Object,List等,但方法前面要加上@ResponseBody注解。
+​	[spring Bean 声明周期](https://blog.csdn.net/admin9527_/article/details/78506135)
 
 :::
 
-::: details 8、SpringMvc里面拦截器是怎么写的：
+:::details 13.如何在src目录加载properties
 
-有两种写法,一种是**实现HandlerInterceptor接口**,另外一种是**继承适配器类**,接着在接口方法当中，实现处理逻辑；然后在SpringMvc的配置文件中配置拦截器即可:
-
-```xml
-<!-- 配置SpringMvc的拦截器 -->
-<mvc:interceptors>
-	
-    <!-- 配置一个拦截器的Bean就可以了 默认是对所有请求都拦截 -->
-	<bean id="myInterceptor" class="com.abc.action.MyHandlerInterceptor"></bean>
-	
-    <!-- 只针对部分请求拦截 -->
-	<mvc:interceptor>
-    	<mvc:mapping path="/modelMap.do" />
-		<bean class="com.abc.action.MyHandlerInterceptorAdapter" />
-	</mvc:interceptor>
-
-</mvc:interceptors>
-```
+`<context:property-placeholder file-encoding="UTF-8"
+						location="classpath:jdbc.properties"/>`
 
 :::
 
-::: details 9、如何解决POST请求中文乱码问题，GET的又如何处理呢？
+:::details 14.将文件存放到数据库中
 
-（1）**解决post**请求乱码问题：
-
-在web.xml中加入：
-
-```xml
-<filter>
-
-  <filter-name>CharacterEncodingFilter</filter-name>
-
-  <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
-
-  <init-param>
-
-    <param-name>encoding</param-name>
-
-    <param-value>utf-8</param-value>
-
-  </init-param>
-
-</filter>
-
-<filter-mapping>
-
-  <filter-name>CharacterEncodingFilter</filter-name>
-
-  <url-pattern>/*</url-pattern>
-
-</filter-mapping>
-```
-
-（2）**解决get**请求中文参数出现乱码解决方法有两个：
-
-①修改tomcat配置文件添加编码与工程编码一致，如下：
-
-`<ConnectorURIEncoding="utf-8" connectionTimeout="20000" port="8080" protocol="HTTP/1.1" redirectPort="8443"/>`
-
- ②另外一种方法对参数进行重新编码：
-
-`String userName = new String(request.getParamter("userName").getBytes("ISO8859-1"),"utf-8")`
-
-ISO8859-1是tomcat默认编码，需要将tomcat编码后的内容按utf-8编码。
+| mysql    | oracle | java   |            |
+| -------- | ------ | ------ | ---------- |
+| longblob | blob   | byte[] | 二进制类型 |
+| text     | clob   | String | 大文本类型 |
 
 :::
 
-::: details 10、Spring MVC的异常处理 ？
+:::details 15.springmvc文件上传
 
-可以将异常**抛给Spring框架**，由Spring框架来处理；我们只需要配置简单的异常处理器，在异常处理器中添视图页面即可。
-
-:::
-
-::: details 11、SpringMvc的核心入口类是什么,Struts1,Struts2的分别是什么：
-
-SpringMvc的是**DispatchServlet**
-
-Struts1的是**ActionServlet**
-
-Struts2的是**StrutsPrepareAndExecuteFilter**
-
-:::
-
-::: details 12、SpringMvc的控制器是不是单例模式,如果是,有什么问题,怎么解决？
-
-是单例模式，所以在多线程访问的时候**有线程安全问题**，不要用同步，会影响性能的，解决方案是在控制器里面不能写字段。
-
-:::
-
-::: details 13、SpingMvc中的控制器的注解一般用那个,有没有别的注解可以替代？
-
-一般用`@Conntroller`注解,表示是表现层,不能用用别的注解代替。
-
-:::
-
-::: details 14、 @RequestMapping注解用在类上面有什么作用？
-
-是一个用来处理请求地址映射的注解，可用于类或方法上。用于类上，表示类中的所有响应请求的方法都是以该地址作为父路径。
-
-:::
-
-::: details 15、怎么样把某个请求映射到特定的方法上面？
-
-直接在方法上面加上注解`@RequestMapping`,并且在这个注解里面写上要拦截的路径。
-
-:::
-
-::: details 16、如果在拦截请求中,我想拦截get方式提交的方法,怎么配置？
-
-可以在@RequestMapping注解里面加上`method=RequestMethod.GET`。
-
-:::
-
-::: details 17、怎么样在方法里面得到Request,或者Session？
-
-直接在方法的形参中声明request,SpringMvc就自动把request对象传入。
-
-:::
-
-::: details 18、如果想在拦截的方法里面得到从前台传入的参数,怎么得到？
-
-直接在形参里面声明这个参数就可以,但**必须名字和传过来的参数一样**。
-
-:::
-
-::: details 19、如果前台有很多个参数传入,并且这些参数都是一个对象的,那么怎么样快速得到这个对象？
-
-直接在方法中声明这个对象,SpringMvc就自动会把属性赋值到这个对象里面。
-
-:::
-
-::: details 20、SpringMvc中函数的返回值是什么？
-
-返回值可以有很多类型,有`String`, `ModelAndView`，但一般用String比较好。
-
-:::
-
-::: details 21、SpringMvc用什么对象从后台向前台传递数据的？
-
-1. 使用Map、Model和ModelMap的方式
+​	有个类MultipartFile、方法transferTo
 
 ```java
-@RequestMapping("/test")
-public String test(Map<String,Object> map,Model model,ModelMap modelMap,HttpServletRequest request){
-    //1.放在map里  
-    map.put("names", Arrays.asList("caoyc","zhh","cjx"));
-    //2.放在model里 建议使用
-    model.addAttribute("time", new Date());
-    //3.放在request里  
-    request.setAttribute("request", "requestValue");
-    //4.放在modelMap中 
-    modelMap.addAttribute("city", "ChengDu");
-    modelMap.put("gender", "male");
-    return "hello";
-}
-```
+public String upload(@RequestParam(value="f") MultipartFile f,HttpSession session){
 
- JSP写法: 
-
-```jsp
-time:${requestScope.time}
-names:${requestScope.names }
-city:${requestScope.city }
-gender:${requestScope.gender }
-request:${requestScope.request}
-```
-
-2. 使用ModelAndView的方式:
-
-```java
-@RequestMapping(value="/test2.do",method = RequestMethod.POST)  
-public ModelAndView checknameIsExist2(@RequestParam("sid") String sid,Model model,HttpServletRequest request) {  
-    ModelAndView mav = new ModelAndView();  
-    mav.addObject("ModelAndView", "ModelAndViewValue");  
-    //设置要跳转的页面，与返回值时String时返回success类似，以下跳转到/student/studentList.jsp  
-    mav.setViewName("/student/studentList");  
-    return mav;  
-```
-
-
-
-:::
-
-::: details 22、SpringMvc中有个类把视图和数据都合并的一起的,叫什么？
-
-叫**ModelAndView**。
-
-:::
-
-::: details 23、怎么样把ModelMap里面的数据放入Session里面？
-
-可以在类上面加上 **@SessionAttributes** 注解,里面包含的字符串就是要放入session里面的key。
-
-:::
-
-::: details 24、当一个方法向AJAX返回特殊对象,譬如Object,List等,需要做什么处理？
-
-要加上 **@ResponseBody** 注解。
-
-:::
-
-::: details 25、读过springmvc源码？
-
-Springmvc入口 请求 映射器 适配器
-
-```java
-//前端控制器分派方法 
-
-protected void doDispatch(HttpServletRequest request, HttpServletResponse response) throws Exception { 
-
-​    HttpServletRequest processedRequest = request; 
-
-​    HandlerExecutionChain mappedHandler = null; 
-
-​    int interceptorIndex = -1;
-
-​    try { 
-
-​      ModelAndView mv; 
-
-​      boolean errorView = false;  
-
-​      try { 
-
-​    //检查是否是请求是否是multipart（如文件上传），如果是将通过MultipartResolver解析 
-
-​        processedRequest = checkMultipart(request); 
-
-​     //步骤2、请求到处理器（页面控制器）的映射，通过HandlerMapping进行映射 
-
-​        mappedHandler = getHandler(processedRequest, false); 
-
-​        if (mappedHandler == null || mappedHandler.getHandler() == null) { 
-
-​          noHandlerFound(processedRequest, response); 
-
-​          return; 
-
-​        } 
-
- //步骤3、处理器适配，即将我们的处理器包装成相应的适配器（从而支持多种类型的处理器） 
-
-​        HandlerAdapter ha = getHandlerAdapter(mappedHandler.getHandler());  
-
-​        // 304 Not Modified缓存支持 
-
-​        //此处省略具体代码  
-
-​        // 执行处理器相关的拦截器的预处理（HandlerInterceptor.preHandle） 
-
-​        //此处省略具体代码  
-
-​        // 步骤4、由适配器执行处理器（调用处理器相应功能处理方法） 
-
-​        mv = ha.handle(processedRequest, response, mappedHandler.getHandler());  
-
-​        // Do we need view name translation? 
-
-​        if (mv != null && !mv.hasView()) { 
-
-​          mv.setViewName(getDefaultViewName(request)); 
-
-​        }  
-
-​        // 执行处理器相关的拦截器的后处理（HandlerInterceptor.postHandle） 
-
-​        //此处省略具体代码 
-
-​      } 
-
-​      catch (ModelAndViewDefiningException ex) { 
-
-​        logger.debug("ModelAndViewDefiningException encountered", ex); 
-
-​        mv = ex.getModelAndView(); 
-
-​      } 
-
-​      catch (Exception ex) { 
-
-​        Object handler = (mappedHandler != null ? mappedHandler.getHandler() : null); 
-
-​        mv = processHandlerException(processedRequest, response, handler, ex); 
-
-​        errorView = (mv != null); 
-
-​      }  
-
-//步骤5 步骤6、解析视图并进行视图的渲染 
-
-//步骤5 由ViewResolver解析View（viewResolver.resolveViewName(viewName, locale)） 
-
-步骤6 视图在渲染时会把Model传入（view.render(mv.getModelInternal(), request, response);） 
-
-​      if (mv != null && !mv.wasCleared()) { 
-
-​        render(mv, processedRequest, response); 
-
-​        if (errorView) { 
-
-​          WebUtils.clearErrorRequestAttributes(request); 
-
-​        } 
-
-​      } 
-
-​      else { 
-
-​        if (logger.isDebugEnabled()) { 
-
-​          logger.debug("Null ModelAndView returned to DispatcherServlet with name '" + getServletName() + 
-
-​              "': assuming HandlerAdapter completed request handling"); 
-
-​        } 
-
-​      }  
-
-​      // 执行处理器相关的拦截器的完成后处理（HandlerInterceptor.afterCompletion） 
-
-​      //此处省略具体代码  
-
-​    catch (Exception ex) { 
-
-​      // Trigger after-completion for thrown exception. 
-
-​      triggerAfterCompletion(mappedHandler, interceptorIndex, processedRequest, response, ex)      throw ex; 
-
-​    } 
-
-​    catch (Error err) { 
-
-​      ServletException ex = new NestedServletException("Handler processing failed", err); 
-
-​      // Trigger after-completion for thrown exception. 
-
-​      triggerAfterCompletion(mappedHandler, interceptorIndex, processedRequest, response, ex); 
-
-​      throw ex; 
-
-​    }  
-
-​    finally { 
-
-​      // Clean up any resources used by a multipart request. 
-
-​      if (processedRequest != request) {
-
-​        cleanupMultipart(processedRequest); 
-
-​      } 
-
-​    } 
-
-  } 
-
- 
-
- 
-
-Springmvc九大组件：
-
-protected void initStrategies(ApplicationContext context) {
-
-  //用于处理上传请求。处理方法是将普通的request包装成MultipartHttpServletRequest，后者可以直接调用getFile方法获取File.
-
-  initMultipartResolver(context);
-
-  //SpringMVC主要有两个地方用到了Locale：一是ViewResolver视图解析的时候；二是用到国际化资源或者主题的时候。
-
-  initLocaleResolver(context); 
-
-  //用于解析主题。SpringMVC中一个主题对应一个properties文件，里面存放着跟当前主题相关的所有资源、
-
-  //如图片、css样式等。SpringMVC的主题也支持国际化， 
-
-  initThemeResolver(context);
-
-  //用来查找Handler的。
-
-  initHandlerMappings(context);
-
-  //从名字上看，它就是一个适配器。Servlet需要的处理方法的结构却是固定的，都是以request和response为参数的方法。
-
-  //如何让固定的Servlet处理方法调用灵活的Handler来进行处理呢？这就是HandlerAdapter要做的事情
-
-  initHandlerAdapters(context);
-
-  //其它组件都是用来干活的。在干活的过程中难免会出现问题，出问题后怎么办呢？
-
-  //这就需要有一个专门的角色对异常情况进行处理，在SpringMVC中就是HandlerExceptionResolver。
-
-  initHandlerExceptionResolvers(context);
-
-  //有的Handler处理完后并没有设置View也没有设置ViewName，这时就需要从request获取ViewName了，
-
-  //如何从request中获取ViewName就是RequestToViewNameTranslator要做的事情了。
-
-  initRequestToViewNameTranslator(context);
-
-  //ViewResolver用来将String类型的视图名和Locale解析为View类型的视图。
-
-  //View是用来渲染页面的，也就是将程序返回的参数填入模板里，生成html（也可能是其它类型）文件。
-
-  initViewResolvers(context);
-
-  //用来管理FlashMap的，FlashMap主要用在redirect重定向中传递参数。
-
-  initFlashMapManager(context); 
+    //MultipartFile有transferTo()这么一个方法写出文件
+    f.transferTo(new File(path,filenewname));
 
 }
 ```
+- springmvc文件下载
 
+  记得设置响应头信息
+  		`response.setHeader("Content-Disposition","attachment;filename="+filename);`
 
+:::
 
- 
+:::details 16，springmvc 提供2种 请求格式
+
+1. \*.do、\*.action
+
+2.  /       默认不加载静态资源  js css <br/>				默认不加载静态资源，要加载的话需要在spring配置文件中配置解析
+	
+	```xml
+	<!-- 静态servlet对象 针对/请求不加载静态资源 js css img  -->
+	<mvc:default-servlet-handler />
+	```
+
+:::
+
+:::details 17.在前端 json 和 js对象的互转
+
+- JSON.parse(str);
+- JSON.stringify(object);
+
+:::
+
+:::details 18.springmvc集成spring,可以使用spring拥有的信息,但只能使用spring的ioc信息,aop不能使用
+
+​		即：容器启动时,spring先加载,springmvc后加载<br/>
+​			spring 	  配置事务,事务底层时aop实现的,springmvc没有aop的配置<br/>
+​			**springmvc 没有配置事务,所以会覆盖掉spring配置**<br/>
+
+​		所以事务会失效，***解决办法***：<br/>
+​			`让springmvc不扫描有事务的层(service层)只扫描Controller层`<br/>
+​			`让spring扫描除了Controller的其他层`
+
+:::
+
+:::details 19.数据库建表3范式
+
+1. 关系型数据库<br/>
+   		表、字段、值	**有相互关系**
+2. 创建字段<br/>
+   		所有字段中**必须有一个字段是唯一的**
+3. **字段不能冗余**
+
+:::
+
+:::details 20.disabled和readonly的区别
+
+- 都是使文本框失效(不能输入)<br/>
+  	***disabled***：前端显示为灰色,后台接受值为null<br/>
+    	***readonly***：前端显示为白色,后台可以接受到值
+
+:::
+
+:::details 21.bootstrap和easyui区别
+
+- easyui 	  是**js框架**,没有响应式布局
+- bootstrap 侧重css的前端框架,有**响应式布局**
+
+:::
+
+:::details 22.js中 == 和 === 的区别
+
+​	== 只比较内容<br/>
+​	===	先比较类型，再比较内容
+
+:::
+
+:::details 23.过滤器和拦截器的区别
+
+- 过滤器：<br/>
+  		在web.xml中配置,**由servlet**实例化对象,spring不能注入,**什么请求都拦截**
+- 拦截器：<br/>
+  		只拦截后台请求,
+    		都是**由spring进行管理**的,springmvc**除了jsp之外都拦截**
+
+:::
+
+:::details 24.struts2和springmvc的区别
+
+1. **入口**<br/>
+   			struts2：web.xml filter元素,容器启动初始化<br/>
+      			mvc:		web.xml servlet元素,第一次触发请求实例化对象
+2. **创建对象**<br/>
+   			struts2： 基于类开发,发送请求时,每次都会创建对象,多例的<br/>
+      			mvc:	基于方法开发,一般设计为单例(默认)
+3. **接受请求参数**<br/>
+   			struts2:	成员变量	依赖类存在<br/>
+      			mvc:		局部变量	依赖方法存在
+
+:::
+
+:::details 25.数据库中的符号
+
+​	 and 相当于	&&<br/>
+​	 or 相当于	||<br/>
+​	 `&gt; ` 相当于	><br/>
+​	` &lt;` 相当于	<<br/>
+
+:::
+
+:::details 26.事务的	隔离机制和七种传播途径
+
+- 脏读:读到了其他事物未提交的数据
+
+- 不可重复读:一次读取到记录之后其他事物对这条数据进行了修改,再次读取数据不一致
+
+- 幻读:相同的查询条件首次查询后,其他事物添加或删除了新的数据,再次查询不一致
+
+- 隔离机制：(解决脏读,不可重复读,幻读)
+
+|  |脏读|				不可重复读|			幻读|
+|--|--|--|--|
+|Read uncommitted : |		会	|				会		|		会|
+|Read committed :	|	不会	|				会		|		会|
+|Repeatable read : 	|	不会		|			不会		|		会|
+|Serializable : 	|		不会		|			不会	|			不会|
+
+- 传播行为:<br/>
+	国内最常用的就是propagation_required
+	**事务的操作有异常是都得向上抛**,不能向上抛就自己new一个异常,不要try(非要try的话,就自己在造一个异常)。
+
+:::
+
+:::details 27.随便写一个自增编号
+
+```java
+Calendar c = Calendar.getInstance();
+String no = "ABC" + c.get(1) + String.format("%04d",(++count));
+```
+
+:::
+
+:::details 28.maven的作用
+
+- 依赖管理jar包
+- 基于多模块
+
+:::
+
+:::details 29.xml和对象的互转
+
+​	java jaxb
+
+:::
+
+:::details 30.网络传输,跨项目访问
+
+- ***webService***: 既可以当客户端又可以当服务端
+  1. 跨平台	跨语言
+  2. 多用在企业
+  3. soap协议
+  4. `http://localhost:8080/SSM/ws/user?wsdl`
+- ***httpclient***: 相当于客户端
+  1. 多用在互联网  调接口/新老系统模块的调用
+  2. http协议
+  3. `http://localhost:8080/SSM/ws/user`
+
+:::
+
+:::details 31.webService如何使用
+
+- **服务端**：
+
+  
+  
+  0. 先在web.xml文件中配置
+  1. 配置服务端cxf.xml文件
+  2. 定义一个bean类
+  3. 争对这个bean写一个接口,在接口前加注解@javax.jws.WebService
+  4. 在这个接口里写响应的增删该查(定义方法的参数和返回值时 注意不要使用Map对象)
+  5. 针对接口写实现类
+  6. 在实现类上加@javax.jws.WebService
+      ，@org.springframework.stereotype.Service //这是一个服务层
+         		在类里写响应的实现
+  
+- **客户端**：
+
+  0. 新建一个测试项目
+  1. 配置客户端cxf.xml文件
+       	（具体使用见下一题）<br/>
+       将生成的文件复制到工程中,新建一个test类测试
+
+:::
+
+:::details 32.cxf测试接口的工具如何使用:
+
+1. **配置cxf环境变量**<br/>
+   path=E:\web server\apache-cxf-3.1.11\bin
+
+2. **cmd下输入命令**<br/>
+	`wsdl2java -d d:/ws  -p com.etoak.client http://localhost:8080/SSM/ws/user?wsdl`<br/>
+`-d`表示生成客户端代码的位置<br/>
+`-p`表示生成客户端代码的包结构
+- 其它方式：**soapui工具**
+:::
