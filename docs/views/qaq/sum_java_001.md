@@ -55,6 +55,28 @@ categories:
 
 :::
 
+::: details 6. 3.2E3F 里面的E/F分别表示什么？
+
+- E：科学计数法	3.2*10（3）
+- F:表示float类型
+
+:::
+
+::: details 7. switch（参数） case的参数可以传哪些数据类型？
+
+- jdk1.0	 char byte short int<br/>
+  jdk5.0   enum(枚举)<br/>
+  jdk7.0   String
+
+:::
+
+::: details 8. do while 和while之间的区别？
+
+- ***do while*** 先执行 然后在判断 保证程序至少执行一次【先斩后奏】
+- ***while*** 先判断 符合条件在执行
+
+:::
+
 
 ## 第二天
 
@@ -122,6 +144,36 @@ categories:
 多态的不同表现形式：方法的重写和重载就是Java多态的不同表现
 - 重写Overriding是父类与子类之间多态的一种表现
 - 重载OverLoding是一个类中多态的一种表现
+
+:::
+
+::: details 6. Java简单运算面试题
+
+```java
+short x = 1;
+x = x + 1;//左边short = 右边int？
+System.out.println(x);//报错
+
+short y = 1;
+y += 1;//y = (short)(y + 1); +=会自动转换
+System.out.println(y);//2
+```
+
+:::
+
+::: details 7. StringBuffer和StringBuilder之间的区别？
+
+- StringBuffer和StringBuilder在创建对象的时候 都会多预留16块缓冲区
+
+1. ***StringBuffer*** 同一时间允许一个线程进行访问，**效率较低**，但是**不会出现并发错误**
+2. ***StringBuilder*** 同一时间允许多个线程进行访问，**效率较高**，但是**可能会出现并发错误**
+
+:::
+
+::: details 8.  为什么不把一个类所有的方法全部定义成静态的呢？
+
+- 静态方法里面只能直接的访问静态成员
+- 如果想要在静态方法里面访问非静态成员的话，需要先创建对象，拿着对象去调用
 
 :::
 
@@ -201,6 +253,12 @@ String和StringBuffer都是Java当中提供的字符串类型，其中String没�
 **抽象类可以实现接口**，而且可以暂时不实现接口当中要求的抽象方法，因为抽象类中本身就可以有抽象方法留待子类具体实现；
 
 **抽象类可以继承实体类**，如果继承的实体类没有默认的无参构造方法，需要写出抽象类的构造方法并在其构造方法的首行使用super()传参来明确指定调用父类的哪个构造方法。
+
+:::
+
+::: details 7. 抽象类是类 有构造方法 但是不能创建对象那么要构造方法的作用？
+
+- 给子类构造方法首行的super去调用的
 
 :::
 
