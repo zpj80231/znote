@@ -3,7 +3,7 @@ title: 概览
 sidebar: true
 date: 2019-08-21
 sidebarDepth: 0
-isComment: true
+isShowComments: true
 ---
 
 <div style="height: 120px">
