@@ -32,7 +32,7 @@ categories:
    
       - 所有bean初始化之后，判断bean的依赖注入关系
    
-      - 遍历beans容器，利用反射机制，获取bean的所有属性并遍历判断有@Autowired注解的进行set方法注入(依赖注入)
+      - 遍历beans容器，利用反射机制，获取bean的所有属性并遍历判断有@Autowired注解的进行依赖注入(利用java反射set注入，private不用写set方法了)
    
         ```java
         //判断当前类属性是否存在注解
@@ -45,7 +45,7 @@ categories:
                 Object bean = getBean(beanId);
                 if (bean != null) {
                     //默认使用属性名称，查找bean容器对象 1参数 当前对象 2参数给属性赋值
-                    field.setAccessible(true); //允许访问私有属性
+                    field.setAccessible(true); //允许访问私有属性,private不用写set()了
                     field.set(object, bean); //依赖注入
                 }
             }
