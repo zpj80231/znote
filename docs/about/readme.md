@@ -3,7 +3,7 @@ title: 关于我
 date: 2019-06-01
 isTimeLine: false
 sidebar: false
-isComment: false
+isShowComments: true
 ---
 
 ::: tip 介绍
@@ -36,7 +36,7 @@ isComment: false
 
 ### 友链
 
--	[午后南杂](https://www.recoluan.com) | 
+-	[午后南杂]( https://vuepress-theme-reco.recoluan.com/views/other/theme-example.html ) | 
 	[晓风轻技术小站](https://xwjie.github.io) | 
 	[友人c](https://www.ihewro.com) | 
 	[SigureMo](https://www.sigure.xyz) |
