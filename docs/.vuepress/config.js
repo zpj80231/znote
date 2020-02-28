@@ -51,11 +51,13 @@ module.exports = {
         editLinks: true,
         editLinkText: '在 GitHub 上编辑此页！',
         //评论
-      /*valineConfig: {
-       appId: '...',// your appId
-       appKey: '...', // your appKey
-       placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!',//评论框占位提示符
-       },*/
+      	valineConfig: {
+       		appId: 'xbT4pPXCWQju5T7GXC5fUFlF-gzGzoHsz',
+       		appKey: 'bofA5chNQ60p37Ih9sMffSI0',
+       		placeholder: '填写邮箱可以收到回复提醒哦！',
+    		notify: true,
+    		recordIP: true
+       	},
     },
 
   markdown: {
