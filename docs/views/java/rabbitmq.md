@@ -285,12 +285,13 @@ public  class Consumer {
                     e.printStackTrace();
                 } finally {
                     System.out.println(name + " 完成： done ");
+                    // false：手动应答
                     channel.basicAck(envelope.getDeliveryTag(), false);
                 }
             }
         };
 
-        // 消费消息
+        // 消费消息 false：手动应答
         channel.basicConsume(QUEUE_NAME, false, consumer);
 
     }

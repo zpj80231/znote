@@ -78,3 +78,28 @@ isShowComments: false
    当用户getSession()时，web容器会先去cookie查找有没有这个session的id，如果没有，那么cookie就会分配一个就jsessionid并且保存在cookie中
 
 :::
+
+## 偏后端
+
+::: details 1. Servlet核心的API？
+
+Javax.servlet.Servlet
+
+Javax.servlet.ServletConfig
+
+Javax.servlet.http.HttpServlet
+
+HttpServletRequest，HttpServletResponse
+
+:::
+
+::: details 2. Servlet/jsp中的对象的创建、实现和调用？
+
+| |创建者|实现者|调用者|
+|--|--|--|--|
+|Servlet|			容器	| <u>我们</u> |		容器|
+|ServletConfig|	容器	|	容器		|<u>我们</u>|
+|Cookie		|	<u>我们</u>	|	容器	| <u>我们</u> |
+|Session	|	容器	|	容器	| <u>我们</u> |
+
+:::
