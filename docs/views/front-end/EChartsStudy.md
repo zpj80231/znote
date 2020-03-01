@@ -21,8 +21,12 @@ isShowComments: false
 
 ## 常用网址
 
-- 在ECharts官网运行编辑实例：[https://www.echartsjs.com/gallery/editor.html?c=doc-example/getting-started](https://www.echartsjs.com/gallery/editor.html?c=doc-example/getting-started)
-- ECharts`option`中各参数详细配置项：[https://echarts.baidu.com/option.html#grid](https://echarts.baidu.com/option.html#grid)
+- 在ECharts官网运行编辑实例：
+  
+  - [https://www.echartsjs.com/gallery/editor.html?c=doc-example/getting-started](https://www.echartsjs.com/gallery/editor.html?c=doc-example/getting-started)
+- ECharts`option`中各参数详细配置项：
+
+  - [https://echarts.baidu.com/option.html#grid](https://echarts.baidu.com/option.html#grid)
 
 ## 图表展示如下
 

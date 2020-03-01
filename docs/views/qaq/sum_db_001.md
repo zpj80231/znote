@@ -56,6 +56,14 @@ isShowComments: false
 
 :::
 
+::: details 6. 数据源、数据库连接池、DBCP三者的关系？
+
+1. **数据源**：是连接数据库的一个<u>标准</u>
+2. **数据库**：连接池是实现数据源的一种<u>解决方案</u>
+3. **DBCP**：是连接池的<u>具体实现</u>
+
+:::
+
 ## 第二天
 
 ::: details 1. Mysql和Oracle的区别
@@ -128,6 +136,20 @@ like常用来实现模糊查询，与%和_匹配使用，如果需要匹配特�
 
 :::
 
+::: details 7. 什么是事务？特征？JDBC如何控制事务？
+
+- 多条sql语句作为 一个执行单元，要么全部执行，要么全不执行
+
+- 四大特性：**原子性，一致性，隔离性，持久性**
+
+- JDBC控制事务：
+  - 开始事务：connection.setAutoCommit(false);
+  - 执行sql语句
+  - 提交:connection.commit();
+  - 回滚：Connection.rollback();
+
+:::
+
 ## 第三天
 
 ::: details 1. 存储过程、视图、触发器
@@ -180,3 +202,144 @@ exists效率更高
 
 :::
 
+::: details 6. Hibernate中常见的主键增长策略？
+
+- ***Assigned***:在调用save方法之前设置，自定义主键增长方式
+- ***Identity***:建表语句必须支持auto_increment
+- ***Sequence***:指定序列生成主键
+- ***Native***:底层自动选择合适的策略
+- ***Increment***：最大值+1的方式
+- ***Uuid***:生成32为字符串
+
+:::
+
+## 第四天
+
+::: details 1. 结构化查询语言都是什么？
+
+1. **DDL**	alter drop truncate create
+2. **DML**	insert delete update
+3. **DQL**	select
+4. **DCL**	grant revoke
+5. **TCL**	commit rollback savepoint
+
+:::
+
+::: details 2. drop和truncate的区别?
+
+- drop：删除表结构和表数据(如果删除表空间的话需要+purge)
+- truncate：删除表数据和表空间，会保留表结构
+
+:::
+
+::: details 3. 组函数?多行函数?
+
+- sum() avg() count() max() min()
+
+:::
+
+::: details 4. 怎么去重？
+
+1. **distinct**  专业去重(支持多列)
+   		  `select distinct salary,name from student;`
+2. **group by**  聚合统计
+
+:::
+
+::: details 5. 什么时候使用多表连接？什么时候使用子查询？
+
+1. 如果需要查询的数据在多个表中,一定要使用多表连接
+2. 不需要表A中的列,但是下需要表A中的条件,可以用子查询
+3. 子查询中如果使用了in some any all这几个关键字,效率比较低,可以转换成多表关联
+
+:::
+
+::: details 6. 为什么要使用视图?
+
+1. **节省编译时间,提高查询效率**
+2. **屏蔽原表中的字段**，避免没有权限的用户查询到其他字段
+3. 视图的数据能够动态的来源于原表
+4. 简单的视图可以更新视图中的数据，复杂的视图无法更新<br/>`
+   create view 视图名 as select name from student;`
+
+:::
+
+::: details 7. 为什么要给普通用户创建属于自己的表空间?
+
+1. 项目中很有可能与其他项目使用同一个数据库,
+   	多个用户在使用用一个数据库时有可能访问同一个数据库文件,
+      	就会产生资源争用的问题。给不同的用户指定不同的表空间，
+      	就可以让他们使用不同的数据库文件，**解决资源争用的问题**。
+2.  **给予用户部分权限**
+
+:::
+
+::: details 8. 约束有哪几种?
+
+1. 外键约束	foreign key references
+2. 唯一约束	unique
+3. 非空约束	not null
+4. 主键约束	primary key
+5. 检查约束	check
+
+:::
+
+::: details 9. 索引有哪几种?
+
+1. 函数索引
+2. 普通索引 normal
+3. 唯一索引 unique
+4. 位图索引 bitmap（适合在数据量比较大，基数比较小的列  如：男/女）
+
+:::
+
+::: details 10. 索引的优缺点?
+
+- 能够更快的帮助我们**提高查询效率**
+- 索引会降低数据库的增删改的效率，因为数据库需要花时间去维护索引,所以**索引适合数据量比较大而且数据不经常改动的列**
+
+:::
+
+::: details 11. sql语句怎么优化?
+
+1. 尽量**用exists代替in**
+2. 合理**使用索引**
+3. 查询多个表中的数据时,尽量用**多表连接**
+4. 多表连接时尽量把**多的数据放在where之后**
+5. 多表连接时尽量**使用表的别名**,减少数据库的解析时间
+6. 在确保语句完整的情况下,多使用commit提交语句
+7. **优化group by**，将不需要的记录在group by之前过滤掉
+
+:::
+
+::: details 12. 查询语句常见的关键字的优先级?
+
+1. select  列名		优先级高于order by
+2. from	表明		优先级最高
+3. where	条件		优先级次高
+4. group by条件		优先级次于where
+5. having	条件		优先级一定在group by之后
+6. order by分组		优先级最低
+
+:::
+
+::: details 13. Oracle分页
+
+​	`rownum`，这是Oracle对动态查询结果的编号，用来实现分页查询有序的整数列，每多一条自动加1
+
+1. 不能和 group by 在同一个查询语句中
+2. 不能用 表名.rownum
+3. 它肯定是从1开始
+- 编号21-30，实现排序效果的分页
+
+```sql
+select rownum,a.*
+   	from
+   		(select rownum rn,b.* 
+         from (select * from student order by salary) b
+         where rownum <=30) a
+   	where
+   		a.rn >=21;
+```
+
+:::
