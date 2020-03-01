@@ -3,15 +3,30 @@ const nav = require('./config/nav/')
 const sidebar = require('./config/sidebar/')
 
 module.exports = {
-  // dest: 'gb-pages',
-  base: '/znote/',
+    // dest: 'gb-pages',//打包目录
+    base: '/znote/',
     title: "znote",
     description: '荷尽已无擎雨盖，菊残犹有傲霜枝。',
-  head: [
-    ['link', { rel: 'icon', href: 'https://infinitypro-img.infinitynewtab.com/custom-icon/8001de1jd3n68lbfnxxt564xvb0vl5.png?imageMogr2/thumbnail/240x/format/webp/blur/1x0/quality/100|imageslim' }],
-    ['meta', { name: 'viewport', content: 'width=device-width,initial-scale=1,user-scalable=no' }],
-   ],
+    head: [
+      ['link', { rel: 'icon', href: 'https://infinitypro-img.infinitynewtab.com/custom-icon/8001de1jd3n68lbfnxxt564xvb0vl5.png?imageMogr2/thumbnail/240x/format/webp/blur/1x0/quality/100|imageslim' }],
+      ['meta', { name: 'viewport', content: 'width=device-width,initial-scale=1,user-scalable=no' }],
+      [
+        "script", {
+            "language": "javascript",
+            "type": "text/javascript",
+            "src": "https://cdn.staticfile.org/jquery/1.7.2/jquery.min.js"
+        }
+      ],
+      [
+          "script", {
+              "language": "javascript",
+              "type": "text/javascript",
+              "src": "/js/MouseClickEffect.js"
+          }
+      ]
+    ],
 
+    //主题配置
     theme: 'reco',
     themeConfig: {
         nav: nav,
@@ -26,11 +41,11 @@ module.exports = {
         blogConfig: {
             category: {
                 location: 2,     // 在导航栏菜单中所占的位置，默认2
-                text: '分类' // 默认文案 “分类”
+                text: '分类'     // 默认文案 “分类”
             },
             tag: {
                 location: 3,     // 在导航栏菜单中所占的位置，默认3
-                text: '标签'      // 默认文案 “标签”
+                text: '标签'     // 默认文案 “标签”
             }
         },
         // 最后更新时间
@@ -54,9 +69,10 @@ module.exports = {
       	valineConfig: {
        		appId: 'xbT4pPXCWQju5T7GXC5fUFlF-gzGzoHsz',
        		appKey: 'bofA5chNQ60p37Ih9sMffSI0',
-       		placeholder: '填写邮箱可以收到回复提醒哦！',
-    		notify: true,
-    		recordIP: true
+       		placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!',
+    		  notify: true, // 邮件提醒
+          verify: true, // 验证码
+    		  recordIP: true
        	},
     },
 
@@ -64,6 +80,7 @@ module.exports = {
     lineNumbers: true
   },
 
+  //插件配置
   plugins: [
    [
       'vuepress-plugin-container',
