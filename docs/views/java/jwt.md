@@ -1,3 +1,25 @@
+---
+title: JWT登陆认证
+date: 2019-04-21
+tags:
+- jwt
+categories:
+- 后端
+isShowComments: false
+---
+
+<Boxx/>
+
+[[toc]]
+
+## 使用场景
+
+
+
+## 初识JWT
+
+
+
 ## JWT登陆认证
 
 1. 引入pom依赖
@@ -6,7 +28,7 @@
    - 拦截请求，从每个请求中获取token，从token中获取负载，从负载中获取用户名放入SpringSecurity中，之后认证授权由SpringSecurity框架管理。
 4. 第一次登陆还没有token，用户的登陆信息由SpringSecurity管理认证通过之后，生成jwtToken返回给客户端保存，客户端之后发送请求头携带我们需要的token即可
 
-
+## 客户端添加请求头
 
 - [js操作cookie](https://www.w3school.com.cn/js/js_cookies.asp)
 - js发送请求头
