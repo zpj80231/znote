@@ -380,7 +380,7 @@
 .music_search-enter,.music_search-leave-to{
     opacity: 0;
 }
-.list{
+._list{
     width: 100%;
     height: 620px;
     list-style: none;
@@ -392,7 +392,7 @@
     border-radius: 2px;
     border: 0px;
 }
-.list li{
+._list li{
     width: 100%;
     height: 60px;
     line-height: 60px;
@@ -407,10 +407,10 @@
     z-index: -1;
     background-color: rgba(26,24,28,0.5);
 }
-.list li:hover{
+._list li:hover{
     background-color: rgba(26,24,28,0.3);
 }
-.list li span,.music_ul_title span{
+._list li span,.music_ul_title span{
     display: block;
     width: 200px;
     height: 100%;
