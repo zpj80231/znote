@@ -29,7 +29,7 @@
                         <div class="music_ul_title">
                             <span>歌曲</span><span>歌手</span><span>专辑</span>
                         </div>
-                        <ul class="list">
+                        <ul class="_list">
                             <li v-for="(item,index) in thisMusicList" @mouseover="ButtonActive(index)" @dblclick="ListPlay((thisListPage-1)*10+index)">
                                 <div class="this_music_shlter" v-if="(thisListPage-1)*10+index==thisMusicIndex"></div>
                                 <span>{{item.name}}</span><span>{{item.ar[0].name}}</span><span>{{item.al.name}}</span>
