@@ -2,7 +2,6 @@
 title: "RabbitMQ"
 date: 2019-08-21 19:41:12
 tags: 
-- Java
 - RabbitMQ
 catagories:
 - '后端'
