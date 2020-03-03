@@ -11,7 +11,7 @@ isShowComments: false
 
 <Boxx/>
 
-## Spring入门
+## 综合入门
 
 :::details 1.hibernate 和 mybatis 区别？
 
