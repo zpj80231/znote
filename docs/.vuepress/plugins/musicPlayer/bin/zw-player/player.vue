@@ -182,6 +182,9 @@ export default {
     mounted() {
         var check_flag = this.check();
         if(!check_flag) {
+            // 手机暂时不显示
+            let musicPlayer = document.getElementById("musicPlayer");
+            musicPlayer.style.display='none';
             return;
         }
         this.Player();
