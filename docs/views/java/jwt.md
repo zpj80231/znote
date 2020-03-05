@@ -15,6 +15,7 @@ isShowComments: false
 ## 使用场景
 
 - 基于客户端的用户登录认证（ 轻量，安全，服务端不用记录用户状态信息(无状态) ）
+- 分布式的单点登录
 
 ## 初识JWT
 
@@ -252,6 +253,14 @@ $.ajax({
 }
 ```
 
+## jwt+redis使用流程
+
+1. 登录：用户第一次登录，校验通过，生成token并存到redis里，返回客户端（token设置过期时间1天，redis设置过期时间0.5小时）。
+
+2. 鉴权：之后客户端每次请求都携带token，服务端校验token通过并且redis过期时间没过，则redis续期然后返回token；服务端校验token通过但如果redis中token已过期，则失效。
+
+3. 登出：服务端校验token通过，将redis中的token删除。
+
 ## 总结
 
 - 优点：在非跨域环境下使用JWT机制是一个非常不错的选择，实现方式简单，操作方便，能够快速实现。由于服务端不存储用户状态信息，因此大用户量，对后台服务也不会造成压力。
@@ -263,6 +272,7 @@ $.ajax({
 ## 其他
 
 - [10分钟了解JSON Web令牌（JWT）](https://baijiahao.baidu.com/s?id=1608021814182894637&wfr=spider&for=pc)
-- [使用JWT实现单点登录（完全跨域方案）](https://blog.csdn.net/weixin_42873937/article/details/82460997)
+- [使用JWT实现单点登录（完全跨域方案）*](https://blog.csdn.net/weixin_42873937/article/details/82460997)
 - [SpringBoot+Security+JWT基础](https://www.jianshu.com/p/6e4371d74248)
 - [SpringBoot集成JWT实现token验证](https://www.jianshu.com/p/e88d3f8151db)
+- [JWT的使用流程 *](https://blog.csdn.net/shmely/article/details/85915044)

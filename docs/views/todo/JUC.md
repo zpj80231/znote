@@ -1,11 +1,11 @@
 ## JUC
 
-### 简介
+## 简介
 
 - 自JDK1.5出现的，JUC（Java并发包）就是java.util .concurrent工具包的简称。
 - 所属位置：jre1.8.0/lib/rj.jar，在jvm中rj.jar由👉bootsrap.classloader加载器通过双亲委派机制加载到内存。
 
-### volatile关键字
+## volatile关键字
 
 - Java中各线程变量都是私有的，为 <u>保证多线程共享数据，常用volatile</u> 关键字修饰数据以保证共享数据在内存中的可见性。
 
@@ -52,7 +52,7 @@
   volatile不具备互斥性(当一个线程持有锁时，其他线程进不来，这就是互斥性)。
   volatile保证可见性但是不具备原子性(保证原子性：1.加锁、2.使用volatile保证可见，使用CAS原子类保证原子性)。
 
-### CAS原子类
+## CAS原子类
 
 - CAS：CompareAndSet，CAS涉及3个元素:内存地址、期盼值和目标值，只有内存地址对应的值和期望的值相同时，才把内存地址对应的值修改为目标值。
 
@@ -142,3 +142,29 @@ public class ABA {
 }
 ```
 
+## JUC下的常见类
+
+ JUC的atomic包下运用了CAS的AtomicBoolean、AtomicInteger、AtomicReference等原子变量类 
+
+JUC的locks包下的AbstractQueuedSynchronizer（AQS）以及使用AQS的ReentantLock（显式锁）、ReentrantReadWriteLock
+
+附：运用了AQS的类还有：Semaphore、CountDownLatch、ReentantLock（显式锁）、ReentrantReadWriteLock
+
+JUC下的一些同步工具类：CountDownLatch（闭锁）、Semaphore（信号量）、CyclicBarrier（栅栏）、FutureTask
+
+### JUC下的一些并发容器类：
+
+1. 使用写时复制类 ***CopyOnWriteArrayList***，此类适合读多写少的场合,它的性能比Vector好的多。
+
+   - 它的读取方法没有使用加锁操作，而是在使用add，set等修改操作的时候将原内容和要修改的内容复制到新的副本中，写完后，再将副本赋予原数据。
+
+2.  ***CopyOnWriteArraySet***： 值得一提的是:CopyOnWriteArraySet使用CopyOnWriteArrayList实现。
+
+3. ***ConcurrentHashMap***: 并发map，很好的支持高性能和高并发。
+
+     - jdk1.7之前使用分段数组+链表实现。jdk1.8后使用 数组+链表/红黑树实现
+
+     *     jdk1.7之前给每段数据加锁，当一个线程访问其中一段数据时，其他数据也能被其他线程访问，也是非常的高效
+     * jdk1.8后使用数组+链表/红黑树实现，其扩容等机制与HashMap一样，但是控制并发的方法改为了CAS+synchronized
+
+       synchronized锁的只是链表的首节点或红黑树的首节点，这样一来，只要节点不冲突(hash不冲突)，synchronized也不会触发，更加高效
