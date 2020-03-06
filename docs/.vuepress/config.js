@@ -30,8 +30,8 @@ module.exports = {
     theme: 'reco',
     themeConfig: {
         nav: nav,
-        // logo: '/vuepress/head.png',//导航栏头像
-        authorAvatar: '/vuepress/head.png',//首页右侧头像
+        // logo: '/vuepress/head-fish.jpg', //导航栏头像
+        authorAvatar: '/vuepress/head-fish.jpg', //首页右侧头像
         // 搜索设置
         search: true,
         searchMaxSuggestions: 10,
@@ -69,7 +69,7 @@ module.exports = {
       	valineConfig: {
        		appId: 'xbT4pPXCWQju5T7GXC5fUFlF-gzGzoHsz',
        		appKey: 'bofA5chNQ60p37Ih9sMffSI0',
-       		placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!',
+       		placeholder: '填写邮箱可以收到恢复哦!',
     		  notify: true, // 邮件提醒
           verify: true, // 验证码
     		  recordIP: true
