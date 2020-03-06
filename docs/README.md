@@ -86,16 +86,15 @@ footer: MIT Licensed | Copyright © 2018-present Evan You
     top: -120%;
     left: -1%;
 }
-
+.clock {
+    background: rgba(0, 0, 0, 0) none repeat scroll !important;
+    background-image: url() !important;
+}
 
 @media screen and (max-width: 700px){
   .wrap {
     top:-107%;
     transform: scale(0.68,0.58);
-  }
-  .clock {
-    background: rgba(0, 0, 0, 0) none repeat scroll !important;
-    background-image: url() !important;
   }
   .home img {    
     margin: 24% auto -6% auto !important;
