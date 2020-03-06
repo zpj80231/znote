@@ -2,11 +2,28 @@
 
 > 积丝成寸，积寸成尺；寸尺水已，遂成丈匹。
 
+
+
+<p align="center">
+   <a href="https://zpj80231.github.io/znote/" target="_blank"><img alt="Read the Docs" src="https://img.shields.io/badge/docs-GetStarted-red?style=flat-square&logo=read-the-docs"></a>
+   <a href="https://github.com/zpj80231/znote" target="_blank"><img alt="GitHub" src="https://img.shields.io/badge/GitHub-znote-black?style=flat-square&logo=github"></a>
+   <br/>
+   <a href="https://github.com/vuejs/vuepress" target="_blank"><img alt="vuepress" src="https://img.shields.io/badge/vuepress-build-1aad19?style=flat-square&logo=vue.js"></a>
+   <a href="https://github.com/vuepress-reco/vuepress-theme-reco" target="_blank"><img alt="vuepress" src="https://img.shields.io/badge/reco-theme-26a2ff?style=flat-square&logo=vue.js"></a>
+   <br/>
+   <a href="LICENSE"><img alt="LICENSE" src="https://img.shields.io/badge/License-MIT-orange?style=flat-square"></a>
+   <a href="https://creativecommons.org/licenses/by-sa/4.0/"><img alt="CC4.0 BY-SA" src="https://img.shields.io/static/v1?label=CC4.0&message=BY-SA&color=yellow&style=flat-square"></a>
+   <br/>
+   <a href="https://twitter.com/zpj80231"><img alt="twitter" src="https://img.shields.io/twitter/url.svg?style=social&url=https://github.com/zpj80231/znote"></a>
+</p>
+
+
+
+- 本仓库代码使用 [MIT](https://github.com/SigureMo/notev/blob/master/LICENSE) 协议进行开源，但是全部文档内容使用 [CC 4.0 BY-SA](https://creativecommons.org/licenses/by-sa/4.0/) 协议进行发布
 - 已全局适配`手机模式`和`暗黑模式（iOS自适应）`请自行体验
+- 国内访问：[https://zpj80231.gitee.io/znote/](https://zpj80231.gitee.io/znote/) 速度加载会快一点
 
-- 国内访问：[https://zpj80231.gitee.io/znote/](https://zpj80231.gitee.io/znote/)
-
-![](/docs/.vuepress/public/vuepress/znote.png) 速度加载会快一点
+![](/docs/.vuepress/public/vuepress/znote.png)
 
 ## 项目运行
 
