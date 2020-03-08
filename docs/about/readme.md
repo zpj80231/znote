@@ -33,7 +33,7 @@ isShowComments: true
 
 ### 参与社区
 
-- 个人博客：[https://zpj80231.gitee.io/znote](https://zpj80231.gitee.io/znote)
+- 博客：[https://zpj80231.gitee.io/znote](https://zpj80231.gitee.io/znote)
 
 - Github：[https://github.com/zpj80231](https://github.com/zpj80231)
 
