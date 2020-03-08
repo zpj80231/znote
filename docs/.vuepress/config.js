@@ -122,22 +122,8 @@ module.exports = {
     '@vuepress-reco/extract-code',
     'flowchart',
     "vuepress-plugin-boxx",
-    // require('./plugins/notification/index'),
     require('./plugins/detailsOpenFlag/index'),
-    require('./plugins/musicPlayer/index'),
-    require('./plugins/vue-canvas-nest/index'),
-    // [
-    //   '@vuepress-reco/vuepress-plugin-bgm-player',
-      
-    //     // 网络文件示例
-    //     {
-    //       name: '강남역 4번 출구',
-    //       artist: 'Plastic / Fallin` Dild',
-    //       url: 'https://assets.smallsunnyfox.com/music/2.mp3',
-    //       cover: 'https://assets.smallsunnyfox.com/music/2.jpg'
-    //     }
-      
-    // ]
+    require('./plugins/musicPlayer/index')
 
 
   ]
