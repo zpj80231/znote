@@ -111,22 +111,5 @@ footer: MIT Licensed | Copyright © 2018-present Evan You
 
 </style>
 
-<script type="text/javascript">
-  // mounted: {
-  //   var hero = document.getElementByclassName("hero");
-
-  // },
-  // methods: {
-  //   $('#sky').on('mousemove', function(e) {
-  // //公式
-  //     var offsetX = e.clientX / window.innerWidth - 0.5,
-  //         offsetY = e.clientY / window.innerHeight - 0.5;
-  //   var _left = -40 * offsetX;    //如果想动的幅度更大，可以调整 -40 的值
-  //   var _top = -40 * offsetY;     //如果想动的幅度更大，可以调整 -40 的值
-  //   //应用公式
-  //   $('#sky img').css('left',60+_left*0.3).css('top',_top*0.3);  //将您的left值和top值先+此数值，*的小数越大，动的越大，否则越小
-  //   $('#sky span').css('left',60+_left*3).css('top',180+_top*3); //将您的left值和top值先+此数值，*的小数越大，动的越大，否则越小
-  //   $('#sky p').css('left',50+_left*1.5).css('top',230+_top*1.5); //将您的left值和top值先+此数值，*的小数越大，动的越大，否则越小
-  // });
-  // }
-</script>
+<link rel="stylesheet" href="">
+<script src="https://cdn.bootcss.com/canvas-nest.js/2.0.4/canvas-nest.js"></script>
