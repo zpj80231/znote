@@ -125,6 +125,7 @@ module.exports = {
     // require('./plugins/notification/index'),
     require('./plugins/detailsOpenFlag/index'),
     require('./plugins/musicPlayer/index'),
+    require('./plugins/vue-canvas-nest/index'),
     // [
     //   '@vuepress-reco/vuepress-plugin-bgm-player',
       
