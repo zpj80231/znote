@@ -17,7 +17,7 @@ module.exports = {
             title:'规范',
             collapsable: false,
             children:[
-                'specification/ali'
+                'specification/ali', 'specification/git'
             ]
         },
         {
