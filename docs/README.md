@@ -73,8 +73,9 @@ footer: MIT Licensed | Copyright © 2018-present Evan You
         return !flag;
       },
       showCanvas() {
+        if(!this.check()){return}
         var element = document.createElement("script");
-        if(this.check()){element.setAttribute("count","89")}else {element.setAttribute("count","20")};
+        element.setAttribute("count","89");
         element.setAttribute("opacity","0.7");
         element.src = "https://cdn.bootcss.com/canvas-nest.js/2.0.4/canvas-nest.js";
         document.body.appendChild(element);
