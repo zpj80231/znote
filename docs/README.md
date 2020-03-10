@@ -55,34 +55,7 @@ footer: MIT Licensed | Copyright © 2018-present Evan You
 :::
 
 
-<script>
-  export default {
-    data() {
-      return {
-        
-      }
-    },
-    mounted() {
-      this.showCanvas();
-    },
-    created() {
-    },
-    methods: {
-      check() {
-        let flag = navigator.userAgent.match(/(phone|pod|iPhone|iPad|iPod|ios|Android|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)
-        return !flag;
-      },
-      showCanvas() {
-        if(!this.check()){return}
-        var element = document.createElement("script");
-        element.setAttribute("count","89");
-        element.setAttribute("opacity","0.7");
-        element.src = "https://cdn.bootcss.com/canvas-nest.js/2.0.4/canvas-nest.js";
-        document.body.appendChild(element);
-      }
-    }
-  }
-</script>
+<CanvasNest></CanvasNest>
 
 <style>
 .home .content__default:not(.custom) {

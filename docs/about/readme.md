@@ -19,6 +19,8 @@ isShowComments: true
 世界上最远的距离，是我在 if 里你在 else 里，虽然经常一起出现，但却永不结伴执行
 :::
 
+<CanvasNest color="255,0,0" opacity='1'></CanvasNest>
+
 ### 一句话
 
 - Just do it !    （翻译：我只是个搞 IT的！哭笑脸）
