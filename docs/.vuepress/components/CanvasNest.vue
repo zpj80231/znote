@@ -21,6 +21,10 @@
             type: String,
             default: ''
         },
+        global: {// 是否全局引入
+          type: Boolean,
+          default: false
+        }
     },
     data() {
       return {
@@ -51,16 +55,18 @@
       }
     },
     beforeDestroy() {
-      var canvas = document.getElementsByTagName("canvas");
-      for(let i=0; i<canvas.length; i++) {
-          canvas[i].style.display='none';
-          canvas[i].remove();
-      }
-      var scripts = document.getElementsByTagName("script");
-      for (var i = 0; i < scripts.length; i++) {
-          if (scripts[i] && scripts[i].getAttribute("name")=="canvas-nest-name") {
-              scripts[i].parentNode.removeChild(scripts[i]);
-          }
+      if(!this.global) {
+        var canvas = document.getElementsByTagName("canvas");
+        for(let i=0; i<canvas.length; i++) {
+            canvas[i].style.display='none';
+            canvas[i].remove();
+        }
+        var scripts = document.getElementsByTagName("script");
+        for (var i = 0; i < scripts.length; i++) {
+            if (scripts[i] && scripts[i].getAttribute("name")=="canvas-nest-name") {
+                scripts[i].parentNode.removeChild(scripts[i]);
+            }
+        }
       }
     },
   }
