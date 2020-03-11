@@ -1,4 +1,16 @@
-## JUC
+---
+title: JUC小结
+date: 2020-03-11
+tags:
+- Java
+categories:
+- "后端"
+isShowComments: false
+---
+
+<Boxx/>
+
+[[toc]]
 
 ## 简介
 
@@ -144,13 +156,13 @@ public class ABA {
 
 ## JUC下的常见类
 
- JUC的atomic包下运用了CAS的AtomicBoolean、AtomicInteger、AtomicReference等原子变量类 
+- JUC的atomic包下运用了CAS的AtomicBoolean、AtomicInteger、AtomicReference等原子变量类 
 
-JUC的locks包下的AbstractQueuedSynchronizer（AQS）以及使用AQS的ReentantLock（显式锁）、ReentrantReadWriteLock
+- JUC的locks包下的AbstractQueuedSynchronizer（AQS）以及使用AQS的ReentantLock（显式锁）、ReentrantReadWriteLock
+      
+    附：运用了AQS的类还有：Semaphore、CountDownLatch、ReentantLock（显式锁）、ReentrantReadWriteLock
 
-附：运用了AQS的类还有：Semaphore、CountDownLatch、ReentantLock（显式锁）、ReentrantReadWriteLock
-
-JUC下的一些同步工具类：CountDownLatch（闭锁）、Semaphore（信号量）、CyclicBarrier（栅栏）、FutureTask
+- JUC下的一些同步工具类：CountDownLatch（闭锁）、Semaphore（信号量）、CyclicBarrier（栅栏）、FutureTask
 
 ### JUC下的一些并发容器类：
 
@@ -162,9 +174,11 @@ JUC下的一些同步工具类：CountDownLatch（闭锁）、Semaphore（信号
 
 3. ***ConcurrentHashMap***: 并发map，很好的支持高性能和高并发。
 
-     - jdk1.7之前使用分段数组+链表实现。jdk1.8后使用 数组+链表/红黑树实现
+     - jdk1.7之前使用分段数组+链表实现。jdk1.8后使用 数组+链表/红黑树 实现
 
-     *     jdk1.7之前给每段数据加锁，当一个线程访问其中一段数据时，其他数据也能被其他线程访问，也是非常的高效
-     * jdk1.8后使用数组+链表/红黑树实现，其扩容等机制与HashMap一样，但是控制并发的方法改为了CAS+synchronized
+     - jdk1.7之前给每段数据加锁，当一个线程访问其中一段数据时，其他数据也能被其他线程访问，也是非常的高效
+     - jdk1.8后使用数组+链表/红黑树实现，其扩容等机制与HashMap一样，但是控制并发的方法改为了CAS+synchronized
 
        synchronized锁的只是链表的首节点或红黑树的首节点，这样一来，只要节点不冲突(hash不冲突)，synchronized也不会触发，更加高效
+
+### 未完待续
