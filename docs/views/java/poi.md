@@ -12,13 +12,16 @@ isShowComments: false
 
 <Boxx/>
 
-[[toc]]
+因项目特殊，最近遇到了`Excel导出大数据量`的问题，所以就趁着解决这个问题的机会，把poi导出Excel再整理一遍，方便自己日后总结。
 
-# Excel：POI 多线程多sheet导出数据
+<!-- more -->
+
+[[toc]]
 
 ## 概要
 
-因项目特殊，最近遇到了`Excel导出大数据量`的问题，所以就趁着解决这个问题的机会，把poi导出Excel再整理一遍，方便自己日后总结。
+
+Excel：POI 多线程多sheet导出数据
 
 - Excel2003版最大行数是65536，Excel2007最大行数是1048576
 - Excel2003版最大列数是256，Excel2007最大列数是16384
