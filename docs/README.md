@@ -55,7 +55,7 @@ footer: MIT Licensed | Copyright © 2018-present Evan You
 :::
 
 
-<CanvasNest></CanvasNest>
+<CanvasNest color='0,23,255' zIndex='-2'></CanvasNest>
 
 <style>
 .home .content__default:not(.custom) {
@@ -87,10 +87,7 @@ footer: MIT Licensed | Copyright © 2018-present Evan You
     top: -120%;
     left: -1%;
 }
-.clock {
-    background: rgba(0, 0, 0, 0) none repeat scroll !important;
-    background-image: url() !important;
-}
+
 
 @media screen and (max-width: 700px){
   .wrap {
@@ -107,6 +104,10 @@ footer: MIT Licensed | Copyright © 2018-present Evan You
     padding: 5px !important;
     margin: -12px;
     margin-left: 0px;
+  }
+  .clock {
+    background: rgba(0, 0, 0, 0) none repeat scroll !important;
+    background-image: url() !important;
   }
 }
 
