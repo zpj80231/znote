@@ -10,11 +10,13 @@ isShowComments: false
 
 <Boxx/>
 
+Swagger 是一款RESTFUL接口的文档在线自动生成+功能测试功能组件，随着现在许多公司实现了前后端分离，swagger越来越受欢迎了。
+
+<!-- more -->
+
 [[toc]]
 
-## 简介
-
-> Swagger 是一款RESTFUL接口的文档在线自动生成+功能测试功能组件，随着现在许多公司实现了前后端分离，swagger越来越受欢迎了。
+## 入门
 
 我是怎么学swagger的呢，经过我一步一步的经验，推荐以下三个网址去学习即可：
 

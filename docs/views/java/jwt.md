@@ -10,11 +10,14 @@ isShowComments: false
 
 <Boxx/>
 
+基于客户端的用户登录认证（ **轻量**，**安全**，服务端不用记录用户状态信息(**无状态**) ）
+
+<!-- more -->
+
 [[toc]]
 
 ## 使用场景
 
-- 基于客户端的用户登录认证（ 轻量，安全，服务端不用记录用户状态信息(无状态) ）
 - 分布式的单点登录
 
 ## 初识JWT
@@ -56,7 +59,7 @@ HMACSHA256(
 
 ### jwt实例
 
-![](/znote/img/_java/jwt.png)
+![](/znote/img/backEnd/jwt.png)
 
 - 最终的JWT串
 

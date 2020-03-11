@@ -11,7 +11,9 @@ categories:
 isShowComments: false
 ---
 
-参考自阮一峰：[ 常用 Git 命令清单 ]( https://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html )
+![](/znote/img/other/git_001.png)
+
+<!-- more -->
 
 ## 架构
 
@@ -20,10 +22,6 @@ isShowComments: false
   2. 暂存区（index/stage）
   3. 本地仓库（local repository）
   4. 远程仓库（remote repository） 
-
-- 各自之间的关系如下图所示：
-
-![](/znote/img/_other/git_001.png)
 
 ## 一、新建代码库
 
@@ -316,4 +314,6 @@ $ git stash pop
 # 生成一个可供发布的压缩包
 $ git archive
 ```
+
+参考自阮一峰老师：[ 常用 Git 命令清单 ]( https://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html )
 

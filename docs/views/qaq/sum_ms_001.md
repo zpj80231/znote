@@ -10,7 +10,9 @@ isShowComments: false
 
 <Boxx/>
 
-- 试炼篇统一没有答案！！
+试炼篇没有答案！！
+
+<!-- more -->
 
 ## java基础知识
 1. 栈和队列的区别
