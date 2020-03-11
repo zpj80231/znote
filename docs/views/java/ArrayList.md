@@ -11,11 +11,13 @@ isShowComments: false
 
 <Boxx/>
 
+ArrayList可以简单的看作是动态数组，相对于普通的数组它可以动态的增加容量或者减少容量。要注意的是ArrayList并不是线程安全的，因此一般建议在单线程中使用ArrayList。
+
+<!-- more -->
+
 [[toc]]
 
 ## ArrayList底层简介
-
-> ArrayList可以简单的看作是动态数组，相对于普通的数组它可以动态的增加容量或者减少容量。要注意的是ArrayList并不是线程安全的，因此一般建议在单线程中使用ArrayList。
 
 - ArrayList是List接口的一个可变大小的数组的实现
 - ArrayList的内部是使用一个Object对象数组来存储元素的
