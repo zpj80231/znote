@@ -49,7 +49,7 @@
         element.setAttribute("color",this.color);
         element.setAttribute("name","canvas-nest-name");
         element.setAttribute("opacity",this.opacity);
-        element.setAttribute("zIndex",this.opazIndexcity);
+        element.setAttribute("zIndex",this.zIndex);
         element.src = "https://cdn.bootcss.com/canvas-nest.js/2.0.4/canvas-nest.js";
         document.body.appendChild(element);
       }
