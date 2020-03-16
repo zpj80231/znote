@@ -1,10 +1,10 @@
 ---
-title: "面试宝典-数据库基础篇"
+title: "Q&A宝典-数据库基础篇"
 date: 2019-10-20
 tags:
-- 面试
+- 复习
 categories:
-- 面试
+- 总结
 isShowComments: false
 ---
 

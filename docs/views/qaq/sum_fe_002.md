@@ -1,10 +1,10 @@
 ---
-title: "面试宝典-前端进阶篇"
+title: "Q&A宝典-前端进阶篇"
 date: 2019-05-24
 tags:
-- 面试
+- 复习
 categories:
-- 面试
+- 总结
 isShowComments: false
 
 ---

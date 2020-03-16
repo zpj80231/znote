@@ -10,9 +10,11 @@ isShowComments: false
 
 <Boxx/>
 
-[[toc]]
+对Redis的总结：常用命令、使用场景、在Spring中使用、在SpringBoot中是使用
 
-## 对Redis的总结：常用命令、使用场景、在Spring中使用、在SpringBoot中是使用
+<!-- more -->
+
+[[toc]]
 
 ## 简介
 
