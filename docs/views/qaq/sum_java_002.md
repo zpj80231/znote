@@ -1,10 +1,10 @@
 ---
-title: "面试宝典-Java进阶篇"
+title: "Q&A宝典-Java进阶篇"
 date: 2019-04-15
 tags:
-- 面试
+- 复习
 categories:
-- 面试
+- 总结
 isShowComments: false
 ---
 

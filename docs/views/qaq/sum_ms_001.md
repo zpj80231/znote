@@ -1,16 +1,16 @@
 ---
-title: "面试宝典-试炼篇"
+title: "Q&A宝典-试炼篇"
 date: 2019-01-31
 tags:
-- 面试
+- 复习
 categories:
-- 面试
+- 总结
 isShowComments: false
 ---
 
 <Boxx/>
 
-试炼篇没有答案！！
+欲知后事如何，且看下回分解！！
 
 <!-- more -->
 

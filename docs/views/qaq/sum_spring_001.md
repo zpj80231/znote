@@ -1,11 +1,11 @@
 ---
 
-title: "面试宝典-spring入门篇"
+title: "Q&A宝典-spring入门篇"
 date: 2019-12-06
 tags:
-- 面试
+- 复习
 categories:
-- 面试
+- 总结
 isShowComments: false
 ---
 

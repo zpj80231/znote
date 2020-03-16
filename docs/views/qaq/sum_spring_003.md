@@ -1,10 +1,10 @@
 ---
-title: "面试宝典-spring进阶篇"
+title: "Q&A宝典-spring进阶篇"
 date: 2020-02-28
 tags:
-- 面试
+- 复习
 categories:
-- 面试
+- 总结
 isShowComments: false
 ---
 
