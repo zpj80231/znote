@@ -1,10 +1,10 @@
 ---
-title: "面试宝典-spring基础篇"
+title: "Q&A宝典-spring基础篇"
 date: 2019-12-29
 tags:
-- 面试
+- 复习
 categories:
-- 面试
+- 总结
 isShowComments: false
 ---
 
