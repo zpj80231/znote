@@ -170,9 +170,63 @@ public class ABA {
 
    - 它的读取方法没有使用加锁操作，而是在使用add，set等修改操作的时候将原内容和要修改的内容复制到新的副本中，写完后，再将副本赋予原数据。
 
-2.  ***CopyOnWriteArraySet***： 值得一提的是:CopyOnWriteArraySet使用CopyOnWriteArrayList实现。
+   ```java
+   /**
+     * Appends the specified element to the end of this list.
+     *
+     * @param e element to be appended to this list
+     * @return {@code true} (as specified by {@link Collection#add})
+     */
+   public boolean add(E e) {
+       final ReentrantLock lock = this.lock;
+       lock.lock();
+       try {
+           Object[] elements = getArray();
+           int len = elements.length;
+           Object[] newElements = Arrays.copyOf(elements, len + 1);
+           newElements[len] = e;
+           setArray(newElements);
+           return true;
+       } finally {
+           lock.unlock();
+       }
+   }
+   
+   /**
+     * 实现CopyOnWriteArraySet需要用到的方法
+     */
+   public boolean addIfAbsent(E e) {
+       Object[] snapshot = getArray();
+       return indexOf(e, snapshot, 0, snapshot.length) >= 0 ? false :
+       addIfAbsent(e, snapshot);
+   }
+   private static int indexOf(Object o, Object[] elements,
+                                  int index, int fence) {
+       if (o == null) {
+           for (int i = index; i < fence; i++)
+               if (elements[i] == null)
+                   return i;
+       } else {
+           for (int i = index; i < fence; i++)
+               if (o.equals(elements[i]))
+                   return i;
+       }
+       return -1;
+   }
+   ```
 
-3. ***ConcurrentHashMap***: 并发map，很好的支持高性能和高并发。
+2. ***CopyOnWriteArraySet***： 值得一提的是：CopyOnWriteArraySet使用CopyOnWriteArrayList实现。
+
+     ```java
+     private final CopyOnWriteArrayList<E> al;
+     
+     public boolean add(E e) {
+         //还是遍历list，看是否有这个元素
+         return al.addIfAbsent(e);
+     }
+     ```
+
+3. ***ConcurrentHashMap***: 并发map，很好的支持高性能和高并发（分段锁）。
 
      - jdk1.7之前使用分段数组+链表实现。jdk1.8后使用 数组+链表/红黑树 实现
 

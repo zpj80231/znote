@@ -12,7 +12,33 @@ isShowComments: false
 
 ## Spring进阶
 
-::: details 1. IOC控制反转底层原理
+::: details 1、SpringMVC的流程？
+
+（1）用户发送请求至<u>前端控制器</u> ***DispatcherServlet***；
+
+（2） DispatcherServlet收到请求后，调用 ***HandlerMapping*** <u>处理器映射器</u>，请求获取Handle；
+
+（3）处理器映射器根据请求url找到具体的处理器，生成处理器对象及处理器拦截器(如果有则生成)一并返回给DispatcherServlet；
+
+（4）DispatcherServlet通过 ***HandlerAdapter*** <u>处理器适配器</u>调用处理器；
+
+（5）<u>执行处理器</u>(***Handler***，也叫后端控制器)；
+
+（6）Handler执行完成<u>**返回ModelAndView**</u>；
+
+（7）HandlerAdapter将Handler执行结果ModelAndView返回给DispatcherServlet；
+
+（8）DispatcherServlet将ModelAndView传给 ***ViewReslover*** <u>视图解析器</u>进行解析；
+
+（9）ViewReslover解析后返回具体View；
+
+（10）DispatcherServlet对View进行渲染视图（即将模型数据填充至视图中）
+
+（11）DispatcherServlet响应用户。
+
+:::
+
+::: details 2. IOC控制反转底层原理
 
 1. 自定义两个注解
 
@@ -56,13 +82,317 @@ isShowComments: false
 
 :::
 
+::: details 3. 动态代理底层原理
 
+- [简书gstansen](https://www.jianshu.com/p/23d3f1a2b3c7)分析的很好，涉及动态代理比较复杂，我在这里简单概括下吧：
+
+1. 业务接口（Interface）
+    业务的抽象表示
+
+2. 业务具体实现类（concreteManager）
+    实现业务接口，执行具体的业务操作
+
+3. 业务代理类（$proxy，在运行的时候动态生成的类）
+    进行业务代理，调用业务代理操作类
+
+4. 业务代理操作类（DynamicProxyHandler，实现了InvocationHandler接口的类）
+    代理方法的直接调用者，通过InvocationHandler中的invoke方法直接发起代理
+
+   ```java
+   public class DynamicProxyHandler implements InvocationHandler{
+       Object realCookManager;
+       DynamicProxyHandler(ICook realCookManager){
+           this.realCookManager = realCookManager;
+       }
+       @Override
+       public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+           System.out.println("invoke start");
+           System.out.println(method.getName());
+           method.invoke(realCookManager,args);
+           System.out.println("invoke end");
+           return null;
+       }
+   }
+   ```
+
+5. 客户端调用对象（client）
+    发起业务
+
+- 总体思路：
+
+  ```java
+  /* 5.客户端调用对象（client）
+   */
+  public class Main {
+      public static void main(String[] args){
+  		//1. 业务实现类
+          CookManager cookManager = new CookManager();
+          //2. 业务代理操作类
+          DynamicProxyHandler dynamicProxyHandler = 
+              new DynamicProxyHandler(cookManager);
+          //3. Proxy类中的newProxyInstance()方法利用java反射返回代理类的实例
+          ICook iCook =(ICook)Proxy.newProxyInstance(
+              dynamicProxyHandler.getClass().getClassLoader(),
+              cookManager.getClass().getInterfaces(),
+              dynamicProxyHandler);
+          
+          //打印一下代理类的类名
+          System.out.println(iCook.getClass().getName());
+          iCook.dealWithFoot();
+          iCook.cook();
+      }
+  }
+  ```
+
+  > ICook iCook = (ICook)Proxy.newProxyInstance(
+  >
+  > ​		`业务代理操作类.getClass().getClassLoader(),`
+  > 
+  > ​		`业务具体实现类.getClass().getInterfaces(), `
+  >
+  > ​		`业务代理操作类`  );
+
+  1.  ClassLoader是一个抽象类，作用是将字节码文件加载进虚拟机并生成相应的class（注意是小写的）
+  2.  interfaces就是被实现的那些业务接口
+  3. 业务代理操作类：实现InvocationHandler接口的实例，即DynamicProxyHandler
+
+   Proxy类中的newProxyInstance()方法利用**java反射**返回代理类的实例：
+
+  ```java
+  public static Object newProxyInstance(ClassLoader loader,Class<?>[]
+                                        interfaces,InvocationHandler h){
+       //所有被实现的业务接口
+        final Class<?>[] intfs = interfaces.clone();
+       //寻找或生成指定的代理类
+        Class<?> cl = getProxyClass0(loader, intfs);
+        //通过反射类中的Constructor获取其所有构造方法
+        final Constructor<?> cons = cl.getConstructor(constructorParams);
+        //通过Constructor返回代理类的实例
+        return cons.newInstance(new Object[]{h});
+  }
+  ```
+
+:::
+
+::: details 4、读过springmvc源码？
+
+Springmvc入口 请求 映射器 适配器
+
+```java
+//前端控制器分派方法 
+
+protected void doDispatch(HttpServletRequest request, HttpServletResponse response) throws Exception { 
+
+​    HttpServletRequest processedRequest = request; 
+
+​    HandlerExecutionChain mappedHandler = null; 
+
+​    int interceptorIndex = -1;
+
+​    try { 
+
+​      ModelAndView mv; 
+
+​      boolean errorView = false;  
+
+​      try { 
+
+​    //检查是否是请求是否是multipart（如文件上传），如果是将通过MultipartResolver解析 
+
+​        processedRequest = checkMultipart(request); 
+
+​     //步骤2、请求到处理器（页面控制器）的映射，通过HandlerMapping进行映射 
+
+​        mappedHandler = getHandler(processedRequest, false); 
+
+​        if (mappedHandler == null || mappedHandler.getHandler() == null) { 
+
+​          noHandlerFound(processedRequest, response); 
+
+​          return; 
+
+​        } 
+
+ //步骤3、处理器适配，即将我们的处理器包装成相应的适配器（从而支持多种类型的处理器） 
+
+​        HandlerAdapter ha = getHandlerAdapter(mappedHandler.getHandler());  
+
+​        // 304 Not Modified缓存支持 
+
+​        //此处省略具体代码  
+
+​        // 执行处理器相关的拦截器的预处理（HandlerInterceptor.preHandle） 
+
+​        //此处省略具体代码  
+
+​        // 步骤4、由适配器执行处理器（调用处理器相应功能处理方法） 
+
+​        mv = ha.handle(processedRequest, response, mappedHandler.getHandler());  
+
+​        // Do we need view name translation? 
+
+​        if (mv != null && !mv.hasView()) { 
+
+​          mv.setViewName(getDefaultViewName(request)); 
+
+​        }  
+
+​        // 执行处理器相关的拦截器的后处理（HandlerInterceptor.postHandle） 
+
+​        //此处省略具体代码 
+
+​      } 
+
+​      catch (ModelAndViewDefiningException ex) { 
+
+​        logger.debug("ModelAndViewDefiningException encountered", ex); 
+
+​        mv = ex.getModelAndView(); 
+
+​      } 
+
+​      catch (Exception ex) { 
+
+​        Object handler = (mappedHandler != null ? mappedHandler.getHandler() : null); 
+
+​        mv = processHandlerException(processedRequest, response, handler, ex); 
+
+​        errorView = (mv != null); 
+
+​      }  
+
+//步骤5 步骤6、解析视图并进行视图的渲染 
+
+//步骤5 由ViewResolver解析View（viewResolver.resolveViewName(viewName, locale)） 
+
+步骤6 视图在渲染时会把Model传入（view.render(mv.getModelInternal(), request, response);） 
+
+​      if (mv != null && !mv.wasCleared()) { 
+
+​        render(mv, processedRequest, response); 
+
+​        if (errorView) { 
+
+​          WebUtils.clearErrorRequestAttributes(request); 
+
+​        } 
+
+​      } 
+
+​      else { 
+
+​        if (logger.isDebugEnabled()) { 
+
+​          logger.debug("Null ModelAndView returned to DispatcherServlet with name '" + getServletName() + 
+
+​              "': assuming HandlerAdapter completed request handling"); 
+
+​        } 
+
+​      }  
+
+​      // 执行处理器相关的拦截器的完成后处理（HandlerInterceptor.afterCompletion） 
+
+​      //此处省略具体代码  
+
+​    catch (Exception ex) { 
+
+​      // Trigger after-completion for thrown exception. 
+
+​      triggerAfterCompletion(mappedHandler, interceptorIndex, processedRequest, response, ex)      throw ex; 
+
+​    } 
+
+​    catch (Error err) { 
+
+​      ServletException ex = new NestedServletException("Handler processing failed", err); 
+
+​      // Trigger after-completion for thrown exception. 
+
+​      triggerAfterCompletion(mappedHandler, interceptorIndex, processedRequest, response, ex); 
+
+​      throw ex; 
+
+​    }  
+
+​    finally { 
+
+​      // Clean up any resources used by a multipart request. 
+
+​      if (processedRequest != request) {
+
+​        cleanupMultipart(processedRequest); 
+
+​      } 
+
+​    } 
+
+  } 
+
+ 
+
+ 
+
+Springmvc九大组件：
+
+protected void initStrategies(ApplicationContext context) {
+
+  //用于处理上传请求。处理方法是将普通的request包装成MultipartHttpServletRequest，后者可以直接调用getFile方法获取File.
+
+  initMultipartResolver(context);
+
+  //SpringMVC主要有两个地方用到了Locale：一是ViewResolver视图解析的时候；二是用到国际化资源或者主题的时候。
+
+  initLocaleResolver(context); 
+
+  //用于解析主题。SpringMVC中一个主题对应一个properties文件，里面存放着跟当前主题相关的所有资源、
+
+  //如图片、css样式等。SpringMVC的主题也支持国际化， 
+
+  initThemeResolver(context);
+
+  //用来查找Handler的。
+
+  initHandlerMappings(context);
+
+  //从名字上看，它就是一个适配器。Servlet需要的处理方法的结构却是固定的，都是以request和response为参数的方法。
+
+  //如何让固定的Servlet处理方法调用灵活的Handler来进行处理呢？这就是HandlerAdapter要做的事情
+
+  initHandlerAdapters(context);
+
+  //其它组件都是用来干活的。在干活的过程中难免会出现问题，出问题后怎么办呢？
+
+  //这就需要有一个专门的角色对异常情况进行处理，在SpringMVC中就是HandlerExceptionResolver。
+
+  initHandlerExceptionResolvers(context);
+
+  //有的Handler处理完后并没有设置View也没有设置ViewName，这时就需要从request获取ViewName了，
+
+  //如何从request中获取ViewName就是RequestToViewNameTranslator要做的事情了。
+
+  initRequestToViewNameTranslator(context);
+
+  //ViewResolver用来将String类型的视图名和Locale解析为View类型的视图。
+
+  //View是用来渲染页面的，也就是将程序返回的参数填入模板里，生成html（也可能是其它类型）文件。
+
+  initViewResolvers(context);
+
+  //用来管理FlashMap的，FlashMap主要用在redirect重定向中传递参数。
+
+  initFlashMapManager(context); 
+
+}
+```
+
+:::
 
 ## 其它
 
 ::: details 1. 定时任务
 
-就是在xml中配置，具体可以我的看[这篇文章](/views/java/quartz.html)
+就是在xml中配置，具体可以看我的[这篇文章](/views/java/quartz.html)
 
 1. 先配置(实例化)一个**业务**，就是我们自己写的类
 2. 再配置一个**任务**，jobDetailFactoryBean
