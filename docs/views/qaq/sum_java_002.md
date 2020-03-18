@@ -11,7 +11,7 @@ isShowComments: false
 <Boxx/>
 
 
-## 第一天
+## List和Map
 
 ::: details 1. 接口和抽象类之间的区别？
 
@@ -76,5 +76,21 @@ isShowComments: false
 4. 出现的版本不同
    - **Hashtable：since jdk1.0**
    - **HashMap：since jdk1.2**
+
+:::
+
+## 泛型
+
+::: details 1. 泛型中的通配符 T，E，K，V，？
+
+本质上这些个都是通配符，没啥区别，换成 A-Z 之间的任何一个 字母都可以。<br/>
+通常情况下，T，E，K，V，？ 是这样约定的：
+
+- ？ 表示不确定的 java 类型
+- T (type) 表示具体的一个java类型
+- K V (key value) 分别代表java键值中的Key Value
+- E (element) 代表Element
+
+> 可参考：[掘金](https://juejin.im/post/5d5789d26fb9a06ad0056bd9#heading-1)
 
 :::
