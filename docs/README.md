@@ -69,6 +69,16 @@ footer: MIT Licensed | Copyright © 2018-present Evan You
 .home img {
    transform: scale(0.8,0.8) !important;
 }
+.home img:hover {
+   transform: rotate(360deg) !important;
+   transition: all 5s !important;
+}
+/* 阻止描述冒泡 */
+.home .hero .description{
+    pointer-events: none;
+    cursor: default;
+    opacity: 0.6;
+}
 .home .feature p {
     color: #476582 !important;
 }
