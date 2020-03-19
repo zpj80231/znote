@@ -68,6 +68,7 @@ footer: MIT Licensed | Copyright © 2018-present Evan You
 }
 .home img {
    transform: scale(0.8,0.8) !important;
+   transition: all 5s !important;
 }
 .home img:hover {
    transform: rotate(360deg)!important;
@@ -125,6 +126,12 @@ footer: MIT Licensed | Copyright © 2018-present Evan You
     background: rgba(0, 0, 0, 0) none repeat scroll !important;
     background-image: url() !important;
   }
+}
+.clock {
+  transition: all 3s;
+}
+.wrap {
+  transition: all 3s;
 }
 .clock:hover {
   transform: scale(0.55) !important;
