@@ -70,7 +70,7 @@ footer: MIT Licensed | Copyright © 2018-present Evan You
    transform: scale(0.8,0.8) !important;
 }
 .home img:hover {
-   transform: rotate(360deg) !important;
+   transform: rotate(360deg)!important;
    transition: all 5s !important;
 }
 /* 阻止描述冒泡 */
@@ -125,6 +125,14 @@ footer: MIT Licensed | Copyright © 2018-present Evan You
     background: rgba(0, 0, 0, 0) none repeat scroll !important;
     background-image: url() !important;
   }
+}
+.clock:hover {
+  transform: scale(0.55) !important;
+  transition: all 3s;
+}
+.wrap:hover {
+  transform: scale(1.15) !important;
+  transition: all 4s;
 }
 
 </style>
