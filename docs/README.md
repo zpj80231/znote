@@ -67,12 +67,12 @@ footer: MIT Licensed | Copyright © 2018-present Evan You
     display: none;
 }
 .home img {
-   transform: scale(0.8,0.8)!important;
-   transition: all 3s!important;
+   transform: scale(0.8,0.8) !important;
+   transition: all 1s!important;
 }
 .home img:hover {
-   transform: rotate(360deg)!important;
-   transition: all 3s !important;
+   transform: scale(1)!important;
+   transition:all 2s !important;
 }
 /* 阻止描述冒泡 */
 .home .hero .description{
@@ -128,18 +128,18 @@ footer: MIT Licensed | Copyright © 2018-present Evan You
   }
 }
 .clock {
-  transition: all 3s;
+  transition: all 2s;
 }
 .wrap {
-  transition: all 3s;
+  transition: all 2s;
 }
 .clock:hover {
   transform: scale(0.55) !important;
-  transition: all 3s;
+  transition: all 2s;
 }
 .wrap:hover {
   transform: scale(1.15) !important;
-  transition: all 3s;
+  transition: all 2s;
 }
 
 </style>
