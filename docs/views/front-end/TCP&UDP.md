@@ -1,5 +1,5 @@
 ---
-title: TCP,UDP的认识
+title: TCP,UDP,HTTP的认识
 date: 2018-01-16
 tags:
 - 网络协议
@@ -51,7 +51,7 @@ TCP采用的最基本的可靠性技术是：确认与**超时重传机制**、*
 UDP是一种**无连接的、不可靠的**传输层协议； 提供了有限的差错检验功能；目的是希望**以最小的开销来达到网络环境中的进程通信目的**。
 
 UDP（用户数据报协议）- 类似发短信：
-   
+
 1. 只管发送，不确认对方是否接收到
 2. 将数据及源和目的封装成数据包中，不需要建立连接
 3. 每个数据包的大小限制在64K之内
@@ -89,3 +89,120 @@ UDP的首部开销小，只有8个字节。
 HTTP 协议有一个缺陷：通信只能由客户端发起，做不到服务器主动向客户端推送信息。 
 
 WebSocket 协议在2008年诞生，2011年成为国际标准。所有浏览器都已经支持了。它的最大特点就是，**服务器可以主动向客户端推送信息，客户端也可以主动向服务器发送信息**，是真正的双向平等对话，属于服务器推送技术的一种。 
+
+## HTTP
+
+HTTP 标准由 IETF 组织制定。
+
+HTTP 协议是基于 TCP 协议出现的，对 TCP 协议来说，TCP 协议是一条双向的通讯通道，HTTP 在 TCP 的基础上，规定了 Request-Response 模式。这个模式决定了通讯必定由浏览器端首先发起。
+
+HTTP 是存粹的文本协议，它是规定了使用 TCP 协议来传输文本格式的一个应用层协议。
+
+### HTTP 协议格式
+
+![http-image](/znote/img/other/http001.jpg)
+
+### HTTP Method 
+
+- GET：浏览器通过地址栏访问页面都是 GET 方法。
+- POST：表单提交产生 POST 方法。
+- HEAD：HEAD 跟 GET 类似，只返回请求头，多数由 JavaScript 发起。
+- PUT：添加资源，语义上的约束。
+- DELETE ：删除资源，语义上的约束。
+- CONNECT：CONNECT 多用于 HTTPS 和 WebSocket。
+- OPTIONS：一般用于调试，多数线上服务都不支持。
+- TRACE：一般用于调试，多数线上服务都不支持。
+
+### HTTP Status code和Status text
+
+- 1xx：临时回应，表示客户端请继续，被浏览器 HTTP 库直接处理掉了，不会让上层应用知晓
+
+- 2xx：请求成功
+
+    - 200：请求成功
+
+- 3xx：表示请求的目标由变化，希望客户端进一步处理
+
+    - 301&302：当前资源已经被转移，永久性与临时性的转移。 301 更接近一种报错，提示客户端下次别来了。
+    - 304：客户端本地已经由缓存的版本，并且在 Request 中告诉了服务端，当服务端通过时间或者 tag，发现没有更新的时候，就会返回一个不含 body 的 304 状态。
+
+- 4xx：客户端请求错误
+
+    - 403：无权限
+    - 404：表示请求的页面不存在
+
+- 5xx：服务端请求错误
+
+    - 500：服务端错误
+   - 503：服务端暂时性错误，可以一会再试
+
+### HTTP Head (HTTP 头)
+
+> 可以看作键值对。
+
+**Request Header**
+
+| Request Header | 规定 |
+| ------ | ------ |
+| Accept | 浏览器端接受的格式 |
+| Accept-Encoding | 浏览器端接受的编码方式 |
+| Accpet-Language | 浏览器端接受的语言，用于服务器端判断多语言 |
+| Cache-Control | 控制缓存的时效性 |
+| Connection | 连接方式，如果是 keep-alive，且服务器端支持，则会复用连接 |
+| Host | HTTP访问使用的域名 |
+| If-Modified-Since | 上次访问时的更改时间，如果服务器认为此时间后自己没有更新，则会给出 304 响应 |
+| If-None-Match | 上次访问时使用的 E-Tag，通常是页面的信息摘要，这个比更改时间更准确一些 |
+| User-Agent | 客户端标识 |
+| Cookie | 客户端存储的 Cookie 字符串 |
+
+**Response Header**
+
+| Response Header | 规定 |
+| ------ | ------ |
+| Cache-Control | 缓存控制，用于通知各级缓存保存的时间，例如 max-age=0 表示不要缓存 |
+| Connection | 连接类型，Keep-Alive表示复用连接 |
+| Content-Encoding | 内容编码方式，通常是gzip |
+| Content-Length | 内容的长度，有利于浏览器判断内容是否已经结束 |
+| Content-Type | 内容类型，所有请求网页的都是 text/html |
+| Date | 当前的服务器日期 |
+| ETag | 页面的信息摘要，用于判断是否需要重新到服务器端取回页面 |
+| Expires | 过期时间，用于判断下次请求是否需要到服务器端取回页面 |
+| Keep-Alive | 保持连接不断时需要的一些信息，如 timeout=5，max=100 |
+| Last-Modified | 页面上次修改的时间 |
+| Server | 服务器软件的类型 |
+| Set-Cookie | 设置 cookie 可以存在多个 |
+| Via | 服务器端的请求链路，对一些调试场景至关重要的一个头 |
+
+### HTTP Request Body
+
+> HTTP 请求的 body 主要用于提交表单场景。比较自由，服务端认可即可。
+
+常见的 body 格式：
+
+- application/json
+- application/x-www-form-urlencoded
+- multipart/form-data
+- text/xml
+
+使用 html 的 form 标签提交产生的 html 请求，默认会产生 application/x-www-form-urlencoded 数据格式，当由文件上传时，则使用 multipart/form-data。
+
+## HTTPS
+
+> 在 HTTP 协议的基础上，HTTPS 和 HTTP2 规定了更复杂的内容，但是它基本保持了 HTTP 的设计思想，即：使用上的 Request-Response 模式。
+
+HTTPS 作用：
+
+- 确定请求的目标服务端身份
+- 保证传输的数据不会被网络中间节点窃听或者篡改
+
+HTTPS 是使用加密通道来传输 HTTP 的内容。 HTTPS 首先与服务端建立一条 TLS 加密通道。TLS 构建于 TCP 协议之上，它实际上是对传输的内容做一次加密，所以从传输内容上看，HTTPS 跟 HTTP 没有任何区别。
+
+## HTTP2
+
+> HTTP 2 是 HTTP 1.1 的升级版本。
+
+HTTP 2.0 最大的改进有两点，一是支持服务端推送，二是支持 TCP 连接推送。
+
+服务端推送能够在客户端发送第一个请求到服务端时，提前把一部分内容推送给客户端，放入缓存中，可以避免客户端请求顺序带来的并行度不高，从而导致性能问题。
+
+TCP 连接复用，则使用同一个 TCP 连接来传输多个 HTTP 请求，避免了 TCP 连接建立时的三次握手开销，和初建 TCP 连接时传输窗口小的问题。
