@@ -1,9 +1,9 @@
 ---
 title: "RabbitMQ基础"
-date: 2019-08-21 19:41:12
+date: 2019-08-17
 tags: 
 - RabbitMQ
-catagories:
+categories:
 - '后端'
 isShowComments: false
 ---

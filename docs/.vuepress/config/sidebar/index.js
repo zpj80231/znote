@@ -33,8 +33,8 @@ module.exports = {
             collapsable: true,
             children:[
                 'java/ArrayList','java/docker','java/HashMap','java/itext','java/poi','java/quartz',
-                'java/rabbitmq', 'java/redis01', 'java/redis02', 'java/SSH', 'java/jwt', 'java/swagger2', 'java/thread',
-                'java/jvm','java/annotationLog','java/ThreadPool','java/JUC'
+                'java/rabbitmq001', 'java/rabbitmq002', 'java/redis01', 'java/redis02', 'java/SSH', 'java/jwt',
+                'java/swagger2', 'java/thread', 'java/jvm', 'java/annotationLog', 'java/ThreadPool', 'java/JUC'
             ]
         },
         {
