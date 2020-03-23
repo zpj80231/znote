@@ -123,6 +123,7 @@ module.exports = {
     'flowchart',
     "vuepress-plugin-boxx",
     ['vuepress-plugin-code-copy', true],
+    ['vuepress-plugin-smooth-scroll'],
     require('./plugins/detailsOpenFlag/index'),
     require('./plugins/musicPlayer/index')
 
