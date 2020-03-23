@@ -122,6 +122,7 @@ module.exports = {
     '@vuepress-reco/extract-code',
     'flowchart',
     "vuepress-plugin-boxx",
+    ['vuepress-plugin-code-copy', true],
     require('./plugins/detailsOpenFlag/index'),
     require('./plugins/musicPlayer/index')
 
