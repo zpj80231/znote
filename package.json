@@ -14,6 +14,7 @@
 		"jquery": "^3.4.1",
 		"vuepress": "^1.3.1",
 		"vuepress-plugin-boxx": "0.0.3",
+		"vuepress-plugin-code-copy": "^1.0.6",
 		"vuepress-plugin-flowchart": "1.4.3",
 		"vuepress-plugin-sitemap": "2.3.0",
 		"vuepress-theme-reco": "1.2.2",
