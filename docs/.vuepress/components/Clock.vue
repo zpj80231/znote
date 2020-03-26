@@ -19,14 +19,18 @@
 	      methods: {},
 	      watch: {},
 	      mounted() {
-	        setInterval(() => {
+	       let time = setInterval(() => {
 	          let day = new Date();
 	          let hr = day.getHours() * 5 * this.deg;
 	          let mn = day.getMinutes() * this.deg;
-	          let sc = day.getSeconds() * this.deg;
-	          this.$refs.hh.style.transform = `rotateZ(${hr+(mn/12)}deg)`;
+            let sc = day.getSeconds() * this.deg;
+            if(this.$refs.hh && this.$refs.mm && this.$refs.ss){
+            this.$refs.hh.style.transform = `rotateZ(${hr+(mn/12)}deg)`;
 	          this.$refs.mm.style.transform = `rotateZ(${mn}deg)`;
-	          this.$refs.ss.style.transform = `rotateZ(${sc}deg)`;
+            this.$refs.ss.style.transform = `rotateZ(${sc}deg)`;
+            }else{
+              clearInterval(time)
+            }
 	        }, 1000)
 	      }
 	}
