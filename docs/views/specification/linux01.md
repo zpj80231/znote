@@ -62,6 +62,15 @@ ls  -l   文件
 
 > 参考：[ 白小黑..](https://blog.csdn.net/weixin_42711549/article/details/81156370)
 
+## 文件复制/移动
+
+```shell
+#复制文件夹 -r
+cp -r a文件夹 b新文件夹
+#将/test1目录下的file1复制到/test3 目录，并将文件名改为file2
+mv /test1/file1 /test3/file2
+```
+
 ## 上传下载
 
 ```shell
