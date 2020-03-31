@@ -69,6 +69,18 @@ isShowComments: false
 ::: details 1. Mysql和Oracle的区别
 
 1. Oracle使用rownum来实现分页，MySQL使用limit实现**分页**
+
+```sql
+-- - mysql查询行号
+select 
+	w.id,
+	@rowno := @rowno + 1 AS rowno,
+	-- 查到当前这一行的行号
+	CASE WHEN w.ID ='123456' THEN
+@rowno END currentrowno 
+	from table w order by w.rowno;
+```
+
 2. Oracle没有主键自增特性,可以使用调用序列的方式来实现主键自增；MySQL可以在主键列之后添加auto_increment设置**自增特性** 
 3. Oracle有表空间的概念，MySQL没有**表空间**
 4. Oracle的**分组函数**中select之后不能直接写非分组的其他列；MySQL如果没有聚组函数则可以写 其他列
