@@ -65,15 +65,14 @@ export default {
     isInViewPortOfOne () {
         let siderbarScroll = document.getElementsByClassName("sidebar")[0]
         let el = document.getElementsByClassName("active sidebar-link")[1]
-        if (el ==null || el.offsetTop == undefined) {
+        if (el ==null || el == undefined || el.offsetTop == undefined) {
           el = document.getElementsByClassName("active sidebar-link")[0]
         }
-        if (el ==null || el.offsetTop == undefined) return
+        if (el ==null || el == undefined || el.offsetTop == undefined) return
         
         const viewPortHeight = siderbarScroll.clientHeight || window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight 
         let offsetBottom = el.offsetTop + el.offsetHeight
         let scrollTop = siderbarScroll.scrollTop
-
         let isView = (offsetBottom <= viewPortHeight + scrollTop)
         if (!isView) {
           siderbarScroll.scrollTop = (offsetBottom+5 - viewPortHeight)
