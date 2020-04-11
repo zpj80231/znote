@@ -40,6 +40,6 @@ module.exports = [
           }]
       }, ]
     },
-    { text: '时间线', link: '/timeLine/', icon: 'reco-date' },
+    { text: '时间线', link: '/timeline/', icon: 'reco-date' },
     { text: '关于我', link: '/about/',icon: 'reco-message'}
 ]
