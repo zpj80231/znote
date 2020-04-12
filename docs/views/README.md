@@ -10,7 +10,9 @@ isShowComments: true
 	<Boxx :changeTime='changeTime' />
 </div>
 
-![](/znote/love/比心.png)
+<p style='display: block;margin-block-start: 1em;margin-block-end: 1em;margin-inline-start: 0px;margin-inline-end: 0px;'>
+	<img id='imgShow' class='active' :src='imgSrc'/>
+</p>
 
 <div id='category'>
 
@@ -41,13 +43,29 @@ isShowComments: true
 		data() {
 			return {
                 changeTime: '2000',
-                index: 2,
+				index: 2,
+				imgSrc: '/znote/love/比心.png'
 			}
 		},
 		mounted() {
-			this.updateTime(this.changeTime);
+			this.updateTime(this.changeTime)
+			this.randomPic()
 		},
 		methods: {
+    		randomPic() {
+				let picList = ['kQWXr.gif','rddek.gif']
+				let imgShow = document.getElementById("imgShow")
+				setInterval(() => {
+					if(imgShow.className == 'active'){
+						imgShow.className=""
+					}else {
+						imgShow.className="active";
+					}
+					this.imgSrc = '/znote/love/' + picList[Math.floor(Math.random() * picList.length)]
+					
+				}, 5000)
+			},
+
 			updateTime(time) {
 				setInterval(() => {
 			      if (this.index%2 == 0) {
@@ -65,6 +83,13 @@ isShowComments: true
 </script>
 
 <style lang='stylus' scoped> 
+	img{
+		opacity: 0;
+		transition: opacity 5s linear;
+	}
+	img.active{
+		opacity: 1;
+	} 
 	.content__default:not(.custom) img {
 	    max-width: 20% !important;
 	    margin-top: -10px;
