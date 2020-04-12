@@ -46,8 +46,9 @@ isShowComments: true
 
 ### 友链
 
--	[午后南杂]( https://vuepress-theme-reco.recoluan.com/views/other/theme-example.html ) | 
-	[有梦想的咸鱼](https://blog.liudongyang.top)
+-	[午后南杂](https://vuepress-theme-reco.recoluan.com/views/other/theme-example.html) | 
+	[有梦想的咸鱼](https://blog.liudongyang.top) | 
+	[Evan's blog](https://xugaoyi.com/)
 
 ### 其他
 
