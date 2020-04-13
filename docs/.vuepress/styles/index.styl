@@ -100,23 +100,13 @@ blockquote {
 .comments-wrapper {
     padding: 2rem 2rem 2rem 10rem !important;
 }
-// @media screen and (max-width: $MQNarrow){//ipad
-//   .page, .password-wrapper-in {
-//     padding-left: 16.4rem !important;
-//   }
-//   .comments-wrapper {
-//     padding: 2rem 2rem 2rem 2rem !important;
-//     padding-left: 18.4rem !important;
-//   }
-// }
-// @media screen and (max-width: $MQMobile){//手机
-//   .page, .password-wrapper-in {
-//     margin-left: 0 !important;
-//   }
-//   .comments-wrapper {
-//     padding: 2rem 2rem 2rem 2rem !important;
-//   }
-// }
+#valine .vwrap .vedit #veditor{
+  background: url('/img/other/comment.png')  
+  background-position: 90% 60%
+  background-size: 16rem 10rem
+  background-repeat: no-repeat
+}
+
 $mobileSidebarWidth = $sidebarWidth * 0.82
 
 // narrow desktop / iPad
@@ -206,5 +196,16 @@ $mobileSidebarWidth = $sidebarWidth * 0.82
 .navbar .links
   font-size: 15.5px !important;
 
-.code-copy
-  display: flex;
+//容器样式
+.theorem
+  margin 1rem 0
+  padding .1rem 1.5rem
+  border-radius 0.4rem
+  background-color #c9daea61
+  .title
+    font-weight bold
+.custom-block
+  &.right
+    color transparentify($textColor, 0.4)
+    font-size 0.9rem
+    text-align right

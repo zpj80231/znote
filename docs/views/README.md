@@ -44,7 +44,7 @@ isShowComments: true
 			return {
                 changeTime: '2000',
 				index: 2,
-				imgSrc: '/znote/love/比心.png'
+				imgSrc: '/znote/love/比心1.png'
 			}
 		},
 		mounted() {
@@ -86,6 +86,7 @@ isShowComments: true
 	img{
 		opacity: 0;
 		transition: opacity 5s linear;
+		pointer-events: none;
 	}
 	img.active{
 		opacity: 1;
