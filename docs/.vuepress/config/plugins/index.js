@@ -51,11 +51,11 @@ module.exports = [
     [require('../../plugins/enhanced-search'), { // 可以添加第三方搜索链接的搜索框（原官方搜索框的参数仍可用）
         thirdparty: [ // 可选，默认 []
             {
-                title: '在 Baidu 中搜索',
+                title: '在 <font color="blue">Baidu</font> 中搜索',
                 frontUrl: 'https://www.baidu.com/s?wd=',
             },
             {
-                title: '在 Google 中搜索',
+                title: '在 <font color="red">Google</font> 中搜索',
                 frontUrl: 'https://www.google.com/search?q=',
             }
         ]

@@ -14,6 +14,7 @@ isShowComments: true
   <a href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=916665067&website=www.oicqzone.com" class="zi zi_tmQq"></a>
 </p>
 
+<Clock02/>
 ::: theorem YOU AND ME
 世界上最远的距离，是我在 if 里你在 else 里，虽然经常一起出现，但却永不结伴执行。
 
@@ -55,7 +56,7 @@ isShowComments: true
 
 ### 其他
 
-- 爱您：[80231](https://zpj80231.github.io/znote/love/love.html)
+- 爱您：[80231](/view/love.html)
 - 本仓库代码使用 [MIT](https://github.com/SigureMo/notev/blob/master/LICENSE) 协议进行开源，但是全部文档内容使用 [CC 4.0 BY-SA](https://creativecommons.org/licenses/by-sa/4.0/) 协议进行发布
 
 
