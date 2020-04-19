@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="GBK">
+    <link rel="icon"
+        href="https://infinitypro-img.infinitynewtab.com/custom-icon/8001de1jd3n68lbfnxxt564xvb0vl5.png?imageMogr2/thumbnail/240x/format/webp/blur/1x0/quality/100|imageslim">
+    <title>znote</title>
+    <style>
+        @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css");
+        * {
+        margin: 0;
+        padding: 0;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        }
+
+        body
+        {
+        text-align:center;
+        }
+
+        .BoardName
+        {
+        color: white;
+        text-shadow: 1px 2px 3px black;
+        font-size: 35px;
+        transform-style: preserve-3d;
+        transform: translateZ(80px);
+        }
+
+        .main
+        {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 2;
+        opacity: 1;
+        }
+
+        .main-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 80px;
+        bottom: 0;
+        z-index: 20;
+        background: #292929;
+        -webkit-transform: translate3d(0,0,0);
+        }
+
+        .folio-btn {
+        position: absolute;
+        right: 0;
+        width: 100%;
+        bottom: 0;
+        height: 80px;
+        background: #343434;
+        border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .folio-btn-item {
+        position: absolute;
+        left: 20px;
+        width: 40px;
+        height: 40px;
+        top: 20px;
+        }
+
+        .folio-btn-dot {
+        float: left;
+        width: 33.3%;
+        height: 33.3%;
+        position: relative;
+        }
+
+        .folio-btn-dot:before {
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 4px;
+        height: 4px;
+        margin: -2px 0 0 -2px;
+        border-radius: 50%;
+        transition: all 300ms linear;
+        transform: scale(1.0);
+        }
+
+        .folio-btn-dot:before
+        {
+        background: #F68338;
+        }
+
+        .folio-btn:hover .folio-btn-dot:first-child:before, .folio-btn:hover .folio-btn-dot:nth-child(3):before,
+        .folio-btn:hover .folio-btn-dot:nth-child(4):before, .folio-btn:hover .folio-btn-dot:nth-child(8):before {
+        transform: scale(1.8);
+        opacity: 0.5;
+        }
+
+
+        /***social***/
+        .header-social {
+        position: absolute;
+        bottom: 80px;
+        width: 100%;
+        right: 0;
+        z-index: 20;
+        padding: 20px 0;
+        background: #383838;
+        }
+
+        .header-social:before
+        {
+        background: #F68338;
+        }
+
+        .header-social:before {
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: -3px;
+        width: 36px;
+        margin-left: -18px;
+        height: 6px;
+        }
+
+        .header-social li {
+        display: block;
+        margin-top: 6px;
+        }
+
+        .header-social li a {
+        width: 36px;
+        height: 36px;
+        line-height: 36px;
+        display: inline-block;
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.41);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        transition: all 300ms linear;
+        }
+
+        .header-social li a:hover
+        {
+        color: #F68338;
+        }
+
+        ul, li
+        {
+        border: none;
+        outline: 0;
+        font-weight: inherit;
+        font-style: inherit;
+        font-size: 100%;
+        font-family: inherit;
+        vertical-align: baseline;
+        text-decoration: none;
+        margin: 0;
+        padding: 0;
+        }
+
+        ol, ul {
+        list-style: none;
+        }
+
+        .main-header:before {
+        content: '';
+        position: absolute;
+        left: 10px;
+        width: 60px;
+        height: 1px;
+        bottom: 120px;
+        background: rgba(255,255,255,0.1);
+        }
+
+        .nav-button {
+        width: 28px;
+        height: 50px;
+        display: inline-block;
+        cursor: pointer;
+        position: relative;
+        top: 120px;
+        }
+
+        .nav-button span {
+        width: 100%;
+        float: left;
+        margin-bottom: 6px;
+        height: 2px;
+        background: #fff;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.2s ease-in-out;
+        }
+
+        .nav-button .ncs {
+        width: 70%;
+        }
+
+        .nav-button .nbs, .nav-button.cmenu:hover .nbs {
+        width: 100%;
+        }
+
+        .menu-button-text {
+        position: absolute;
+        left: 0;
+        width: 100%;
+        bottom: -1px;
+        color: rgba(255, 255, 255, 0.41);
+        font-size: 10px;
+        font-weight: 400;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        }
+
+        .nav-button span
+        {
+        background: #F68338;
+        }
+
+        .nav-button:hover span:before {
+        width: 100%;
+        }
+
+        .nav-button:hover .ncs, .nav-button:hover .nbs {
+        width: 100%;
+        }
+
+        .nav-button span:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 0;
+        height: 100%;
+        background: #fff;
+        transition: all 0.2s ease-in-out;
+        }
+
+
+
+
+        /*****end****/
+
+
+
+        #wrapper {
+        /* position: absolute; */
+        top: 0;
+        left: 80px;
+        right: 0;
+        bottom: 0;
+        z-index: 3;
+        }
+
+        .content-holder {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        }
+
+        .hero-wrap, .fs-slider-wrap {
+        background: #292929;
+        z-index: 25;
+        }
+
+        .full-height
+        {
+        height: 100%;
+        }
+
+        .fl-wrap {
+        float: left;
+        width: 100%;
+        position: relative;
+        }
+
+
+        .impulse-wrap {
+        background: #232323;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        -webkit-perspective: 1000;
+        }
+
+        .impulse-wrap:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        }
+
+
+        .mm-parallax {
+        position: absolute;
+        top: 100px;
+        left: 100px;
+        right: 100px;
+        bottom: 100px;
+        z-index: 20;
+        transform-style: preserve-3d;
+        }
+
+
+        .impulse-wrap .bg, .impulse-wrap .overlay {
+        box-shadow: 0 20px 25px 0 rgba(18,17,30,.35);
+        }
+
+        .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: black;
+        opacity: 0.4;
+        z-index: 3;
+        }
+
+        .bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        background-size: cover;
+        background-attachment: scroll;
+        background-position: center;
+        background-repeat: repeat;
+        background-origin: content-box;
+        }
+
+
+
+
+        .hero-corner {
+        top: 50px;
+        right: 50px;
+        z-index: 21;
+        border-top: 1px solid;
+        border-right: 1px solid;
+        }
+
+        .hero-corner2 {
+        top: 50px;
+        left: 50px;
+        border-top: 1px solid;
+        border-left: 1px solid;
+        }
+
+        .hero-corner3 {
+        bottom: 50px;
+        right: 50px;
+        border-bottom: 1px solid;
+        border-right: 1px solid;
+        }
+
+        .hero-corner4 {
+        bottom: 50px;
+        left: 50px;
+        z-index: 21;
+        border-left: 1px solid;
+        border-bottom: 1px solid;
+        }
+
+
+
+        .hero-corner, .hero-corner2, .hero-corner3, .hero-corner4 {
+        position: absolute;
+        width: 70px;
+        height: 70px;
+        z-index: 21;
+        border-color: rgba(255,255,255,0.3);
+        }
+
+
+        .fl-wrap {
+        float: left;
+        width: 100%;
+        position: relative;
+        transform: translateZ(80px)
+        }
+
+        .hero-wrap-item {
+        top: 45%;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="main">
+	
+        <div class="main-header">
+            <div class="nav-button but-hol">
+                <span class="nos"></span>
+                <span class="ncs"></span>
+                <span class="nbs"></span>
+                <div class="menu-button-text">Menu</div>
+            </div>
+
+            <div class="header-social">
+                <ul>
+                    <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                    <li><a href="#"><i class="fab fa-dribbble"></i></a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                </ul>
+            </div>
+            <div class="folio-btn">
+                <a class="folio-btn-item ajax" href="#"><span class="folio-btn-dot"></span><span
+                        class="folio-btn-dot"></span><span class="folio-btn-dot"></span><span
+                        class="folio-btn-dot"></span><span class="folio-btn-dot"></span><span
+                        class="folio-btn-dot"></span><span class="folio-btn-dot"></span><span
+                        class="folio-btn-dot"></span><span class="folio-btn-dot"></span></a>
+            </div>
+        </div>
+
+	
+
+        <div id="wrapper">
+            <div class="content-holder">
+                <div class="hero-wrap fl-wrap full-height scroll-con-sec">
+
+                    <div class="impulse-wrap">
+                        <div class="mm-par-wrap">
+                            <div class="mm-parallax" data-tilt data-tilt-max="4">
+                                <div class="overlay"></div>
+                                <div class="bg"
+                                    data-bg="https://images.unsplash.com/photo-1499018658500-b21c72d7172b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80"
+                                    style="background-image: url(https://images.unsplash.com/photo-1499018658500-b21c72d7172b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80);">
+
+                                </div>
+
+                                <div class="hero-wrap-item fl-wrap">
+                                    <div class="container">
+                                        <div class="fl-wrap section-entry hiddec-anim" style="opacity: 1; ">
+                                            <h1 class="BoardName">
+                                                <a href="/" style="color: beige">Welcome to ZNOTE!</a>
+                                            </h1>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="hero-corner hiddec-anim" style="opacity: 1; transform: translate3d(0px, 0px, 0px);">
+                    </div>
+
+                    <div class="hero-corner2 hiddec-anim" style="opacity: 1; transform: translate3d(0px, 0px, 0px);">
+                    </div>
+
+                    <div class="hero-corner3 hiddec-anim" style="opacity: 1; transform: translate3d(0px, 0px, 0px);">
+                    </div>
+
+                    <div class="hero-corner4 hiddec-anim" style="opacity: 1; transform: translate3d(0px, 0px, 0px);">
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+<script src="https://cdn.bootcss.com/jquery/3.5.0/jquery.js"></script>
+<script>
+    'use strict';
+
+    var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof
+    obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !==
+    Symbol.prototype ? "symbol" : typeof obj; };
+
+    (function (factory) {
+    if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['jquery'], factory);
+    } else if ((typeof module === 'undefined' ? 'undefined' : _typeof(module)) === 'object' && module.exports) {
+    // Node/CommonJS
+    module.exports = function (root, jQuery) {
+    if (jQuery === undefined) {
+    // require('jQuery') returns a factory that requires window to
+    // build a jQuery instance, we normalize how we use modules
+    // that require this pattern but the window provided is a noop
+    // if it's defined (how jquery works)
+    if (typeof window !== 'undefined') {
+    jQuery = require('jquery');
+    } else {
+    jQuery = require('jquery')(root);
+    }
+    }
+    factory(jQuery);
+    return jQuery;
+    };
+    } else {
+    // Browser globals
+    factory(jQuery);
+    }
+    })(function ($) {
+    $.fn.tilt = function (options) {
+
+    /**
+    * RequestAnimationFrame
+    */
+    var requestTick = function requestTick() {
+    if (this.ticking) return;
+    requestAnimationFrame(updateTransforms.bind(this));
+    this.ticking = true;
+    };
+
+    /**
+    * Bind mouse movement evens on instance
+    */
+    var bindEvents = function bindEvents() {
+    var _this = this;
+    $(this).on('mousemove', mouseMove);
+    $(this).on('mouseenter', mouseEnter);
+    if (this.settings.reset) $(this).on('mouseleave', mouseLeave);
+    if (this.settings.glare) $(window).on('resize', updateGlareSize.bind(_this));
+    };
+
+    /**
+    * Set transition only on mouse leave and mouse enter so it doesn't influence mouse move transforms
+    */
+    var setTransition = function setTransition() {
+    var _this2 = this;
+
+    if (this.timeout !== undefined) clearTimeout(this.timeout);
+    $(this).css({ 'transition': this.settings.speed + 'ms ' + this.settings.easing });
+    if (this.settings.glare) this.glareElement.css({ 'transition': 'opacity ' + this.settings.speed + 'ms ' +
+    this.settings.easing });
+    this.timeout = setTimeout(function () {
+    $(_this2).css({ 'transition': '' });
+    if (_this2.settings.glare) _this2.glareElement.css({ 'transition': '' });
+    }, this.settings.speed);
+    };
+
+    /**
+    * When user mouse enters tilt element
+    */
+    var mouseEnter = function mouseEnter(event) {
+    this.ticking = false;
+    $(this).css({ 'will-change': 'transform' });
+    setTransition.call(this);
+
+    // Trigger change event
+    $(this).trigger("tilt.mouseEnter");
+    };
+
+    /**
+    * Return the x,y position of the mouse on the tilt element
+    * @returns {{x: *, y: *}}
+    */
+    var getMousePositions = function getMousePositions(event) {
+    if (typeof event === "undefined") {
+    event = {
+    pageX: $(this).offset().left + $(this).outerWidth() / 2,
+    pageY: $(this).offset().top + $(this).outerHeight() / 2
+    };
+    }
+    return { x: event.pageX, y: event.pageY };
+    };
+
+    /**
+    * When user mouse moves over the tilt element
+    */
+    var mouseMove = function mouseMove(event) {
+    this.mousePositions = getMousePositions(event);
+    requestTick.call(this);
+    };
+
+    /**
+    * When user mouse leaves tilt element
+    */
+    var mouseLeave = function mouseLeave() {
+    setTransition.call(this);
+    this.reset = true;
+    requestTick.call(this);
+
+    // Trigger change event
+    $(this).trigger("tilt.mouseLeave");
+    };
+
+    /**
+    * Get tilt values
+    *
+    * @returns {{x: tilt value, y: tilt value}}
+    */
+    var getValues = function getValues() {
+    var width = $(this).outerWidth();
+    var height = $(this).outerHeight();
+    var left = $(this).offset().left;
+    var top = $(this).offset().top;
+    var percentageX = (this.mousePositions.x - left) / width;
+    var percentageY = (this.mousePositions.y - top) / height;
+    // x or y position inside instance / width of instance = percentage of position inside instance * the max tilt value
+    var tiltX = (this.settings.maxTilt / 2 - percentageX * this.settings.maxTilt).toFixed(2);
+    var tiltY = (percentageY * this.settings.maxTilt - this.settings.maxTilt / 2).toFixed(2);
+    // angle
+    var angle = Math.atan2(this.mousePositions.x - (left + width / 2), -(this.mousePositions.y - (top + height / 2))) *
+    (180 / Math.PI);
+    // Return x & y tilt values
+    return { tiltX: tiltX, tiltY: tiltY, 'percentageX': percentageX * 100, 'percentageY': percentageY * 100, angle:
+    angle };
+    };
+
+    /**
+    * Update tilt transforms on mousemove
+    */
+    var updateTransforms = function updateTransforms() {
+    this.transforms = getValues.call(this);
+
+    if (this.reset) {
+    this.reset = false;
+    $(this).css('transform', 'perspective(' + this.settings.perspective + 'px) rotateX(0deg) rotateY(0deg)');
+
+    // Rotate glare if enabled
+    if (this.settings.glare) {
+    this.glareElement.css('transform', 'rotate(180deg) translate(-50%, -50%)');
+    this.glareElement.css('opacity', '0');
+    }
+
+    return;
+    } else {
+    $(this).css('transform', 'perspective(' + this.settings.perspective + 'px) rotateX(' + (this.settings.disableAxis
+    === 'x' ? 0 : this.transforms.tiltY) + 'deg) rotateY(' + (this.settings.disableAxis === 'y' ? 0 :
+    this.transforms.tiltX) + 'deg) scale3d(' + this.settings.scale + ',' + this.settings.scale + ',' +
+    this.settings.scale + ')');
+
+    // Rotate glare if enabled
+    if (this.settings.glare) {
+    this.glareElement.css('transform', 'rotate(' + this.transforms.angle + 'deg) translate(-50%, -50%)');
+    this.glareElement.css('opacity', '' + this.transforms.percentageY * this.settings.maxGlare / 100);
+    }
+    }
+
+    // Trigger change event
+    $(this).trigger("change", [this.transforms]);
+
+    this.ticking = false;
+    };
+
+    /**
+    * Prepare elements
+    */
+    var prepareGlare = function prepareGlare() {
+    var glarePrerender = this.settings.glarePrerender;
+
+    // If option pre-render is enabled we assume all html/css is present for an optimal glare effect.
+    if (!glarePrerender)
+    // Create glare element
+    $(this).append('<div class="js-tilt-glare"><div class="js-tilt-glare-inner"></div></div>');
+
+    // Store glare selector if glare is enabled
+    this.glareElementWrapper = $(this).find(".js-tilt-glare");
+    this.glareElement = $(this).find(".js-tilt-glare-inner");
+
+    // Remember? We assume all css is already set, so just return
+    if (glarePrerender) return;
+
+    // Abstracted re-usable glare styles
+    var stretch = {
+    'position': 'absolute',
+    'top': '0',
+    'left': '0',
+    'width': '100%',
+    'height': '100%'
+    };
+
+    // Style glare wrapper
+    this.glareElementWrapper.css(stretch).css({
+    'overflow': 'hidden',
+    'pointer-events': 'none'
+    });
+
+    // Style glare element
+    this.glareElement.css({
+    'position': 'absolute',
+    'top': '50%',
+    'left': '50%',
+    'background-image': 'linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%)',
+    'width': '' + $(this).outerWidth() * 2,
+    'height': '' + $(this).outerWidth() * 2,
+    'transform': 'rotate(180deg) translate(-50%, -50%)',
+    'transform-origin': '0% 0%',
+    'opacity': '0'
+    });
+    };
+
+    /**
+    * Update glare on resize
+    */
+    var updateGlareSize = function updateGlareSize() {
+    this.glareElement.css({
+    'width': '' + $(this).outerWidth() * 2,
+    'height': '' + $(this).outerWidth() * 2
+    });
+    };
+
+    /**
+    * Public methods
+    */
+    $.fn.tilt.destroy = function () {
+    $(this).each(function () {
+    $(this).find('.js-tilt-glare').remove();
+    $(this).css({ 'will-change': '', 'transform': '' });
+    $(this).off('mousemove mouseenter mouseleave');
+    });
+    };
+
+    $.fn.tilt.getValues = function () {
+    var results = [];
+    $(this).each(function () {
+    this.mousePositions = getMousePositions.call(this);
+    results.push(getValues.call(this));
+    });
+    return results;
+    };
+
+    $.fn.tilt.reset = function () {
+    $(this).each(function () {
+    var _this3 = this;
+
+    this.mousePositions = getMousePositions.call(this);
+    this.settings = $(this).data('settings');
+    mouseLeave.call(this);
+    setTimeout(function () {
+    _this3.reset = false;
+    }, this.settings.transition);
+    });
+    };
+
+    /**
+    * Loop every instance
+    */
+    return this.each(function () {
+    var _this4 = this;
+
+    /**
+    * Default settings merged with user settings
+    * Can be set trough data attributes or as parameter.
+    * @type {*}
+    */
+    this.settings = $.extend({
+    maxTilt: $(this).is('[data-tilt-max]') ? $(this).data('tilt-max') : 20,
+    perspective: $(this).is('[data-tilt-perspective]') ? $(this).data('tilt-perspective') : 300,
+    easing: $(this).is('[data-tilt-easing]') ? $(this).data('tilt-easing') : 'cubic-bezier(.03,.98,.52,.99)',
+    scale: $(this).is('[data-tilt-scale]') ? $(this).data('tilt-scale') : '1',
+    speed: $(this).is('[data-tilt-speed]') ? $(this).data('tilt-speed') : '400',
+    transition: $(this).is('[data-tilt-transition]') ? $(this).data('tilt-transition') : true,
+    disableAxis: $(this).is('[data-tilt-disable-axis]') ? $(this).data('tilt-disable-axis') : null,
+    axis: $(this).is('[data-tilt-axis]') ? $(this).data('tilt-axis') : null,
+    reset: $(this).is('[data-tilt-reset]') ? $(this).data('tilt-reset') : true,
+    glare: $(this).is('[data-tilt-glare]') ? $(this).data('tilt-glare') : false,
+    maxGlare: $(this).is('[data-tilt-maxglare]') ? $(this).data('tilt-maxglare') : 1
+    }, options);
+
+    // Add deprecation warning & set disableAxis to deprecated axis setting
+    if (this.settings.axis !== null) {
+    console.warn('Tilt.js: the axis setting has been renamed to disableAxis. Seehttps://github.com/gijsroge/tilt.js/pull/26 for more information');
+    this.settings.disableAxis = this.settings.axis;
+    }
+
+    this.init = function () {
+    // Store settings
+    $(_this4).data('settings', _this4.settings);
+
+    // Prepare element
+    if (_this4.settings.glare) prepareGlare.call(_this4);
+
+    // Bind events
+    bindEvents.call(_this4);
+    };
+
+    // Init
+    this.init();
+    });
+    };
+
+    /**
+    * Auto load
+    */
+    $('[data-tilt]').tilt();
+
+    return true;
+    });
+    //# sourceMappingURL=tilt.jquery.js.map
+</script>
+
+</html>
