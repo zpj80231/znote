@@ -63,7 +63,7 @@ footer: MIT Licensed | Copyright © 2018-present Evan You
       if(path != '/' ) return
       let flag = sessionStorage.getItem('zk');
       if(flag == null) {
-        window.location.href=('/view/index.html')
+        window.location.href=('/znote/view/index.html')
         sessionStorage.setItem('zk', 'zv');
       }
     }

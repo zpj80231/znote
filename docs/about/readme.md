@@ -56,7 +56,7 @@ isShowComments: true
 
 ### 其他
 
-- 爱您：[80231](/view/love.html)
+- 爱您：[80231](/znote/view/love.html)
 - 本仓库代码使用 [MIT](https://github.com/SigureMo/notev/blob/master/LICENSE) 协议进行开源，但是全部文档内容使用 [CC 4.0 BY-SA](https://creativecommons.org/licenses/by-sa/4.0/) 协议进行发布
 
 
