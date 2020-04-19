@@ -1,7 +1,7 @@
 <template>
 <div id="clock02">
-    <span class="date">{{ date }}</span>
-    <span class="time">{{ time }}</span>
+    <span class="date02">{{ date }}</span>
+    <span class="time02">{{ time }}</span>
 </div>
 </template>
 
@@ -39,21 +39,21 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-html, body {
-  height: 100%;
-}
+// html, body {
+//   height: 100%;
+// }
 
-body {
-  background: #0f3854;
-  background: -webkit-radial-gradient(center ellipse, #0a2e38 0%, #000000 70%);
-  background: radial-gradient(ellipse at center, #0a2e38 0%, #000000 70%);
-  background-size: 100%;
-}
+// body {
+//   background: #0f3854;
+//   background: -webkit-radial-gradient(center ellipse, #0a2e38 0%, #000000 70%);
+//   background: radial-gradient(ellipse at center, #0a2e38 0%, #000000 70%);
+//   background-size: 100%;
+// }
 
-p {
-  margin: 0;
-  padding: 0;
-}
+// p {
+//   margin: 0;
+//   padding: 0;
+// }
 
 #clock02 {
   font-family: 'Share Tech Mono', monospace;
@@ -69,12 +69,12 @@ p {
   color: #daf6ff;
   text-shadow: 0 0 2px #0aafe6, 0 0 2px rgba(10, 175, 230, 0);
 }
-#clock02 .time {
+#clock02 .time02 {
   letter-spacing: 0.05em;
   font-size: 50px;
   padding: 5px 0;
 }
-#clock02 .date {
+#clock02 .date02 {
   letter-spacing: 0.1em;
   font-size: 24px;
 }
