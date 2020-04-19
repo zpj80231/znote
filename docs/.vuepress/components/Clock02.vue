@@ -1,5 +1,5 @@
 <template>
-<div id="clock">
+<div id="clock02">
     <span class="date">{{ date }}</span>
     <span class="time">{{ time }}</span>
 </div>
@@ -55,7 +55,7 @@ p {
   padding: 0;
 }
 
-#clock {
+#clock02 {
   font-family: 'Share Tech Mono', monospace;
   color: #ffffff;
   text-align: center;
@@ -69,16 +69,16 @@ p {
   color: #daf6ff;
   text-shadow: 0 0 2px #0aafe6, 0 0 2px rgba(10, 175, 230, 0);
 }
-#clock .time {
+#clock02 .time {
   letter-spacing: 0.05em;
   font-size: 50px;
   padding: 5px 0;
 }
-#clock .date {
+#clock02 .date {
   letter-spacing: 0.1em;
   font-size: 24px;
 }
-#clock .text {
+#clock02 .text {
   letter-spacing: 0.1em;
   font-size: 12px;
   padding: 20px 0 0;
