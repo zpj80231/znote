@@ -44,7 +44,7 @@ isShowComments: true
 			return {
                 changeTime: '2000',
 				index: 2,
-				imgSrc: '/znote/love/比心1.png'
+				imgSrc: '/znote/view/比心1.png'
 			}
 		},
 		mounted() {
@@ -61,7 +61,7 @@ isShowComments: true
 					}else {
 						imgShow.className="active";
 					}
-					this.imgSrc = '/znote/love/' + picList[Math.floor(Math.random() * picList.length)]
+					this.imgSrc = '/znote/view/' + picList[Math.floor(Math.random() * picList.length)]
 					
 				}, 5000)
 			},
