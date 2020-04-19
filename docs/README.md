@@ -54,8 +54,21 @@ footer: MIT Licensed | Copyright © 2018-present Evan You
 
 :::
 
+<!-- <CanvasNest color='0,23,255' zIndex='-2'></CanvasNest> -->
 
-<CanvasNest color='0,23,255' zIndex='-2'></CanvasNest>
+<script>
+  export default {
+    mounted () {
+      let path = this.$route.path
+      if(path != '/' ) return
+      let flag = sessionStorage.getItem('zk');
+      if(flag == null) {
+        window.location.href=('/view/index.html')
+        sessionStorage.setItem('zk', 'zv');
+      }
+    }
+  }
+</script>
 
 <style>
 .home .content__default:not(.custom) {
