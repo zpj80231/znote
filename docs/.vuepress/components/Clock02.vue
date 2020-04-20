@@ -38,22 +38,7 @@ export default {
 
 </script>
 
-<style lang="stylus" scoped>
-// html, body {
-//   height: 100%;
-// }
-
-// body {
-//   background: #0f3854;
-//   background: -webkit-radial-gradient(center ellipse, #0a2e38 0%, #000000 70%);
-//   background: radial-gradient(ellipse at center, #0a2e38 0%, #000000 70%);
-//   background-size: 100%;
-// }
-
-// p {
-//   margin: 0;
-//   padding: 0;
-// }
+<style lang="css" scoped>
 
 #clock02 {
   font-family: 'Share Tech Mono', monospace;
