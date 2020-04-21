@@ -69,24 +69,14 @@
             }
           }        
         },
-        beforeCreate () {
-          let path = this.$route.path
-          if(path != '/' ) return
-          let flag = sessionStorage.getItem('zk');
-          if(flag == null) {
-            window.location.href=('/znote/view/index.html')
-            sessionStorage.setItem('zk', 'zv');
-          }
+        created () {
+          
         },
         mounted () {
-          // window.addEventListener('scroll', this.handleScroll)
+        
         },
         beforeDestroy () {
-          // window.removeEventListener('scroll', this.handleScroll)
-          // if (this.interval) {
-          //   alert(this.interval);
-          //   clearInterval(this.interval)
-          // }
+          
         },
   }
 </script>
