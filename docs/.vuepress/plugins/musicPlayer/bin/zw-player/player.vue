@@ -182,10 +182,16 @@ export default {
     mounted() {
         var check_flag = this.check();
         if(!check_flag) {
-            // 手机暂时不显示
             let musicPlayer = document.getElementById("musicPlayer");
             musicPlayer.style.display='none';
             return;
+        }
+        let path = this.$route.path
+        if(path != '/' ) return
+        let flag = sessionStorage.getItem('zk');
+        if(flag == null) {
+            window.location.href=('/znote/view/index.html')
+            sessionStorage.setItem('zk', 'zv');
         }
         this.Player();
         this._getMusicType(1);
