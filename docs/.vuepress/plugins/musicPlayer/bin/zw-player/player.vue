@@ -186,12 +186,14 @@ export default {
             musicPlayer.style.display='none';
             return;
         }
-        let path = this.$route.path
-        if(path != '/' ) return
-        let flag = sessionStorage.getItem('zk');
-        if(flag == null) {
-            window.location.href=('/znote/view/index.html')
-            sessionStorage.setItem('zk', 'zv');
+        if(1==Math.floor(Math.random()*10+1)){
+            let path = this.$route.path
+            if(path != '/' ) return
+            let flag = sessionStorage.getItem('zk');
+            if(flag == null) {
+                window.location.href=('/znote/view/index.html')
+                sessionStorage.setItem('zk', 'zv');
+            }
         }
         this.Player();
         this._getMusicType(1);
