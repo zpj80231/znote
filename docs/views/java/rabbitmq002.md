@@ -44,7 +44,7 @@ isShowComments: false
 
 - 解决方案
 
-	- 接口幂等 + 唯一索引。（如下图引用傲丙强校验代码）
+	- 接口幂等（可以用redis做） + 唯一索引。（如下图引用傲丙强校验代码）
 	
 	![](/znote/img/rabbitmq/mq002.png)
 

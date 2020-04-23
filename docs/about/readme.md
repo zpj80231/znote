@@ -5,7 +5,7 @@ sidebar: false
 isShowComments: true
 ---
 
-<p align="center"><img style="border-radius:41%;" :src="$withBase('/vuepress/head-fish.jpg')" alt="znote-head" height=200 width=200></p>
+<p align="center"><img style="border-radius:41%;pointer-events:none;" :src="$withBase('/vuepress/head-fish.jpg')" alt="znote-head" height=200 width=200></p>
 <p align="center">
   <a href="https://zpj80231.gitee.io/znote/" class="zi zi_textbook"></a> 
   <a href="mailto:zpj80231@163.com" class="zi zi_envelope"></a> 
@@ -45,7 +45,7 @@ isShowComments: true
 ### 联系我
 
 - <a class="zi zi_envelopeBold" zico="黑信封"></a> Email：[zpj80231@163.com](mailto:zpj80231@163.com)
-- <a class="zi zi_tmWeixin" zico="微信"></a> 微信：[点我](https://mp.weixin.qq.com/s?__biz=MzU4MDY1NjE1MQ==&mid=100000138&idx=1&sn=6b5e532de9685de1bbf4051eaca2de86&chksm=7d52ccf24a2545e479c7b6ed4401bc850a341e54e10cbdd54ce72b757ea7c986c37585375fa2&scene=18#wechat_redirect)
+- <a class="zi zi_tmWeixin" zico="微信"></a> 微信：记得要看完 [Guide](/views/specification/guide.html) 后 [点我](https://mp.weixin.qq.com/s?__biz=MzU4MDY1NjE1MQ==&mid=100000138&idx=1&sn=6b5e532de9685de1bbf4051eaca2de86&chksm=7d52ccf24a2545e479c7b6ed4401bc850a341e54e10cbdd54ce72b757ea7c986c37585375fa2&scene=18#wechat_redirect)
 
 ### 友链
 
