@@ -141,3 +141,7 @@ public class ReadWriteLockDemo{
 }
 ```
 
+## 其他
+
+- 刚发现美团写的不错 -- [传送门](https://tech.meituan.com/2018/11/15/java-lock.html)
+

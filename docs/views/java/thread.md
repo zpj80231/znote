@@ -219,6 +219,12 @@ class ChangeThread extends Thread{
    	}
    ```
 
+## 利用java工具查看死锁
+
+1. 图形界面：jconsole.exe
+
+2. 命令行：jps 和 jstack
+
 ## 创建线程池的几种方式
 
 - 既然都了解到线程并发了，那怎么能不了解了解线程池呢！😄
