@@ -7,7 +7,7 @@ heroImageStyle: {
   width: '100%',
   height: '15%',,
   display: block,
-  margin: '24% auto -18% auto',
+  margin: '16% auto -18% auto',
   //border: '1px dashed #000',
   box-shadow: '8px 8px 20px #022',
   borderRadius: '1rem',
