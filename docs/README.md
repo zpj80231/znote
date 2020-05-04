@@ -28,7 +28,7 @@ footer: MIT Licensed | Copyright © 2018-present Evan You
 
 <Clock/>
 
-::: tip 昨天今天明天
+::: tip 昨天 今天 明天
 
 问一问，人的一生能有几天 <br/>
 算一算，人的一生不过三天 <br/>
