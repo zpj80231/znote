@@ -100,6 +100,7 @@ isShowComments: true
 		width:100px;
 		height:100px;
 		float: right;
+		border-radius: 25%;
 		background:#ffff0059;
 		transition:width 2s;
 		-moz-transition:width 2s; /* Firefox 4 */
@@ -115,6 +116,7 @@ isShowComments: true
 		width:100px;
 		height:100px;
 		float: right;
+		border-radius: 25%;
 		background:#ffff0059;
 		transition:width 2s, height 2s;
 		-moz-transition:width 2s, height 2s, -moz-transform 2s; /* Firefox 4 */
