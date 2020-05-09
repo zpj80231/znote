@@ -96,20 +96,41 @@ isShowComments: true
 	    margin-top: -10px;
 	    //padding-left: 26%;
 	}
-	#category {
+
+	/* #category {
 		width:100px;
 		height:100px;
 		float: right;
 		border-radius: 25%;
 		background:#ffff0059;
 		transition:width 2s;
-		-moz-transition:width 2s; /* Firefox 4 */
-		-webkit-transition:width 2s; /* Safari and Chrome */
-		-o-transition:width 2s; /* Opera */
+		-moz-transition:width 2s;
+		-webkit-transition:width 2s;
+		-o-transition:width 2s;
 	}
 
 	#category:hover {
 		width:300px;
+	} */
+
+	#category {
+		width:100px;
+		height:100px;
+		float: right;
+		border-radius: 25%;
+		background:#ffff0059;
+		transition:width 2s, height 2s;
+		-moz-transition:width 2s, height 2s, -moz-transform 2s; /* Firefox 4 */
+		-webkit-transition:width 2s, height 2s, -webkit-transform 2s; /* Safari and Chrome */
+		-o-transition:width 2s, height 2s, -o-transform 2s; /* Opera */
+	}
+	#category:hover {
+		width:100px;
+		height:100px;
+		transform:rotate(360deg);
+		-moz-transform:rotate(360deg); /* Firefox 4 */
+		-webkit-transform:rotate(360deg); /* Safari and Chrome */
+		-o-transform:rotate(360deg	); /* Opera */
 	}
 	
 	#tag {
