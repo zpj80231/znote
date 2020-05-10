@@ -102,7 +102,7 @@ footer: MIT Licensed | Copyright © 2018-present Evan You
     left: -1%;
 }
 
-@media screen and (max-width: 768px){
+@media screen and (max-width: $MQMobile){
   .clock {
     margin-top: -35%
   }
