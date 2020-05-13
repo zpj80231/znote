@@ -24,14 +24,10 @@ export default {
   },
   mounted () {
     if (this.noFoundPageByTencent) {
-      let fullPath = decodeURIComponent(window.location.href)
-      let homePageUrl = fullPath.substring(0,decodeURIComponent(fullPath.indexOf(this.$route.path)))
-      
       const dom = document.createElement('script')
       dom.setAttribute('homePageName', '回到首页')
-      dom.setAttribute('homePageUrl', homePageUrl)
+      dom.setAttribute('homePageUrl', this.$site.base)
       dom.setAttribute('src', '//qzonestyle.gtimg.cn/qzone/hybrid/app/404/search_children.js')
-      
       document.body.append(dom)
     }
   },
