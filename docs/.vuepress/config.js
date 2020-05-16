@@ -11,12 +11,11 @@ module.exports = {
   head: [
     ['link', {
       rel: 'icon',
-      href: 'https://infinitypro-img.infinitynewtab.com/custom-icon/8001e88n6bnksu13h81kichbkd6zad.png?imageMogr2/thumbnail/240x/format/webp/blur/1x0/quality/100|imageslim'
+      href: 'https://infinitypro-img.infinitynewtab.com/custom-icon/8001de1jd3n68lbfnxxt564xvb0vl5.png?imageMogr2/thumbnail/240x/format/webp/blur/1x0/quality/100|imageslim'
     }],
     ['link', {
       rel: 'apple-touch-icon',
-      sizes: "114x114",
-      href: 'https://infinitypro-img.infinitynewtab.com/custom-icon/8001e88n6bnksu13h81kichbkd6zad.png?imageMogr2/thumbnail/240x/format/webp/blur/1x0/quality/100|imageslim'
+      href: 'https://infinitypro-img.infinitynewtab.com/custom-icon/8001de1jd3n68lbfnxxt564xvb0vl5.png?imageMogr2/thumbnail/240x/format/webp/blur/1x0/quality/100|imageslim'
     }],
     ['meta', {
       name: 'viewport',
