@@ -18,11 +18,11 @@ isShowComments: false
 
 ## 安装
 
-- 在文件`package.json`中的`devDependencies`下加入`"vuepress-plugin-boxx": "0.0.6"`：
+- 在文件`package.json`中的`devDependencies`下加入`"vuepress-plugin-boxx": "0.0.7"`：
 
 ```json
 	"devDependencies": {
-        "vuepress-plugin-boxx": "0.0.6"
+        "vuepress-plugin-boxx": "0.0.7"
     }
 ```
 
