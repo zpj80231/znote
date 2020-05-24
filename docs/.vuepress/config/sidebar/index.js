@@ -45,8 +45,8 @@ module.exports = {
             collapsable: true,
             children: [
                 'java/ArrayList',
-                'java/docker',
                 'java/HashMap',
+                'java/docker',
                 'java/itext',
                 'java/poi',
                 'java/quartz',
@@ -58,11 +58,11 @@ module.exports = {
                 'java/jwt',
                 'java/swagger2',
                 'java/thread',
-                'java/jvm',
-                'java/annotationLog',
                 'java/ThreadPool',
-                'java/JUC',
                 'java/ThreadLocal',
+                'java/annotationLog',
+                'java/jvm',
+                'java/JUC',
                 'java/javaLock',
                 'java/mysql_explain'
             ]
