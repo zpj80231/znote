@@ -26,7 +26,10 @@ export default {
     if (this.noFoundPageByTencent) {
       const dom = document.createElement('script')
       dom.setAttribute('homePageName', '回到首页')
-      dom.setAttribute('homePageUrl', this.$site.base)
+      var fullPath = decodeURIComponent(window.location.href)
+      var childrenPath = decodeURIComponent(this.$route.path)
+      var homePath = fullPath.substring(0,fullPath.indexOf(childrenPath))
+      dom.setAttribute('homePageUrl', homePath)
       dom.setAttribute('src', '//qzonestyle.gtimg.cn/qzone/hybrid/app/404/search_children.js')
       document.body.append(dom)
     }
