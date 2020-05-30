@@ -101,18 +101,19 @@ vim /etc/profile #编辑
 source /etc/profile #重启使环境变量生效
 ```
 
-## 端口
+## 端口/防火墙
 
 ```shell
 netstat -ntlp   #查看当前所有tcp端口
 netstat -ntulp |grep 80   #查看所有80端口使用情况
 
-# 如开放80端口,ACCEPT为开启、DROP为关闭
+#开放端口： 1.修改 /etc/sysconfig/iptables 文件
+# 2.如开放80端口,ACCEPT为开启、DROP为关闭
 iptables -A INPUT -p tcp --dport 80 -j ACCEPT #当数据从外部进入服务器为目标端口
 iptables -A OUTPUT -p tcp --sport 80 -j ACCEPT #数据从服务器出去
 service iptables save #保证重启服务器后也不会失效
 
-service iptables restart #更新防火墙
+service iptables restart #改完后重启防火墙
 /sbin/iptables -L -n #查看开放的端口
 ```
 
