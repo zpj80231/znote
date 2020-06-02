@@ -11,7 +11,7 @@ isShowComments: true
 </div>
 
 <p style='display: block;margin-block-start: 1em;margin-block-end: 1em;margin-inline-start: 0px;margin-inline-end: 0px;'>
-	<img id='imgShow' class='active' :src='imgSrc'/>
+	<img id='imgShow' :class='active' :src='imgSrc'/>
 </p>
 
 <div id='category'>
@@ -44,22 +44,25 @@ isShowComments: true
 			return {
                 changeTime: '2000',
 				index: 2,
-				imgSrc: '/znote/view/比心1.png'
+				imgSrc: '/znote/view/比心1.png',
+				active: 'active'
 			}
 		},
 		mounted() {
 			this.updateTime(this.changeTime)
 			this.randomPic()
 		},
+		updated() {
+		},
 		methods: {
     		randomPic() {
 				let picList = ['kQWXr.gif','rddek.gif']
 				let imgShow = document.getElementById("imgShow")
 				setInterval(() => {
-					if(imgShow.className == 'active'){
-						imgShow.className="noActive"
+					if(this.active == 'active'){
+						this.active="noActive"
 					}else {
-						imgShow.className="active";
+						this.active="active";
 					}
 					this.imgSrc = '/znote/view/' + picList[Math.floor(Math.random() * picList.length)]
 					
