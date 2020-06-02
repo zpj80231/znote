@@ -57,7 +57,7 @@ isShowComments: true
 				let imgShow = document.getElementById("imgShow")
 				setInterval(() => {
 					if(imgShow.className == 'active'){
-						imgShow.className=""
+						imgShow.className="noActive"
 					}else {
 						imgShow.className="active";
 					}
@@ -83,13 +83,15 @@ isShowComments: true
 </script>
 
 <style lang='stylus' scoped> 
-	img{
+	img.noActive{
 		opacity: 0;
 		transition: opacity 5s linear;
 		pointer-events: none;
 	}
 	img.active{
 		opacity: 1;
+		transition: opacity 5s linear;
+		pointer-events: none;
 	} 
 	.content__default:not(.custom) img {
 	    max-width: 20% !important;
