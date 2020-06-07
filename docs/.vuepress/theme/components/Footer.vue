@@ -2,7 +2,7 @@
   <div class="footer-wrapper">
     <span>
       <i class="iconfont reco-theme"></i>
-      <a target="blank" :href="$withBase('/views/specification/guide.html')">znote magic reform reco</a>
+      <a target="blank" :href="$withBase('/views/specification/guide.html')">Znote Reform Reco And Vuepress</a>
     </span>
     <span v-if="$themeConfig.record">
       <i class="iconfont reco-beian"></i>
