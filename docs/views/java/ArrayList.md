@@ -87,10 +87,10 @@ public class MyArrayList {
             System.arraycopy(data, 0, temp, 0, size);
             //改变引用指向 gc回收老数组对象
             data = temp;
-        } else {
-            data[size] = obj;
-            size++;
         }
+        
+        data[size] = obj;
+        size++;
     }
 
     /**
