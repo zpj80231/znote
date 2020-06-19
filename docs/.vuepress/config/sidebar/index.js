@@ -64,7 +64,8 @@ module.exports = {
                 'java/jvm',
                 'java/JUC',
                 'java/javaLock',
-                'java/mysql_explain'
+                'java/mysql_explain',
+                'java/ReentrantLock'
             ]
         },
         {
