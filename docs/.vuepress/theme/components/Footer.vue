@@ -2,7 +2,10 @@
   <div class="footer-wrapper">
     <span>
       <i class="iconfont reco-theme"></i>
-      <a target="blank" :href="$withBase('/views/specification/guide.html')">Znote Reform Reco And Vuepress</a>
+      <a target="blank" :href="$withBase('/views/specification/guide.html')">
+        Reform <a href="https://vuepress-theme-reco.recoluan.com"><b>Reco</b></a>
+        And <a href="https://vuepress.vuejs.org/"><b>Vuepress</b></a>
+      </a>
     </span>
     <span v-if="$themeConfig.record">
       <i class="iconfont reco-beian"></i>
