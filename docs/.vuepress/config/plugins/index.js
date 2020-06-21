@@ -51,11 +51,11 @@ module.exports = [
     [require('../../plugins/enhanced-search'), { // 可以添加第三方搜索链接的搜索框（原官方搜索框的参数仍可用）
         thirdparty: [ // 可选，默认 []
             {
-                title: '在 <font color="blue">Baidu</font> 中搜索',
+                title: '在 <span style="color: blue; ">Baidu</span> 中搜索 ',
                 frontUrl: 'https://www.baidu.com/s?wd=',
             },
             {
-                title: '在 <font color="red">Google</font> 中搜索',
+                title: '在 <span style="color: red; ">Google</span> 中搜索 ',
                 frontUrl: 'https://www.google.com/search?q=',
             }
         ]
@@ -71,7 +71,7 @@ module.exports = [
     ['@vuepress/last-updated', { // "上次更新"时间格式
         transformer: (timestamp, lang) => {
             const moment = require('moment') // https://momentjs.com/
-            return moment(timestamp).format('YYYY/MM/DD, H:MM:SS');
+            return moment(timestamp).utcOffset(480).format('YYYY-MM-DD HH:mm:ss');
         }
     }]
 
