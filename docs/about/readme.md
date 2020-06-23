@@ -36,16 +36,27 @@ isShowComments: true
 
 - 在互联网信息高速公路上​流浪。​。​
 
+### 成熟标志
+
+- 爱您：[80231](/view/love.html)
+- 会扔、敢买、能赚、懂爱！
+- 自信乐观，勇于担当，明白责任、责任、责任的意义！
+- 意识到自己时间有限，具备区分什么是值得花时间的、什么是不值得花时间的的能力！
+- 成年人的发泄方式，不再是改头像、换签名、发朋友圈，而是吹吹风，静一静，习惯性的等待自愈！
+
 ### 参与社区
 
 - 博客：[https://zpj80231.gitee.io/znote](https://zpj80231.gitee.io/znote)
-
 - Github：[https://github.com/zpj80231](https://github.com/zpj80231)
 
 ### 联系我
 
 - <a class="zi zi_envelopeBold" zico="黑信封"></a> Email：[zpj80231@163.com](mailto:zpj80231@163.com)
 - <a class="zi zi_tmWeixin" zico="微信"></a> 微信：记得要看完 [Guide](/views/specification/guide.html) 后 [点我](https://mp.weixin.qq.com/s?__biz=MzU4MDY1NjE1MQ==&mid=100000138&idx=1&sn=6b5e532de9685de1bbf4051eaca2de86&chksm=7d52ccf24a2545e479c7b6ed4401bc850a341e54e10cbdd54ce72b757ea7c986c37585375fa2&scene=18#wechat_redirect)
+
+### 其他
+
+- 本仓库代码使用 [MIT](https://github.com/SigureMo/notev/blob/master/LICENSE) 协议进行开源，但是全部文档内容使用 [CC 4.0 BY-SA](https://creativecommons.org/licenses/by-sa/4.0/) 协议进行发布
 
 ### 友链
 
@@ -86,11 +97,6 @@ isShowComments: true
   textColor: '#ecf0f1'
 ```
 :::
-
-### 其他
-
-- 爱您：[80231](/view/love.html)
-- 本仓库代码使用 [MIT](https://github.com/SigureMo/notev/blob/master/LICENSE) 协议进行开源，但是全部文档内容使用 [CC 4.0 BY-SA](https://creativecommons.org/licenses/by-sa/4.0/) 协议进行发布
 
 
 <link rel="stylesheet" href="https://ico.z01.com/zico.min.css">
