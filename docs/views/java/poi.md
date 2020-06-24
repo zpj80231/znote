@@ -1,6 +1,6 @@
 ---
 title: "poi多线程多sheet导出Excel,csv"
-date: 2018-08-20 16:41:12
+date: 2018-08-20
 tags:
 - Java
 - poi
@@ -376,18 +376,18 @@ public class CSVUtils {
 
 ### 4. 本地90万数据：输入输出流+poi多线程多sheet导出Excel
 
-> 可直接运行main()查看导出结果
+> 可直接运行main()查看导出结果，注意poi版本3.7+
 
 ```java
-package com.zpj.electric.util;
+package com.zpj.electric.util.excel;
 
 import com.zpj.electric.po.Student;
 import org.apache.commons.beanutils.PropertyUtilsBean;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 
 import java.beans.PropertyDescriptor;
 import java.io.File;
@@ -396,8 +396,9 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 public class ThreadExcelUtils {
 
@@ -445,7 +446,7 @@ public class ThreadExcelUtils {
      * @Date Create in 13:54 2017/12/28 0028
      */
     public ThreadExcelUtils(String fileName, String filePath, String[] hearders, String[] fields) {
-        this.wb = new HSSFWorkbook();
+        this.wb = new SXSSFWorkbook(10000);
         this.fileName = fileName;
         this.filePath = filePath;
         this.hearders = hearders;
@@ -455,7 +456,7 @@ public class ThreadExcelUtils {
     public static void main(String[] args) throws Exception {
         String[] header = {"姓名", "年龄"};
         String[] fileNames = {"name", "age"};
-        ThreadExcelUtils utils = new ThreadExcelUtils("测试Excel1", "C:\\Users\\lenovo\\Desktop", header, fileNames);
+        ThreadExcelUtils utils = new ThreadExcelUtils("测试Excel1", "D:\\exceltext\\wer\\sd", header, fileNames);
         List list = new ArrayList<>();
         System.out.println("开始造数据.......");
         for (int i = 0; i < 900000; i++) {
@@ -492,7 +493,8 @@ public class ThreadExcelUtils {
         Integer threadNumber = pageCount / 4;
         if (threadNumber == 0)
             threadNumber = 1;
-        ExecutorService threadPool = Executors.newFixedThreadPool(threadNumber);
+//        ExecutorService threadPool = Executors.newFixedThreadPool(threadNumber);
+        ThreadPoolExecutor threadPool = new ThreadPoolExecutor(threadNumber, threadNumber, 0L, TimeUnit.SECONDS, new LinkedBlockingQueue<>(50));
         //创建栅栏 等待任务完成
         CountDownLatch countDownLatch = new CountDownLatch(pageCount);
         //循环遍历投递任务
@@ -501,9 +503,13 @@ public class ThreadExcelUtils {
             thraedExcel.setCountDownLatch(countDownLatch);
             threadPool.submit(thraedExcel);
         }
-        countDownLatch.await();
+        countDownLatch.await(10L,TimeUnit.SECONDS);
+        System.err.println("超时拉=====================================");
         Workbook wb = getWb();
         File file = new File(filePath);
+        if (!file.exists() && !file.isDirectory()) {
+            file.mkdirs();
+        }
         FileOutputStream fout = new FileOutputStream(new File(file, fileName + ".xls"));
         try {
             wb.write(fout);
@@ -682,7 +688,7 @@ public class ThreadExcelUtils {
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi</artifactId>
-            <version>3.7</version>
+            <version>3.9</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
         <dependency>
