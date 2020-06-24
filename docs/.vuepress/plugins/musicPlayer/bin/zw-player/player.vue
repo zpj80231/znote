@@ -196,7 +196,6 @@ export default {
             }
         }
         this.Player();
-        this._getMusicType(1);
     },
     created() {
     },
@@ -406,10 +405,8 @@ export default {
             let self=this;
             let player=$('#music')[0];
             let playerTimer=setInterval(timer,1000);
-            //定时器函数
             $('body').on('click',()=>{
-                player.play();
-                // player.pause();
+                this._getMusicType(1);
                 $('body').unbind('click');
                 
             })
