@@ -1,3 +1,4 @@
+const path = require('path')
 const yaml = require('js-yaml')
 const CARD_LIST = 'cardList'
 const CARD_IMG_LIST = 'cardImgList'
@@ -90,6 +91,11 @@ module.exports = [
         }
     }],
 
+    ['copyright',{
+        minLength: 10,
+        clipboardComponent: path.resolve(__dirname, '../../components/Copyright.vue')
+    },],
+
     ['@vuepress/last-updated', { // "上次更新"时间格式
         transformer: (timestamp, lang) => {
             const moment = require('moment') // https://momentjs.com/
@@ -106,7 +112,6 @@ function renderCardList(tokens, idx, type) {
         _tokens$idx = tokens[idx],
         nesting = _tokens$idx.nesting,
         info = _tokens$idx.info;
-
     if (nesting === 1) { // 渲染开头的 ':::' 标记
         let yamlStr = '';
 
