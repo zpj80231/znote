@@ -113,7 +113,7 @@
 //   }
 // });
 
-import { getWords,getMusicInfo,getMusicUrl,getHotMusic,getSearchSuggest,getHotTalk } from './api/music'
+import { getWords,getMusicInfo,getMusicUrl,getHotMusic,getMyMusic,getSearchSuggest,getHotTalk } from './api/music'
 import pan from './img/pan.png'
 import play from './img/play.png'
 import pause from './img/pause.png'
@@ -125,6 +125,7 @@ import state1 from './img/state_1.png'
 import talkicon1 from './img/talkicon1.png'
 import talkicon2 from './img/talkicon2.png'
 import $ from 'jquery'
+const myMusicId = 3068309305
 export default {
     name:'Player',
     data() {
@@ -164,6 +165,7 @@ export default {
                 {name:'新歌榜',id:0},
                 {name:'飙升榜',id:3},
                 {name:'嘻哈榜',id:18},
+                {name:'我的单曲',id:myMusicId},
                 {name:'My Songs',id:-1}
             ],
             thisMusicType:-1,
@@ -314,22 +316,25 @@ export default {
                     }
                     
                 }else{
-                    getHotMusic(id).then((res)=>{
-                        this.musicList=res.data.playlist.tracks.splice(0,200);
-                        this.thisMusicType=id;
-                        this.thisMusicIndex=0;
-                        this.thisListPage=1;
-                        this._getInfo();
-                        this.top=0;
-                        this.o=0;
-                        this.wordIndex=0;
-                        this.wordsTop=0;
-                        this.currentProgress='0%';
-                        if(!this.playState){
-                            $('.control_icon').click();
-                        }
-                    })
+                    if(myMusicId === id)
+                        getMyMusic(id).then((res)=>{this.getMusicDetail(res, id)})
+                        getHotMusic(id).then((res)=>{this.getMusicDetail(res, id)})
                 }
+            }
+        },
+        getMusicDetail(res, id){
+            this.musicList=res.data.playlist.tracks.splice(0,200);
+            this.thisMusicType=id;
+            this.thisMusicIndex=0;
+            this.thisListPage=1;
+            this._getInfo();
+            this.top=0;
+            this.o=0;
+            this.wordIndex=0;
+            this.wordsTop=0;
+            this.currentProgress='0%';
+            if(!this.playState){
+                $('.control_icon').click();
             }
         },
         _getInfo(){
@@ -406,7 +411,7 @@ export default {
             let player=$('#music')[0];
             let playerTimer=setInterval(timer,1000);
             $('body').on('click',()=>{
-                this._getMusicType(1);
+                this._getMusicType(myMusicId);
                 $('body').unbind('click');
                 
             })

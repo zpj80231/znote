@@ -15,6 +15,10 @@ export const getMusicUrl=(id)=>{
 export const getHotMusic=(id)=>{
     return axios.get(`https://blogme.top:3000/top/list?idx=${id}`);
 }
+//获取歌单歌曲
+export const getMyMusic=(id)=>{
+    return axios.get(`https://blogme.top:3000/playlist/detail?id=${id}`);
+}
 //获取搜索建议
 export const getSearchSuggest=(key)=>{
     return axios.get(`https://blogme.top:3000/search/suggest?keywords=${key}`)
