@@ -9,7 +9,7 @@ isShowComments: false
 ---
 
 <div style="height: 120px">
-<Boxx changeTime='500' />
+<Boxx changeTime='1200' />
 </div>
 
 ## 序言
@@ -21,9 +21,9 @@ isShowComments: false
 - 在文件`package.json`中的`devDependencies`下加入`"vuepress-plugin-boxx": "0.0.7"`：
 
 ```json
-	"devDependencies": {
-        "vuepress-plugin-boxx": "0.0.7"
-    }
+"devDependencies": {
+    "vuepress-plugin-boxx": "0.0.7"
+}
 ```
 
 - 在 vuepress 的`config.js`中配置`plugins`：
@@ -31,7 +31,7 @@ isShowComments: false
 ```json
 plugins: [
     ["vuepress-plugin-boxx"]
-  ],
+],
 ```
 
 - 在`package.json`目录下执行命令：`npm install`
@@ -63,8 +63,8 @@ plugins: [
 
 - 当然你也可以只输入`title`或`content`，如下：
 
-  <Boxx type="warning" :blockStyle="title01" title="短短的 title：<code> &#60;Boxx type='warning' title='自定义' /> </code>"/>
-  <Boxx type="danger" :blockStyle="content01" content="更短短的 content：<code> &#60;Boxx type='danger' content='自定义' /> </code>"/>
+<Boxx type="warning" :blockStyle="title01" title="短短的 title：<code> &#60;Boxx type='warning' title='自定义' /> </code>"/>
+<Boxx type="danger" :blockStyle="content01" content="更短短的 content：<code> &#60;Boxx type='danger' content='自定义' /> </code>"/>
 
 ## 自定义样式
 
@@ -74,7 +74,7 @@ plugins: [
 <Boxx type="warning" :blockStyle="titleStyle" :titleStyle="titleStyle" changeTime="1000" title="我是一个大大的且变化的 title"/>
 <Boxx type="danger" :blockStyle="contentStyle" :contentStyle="contentStyle" content="我是一个小小的<br><marquee>content</marquee>"/>
 
- </marquee>
+</marquee>
 
 - 可以通过以下几个属性实现
 
@@ -94,15 +94,15 @@ plugins: [
 <Boxx :blockStyle="blockStyle"  />
 <Boxx type="warning" :blockStyle="titleStyle" :titleStyle="titleStyle" changeTime="1000" title="我是一个大大的且变化的 title"/>
 <Boxx type="danger" :blockStyle="contentStyle" :contentStyle="contentStyle" content="我是一个小小的<br><marquee>content</marquee>"/>
- </marquee>
+</marquee>
 
 <script>
 	export default {
 		data() {
 			return {
 				blockStyle: {'background':'#eee','color':'red'},
-                titleStyle: {'margin-left': '10%','font-size':'16px'},
-                contentStyle: {'margin-left': '20%','font-size':'10px',
+                titleStyle: {'margin-right': '10%','font-size':'16px'},
+                contentStyle: {'margin-right': '20%','font-size':'10px',
                                "margin-top": "1rem","margin-bottom": "0.4rem"},
 			}
 		}
@@ -116,11 +116,11 @@ plugins: [
 	export default {
 		data() {
 			return {
-                title01: {'margin-left': '10%'},
-                content01: {'margin-left': '20%'},
+                title01: {'margin-right': '10%'},
+                content01: {'margin-right': '20%'},
 				blockStyle: {'background':'#eee','color':'red'},
-                titleStyle: {'margin-left': '10%','font-size':'16px'},
-                contentStyle: {'margin-left': '20%','font-size':'10px',
+                titleStyle: {'margin-right': '10%','font-size':'16px'},
+                contentStyle: {'margin-right': '20%','font-size':'10px',
                                "margin-top": "1rem","margin-bottom": "0.4rem"},
 			}
 		}
