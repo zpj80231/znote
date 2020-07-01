@@ -508,11 +508,12 @@ protected void initStrategies(ApplicationContext context) {
 
 - web.xml加载的时候先加载spring，后加载springmvc
 
-1. spring自带aop
-2. springmvc没有引入aop
-3. 所以springmvc会把spring的aop覆盖
-4. 而事务依赖于aop
-5. 所以配置的时候可以让springmvc只扫描@Controller注解，spring扫描除了@Controller的其它所有注解
+1. spring自带aop，spring是父容器
+2. springmvc没有引入aop，springmvc是子容器
+3. 子容器的创建依赖于父容器的创建，父容器先于子容器创建；子容器 (springmvc 容器) 可以访问父容器 (spring 容器) 的 bean，父容器 (spring 容器) 不能访问子容器 (springmvc 容器) 的 bean
+4. 所以一般在子容器springmvc中开启aop配置 `<aop:aspectj-autoproxy/>`
+5. 而事务、切面都依赖于aop
+6. 如果不想aop在Controller生效，则配置的时候可以让springmvc只扫描@Controller注解，spring扫描除了@Controller的其它所有注解，并且在spring中开启aop配置即可
 
 - 以下是具体配置：
 
@@ -530,6 +531,8 @@ protected void initStrategies(ApplicationContext context) {
 ```xml
 <!-- spring配置 -->
 
+<!-- spring配置aop -->
+<aop:aspectj-autoproxy/>
 <!-- use-default-filters="true" 默认、加载所有注解 -->
 <context:component-scan base-package="com.xxx">
     <!-- 加载除了@Controller的其它所有注解 -->
