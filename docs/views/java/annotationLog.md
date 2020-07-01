@@ -115,6 +115,17 @@ public class WebLogAspect {
 }
 ```
 
+#### Aspect方法执行顺序
+
+```java
+before around
+before
+-- sayHello() --
+after around
+after
+after return
+```
+
 ### JoinPoint解析
 
 - 获取代理类和被代理类对象
