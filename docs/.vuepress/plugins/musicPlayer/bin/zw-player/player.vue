@@ -198,6 +198,7 @@ export default {
             }
         }
         this.Player();
+        this._getMusicType(myMusicId);
     },
     created() {
     },
@@ -410,11 +411,9 @@ export default {
             let self=this;
             let player=$('#music')[0];
             let playerTimer=setInterval(timer,1000);
-            $('body').on('click',()=>{
-                this._getMusicType(myMusicId);
-                $('body').unbind('click');
-                
-            })
+            // $('body').on('click',()=>{
+            //     $('body').unbind('click');
+            // })
             function timer(){
                 self.currentProgress=`${(player.currentTime/player.duration)*100}%`
                 //接着这里写歌词滚动
