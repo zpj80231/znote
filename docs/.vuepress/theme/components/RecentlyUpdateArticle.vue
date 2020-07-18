@@ -43,7 +43,7 @@
     computed: {
       topPublishPosts() {
         return this.$recoPosts ? this.$recoPosts.filter( post => {
-          const { path } = post.path
+          const path = post.path
           const sticky = post.frontmatter.sticky
           return path !== this.currentPath && sticky === undefined
         }).slice(0, this.length) : []
