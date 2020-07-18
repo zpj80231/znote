@@ -76,6 +76,13 @@
     <ModuleTransition delay="0.40">
       <slot v-show="recoShowModule" name="bottom"/>
     </ModuleTransition>
+
+    <RecentlyUpdateArticle
+      :length="3"
+      :moreArticle="updateBarConfig && updateBarConfig.moreArticle"
+      v-if="isShowUpdateBar"
+    />
+
   </main>
 </template>
 
@@ -84,20 +91,29 @@ import PageInfo from '@theme/components/PageInfo'
 import { resolvePage, outboundRE, endingSlashRE } from '@theme/helpers/utils'
 import ModuleTransition from '@theme/components/ModuleTransition'
 import moduleTransitonMixin from '@theme/mixins/moduleTransiton'
+import RecentlyUpdateArticle from './RecentlyUpdateArticle.vue'
 
 export default {
   mixins: [moduleTransitonMixin],
-  components: { PageInfo, ModuleTransition },
+  components: { PageInfo, ModuleTransition, RecentlyUpdateArticle },
 
   props: ['sidebarItems'],
 
   data () {
     return {
-      isHasKey: true
+      isHasKey: true,
+      updateBarConfig: null
     }
   },
 
+  created() {
+    this.updateBarConfig = this.$themeConfig.updateBar
+  },
+
   computed: {
+    isShowUpdateBar() {
+      return this.updateBarConfig && this.updateBarConfig.showToArticle === false ? false : true
+    },
     showAccessNumber () {
       return this.$themeConfig.commentsSolution === 'valine'
     },
