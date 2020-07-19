@@ -70,7 +70,7 @@
   }
 </script>
 
-<style lang='stylus'>
+<style lang='stylus' scoped>
   // @require '../styles/wrapper.styl'
   .article-more
     font-weight 500
