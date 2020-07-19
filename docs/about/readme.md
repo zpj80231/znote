@@ -40,7 +40,7 @@ isShowComments: true
 
 - 爱您：[80231](/view/love.html)
 - 会扔、敢买、能赚、懂爱！
-- 自信乐观，勇于担当，明白责任、责任、责任的意义！
+- 自信乐观，勇于担当，明白责任的意义！
 - 意识到自己时间有限，具备区分什么是值得花时间的、什么是不值得花时间的的能力！
 - 成年人的发泄方式，不再是改头像、换签名、发朋友圈，而是吹吹风，静一静，习惯性的等待自愈！
 
@@ -51,52 +51,44 @@ isShowComments: true
 
 ### 联系我
 
-- <a class="zi zi_envelopeBold" zico="黑信封"></a> Email：[zpj80231@163.com](mailto:zpj80231@163.com)
-- <a class="zi zi_tmWeixin" zico="微信"></a> 微信：记得要看完 [Guide](/views/specification/guide.html) 后 [点我](https://mp.weixin.qq.com/s?__biz=MzU4MDY1NjE1MQ==&mid=100000138&idx=1&sn=6b5e532de9685de1bbf4051eaca2de86&chksm=7d52ccf24a2545e479c7b6ed4401bc850a341e54e10cbdd54ce72b757ea7c986c37585375fa2&scene=18#wechat_redirect)
+- <i class="zi zi_envelopeBold" zico="黑信封"></i> Email：[zpj80231@163.com](mailto:zpj80231@163.com)
+- <i class="zi zi_tmWeixin" zico="微信"></i> 微信：记得要看完 [Guide](/views/specification/guide.html) 后 [点我](https://mp.weixin.qq.com/s?__biz=MzU4MDY1NjE1MQ==&mid=100000138&idx=1&sn=6b5e532de9685de1bbf4051eaca2de86&chksm=7d52ccf24a2545e479c7b6ed4401bc850a341e54e10cbdd54ce72b757ea7c986c37585375fa2&scene=18#wechat_redirect)
+- <i class="zi zi_fly" zico="友链"></i> 友链：[详情GO!](/other/friends.html)
 
 ### 其他
 
 - 本仓库代码使用 [MIT](https://github.com/SigureMo/notev/blob/master/LICENSE) 协议进行开源，但是全部文档内容使用 [CC 4.0 BY-SA](https://creativecommons.org/licenses/by-sa/4.0/) 协议进行发布
 
-### 友链
+::: details 打赏一下
+<br/>
+<p align="center" style="margin: -23% auto;">
+    <img style="transform: scale(0.5);" :src="$withBase('/vuepress/zanshang01.png')" width=400>
+</p>
+<p align="center">「真诚赞赏，手留余香」</p>
 
-- 朋友丰富人生 —— 林肯
-- 高质量友人帐
-
-::: cardList 3
-```yaml
-- name: 午后南杂
-  avatar: https://www.recoluan.com/head.png
-  desc: Enjoy when you can, and endure when you must.
-  link: https://www.recoluan.com
-  bgColor: '#CBEAFA'
-  textColor: '#6854A1'
-- name: 青灯有味
-  desc: 闹里有钱，静外安身
-  avatar: https://zscnb.gitee.io/logo.png
-  link: https://zscnb.gitee.io/
-  bgColor: '#FCE5BF'
-  textColor: '#7B2532'
-- name: znote
-  desc: 荷尽已无擎雨盖，菊残犹有傲霜枝
-  avatar: https://zpj80231.gitee.io/znote/vuepress/head-fish.jpg
-  link: https://zpj80231.gitee.io/znote/
-  bgColor: '#FCDBA0'
-  textColor: '#A05F2C'
-- name: 有梦想的咸鱼
-  desc: 我不能克制我记几
-  avatar: https://blog.liudongyang.top/head-logo.gif
-  link: https://blog.liudongyang.top
-  bgColor: '#1abc9c'
-  textColor: '#c0392b'
-- name: Evan's blog
-  avatar: https://cdn.jsdelivr.net/gh/xugaoyi/image_store/blog/20200103123203.jpg
-  desc: Web 前端技术博客，积跬步以至千里，致敬每个爱学习的你。
-  link: https://xugaoyi.com/
-  bgColor: '#2980b9'
-  textColor: '#ecf0f1'
-```
+### 打赏记录
+打赏者 | 打助金额 (元) | 支付方式 | 时间 | 备注
+:----: | :---: | :---: | :---: | :---: 
+John | 12 | 微信     | 2020-06-09 | tip for you
+艾斯  | 32 | 支付宝   | 2020-07-11 | 火拳赞赏
 :::
 
 
 <link rel="stylesheet" href="https://ico.z01.com/zico.min.css">
+
+<style lang="stylus" scoped> 
+  .details {
+    margin: 5% auto 0 auto;
+    width: 100%;
+  }
+  summary {
+      background-color: #faebd7;
+      text-align: center;
+      margin: 0 auto;
+      width: 150px;
+  }
+  table th:nth-of-type(1),th:nth-of-type(4),th:nth-of-type(5) {
+      width: 23%;
+  }
+  
+</style>
