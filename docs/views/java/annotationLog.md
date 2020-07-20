@@ -170,3 +170,4 @@ HashMap mapParam = (HashMap) joinPoint.getArgs()[0];
 
 5. 根据逻辑判断是否需要发送告警邮件
 
+<Reward/>
