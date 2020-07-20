@@ -52,43 +52,17 @@ isShowComments: true
 ### 联系我
 
 - <i class="zi zi_envelopeBold" zico="黑信封"></i> Email：[zpj80231@163.com](mailto:zpj80231@163.com)
-- <i class="zi zi_tmWeixin" zico="微信"></i> 微信：记得要看完 [Guide](/views/specification/guide.html) 后 [点我](https://mp.weixin.qq.com/s?__biz=MzU4MDY1NjE1MQ==&mid=100000138&idx=1&sn=6b5e532de9685de1bbf4051eaca2de86&chksm=7d52ccf24a2545e479c7b6ed4401bc850a341e54e10cbdd54ce72b757ea7c986c37585375fa2&scene=18#wechat_redirect)
-- <i class="zi zi_fly" zico="友链"></i> 友链：[详情GO!](/other/friends.html)
+- <i class="zi zi_tmWeixin" zico="微信"></i> 微信：记得要看完 [guide](/views/specification/guide.html) 后 [点我](https://mp.weixin.qq.com/s?__biz=MzU4MDY1NjE1MQ==&mid=100000138&idx=1&sn=6b5e532de9685de1bbf4051eaca2de86&chksm=7d52ccf24a2545e479c7b6ed4401bc850a341e54e10cbdd54ce72b757ea7c986c37585375fa2&scene=18#wechat_redirect)
+- <i class="zi zi_fly" zico="友链"></i> 友链：[let's go!](/other/friends.html)
 
 ### 其他
 
 - 本仓库代码使用 [MIT](https://github.com/SigureMo/notev/blob/master/LICENSE) 协议进行开源，但是全部文档内容使用 [CC 4.0 BY-SA](https://creativecommons.org/licenses/by-sa/4.0/) 协议进行发布
 
-::: details 打赏一下
-<br/>
-<p align="center" style="margin: -23% auto;">
-    <img style="transform: scale(0.5);" :src="$withBase('/vuepress/zanshang01.png')" width=400>
-</p>
-<p align="center">「真诚赞赏，手留余香」</p>
-
-### 打赏记录
-打赏者 | 打助金额 (元) | 支付方式 | 时间 | 备注
-:----: | :---: | :---: | :---: | :---: 
-John | 12 | 微信     | 2020-06-09 | tip for you
-艾斯  | 32 | 支付宝   | 2020-07-11 | 火拳赞赏
-:::
-
+<Reward/>
 
 <link rel="stylesheet" href="https://ico.z01.com/zico.min.css">
 
 <style lang="stylus" scoped> 
-  .details {
-    margin: 5% auto 0 auto;
-    width: 100%;
-  }
-  summary {
-      background-color: #faebd7;
-      text-align: center;
-      margin: 0 auto;
-      width: 150px;
-  }
-  table th:nth-of-type(1),th:nth-of-type(4),th:nth-of-type(5) {
-      width: 23%;
-  }
-  
+
 </style>
