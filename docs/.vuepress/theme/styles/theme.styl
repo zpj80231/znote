@@ -58,8 +58,24 @@ body
   @extend $wrapper
   // > *:first-child
   //   margin-top 1.6rem
+  a
+    position: relative;
+    font-size: 1.1em;
+    max-width: 26em;
   a:hover
     text-decoration underline
+  a:after 
+      content: "";
+      position: absolute;
+      z-index: -1;
+      top: 90%;
+      left: 0em;
+      right: 0em;
+      bottom: 0;
+      transition: top 500ms cubic-bezier(0, .8, .13, 1);
+      background-color: rgba(79,192,141,0.5);
+  a:hover:after 
+      top: 0%;
   p.demo
     padding 1rem 1.5rem
     border 1px solid #ddd
