@@ -28,6 +28,8 @@ publish: true
 cd /home/yx/server8.5.50/apache-tomcat-8.5.40/webapps/uapclient/WEB-INF/repository/application/plugins/
 # 总部
 cd /home/yx_zb/phantomjs #phantomjs路径
+# 查找包含 2020 的 catalina.out文件所在的行
+find ./ -name catalina.out |xargs grep 2020
 ```
 
 ## Tomcat
@@ -49,6 +51,8 @@ cd /home/yx_zb/phantomjs #phantomjs路径
   # 清缓存
   cd /home/yx/server8.5.50/apache-tomcat-8.5.40/work
   rm -rf Catalina
+  # 截取日志 （前提是 catalina.out 日志中的每行都是以日期格式开头的）
+  sed -n '/^2012-05-15/,/^2012-05-16/p' catalina.out > catalina_20120515.out
   ```
 
 ## 权限
