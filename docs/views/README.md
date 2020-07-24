@@ -164,7 +164,7 @@ isShowComments: true
 		    padding-top: 35px;
 		    padding-left: 15px;
 		    /*padding-right: 15px;*/
-		    font-size: 16px;
+		    font-size: 15px;
 	}
 	
 	#fj,#se {
@@ -178,11 +178,11 @@ isShowComments: true
 		    padding-left: 26%;
 		}
 		#fj {
-			font-size: 14px;
+			font-size: 13px !important;
 			margin-top: 28px;
 		}
 		#se {
-			font-size: 14px;
+			font-size: 13px !important;
 		}
 		#category {
 			width:100px;
@@ -206,20 +206,20 @@ isShowComments: true
 	
 	@media screen and (max-width: 360px){
 		#fj {
-			font-size: 12px;
+			font-size: 12px !important;
 			margin-top: 28px;
 		}
 		#se {
-			font-size: 12px;
+			font-size: 12px !important;
 		}
 	}
 	@media screen and (max-width: 320px){
 		#fj {
-			font-size: 12px;
+			font-size: 12px !important;
 			margin-top: 26px;
 		}
 		#se {
-			font-size: 12px;
+			font-size: 12px !important;
 			margin-top: -10px;
 		}
 	}
