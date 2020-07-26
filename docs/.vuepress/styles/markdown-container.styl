@@ -17,11 +17,14 @@
       box-shadow 1px 1px 2px 0 rgba(0,0,0,.06)
       &:hover
         text-decoration none
-        img 
-          transform rotate(8deg) scale(1.1, 1.1)
+        img
+          transform rotate(15deg) scale(1.1, 1.1)
           box-shadow 3px 2px 7px rgba(0, 0, 0, 0.15)
         div p
+          transform translate(2%)
           text-shadow 3px 2px 5px rgba(0, 0, 0, 0.15)
+      &:after
+        bottom 0
       img
         width 60px
         height 60px
@@ -39,7 +42,7 @@
         p
           margin 0
           padding 0 1rem
-          transition text-shadow .4s
+          transition all .4s
           text-align center
         .name
           margin .2rem 0 .3rem 0
