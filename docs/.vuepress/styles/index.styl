@@ -217,4 +217,16 @@ $mobileSidebarWidth = $sidebarWidth * 0.82
     font-size 0.9rem
     text-align right
 
+//正文目录链接
+.content__default
+  div.table-of-contents
+    font-size: 14.5px
+    a:after
+     bottom: 0
+     background-color: var(--background-color)
+a.header-anchor 
+  font-size: 0.85em !important;
+  &:after
+    background-color: var(--background-color) !important;
+
 @require './markdown-container'
