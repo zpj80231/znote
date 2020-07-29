@@ -50,6 +50,12 @@ reward: true
   link: https://www.ihewro.com/
   bgColor: 'rgb(136,181,214)'
   textColor: 'rgb(249,249,249)'
+- name: 田小波
+  avatar: http://www.tianxiaobo.com/images/tx.png
+  desc: 欢迎访问田小波的技术博客。
+  link: http://www.tianxiaobo.com/
+  bgColor: '#B39CD0'
+  textColor: '#FBEAFF'
 ```
 :::
 
