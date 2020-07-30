@@ -37,3 +37,29 @@ $mobileSidebarWidth = $sidebarWidth * 0.82
     div[class*="language-"]
       margin 0.85rem -1.5rem
       border-radius 0
+      
+// 侧边栏显示隐藏的适配
+@media (min-width: ($MQMobile + 1px)) // 720px
+  .theme-container 
+    &.sidebar-open
+      .sidebar-mask
+        display: none
+      .sidebar
+        display: none
+      .sidebar-button
+        left 0
+      .page
+        margin auto !important
+      .comments-wrapper
+        padding: 2rem !important;
+    &.no-sidebar
+      .page
+        padding-left 0!important
+  @media (max-width: $MQNarrow)
+    .theme-container
+      &.sidebar-open:not(.on-sidebar)
+        .sidebar-button
+          left 0
+  .theme-container.no-sidebar
+    .sidebar-button
+      display none
