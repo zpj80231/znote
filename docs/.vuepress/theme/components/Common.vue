@@ -170,7 +170,7 @@ export default {
 
   mounted () {
     this.$router.afterEach(() => {
-      this.isSidebarOpen = false
+      // this.isSidebarOpen = false
     })
 
     this.hasKey()
