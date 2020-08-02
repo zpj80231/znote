@@ -80,7 +80,7 @@
   .article-list
     // @extend $wrapper
     padding 1rem 2rem
-    max-width 740px
+    max-width $contentWidth
     margin 0 auto
     @media (max-width: $MQNarrow)
       padding 1rem 1.5rem

@@ -62,7 +62,7 @@ export default {
 
 .timeline-wrapper
   box-sizing border-box
-  max-width: 740px;
+  max-width: $contentWidth;
   margin: 8rem auto 4rem;
   position relative
   list-style none
