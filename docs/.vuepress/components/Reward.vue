@@ -65,6 +65,6 @@
     }
 
     table th:nth-of-type(1), th:nth-of-type(4), th:nth-of-type(5) {
-        width: 23%;
+        width: 22.5%;
     }
 </style>

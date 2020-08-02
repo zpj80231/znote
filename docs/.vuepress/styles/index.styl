@@ -103,10 +103,10 @@ blockquote {
 
 //主页，评论偏左
 .page, .password-wrapper-in {
-    margin-left: 8rem !important;
+    margin-left: 4rem !important;
 }
 .comments-wrapper {
-    padding: 2rem 2rem 2rem 10rem !important;
+    padding: 2rem 2rem 2rem 6rem !important;
 }
 #valine .vwrap .vedit #veditor{
   background: url('/znote/img/other/comment.png')  
@@ -216,6 +216,14 @@ $mobileSidebarWidth = $sidebarWidth * 0.82
     color transparentify($textColor, 0.4)
     font-size 0.9rem
     text-align right
+
+//正文图片样式
+.content__default:not(.custom) img
+  border-radius: 1%
+//分类下的图片大小
+.abstract-item
+  img
+    max-width 100%
 
 //正文目录链接
 .content__default
