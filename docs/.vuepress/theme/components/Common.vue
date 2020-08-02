@@ -277,7 +277,7 @@ export default {
 
 .comments-wrapper
   padding 2rem 2rem 2rem 22rem
-  max-width: 740px;
+  max-width: $contentWidth;
   margin: 0 auto;
 @media (max-width: $MQNarrow)
   .theme-container.no-sidebar
