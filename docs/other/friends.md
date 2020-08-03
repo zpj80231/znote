@@ -45,7 +45,7 @@ reward: true
   bgColor: '#2980b9'
   textColor: '#ecf0f1'
 - name: 友人c
-  avatar: http://www.friendcc.com/863730882.jpg
+  avatar: https://www.ihewro.com/usr/uploads/2020/02/863730882.jpg
   desc: 只要心还眺。
   link: https://www.ihewro.com/
   bgColor: 'rgb(136,181,214)'
