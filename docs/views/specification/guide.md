@@ -119,9 +119,13 @@ publish: true //文章是否发布
 
 ## 写在最后
 
-如果在博客中遇到什么问题，不要一上来就问我，我对那些不经过自己思考的人很反感，毕竟自己动手找出来的东西才能深入理解、印象深刻。
+如果在博客中遇到什么问题，不要一上来就问我，我对那些不经过自己思考的人（即抛出没有价值的问题）很反感，毕竟只有自己淌过的坑才能深入理解、印象深刻。
 
-推荐先去以下几个网址找答案：
+当然，遇到一些`有价值`的问题，还是欢迎来找我共同进步滴😉~~
+
+关于如何提问，在 github 中这个项目可以说是相当 nice 了，可以的话一定要过一遍，于人于己都有莫大的好处：[提问的智慧](https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way/blob/master/README-zh_CN.md)
+
+在 blog 搭建中遇到问题，推荐先去以下几个网址找答案：
 
 - vuepress官网：[https://vuepress.vuejs.org/zh/](https://vuepress.vuejs.org/zh/)
 - vuepress自定义开发主题：[https://vuepress.vuejs.org/zh/theme/writing-a-theme.html](https://vuepress.vuejs.org/zh/theme/writing-a-theme.html)
@@ -129,6 +133,9 @@ publish: true //文章是否发布
 
 ## 关于友链
 
-近期也发现有好些人要加友链的，在这里我也说一下吧
+近期也发现有好些人要加 [友链](/other/friends.html) 的，在这里我也说一下吧：
 
-你可以复用我的blog，但是**你需要在你的blog创新一些东西**，尽量和每个人都不一样，然后我给你加友链。毕竟千篇一律的友链没有必要是吧！
+你可以复用我的blog，但是`需要在你的 blog 创新一些东西`，尽量体现自己独特的创意或价值，然后俺给你加友链。毕竟千篇一律的友链没有必要是吧！
+
+
+*Thanks for you!*
