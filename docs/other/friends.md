@@ -56,6 +56,12 @@ reward: true
   link: http://www.tianxiaobo.com/
   bgColor: '#B39CD0'
   textColor: '#FBEAFF'
+- name: 易良同学的博客
+  desc: 正在努力！
+  avatar: https://yiliang.site/assets/images/avatar.jpeg
+  link: https://yiliang.site
+  bgColor: 'rgb(220 218 218)'
+  textColor: '#2c3e50' 
 ```
 :::
 
