@@ -5,7 +5,7 @@ tags:
  - linux
 categories:
  - 后端
-isShowComments: false
+isShowComments: true
 publish: true
 ---
 
@@ -127,3 +127,4 @@ service iptables restart #改完后重启防火墙
 iptables -A INPUT -p tcp -s 192.168.1.2 -j DROP
 ```
 
+<Reward/>
