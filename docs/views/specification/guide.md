@@ -139,3 +139,5 @@ publish: true //文章是否发布
 
 
 *Thanks for you!*
+
+<Reward/>
