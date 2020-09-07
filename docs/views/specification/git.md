@@ -8,7 +8,7 @@ tags:
 - git
 categories:
 - "后端"
-isShowComments: false
+isShowComments: true
 ---
 
 ![](/znote/img/other/git_001.png)
@@ -317,3 +317,4 @@ $ git archive
 
 参考自阮一峰老师：[ 常用 Git 命令清单 ]( https://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html )
 
+<Reward/>

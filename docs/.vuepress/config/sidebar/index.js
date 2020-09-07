@@ -24,7 +24,8 @@ module.exports = {
                 'specification/ali',
                 'specification/git',
                 'specification/linux01',
-                'specification/objectModel'
+                'specification/objectModel',
+                'specification/提交规范'
             ]
         },
         {
