@@ -6,7 +6,7 @@ tags:
 - Java
 categories:
 - "后端"
-isShowComments: false
+isShowComments: true
 ---
 
 <Boxx/>
@@ -84,3 +84,5 @@ Query：数据查询对象，各层接收上层的查询请求。 注意超过 2
 展示对象：xxxVO，xxx 一般为网页名称。
 
 POJO 是 DO/DTO/BO/VO 的统称，禁止命名成 xxxPOJO。
+
+<Reward/>
