@@ -14,7 +14,7 @@ module.exports = {
                 'qaq/sum_db_001',
                 'qaq/sum_spring_001',
                 'qaq/sum_spring_002',
-                'qaq/sum_spring_003'
+                'qaq/sum_spring_003',
             ]
         },
         {
@@ -25,7 +25,7 @@ module.exports = {
                 'specification/git',
                 'specification/linux01',
                 'specification/objectModel',
-                'specification/提交规范'
+                'specification/提交规范',
             ]
         },
         {
@@ -38,7 +38,7 @@ module.exports = {
                 'front-end/vue-demo',
                 'front-end/reco-info',
                 'front-end/vuepress-plugin-boxx',
-                'front-end/TCP&UDP'
+                'front-end/TCP&UDP',
             ]
         },
         {
@@ -67,7 +67,8 @@ module.exports = {
                 'java/javaLock',
                 'java/mysql_explain',
                 'java/ReentrantLock',
-                'java/CountDownLatch'
+                'java/CountDownLatch',
+                'java/zookeeper',
             ]
         },
         {
