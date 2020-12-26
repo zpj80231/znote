@@ -38,13 +38,13 @@ isShowComments: false
   
      当然，为防止一直等待，可以加个超时时间`countDownLatch.await(10L,TimeUnit.SECONDS);`，超出时间后不再等待，直接唤醒 await 线程进行下一步操作。
   
-- 以上思路实例代码可见另一篇[poi多线程多sheet导出Excel,csv](/views/java/poi.html#_4-本地90万数据：输入输出流-poi多线程多sheet导出excel)
+- 以上思路实例代码可见另一篇[poi多线程多sheet导出Excel,csv](/views/backend/poi.html#_4-本地90万数据：输入输出流-poi多线程多sheet导出excel)
 
 ## CountDownLatch解析
 
 CountDownLatch 类图如下:
 
-![CountDownLatch](/znote/img/backEnd/CountDownLatch.png)
+![CountDownLatch](/znote/img/backend/CountDownLatch.png)
 
 从图中可以看出，CountDownLatch 内部依赖 Sync 实现，而 Sync 继承自 AQS。CountDownLatch 仅提供了一个构造方法：
 

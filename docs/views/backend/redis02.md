@@ -16,7 +16,7 @@ isShowComments: false
 
 ## Redis基础
 
-看我之前的这篇 - [传送门](/views/java/redis01.html)
+看我之前的这篇 - [传送门](/views/backend/redis01.html)
 
 ### 使用场景
 
@@ -294,4 +294,4 @@ public class RedisLockUtil {
 
 [查看](https://mp.weixin.qq.com/s?__biz=MzAwNDA2OTM1Ng==&mid=305657212&idx=3&sn=f6a1a6f39257b8749488d475d130f5be&chksm=0cf2d7ff3b855ee9c87e266cd193ef875eaf7ec8b6a9a39699bfe5b29adb729e50919d63b631&scene=18&xtrack=1&key=ebe57afce2f3a109e9797ed19e614ae0a4fae7ab92283105f2dab753cbe327ca1a41e1fd13a80058781edf1d44aae8b555259116a54400ac75761af7ca98f0315133e7f7b81d482d6ac49774f6eeb0e1&ascene=1&uin=MjA2MzU5OTU2Mw%3D%3D&devicetype=Windows+10&version=62070155&lang=zh_CN&pass_ticket=yMrUA%2FpkdEoj2uvU95vik7jUhd7bqgtcnVWYXE9vArgiCxFDX9Gwpt60%2FG1W3Epb)
 
-![](/znote/img/redis/redis02.png)
+![](/znote/img/backend/redis/redis02.png)

@@ -392,7 +392,7 @@ protected void initStrategies(ApplicationContext context) {
 
 ::: details 1. 定时任务
 
-就是在xml中配置，具体可以看我的[这篇文章](/views/java/quartz.html)
+就是在xml中配置，具体可以看我的[这篇文章](/views/backend/quartz.html)
 
 1. 先配置(实例化)一个**业务**，就是我们自己写的类
 2. 再配置一个**任务**，jobDetailFactoryBean

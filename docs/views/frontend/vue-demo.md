@@ -39,12 +39,12 @@ isShowComments: false
 
 ## 图形界面展示
 <figure class="third">
-    <img src="/znote/img/vuedemo/1.png" width='200px'>
-    <img src="/znote/img/vuedemo/2.png" width='200px'>
-    <img src="/znote/img/vuedemo/3.png" width='200px'>
-    <img src="/znote/img/vuedemo/4.png" width='200px'>
-    <img src="/znote/img/vuedemo/5.png" width='200px'>
-    <img src="/znote/img/vuedemo/6.png" width='200px'>
+    <img src="/znote/img/frontend/vuedemo/1.png" width='200px'>
+    <img src="/znote/img/frontend/vuedemo/2.png" width='200px'>
+    <img src="/znote/img/frontend/vuedemo/3.png" width='200px'>
+    <img src="/znote/img/frontend/vuedemo/4.png" width='200px'>
+    <img src="/znote/img/frontend/vuedemo/5.png" width='200px'>
+    <img src="/znote/img/frontend/vuedemo/6.png" width='200px'>
 </figure>
 
 

@@ -32,7 +32,7 @@ public class HashMap<K,V> extends AbstractMap<K,V>
 - HashMap由数组+链表(+红黑树 1.8)来实现对数据的存储
 - 详细可以看：[HashMap原理深入理解](https://blog.csdn.net/visant/article/details/80045154)
 
-![](/znote/img/HashMap/20180423002750407.png)
+![](/znote/img/backend/HashMap/20180423002750407.png)
 
 ## 手写一个简单的HashMap
 

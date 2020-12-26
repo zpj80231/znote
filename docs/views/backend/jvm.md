@@ -17,7 +17,7 @@ isShowComments: false
 
 - JVM是运行在操作系统之上的，它与硬件没有直接的交互
 
-![](/znote/img/jvm/jvm001.png)
+![](/znote/img/backend/jvm/jvm001.png)
 
 ### 类装载器
 
@@ -26,7 +26,7 @@ isShowComments: false
 3. 应用类加载器（AppClassLoader）Java编写：加载我们自己写的类
 4. 用户自定义加载器：对自带的三种加载器不满足的话，继承ClassLoader，自定义一个我们自己需求的类加载器
 
-![](/znote/img/jvm/jvm002.png)
+![](/znote/img/backend/jvm/jvm002.png)
 
 #### ClassLoader的双亲委派机制
 
@@ -60,11 +60,11 @@ isShowComments: false
   2. 栈操作（Operand Stack）：记录出栈、入栈的操作
   3. 栈帧数据（Frame Data）：包括类文件、方法等等
 
-![](/znote/img/jvm/jvm003.png)
+![](/znote/img/backend/jvm/jvm003.png)
 
 ### 堆 heap
 
-![](/znote/img/jvm/jvm004.png)
+![](/znote/img/backend/jvm/jvm004.png)
 
 1. 新生代
    - 伊甸区：占新生代的8/10 （98%的GC回收都在这） 
@@ -104,7 +104,7 @@ isShowComments: false
 
 ## GC
 
-![](/znote/img/jvm/gc001.png)
+![](/znote/img/backend/jvm/gc001.png)
 
 ### MinorGC的过程（复制->清空->互换）
 
@@ -129,7 +129,7 @@ isShowComments: false
 
    > **年轻代**中使用的Minor GC，这种GC算法用的就是复制算法
 
-   ![](/znote/img/jvm/gc002.png)
+   ![](/znote/img/backend/jvm/gc002.png)
 
    缺点： 消耗空间（每次都从from区复制到to区，也正是from区和to区所占空间为1:1的原因）
 
@@ -141,9 +141,9 @@ isShowComments: false
 
    > **老年代**一般是由标记清除或者是标记清除与标记整理的混合实现 
 
-   ![](/znote/img/jvm/gc003.png)
+   ![](/znote/img/backend/jvm/gc003.png)
 
-   ![](/znote/img/jvm/gc004.png)
+   ![](/znote/img/backend/jvm/gc004.png)
 
    what：算法分为“标记”和“清除”两个阶段，首先标记出所需要回收的对象，在标记完成后统一回收掉所有被标记的对象。
 
@@ -151,7 +151,7 @@ isShowComments: false
 
 4. 标记整理法
 
-   ![](/znote/img/jvm/gc005.png)
+   ![](/znote/img/backend/jvm/gc005.png)
 
    在标记清除后，再对存活对象内存和可用内存进行一遍有序整理（相当于解决内存碎片问题），相当于标记清除的升级版，但效率肯定更慢一点。
 
