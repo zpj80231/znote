@@ -32,7 +32,7 @@ isShowComments: false
 
 大数据生态系统里由很多组件的命名都是某些动物或者昆虫，比如`hadoop`大象，`hive`就是蜂巢，`zookeeper`即管理员，顾名思义就算管理大数据生态系统各组件的管理员，如下所示：
 
-![zookeeper-1](/img/assets/zookeeper-1.png)
+![zookeeper-1](/znote/img/backend/zk/zookeeper-1.png)
 
 #### 应用场景
 
@@ -53,7 +53,7 @@ isShowComments: false
 
      **`zookeeper`就可以提供这样一种服务**，其使用`Zab`这种一致性协议来保证一致性。现在有很多开源项目使用`zookeeper`来维护配置，如在 `hbase`中，客户端就是连接一个 `zookeeper`，获得必要的 `hbase`集群的配置信息，然后才可以进一步操作。还有在开源的消息队列 `kafka`中，也便用`zookeeper`来维护 `brokers`的信息。在 `alibaba`开源的`soa`框架`dubbo`中也广泛的使用`zookeeper`管理一些配置来实现服务治理。
 
-     ![zookeeper-2](/img/assets/zookeeper-2.png)
+     ![zookeeper-2](/znote/img/backend/zk/zookeeper-2.png)
 
 2. 分布式锁服务
 
@@ -63,7 +63,7 @@ isShowComments: false
 
    - 一个集群有时会因为各种软硬件故障或者网络故障，出现棊些服务器挂掉而被移除集群，而某些服务器加入到集群中的情况，`zookeeper`会将这些服务器加入/移出的情况通知给集群中的其他正常工作的服务器，以及时调整存储和计算等任务的分配和执行等。此外`zookeeper`还会对故障的服务器做出诊断并尝试修复。
 
-     ![zookeeper-3](/img/assets/zookeeper-3.png)
+     ![zookeeper-3](/znote/img/backend/zk/zookeeper-3.png)
 
 4. 生产分布式唯一ID
 
@@ -92,7 +92,7 @@ isShowComments: false
 
 `znode`，间距文件和目录两种特点，即像文件一样维护着数据、元信息、ACL、时间戳等数据结构，又像目录一样可以作为路径标识的一部分
 
-![zookeeper-4](/img/assets/zookeeper-4.png)
+![zookeeper-4](/znote/img/backend/zk/zookeeper-4.png)
 
 那么如何描述一个`znode`呢？一个`znode`大体上分为`3`个部分：
 
@@ -104,7 +104,7 @@ isShowComments: false
 
 在`zookeeper shell `中使用 `get `命令查看指定路径结点的`data`、`stat`信息
 
-![zookeeper-5](/img/assets/zookeeper-5.png)
+![zookeeper-5](/znote/img/backend/zk/zookeeper-5.png)
 
 属性说明：
 
@@ -919,7 +919,7 @@ public static void main(String[] args) throws IOException, InterruptedException 
 
 客户端**首先将 `Watcher`注册到服务端**，同时将 `Watcher`对象**保存到客户端的`watch`管理器中**。当`Zookeeper`服务端监听的数据状态发生变化时，服务端会**主动通知客户端**，接着客户端的 `Watch`管理器会**触发相关 `Watcher`**来回调相应处理逻辑，从而完成整体的数据 `发布/订阅`流程
 
-![zookeeper-6](/img/assets/zookeeper-6.png)
+![zookeeper-6](/znote/img/backend/zk/zookeeper-6.png)
 
 #### watcher特性
 
@@ -936,7 +936,7 @@ public static void main(String[] args) throws IOException, InterruptedException 
 
 `Watcher`是一个接口，任何实现了`Watcher`接口的类就算一个新的`Watcher`。`Watcher`内部包含了两个枚举类：`KeeperState`、`EventType`
 
-![zookeeper-7](/img/assets/zookeeper-7.png)
+![zookeeper-7](/znote/img/backend/zk/zookeeper-7.png)
 
 ##### Watcher通知状态(KeeperState)
 
@@ -1382,7 +1382,7 @@ public class DistributedLock {
 - 如果有两台服务器，两台都认为另外的`zk`宕掉，各自成为`leader`运行(假设可以，实际上选不出`leader`，可以实际搭建一个集群，看看一台zk是否能够成功集群，详见**`leader`选举**)，就会导致数据不一致。
 - 如果有三台服务器，一台因为网络分区，无法连接，剩下两台网络正常，选举出了`leader`，集群正常
 - 以此类推
-  - ![脑裂](/img/assets/脑裂.png)
+  - ![脑裂](/znote/img/backend/zk/脑裂.png)
   - zk的设计天生就是`cap`中的`cp`，所以不会出现上述的脑裂和数据一致性问题，我们搭建`zk`仅需保证`2n+1`原则
 
 复制模式所需的**conf / zoo.cfg**文件类似于独立模式下使用的文件，但有一些区别。这是一个例子：
@@ -1477,7 +1477,7 @@ server.3=zoo3:2888:3888
 
 ·`zab`广播模式工作原理，通过类似两端式提交协议的方式解决数据一致性：
 
-![zookeeper-8](/img/assets/zookeeper-8.png)
+![zookeeper-8](/znote/img/backend/zk/zookeeper-8.png)
 
 1. `leader`从客户端收**到一个写请求**
 2. `leader`**生成一个新的事务**并为这个事务生成一个唯一的`ZXID`
@@ -2461,11 +2461,11 @@ ZOOMAIN="-Dzookeeper.4lw.commands.whitelist=* ${ZOOMAIN}"
 
 - 解压后进入目录`ZooInspector\build`，运行`zookeeper-dev-ZooInspector.jar`
 - `java -jar` 运行，之后会弹出一个客户端
-- ![zookeeper-9](/img/assets/zookeeper-9.png)
+- ![zookeeper-9](/znote/img/backend/zk/zookeeper-9.png)
 - 
-  ![zookeeper-10](/img/assets/zookeeper-10.png)
+  ![zookeeper-10](/znote/img/backend/zk/zookeeper-10.png)
 - 
-  ![zookeeper-11](/img/assets/zookeeper-11.png)
+  ![zookeeper-11](/znote/img/backend/zk/zookeeper-11.png)
 - 其它的不必多说，很容易懂(主要是功能也就这几个面板，主要还是直接`zkCli.sh`)
 
 **taokeeper检控工具**
@@ -2476,7 +2476,7 @@ ZOOMAIN="-Dzookeeper.4lw.commands.whitelist=* ${ZOOMAIN}"
 
 1. 下载数据库脚本——算了，我放弃了
 
-![zookeeper-12](/img/assets/zookeeper-12.png)
+![zookeeper-12](/znote/img/backend/zk/zookeeper-12.png)
 
 
 

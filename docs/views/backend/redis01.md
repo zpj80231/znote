@@ -385,8 +385,8 @@ public class RedisServiceImpl implements RedisService {
 
 - 查询：
 
-![](/znote/img/redis/缓存查询.png)
+![](/znote/img/backend/redis/缓存查询.png)
 
 - 更新：
 
-![](/znote/img/redis/缓存更新.png)
+![](/znote/img/backend/redis/缓存更新.png)
