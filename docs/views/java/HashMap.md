@@ -1,6 +1,6 @@
 ---
 title: HashMap底层实现和原理
-date: 2019-06-13 20:53:26
+date: 2019-06-13
 tags:
 - "源码分析"
 - Java
@@ -12,8 +12,6 @@ isShowComments: false
 <Boxx/>
 
 [[toc]]
-
-# HashMap底层实现和原理
 
 ## 简介
 

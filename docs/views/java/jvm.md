@@ -1,5 +1,5 @@
 ---
-title: jvm和GC
+title: JVM 和 GC
 date: 2020-01-12
 tags:
 - jvm
@@ -13,7 +13,7 @@ isShowComments: false
 
 [[toc]]
 
-## jvm
+## JVM
 
 - JVM是运行在操作系统之上的，它与硬件没有直接的交互
 
@@ -86,7 +86,7 @@ isShowComments: false
 
   一般jvm调优指的就是堆调优
 
-### jvm调优
+### jvm 调优
 
 -  如何调优：一般初始内存-Xms和最大内存-Xmx调成一样大小，避免GC和应用程序争抢内存，导致内存值忽高忽低 
 
