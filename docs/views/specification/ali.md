@@ -961,7 +961,7 @@ and b=? 那么即使 a 的区分度更高，也必须把 b 放在索引的最前
 
 1. 【推荐】图中默认上层依赖于下层，箭头关系表示可直接依赖，如：开放接口层可以依赖于 Web 层，也可以直接依赖于 Service 层，依此类推：
 
-    ![未加载图片](/znote/img/ali/app_layout.png)
+    ![未加载图片](/znote/img/backend/ali/app_layout.png)
 
     + **开放接口层：** 可直接封装 Service 方法暴露成 RPC 接口；通过 Web 封装成 http 接口；进行网关安全控制、流量控制等。
     + **终端显示层：** 各个端的模板渲染并执行显示的层。当前主要是 velocity 渲染，JS 渲染，JSP 渲染，移动端展示等。

@@ -38,7 +38,7 @@ Swagger 是一款RESTFUL接口的文档在线自动生成+功能测试功能组�
 
 - 配置完成后，通过访问`http://localhost:8080/swagger-ui.html`（自己的项目访问路径/swagger-ui.html）来访问接口文档就可以了。
 
-![](/znote/img/swagger2/swagger2.png)
+![](/znote/img/backend/swagger2/swagger2.png)
 
 ### 添加依赖
 

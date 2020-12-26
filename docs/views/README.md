@@ -28,7 +28,7 @@ isShowComments: true
 
 <div id='fj'>
 
-[【前端】](/views/front-end/js-json.html) | [【后端】](/views/java/ArrayList.html)
+[【前端】](/views/frontend/EChartsStudy.html) | [【后端】](/views/backend/ArrayList.html)
 
 </div>
 

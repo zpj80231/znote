@@ -27,7 +27,7 @@ RabbitMQ的5种主题模式、使用场景、在Spring、SpringBoot中的使用
 
 - RabbitMQ是基于Erlang语言开发的实现了高级消息队列协议（AMQP)的开源消息代理中间件，支持多种语言，多个平台。
 
-  ![](/znote/img/rabbitmq/rabbitmq.png)
+  ![](/znote/img/backend/rabbitmq/rabbitmq.png)
 
 ## RabbitMQ应用场景
 
@@ -116,7 +116,7 @@ firewall-cmd --reload
 
 ### 6种消息队列模型
 
-![](/znote/img/rabbitmq/队列模型.png)
+![](/znote/img/backend/rabbitmq/队列模型.png)
 
 - 官网是真的真的真的是最好的学习路径：[https://www.rabbitmq.com/getstarted.html](https://www.rabbitmq.com/getstarted.html)
 - 官网实例源码rabbitmq-java-maven：[https://github.com/rabbitmq/rabbitmq-tutorials/tree/master/java-mvn](https://github.com/rabbitmq/rabbitmq-tutorials/tree/master/java-mvn)
@@ -125,7 +125,7 @@ firewall-cmd --reload
 
 >  这里挑最主要的`topic（主题）`模型，介绍一下
 
-![](/znote/img/rabbitmq/topic.png)
+![](/znote/img/backend/rabbitmq/topic.png)
 
 `举例：如上图的主题模式中，交换机类型设为topic， Q1绑定 *.orange.* 路由键，Q2绑定两个路由键，分别是 *.*.rabbit 以及 lazy.#`
 

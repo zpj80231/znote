@@ -28,9 +28,9 @@ isShowComments: false
 
 3. **公平锁与非公平锁可选**。ReentrantLock 默认是非公平锁，但是也可以通过构造方法选择非公平锁。公平锁是指当多个线程尝试获取同一个锁时，获取锁的顺序按照到达的时间顺序排序。
 
-![RenntrantLock](/znote/img/backEnd/16301aac714a64ae.jpg)
+![RenntrantLock](/znote/img/backend/16301aac714a64ae.jpg)
 
-![依赖关系](/znote/img/backEnd/16301aac716e8f24.jpg)
+![依赖关系](/znote/img/backend/16301aac716e8f24.jpg)
 
 `斜体为抽象类,下横线为接口`
 
@@ -450,13 +450,13 @@ final ConditionObject newCondition() {
 我们知道关键字 `Synchronized` + `Object` 的 `wait` 和 `notify`、`notifyAll` 方法能实现**等待 / 通知**机制，那么 `ReentrantLock` 是否也能实现这样的等待 / 通知机制，答案是：可以。
  `ReentrantLock` 通过 `Condition` 对象，也就是**条件队列**实现了和 `wait`、`notify`、`notifyAll` 相同的语义。 线程执行 `condition.await()` 方法，将节点 1 从同步队列转移到条件队列中。
 
-![img](/znote/img/backEnd/169b3432b128105d.jpg)
+![img](/znote/img/backend/169b3432b128105d.jpg)
 
 
 
 线程执行 `condition.signal()` 方法，将节点 1 从条件队列中转移到同步队列。
 
-![img](/znote/img/backEnd/169b3411b74cfff1.jpg)
+![img](/znote/img/backend/169b3411b74cfff1.jpg)
 
 
 

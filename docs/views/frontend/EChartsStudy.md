@@ -32,19 +32,19 @@ isShowComments: false
 
 - 柱+折线图
 
-![](/znote/img/EChartsStudy/柱+折线图.png)
+![](/znote/img/frontend/EChartsStudy/柱+折线图.png)
 
 - 饼图
 
-![](/znote/img/EChartsStudy/饼图.png)
+![](/znote/img/frontend/EChartsStudy/饼图.png)
 
 - 迁徙图
 
-![](/znote/img/EChartsStudy/迁徙图.png)
+![](/znote/img/frontend/EChartsStudy/迁徙图.png)
 
 - 接入百度地图
 
-![](/znote/img/EChartsStudy/接入百度地图.png)
+![](/znote/img/frontend/EChartsStudy/接入百度地图.png)
 
 ## 使用服务端返回数据的异步加载和更新
 
