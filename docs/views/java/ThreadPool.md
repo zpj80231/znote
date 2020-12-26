@@ -14,9 +14,7 @@ isShowComments: false
 
 [[toc]]
 
-## 线程池
-
-### 前言
+## 前言
 
 -  Java中创建线程池很简单，Java提供了 ***Executors*** 这个强大的线程池工具类，我们创造线程池只需调用某个方法即可，比如`Executors.newFixedThreadPool(int nThreads)`，但是便捷不仅隐藏了复杂性，也为我们埋下了潜在的隐患（**OOM**，**线程耗尽**）。
   
@@ -44,7 +42,7 @@ isShowComments: false
   3.  【强制】线程池不允许使用 Executors 去创建，而是通过 ThreadPoolExecutor 的方式，这样
      的处理方式让写的同学更加明确线程池的运行规则，规避资源耗尽的风险。 
 
-### 初识Executors
+## 初识Executors
 
 **1. Executors.newCachedThreadPool();**
 说明: 创建一个可缓存线程池，如果线程池长度超过处理需要，可灵活回收空闲线程，若无可回收，则新建线程.
@@ -94,7 +92,7 @@ public static ExecutorService newSingleThreadExecutor() {
 new ScheduledThreadPoolExecutor(corePoolSize)
 ```
 
-###  步入`ThreadPoolExecutor `
+##  步入`ThreadPoolExecutor `
 
 - 核心参数
 
@@ -120,7 +118,7 @@ public ThreadPoolExecutor(
 | threadFactory   | 线程工厂，用于创建线程，一般用默认的即可                     |
 | handler         | 线程池对拒绝任务的处理策略                                   |
 
-#### handler拒绝策略
+### handler拒绝策略
 
 当线程池任务处理不过来的时候，可以通过handler指定的策略进行处理，ThreadPoolExecutor提供了四种策略：
 
@@ -131,19 +129,19 @@ public ThreadPoolExecutor(
 
 可以通过实现RejectedExecutionHandler接口自定义处理方式。
 
-#### workQueue任务队列
+### workQueue任务队列
 
 1. ArrayBlockingQueue： 这是一个由数组实现的容量固定的有界阻塞队列。
 2. SynchronousQueue： 没有容量，不能缓存数据；每个put必须等待一个take; offer()的时候如果没有另一个线程在poll()或者take()的话返回false。
 3. LinkedBlockingQueue： 这是一个由单链表实现的默认×××的阻塞队列。LinkedBlockingQueue提供了一个可选有界的构造函数，而在未指明容量时，容量默认为Integer.MAX_VALUE。 
 
-### 线程池的工作顺序
+## 线程池的工作顺序
 
 - corePoolSize ->  workQueue 任务队列 -> maximumPoolSize -> handler 拒绝策略 
 
   跟银行类似：有2个窗口（`corePoolSize `）办理业务，有人来了就先到候客区（` workQueue `）等着，候客区如果满了就再多开几个窗口（`maximumPoolSize `）办理业务，如果候客区和能开的窗口都满了，那保安就拒绝（` handler `）别人再进入银行。业务办理的差不多了，多开的窗口等待一定时间（` keepAliveTime` ）还没有人办理业务，那就把它关了吧浪费。
 
-### Executors弊端
+## Executors弊端
 
 1. **FixedThreadPool 和 SingleThreadPool:**
    
@@ -153,7 +151,7 @@ public ThreadPoolExecutor(
 
    允许的创建线程数量为 Integer.MAX_VALUE， 可能会创建大量的线程，从而导致 OOM。 
 
-### 正确的使用线程池
+## 正确的使用线程池
 
 ```java
 // 返回可用处理器的Java虚拟机的数量(获取本机cpu核心数)
@@ -168,7 +166,7 @@ ExecutorService executorService = new ThreadPoolExecutor(poolSize, poolSize,
     0, TimeUnit.SECONDS,queue,policy);
 ```
 
-#### 线程超时时间
+### 线程超时时间
 
 - 单个任务的超时时间
 
