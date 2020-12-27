@@ -81,6 +81,9 @@ footer: MIT Licensed | Copyright © 2018-present Evan You
     cursor: default;
     opacity: 0.6;
 }
+.home .features {
+    text-align: center;
+}
 .home .feature p {
     color: #476582 !important;
 }
