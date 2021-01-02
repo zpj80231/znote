@@ -5,16 +5,16 @@
 
 
 <p align="center">
-   <a href="https://zpj80231.github.io/znote/" target="_blank"><img alt="Read the Docs" src="https://img.shields.io/badge/docs-GetStarted-red?style=flat-square&logo=read-the-docs"></a>
-   <a href="https://github.com/zpj80231/znote" target="_blank"><img alt="GitHub" src="https://img.shields.io/badge/GitHub-znote-black?style=flat-square&logo=github"></a>
+   <a href="https://zpj80231.github.io/znote/views/specification/guide.html" target="_blank"><img alt="Read the Docs" src="https://img.shields.io/badge/Docs-GetStarted-red?style=flat-square&logo=buffer"></a>
+   <a href="https://github.com/zpj80231/znote" target="_blank"><img alt="GitHub" src="https://img.shields.io/badge/GitHub-znote-d05577?style=flat-square&logo=github"></a>
    <br/>
-   <a href="https://github.com/vuejs/vuepress" target="_blank"><img alt="vuepress" src="https://img.shields.io/badge/vuepress-build-1aad19?style=flat-square&logo=vue.js"></a>
-   <a href="https://github.com/vuepress-reco/vuepress-theme-reco" target="_blank"><img alt="vuepress" src="https://img.shields.io/badge/reco-theme-26a2ff?style=flat-square&logo=vue.js"></a>
+   <a href="https://github.com/vuejs/vuepress" target="_blank"><img alt="VuePress" src="https://img.shields.io/badge/VuePress-build-05a564?style=flat-square&logo=vue.js"></a>
+   <a href="https://github.com/vuepress-reco/vuepress-theme-reco" target="_blank"><img alt="Reco" src="https://img.shields.io/badge/Reco-theme-137cbd?style=flat-square&logo=vue.js"></a>
    <br/>
+   <a href="https://creativecommons.org/licenses/by-sa/4.0/"><img alt="CC4.0 BY-SA" src="https://img.shields.io/static/v1?label=CC%20%204.0&message=BY-SA&color=yellow&style=flat-square"></a>
    <a href="LICENSE"><img alt="LICENSE" src="https://img.shields.io/badge/License-MIT-orange?style=flat-square"></a>
-   <a href="https://creativecommons.org/licenses/by-sa/4.0/"><img alt="CC4.0 BY-SA" src="https://img.shields.io/static/v1?label=CC4.0&message=BY-SA&color=yellow&style=flat-square"></a>
    <br/>
-   <a href="https://twitter.com/zpj80231"><img alt="twitter" src="https://img.shields.io/twitter/url.svg?style=social&url=https://github.com/zpj80231/znote"></a>
+   <a href="https://zpj80231.gitee.io/znote/"><img alt="znote site" src="https://img.shields.io/badge/znote-pages-a06bc1?style=flat-square&logo=zulip"></a>
 </p>
 
 
