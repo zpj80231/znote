@@ -3,10 +3,8 @@
         <details class="custom-block details">
             <summary>打赏一下</summary>
             <br>
-            <p align="center" style="margin: -23% auto; transform: scale(0.5);"><img
-                    :src="src"
-                    width="400"
-                    class="medium-zoom-image">
+            <p align="center" style="max-width: 200px; margin: 0 auto; pointer-events:none;">
+                <img :src="rewardImg" class="medium-zoom-image" />
             </p>
             <p align="center">「真诚赞赏，手留余香」</p>
             <h3 id="打赏记录"><a href="#打赏记录" class="header-anchor">#</a> 打赏记录</h3>
@@ -46,7 +44,7 @@
         data() {
             return {
                 rewarder,
-                src: "/znote/vuepress/zanshang01.png"
+                rewardImg: "/znote/vuepress/zanshang01.png"
             }
         }
     }

@@ -75,12 +75,6 @@ footer: MIT Licensed | Copyright © 2018-present Evan You
    //transform: scale(1)!important;
    transition:all 2s !important;
 }
-/* 阻止描述冒泡 */
-.home .hero .description{
-    pointer-events: none;
-    cursor: default;
-    opacity: 0.6;
-}
 .home .features {
     text-align: center;
 }
