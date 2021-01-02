@@ -109,7 +109,7 @@ blockquote {
     padding: 2rem 2rem 2rem 6rem !important;
 }
 #valine .vwrap .vedit #veditor{
-  background: url('/znote/img/other/comment.png')  
+  background: url('/znote/img/other/comment.png')
   background-position: 90% 60%
   background-size: 16rem 10rem
   background-repeat: no-repeat
@@ -124,7 +124,7 @@ $mobileSidebarWidth = $sidebarWidth * 0.82
     width $mobileSidebarWidth !important;
   .page, .password-wrapper-in
     margin-left $mobileSidebarWidth !important;
-  .comments-wrapper 
+  .comments-wrapper
     padding: 2rem 2rem 2rem $mobileSidebarWidth*1.1 !important;
 
 // wide mobile
@@ -136,7 +136,7 @@ $mobileSidebarWidth = $sidebarWidth * 0.82
     transition transform .2s ease
   .page, .password-wrapper-in
     margin-left 0  !important;
-  .comments-wrapper 
+  .comments-wrapper
     padding: 2rem 2rem 2rem 2rem !important;
   .theme-container
     &.sidebar-open
@@ -163,12 +163,12 @@ $mobileSidebarWidth = $sidebarWidth * 0.82
       display none
     .page, .password-wrapper-in
       margin-left 0  !important;
-    .comments-wrapper 
+    .comments-wrapper
       padding: 2rem 2rem 2rem 2rem !important;
 
 //标签列表样式
 .abstract-item {
-  background-color: #acdcfd3d !important;  
+  background-color: #acdcfd3d !important;
   transition: all .5s;
 }
 .abstract-item:hover {
@@ -181,22 +181,22 @@ $mobileSidebarWidth = $sidebarWidth * 0.82
   width: 6px !important;
 /*滚动条的设置*/
 ::-webkit-scrollbar-thumb {
-	background-color:#94989c8c !important; 
-	background-clip:padding-box !important; 
-	-webkit-border-radius: 10em !important; 
-	-moz-border-radius: 10em !important; 
-	border-radius: 10em !important; 
+	background-color:#94989c8c !important;
+	background-clip:padding-box !important;
+	-webkit-border-radius: 10em !important;
+	-moz-border-radius: 10em !important;
+	border-radius: 10em !important;
 }
 /*滚动条凹槽的颜色，还可以设置边框属性 */
 ::-webkit-scrollbar-track-piece {
-	background-color:transparent !important; 
-	-webkit-border-radius: 0em !important; 
-	-moz-border-radius: 0em !important; 
-	border-radius: 0em !important; 
+	background-color:transparent !important;
+	-webkit-border-radius: 0em !important;
+	-moz-border-radius: 0em !important;
+	border-radius: 0em !important;
 }
 /*滚动条鼠标移上去*/
 ::-webkit-scrollbar-thumb:hover {
-	background-color:#bbb !important; 
+	background-color:#bbb !important;
 }
 
 //navbar字体大小
@@ -232,9 +232,16 @@ $mobileSidebarWidth = $sidebarWidth * 0.82
     a:after
      bottom: 0
      background-color: var(--background-color)
-a.header-anchor 
+a.header-anchor
   font-size: 0.85em !important;
   &:after
     background-color: var(--background-color) !important;
+
+body {
+  -webkit-text-size-adjust : 100% !important;
+  -moz-text-size-adjust : 100% !important;
+  -ms-text-size-adjust : 100% !important;
+  text-size-adjust : 100% !important;
+}
 
 @require './markdown-container'
