@@ -3,8 +3,9 @@
     <span>
       <i class="iconfont reco-theme"></i>
       <a target="blank" :href="$withBase('/views/specification/guide.html')">
-        Reform <a href="https://vuepress-theme-reco.recoluan.com"><b>Reco</b></a>
-        And <a href="https://vuepress.vuejs.org/"><b>Vuepress</b></a>
+        Powered by
+        <a href="https://vuepress-theme-reco.recoluan.com"><b>Reco</b></a>,
+        <a href="https://vuepress.vuejs.org/"><b>VuePress</b></a>
       </a>
     </span>
     <span v-if="$themeConfig.record">
