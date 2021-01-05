@@ -43,11 +43,6 @@ export default {
 #clock02 {
   font-family: 'Share Tech Mono', monospace;
   text-align: center;
-  position: relative;
-  left: 30%;
-  margin-bottom: -30px;
-  margin-top: 30px;
-  transform: translate(-30%, -30%);
   color: #daf6ff;
   text-shadow: 0 0 2px #0aafe6, 0 0 2px rgba(10, 175, 230, 0);
 }
