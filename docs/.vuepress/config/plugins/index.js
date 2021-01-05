@@ -70,6 +70,7 @@ module.exports = [
     ['vuepress-plugin-smooth-scroll'],
     require('../../plugins/detailsOpenFlag/index'),
     require('../../plugins/musicPlayer/index'),
+    require('../../plugins/notification/index'),
 
     [require('../../plugins/enhanced-search'), { // 可以添加第三方搜索链接的搜索框（原官方搜索框的参数仍可用）
         thirdparty: [ // 可选，默认 []
