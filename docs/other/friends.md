@@ -10,7 +10,8 @@ reward: true
 ### 高质量友人帐
 
 - 朋友丰富人生 —— 林肯
-- 展示所有友情站点，以下排名不分先后！
+- 展示所有友情站点，排名不分先后！
+- 稍息，立正。欢迎入队！👍
 
 ::: cardList 2
 ```yaml
@@ -62,6 +63,19 @@ reward: true
   link: https://yiliang.site
   bgColor: 'rgb(220 218 218)'
   textColor: '#2c3e50' 
+```
+:::
+
+::: cardImgList 2
+```yaml
+- img: /znote/img/other/5666c8e4-867a-3356-9708-6ba918e87853.jpg
+  link: /znote/other/friends.html
+  name: For you
+  desc: 你若盛开，清风自来。
+- img: /znote/img/other/4ec4e5f0-947b-3abe-9e8b-47bad5b8cf1c.jpg
+  link: /znote/other/friends.html
+  name: To me
+  desc: 心若浮沉，浅笑安然。
 ```
 :::
 
