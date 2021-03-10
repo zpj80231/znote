@@ -67,7 +67,14 @@ module.exports = [
 
     'flowchart',
     "vuepress-plugin-boxx",
-    ['vuepress-plugin-smooth-scroll'],
+    // ['vuepress-plugin-smooth-scroll'],
+    //'vuepress-plugin-catalog-graph',
+    // ["vuepress-plugin-auto-sidebar", {
+    //     titleMap: {
+    //         "backend": "🎉 Hello Vuepress 🎉",
+    //         "qaq": "🎉 Auto Sidebar 🎉"
+    //     }
+    // }],
     require('../../plugins/detailsOpenFlag/index'),
     require('../../plugins/musicPlayer/index'),
     require('../../plugins/notification/index'),

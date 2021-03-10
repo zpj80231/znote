@@ -38,6 +38,8 @@ isShowComments: true
 
 </div>
 
+<CatalogGraph  root='/views/' title='概览' :height='320' />
+
 <script>
 	export default {
 		data() {
@@ -172,6 +174,9 @@ isShowComments: true
 	}
 	
 	@media screen and (max-width: 960px){
+	    .catalog-graph {
+	        display: none;
+	    }
 		.content__default:not(.custom) img {
 		    max-width: 35% !important;
 		    margin: 17px;
