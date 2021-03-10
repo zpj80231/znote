@@ -2,10 +2,9 @@
   <div class="footer-wrapper">
     <span>
       <i class="iconfont reco-theme"></i>
-      <a target="blank" :href="$withBase('/views/specification/guide.html')">
+      <a target="blank" href="https://zpj80231.gitee.io/znote/">
         Powered by
-        <a href="https://vuepress-theme-reco.recoluan.com"><b>Reco</b></a>,
-        <a href="https://vuepress.vuejs.org/"><b>VuePress</b></a>
+        <a href="https://zpj80231.gitee.io/znote/"><b>znote</b></a>
       </a>
     </span>
     <span v-if="$themeConfig.record">
