@@ -40,6 +40,7 @@ module.exports = {
     // 搜索设置
     search: true,
     searchMaxSuggestions: 10,
+    smoothScroll: true,
     sidebarDepth: 2,
     blogConfig: {
       category: {
