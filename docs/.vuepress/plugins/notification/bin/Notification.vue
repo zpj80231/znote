@@ -46,13 +46,13 @@
             this.setRandomShow()
         },
         methods: {
-            //点击关闭按钮后，整体通知区域2min内不再显示
+            //点击关闭按钮后，整体通知区域5min内不再显示
             closeNote() {
                 this.visible = false
                 this.closeBtn = true
                 setTimeout(() => {
                     this.closeBtn = false
-                }, (2*60*1000))
+                }, (5*60*1000))
             },
             check() {
                 let flag = navigator.userAgent.match(/(phone|pod|iPhone|iPod|ios|Android|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)
@@ -103,7 +103,7 @@
         bottom 20px
         right 5rem
         //z-index 19
-        width 160px
+        width 120px
         box-sizing border-box
         background #fff
         //border 1px solid #3eaf7c
