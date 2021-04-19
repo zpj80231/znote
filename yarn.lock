@@ -2370,6 +2370,11 @@ color@^3.0.0:
     color-convert "^1.9.1"
     color-string "^1.5.2"
 
+colors@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/colors/-/colors-1.4.0.tgz#c50491479d4c1bdaed2c9ced32cf7c7dc2360f78"
+  integrity sha512-a+UqTh4kgZg/SlGvfbzDHpgRu7AAQOmmqRHJnxhRZICKFUT91brVhNNt58CMWU9PsBbv3PDCZUHbVxuDiH2mtA==
+
 colour@~0.7.1:
   version "0.7.1"
   resolved "https://registry.yarnpkg.com/colour/-/colour-0.7.1.tgz#9cb169917ec5d12c0736d3e8685746df1cadf778"
@@ -8384,6 +8389,13 @@ vuepress-html-webpack-plugin@^3.2.0:
     toposort "^1.0.0"
     util.promisify "1.0.0"
 
+vuepress-plugin-auto-sidebar@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/vuepress-plugin-auto-sidebar/-/vuepress-plugin-auto-sidebar-1.5.0.tgz#fc11b32f5e7976394bab01edd68cd602b1c0cefe"
+  integrity sha512-PsF+XRWBZw+xbh/4IzTw6VbM4PoMhEMemHgK+c1Lmf7+9Fq3FK/iB4/P6Bp3VmlY+GenJ95MtwKK0BRjuK4RCQ==
+  dependencies:
+    colors "^1.4.0"
+
 vuepress-plugin-boxx@0.0.7:
   version "0.0.7"
   resolved "https://registry.yarnpkg.com/vuepress-plugin-boxx/-/vuepress-plugin-boxx-0.0.7.tgz#8337d27eaf5b3f609eb7befdb3681ce5f0eac17c"
@@ -8886,9 +8898,9 @@ xtend@^4.0.0, xtend@~4.0.1:
   integrity sha512-LKYU1iAXJXUgAXn9URjiu+MWhyUXHsvfp7mcuYm9dSUKK0/CjtrUwFAxD82/mCWbtLsGjFIad0wIsod4zrTAEQ==
 
 y18n@^3.2.0:
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/y18n/-/y18n-3.2.1.tgz#6d15fba884c08679c0d77e88e7759e811e07fa41"
-  integrity sha1-bRX7qITAhnnA136I53WegR4H+kE=
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/y18n/-/y18n-3.2.2.tgz#85c901bd6470ce71fc4bb723ad209b70f7f28696"
+  integrity sha512-uGZHXkHnhF0XeeAPgnKfPv1bgKAYyVvmNL1xlKsPYZPaIHxGti2hHqvOCQv71XMsLxu1QjergkqogUnms5D3YQ==
 
 "y18n@^3.2.1 || ^4.0.0", y18n@^4.0.0:
   version "4.0.0"
