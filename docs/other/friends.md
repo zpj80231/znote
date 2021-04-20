@@ -63,6 +63,18 @@ reward: true
   link: https://yiliang.site
   bgColor: 'rgb(220 218 218)'
   textColor: '#2c3e50' 
+- name: 会飞的小弋
+  link: https://lovelijunyi.gitee.io/
+  avatar: https://gitee.com/lovelijunyi/images/raw/master/20200404135847.jpg
+  desc: 喜欢大数据，嵌入式和机器视觉
+  bgColor: 'rgb(243 126 126)'
+  textColor: 'rgb(102 48 72)'
+- name: 站位等待中...
+  link: 
+  avatar: 
+  desc: 稍息，立正。欢迎入队！👍
+  bgColor: 'rgb(157 156 186)'
+  textColor: 'rgb(252 249 247)'
 ```
 :::
 
