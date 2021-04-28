@@ -3,7 +3,7 @@
 
 	<div @click="updateOpen()" v-show="showButtonFlag" class="DetailsOpenFlag"
 		:style="detailsStyle">
-	 {{text}} 
+	 {{text}}
 
 	</div>
 
@@ -43,7 +43,7 @@
             }
           },
           showButton() {
-            // this.$route.path 
+            // this.$route.path
           	var objs = document.getElementsByTagName('details');
           	//当details的数量至少3时才显示展开按钮
             if(objs!=null && objs.length>2) {
@@ -67,23 +67,23 @@
               this.text = "展开";
               this.showButton()
             }
-          }        
+          }
         },
         created () {
-          
+
         },
         mounted () {
-        
+
         },
         beforeDestroy () {
-          
+
         },
   }
 </script>
 
 <style lang="stylus" scoped>
 	.DetailsOpenFlag
-	  background-color: var(--background-color)
+	  background-color: rgba(231, 234, 241, 0.5)
 	  box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.2)
 	  box-shadow: var(--box-shadow)
 	  position: fixed;
