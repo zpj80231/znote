@@ -69,6 +69,7 @@ module.exports = {
                 'backend/ReentrantLock',
                 'backend/CountDownLatch',
                 'backend/zookeeper',
+                'backend/分布式系统概述',
             ]
         },
         {
