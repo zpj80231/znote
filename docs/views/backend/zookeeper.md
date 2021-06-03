@@ -3,7 +3,6 @@ title: Zookeeper 全解
 date: 2020-12-26
 tags:
     - 分布式
-    - Java
     - zookeeper
 categories:
     - 后端
