@@ -18,11 +18,12 @@ isShowComments: false
 
 ## 使用场景
 
-- 分布式的单点登录
+- 分布式的登录认证
+- Token 可以是无状态的，可以在多个服务间共享
 
 ## 初识JWT
 
-> 官网：[ https://jwt.io/ ]( https://jwt.io/ )
+- 官网：[ https://jwt.io/ ]( https://jwt.io/ )
 
 ### jwt的组成
 
@@ -264,13 +265,35 @@ $.ajax({
 
 3. 登出：服务端校验token通过，将redis中的token删除。
 
+## 安全问题
+
+1. 如果其他用户获得我们电脑上的token,那么他们就能模仿真实用户进行操作（黑客监控电脑，获得网站发送的token,进行操作）？
+
+   对于敏感的api接口，需使用https 。https是在http超文本传输协议加入SSL层，它在网络间通信是加密的，所以需要加密证书。
+
+2. 我们是否可以伪造用户token进行访问？
+
+   不可以，因为你无法使用服务器的签名，就是你自己的密钥签名的信息服务器识别不了。
+
+3. 我们是否可以修改token中body的信息？
+
+   不能，修改了之后签名信息就不正确，然后就无法验证签名，说明数据被修改了。
+
+4. app登录后，服务端返回一个token，app存在客户端，下次再打开app时，直接读token，传token到服务端做验证，免去重新输入用户密码的麻烦，这个token存储在header里，目前看大多数app都是这样做，但如果黑客抓包获取到token，伪造http 请求，对服务器做操作，那岂不是很不安全。。。
+
+   这方法确实不好啊，不能只依赖于http的header里的东西来认证，太容易模仿。最简单的方法可能就是走https，客户端只要接受服务器端的签名即可。
+
+   理解：签名就是验证信息的唯一性，如果中间人进行获得token，那么无法进行公钥签名，服务器获得token之后还要进行解密的，因此这个方法可以进行避免攻击。
+
 ## 总结
 
 - 优点：在非跨域环境下使用JWT机制是一个非常不错的选择，实现方式简单，操作方便，能够快速实现。由于服务端不存储用户状态信息，因此大用户量，对后台服务也不会造成压力。
 
 - 缺点：跨域实现相对比较麻烦，安全性也有待探讨。因为JWT令牌返回到页面中，可以使用js获取到，如果遇到XSS攻击令牌可能会被盗取，在JWT还没超时的情况下，就会被获取到敏感数据信息。 
 
+- 对于安全问题：
 
+  对于敏感的api接口，需使用https 。https是在http超文本传输协议加入SSL层，它在网络间通信是加密的，所以需要加密证书。采用https 或者 代码层面也可以做安全检测，比如ip地址发生变化，MAC地址发生变化等等，可以要求重新登录
 
 ## 其他
 
@@ -278,4 +301,5 @@ $.ajax({
 - [使用JWT实现单点登录（完全跨域方案）*](https://blog.csdn.net/weixin_42873937/article/details/82460997)
 - [SpringBoot+Security+JWT基础](https://www.jianshu.com/p/6e4371d74248)
 - [SpringBoot集成JWT实现token验证](https://www.jianshu.com/p/e88d3f8151db)
-- [JWT的使用流程 *](https://blog.csdn.net/shmely/article/details/85915044)
+- [JWT的使用流程](https://blog.csdn.net/shmely/article/details/85915044)
+- [掌握基于JWT实现的Token身份认证](https://segmentfault.com/a/1190000021224288)
