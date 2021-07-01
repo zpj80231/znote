@@ -70,6 +70,7 @@ module.exports = {
                 'backend/CountDownLatch',
                 'backend/zookeeper',
                 'backend/分布式系统概述',
+                'backend/API网关概述',
             ]
         },
         {
