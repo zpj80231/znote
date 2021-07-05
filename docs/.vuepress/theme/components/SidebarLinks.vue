@@ -81,7 +81,7 @@ export default {
       let anchors = [].slice.call(document.querySelectorAll(AHL_HEADER_ANCHOR_SELECTOR))
                       .filter(anchor => decodeURIComponent(this.$route.hash) == decodeURIComponent(anchor.hash))
       if(anchors == null || anchors.length<1 || anchors[0].offsetTop == undefined) return
-     
+
       setTimeout(function(){
         window.scrollTo(0, anchors[0].offsetTop + 170)
       },300)
@@ -101,11 +101,11 @@ export default {
       let scrollTop = siderbarScroll.scrollTop
       let bottomVisible = (offsetBottom <= viewPortHeight + scrollTop)
       if (!bottomVisible) {
-        siderbarScroll.scrollTop = (offsetBottom + 5 - viewPortHeight)
+        siderbarScroll.scrollTop = (offsetBottom + 120 - viewPortHeight)
       }
       let topVisible = (offsetTop >= scrollTop)
       if (!topVisible) {
-        siderbarScroll.scrollTop = (offsetTop - 5)
+        siderbarScroll.scrollTop = (offsetTop - 120)
       }
     },
 
