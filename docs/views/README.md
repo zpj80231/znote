@@ -103,23 +103,7 @@ isShowComments: true
 	    margin-top: -10px;
 	    //padding-left: 26%;
 	}
-
-	/* #category {
-		width:100px;
-		height:100px;
-		float: right;
-		border-radius: 25%;
-		background:#ffff0059;
-		transition:width 2s;
-		-moz-transition:width 2s;
-		-webkit-transition:width 2s;
-		-o-transition:width 2s;
-	}
-
-	#category:hover {
-		width:300px;
-	} */
-
+	
 	#category {
 		width:100px;
 		height:100px;
@@ -151,7 +135,6 @@ isShowComments: true
 		-webkit-transition:width 2s, height 2s, -webkit-transform 2s; /* Safari and Chrome */
 		-o-transition:width 2s, height 2s, -o-transform 2s; /* Opera */
 	}
-	
 	#tag:hover {
 		width:100px;
 		height:100px;
@@ -162,11 +145,10 @@ isShowComments: true
 	}
 	
 	#category p,#tag p {
-		    margin: 0;
-		    padding-top: 35px;
-		    padding-left: 15px;
-		    /*padding-right: 15px;*/
-		    font-size: 15px;
+        margin: 0;
+        line-height: 100px;
+        text-align: center;
+        font-size: 15px;
 	}
 	
 	#fj,#se {
@@ -189,43 +171,24 @@ isShowComments: true
 		#se {
 			font-size: 13px !important;
 		}
-		#category {
-			width:100px;
-			height:100px;
-			float: right;
-			background:#ffff0059;
-			transition:width 2s, height 2s;
-			-moz-transition:width 2s, height 2s, -moz-transform 2s; /* Firefox 4 */
-			-webkit-transition:width 2s, height 2s, -webkit-transform 2s; /* Safari and Chrome */
-			-o-transition:width 2s, height 2s, -o-transform 2s; /* Opera */
+		#category,#tag {
+		    margin: 3% 0;
+			width:80px;
+			height:80px;
 		}
-		#category:hover {
-			width:100px;
-			height:100px;
-			transform:rotate(360deg);
-			-moz-transform:rotate(360deg); /* Firefox 4 */
-			-webkit-transform:rotate(360deg); /* Safari and Chrome */
-			-o-transform:rotate(360deg	); /* Opera */
+		#category:hover,#tag:hover {
+			width:80px;
+			height:80px;
 		}
+		#category p,#tag p {
+		    line-height: 80px;
+            font-size: 14px;
+        }
 	}
 	
-	@media screen and (max-width: 360px){
-		#fj {
-			font-size: 12px !important;
-			margin-top: 28px;
-		}
-		#se {
-			font-size: 12px !important;
-		}
-	}
 	@media screen and (max-width: 320px){
-		#fj {
-			font-size: 12px !important;
-			margin-top: 26px;
-		}
-		#se {
-			font-size: 12px !important;
-			margin-top: -10px;
+		#fj,#se {
+			font-size: 10px !important;
 		}
 	}
 </style>
