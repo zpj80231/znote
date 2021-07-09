@@ -13,7 +13,7 @@ module.exports = [
             }, {
                 text: 'Common sites🎈',
                 items: [{
-                    text: '友 链',
+                    text: '✔ 友 链 →',
                     link: '/other/friends',
                 }, {
                     text: 'Java SE API Documentation',
