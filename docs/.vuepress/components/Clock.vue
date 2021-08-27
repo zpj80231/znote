@@ -40,7 +40,7 @@
 	.wrap {
       width: 100%;
       min-height: 10vh;
-      background: #fff;
+      /*background: #fff;*/
       display: flex;
       justify-content: center;
       align-items: center;
