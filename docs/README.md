@@ -91,13 +91,19 @@ footer: MIT Licensed | Copyright © 2018-present Evan You
     width: 100%;
     height: 200px;
     min-height: 10vh;
-    background: transparent none repeat scroll!important;
     position: fixed;
     top: -120%;
     left: -1%;
+    background: url(https://img.shields.io/github/stars/zpj80231/znote?style=social) right,url(https://img.shields.io/github/forks/zpj80231/znote?style=social) right;
+    background-repeat: no-repeat, no-repeat;
+    background-position-y: 20%, 20%;
+    background-position-x: 86%, 98%;
 }
 
 @media screen and (max-width: 780px) and (min-width: 541px){
+  .wrap {
+    background: none;
+  }
   .clock {
     max-width: 230px !important;
     max-height: 230px !important;
@@ -109,6 +115,9 @@ footer: MIT Licensed | Copyright © 2018-present Evan You
 }
 
 @media screen and (max-width: 540px) and (min-width: 481px){
+  .wrap {
+    background: none;
+  }
   .clock {
     max-width: 200px !important;
     max-height: 200px !important;
@@ -124,6 +133,7 @@ footer: MIT Licensed | Copyright © 2018-present Evan You
   .wrap {
     top:-107%;
     transform: scale(0.68,0.58);
+    background: none;
   }
   .home img {    
     margin: 24% auto -6% auto !important;
@@ -147,17 +157,19 @@ footer: MIT Licensed | Copyright © 2018-present Evan You
   margin-top: 12%;
   transition: all 2s;
 }
-.wrap {
-  transition: all 2s;
-}
 .clock:hover {
   transform: scale(0.55) !important;
+  transition: all 2s;
+}
+/*
+.wrap {
   transition: all 2s;
 }
 .wrap:hover {
   transform: scale(1.05) !important;
   transition: all 2s;
 }
+*/
 
 </style>
 
