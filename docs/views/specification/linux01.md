@@ -21,6 +21,17 @@ publish: true
 
 自我备份：[Xshell + Xftp（已破解）](https://note.youdao.com/web/#/file/WEB9a8de91346f2b4dbb81dd5308c02352d/default/WEB07643efa9317a66ad0f564022e4aa0cb/ )
 
+## 文件内容查找
+
+```shell
+# 查找文件夹下或某个文件包含某字符的所有文件
+# -r 是递归查找
+# -n 是显示行号
+grep -rn "message" ./
+# 实时显示日志记录
+tail -100f a.log
+```
+
 ## 切换目录
 
 ```shell
