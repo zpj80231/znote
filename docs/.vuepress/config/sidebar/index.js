@@ -71,6 +71,7 @@ module.exports = {
                 'backend/zookeeper',
                 'backend/分布式系统概述',
                 'backend/API网关概述',
+                'backend/spring-security-01',
             ]
         },
         {
@@ -85,7 +86,7 @@ module.exports = {
                 'essay/20200301',
                 'essay/20200703',
                 'essay/20200715',
-                'essay/20200813song',
+                'essay/20200813',
                 'essay/20201012',
                 'essay/20201119',
             ]
