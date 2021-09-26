@@ -4,10 +4,10 @@ date: 2017-05-02
 sidebar: true
 sidebarDepth: 5
 tags:
-- "开发规范"
+- 开发规范
 - Java
 categories:
-- "后端"
+- 规范 Standard
 isShowComments: true
 ---
 
