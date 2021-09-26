@@ -2,9 +2,9 @@
 title: vuepress插件：`<Boxx/>`
 date: 2019-11-17 15:53:26
 tags:
-- "vuepress"
+- vuepress
 categories:
-- "前端"
+- 前端 Front-end
 isShowComments: false
 ---
 

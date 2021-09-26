@@ -3,9 +3,9 @@ title: 关于Vue的学习
 catalog: true
 date: 2019-05-12 13:59:44
 tags: 
-- 'Vue'
+- Vue
 categories:
-- '前端'
+- 前端 Front-end
 isShowComments: false
 ---
 
