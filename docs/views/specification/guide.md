@@ -4,7 +4,7 @@ date: 2020-03-26
 tags:
  - vuepress
 categories:
- - 前端
+ - 规范 Standard
 isShowComments: true
 sidebar: false
 publish: true
