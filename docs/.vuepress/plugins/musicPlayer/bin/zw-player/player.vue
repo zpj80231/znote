@@ -79,7 +79,7 @@
                     <p class="music_title">{{musicTitle}}</p>
                     <p class="music_intro">歌手: {{musicName}}</p>
                     <ul class="music_words">
-                        <div class="music_words_box" :style="{top:wordsTop+'px'}">  
+                        <div class="music_words_box" :style="{top:wordsTop+'px'}">
                             <li v-for="(item,index) in musicWords" class="music_word" :class="{word_highlight:wordIndex==index}">{{item}}</li>
                         </div>
                     </ul>
@@ -101,7 +101,7 @@
             </video>
         </div>
     </div>
-    
+
 </template>
 <script>
 // var jsdom = require('jsdom').jsdom;
@@ -161,10 +161,10 @@ export default {
             listButtonActiveIndex:-1,
             thisListPage:1,
             musicTypeList:[
-                {name:'热歌榜',id:1},
-                {name:'新歌榜',id:0},
-                {name:'飙升榜',id:3},
-                {name:'嘻哈榜',id:18},
+                {name:'热歌榜',id:3778678},
+                {name:'新歌榜',id:3779629},
+                {name:'飙升榜',id:19723756},
+                {name:'抖音榜',id:2250011882},
                 {name:'我的单曲',id:myMusicId},
                 {name:'My Songs',id:-1}
             ],
@@ -206,7 +206,7 @@ export default {
         thisMusicList(){
             return [...this.musicList].splice((this.thisListPage-1)*10,10);  //分页
         },
-        
+
     },
     watch: {
         musicSearchVal(){
@@ -248,7 +248,7 @@ export default {
                 }else{
                     this.myMusicList.push(res.data.songs[0]);
                     //提示已经添加进去
-                    
+
                 }
                 this.MusicAlert('添加成功');
             })
@@ -274,7 +274,7 @@ export default {
                 this.thisListPage++;
             }
         },
-        ListPlay(id){   
+        ListPlay(id){
             if(this.thisMusicIndex!=id){
                 this.thisMusicIndex=id>this.musicList.length-1 ? 0 : id;
                 this._getInfo();
@@ -315,7 +315,7 @@ export default {
                     }else{//自定义库没有歌曲 提示需要搜索才可以添加
                         this.MusicAlert('没有歌曲,需要自己添加');
                     }
-                    
+
                 }else{
                     if(myMusicId === id)
                         getMyMusic(id).then((res)=>{this.getMusicDetail(res, id)})
@@ -349,7 +349,7 @@ export default {
                         }
                         this.MusicAlert(`${this.musicList[this.thisMusicIndex].name}因为一些原因不能播放`);
                         this.ListPlay(nextIndex);//寻找下一首歌  直到找到
-                        
+
                         //提示这首歌不能放
                     }else{
                         //遍历完没有找到
@@ -369,7 +369,7 @@ export default {
                         if(!res.data.nolyric){
                             let info=this.Cut(res.data.lrc.lyric);
                             this.musicWords=info.wordArr;
-                            this.wordsTime=info.timeArr;  
+                            this.wordsTime=info.timeArr;
                         }
                     })
                     getHotTalk(this.musicList[this.thisMusicIndex].id).then((res)=>{
