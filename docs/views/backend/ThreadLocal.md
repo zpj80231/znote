@@ -17,6 +17,10 @@ isShowComments: false
 
 - 每个线程需要有自己单独的实例
 - 实例需要在多个方法中共享，但不希望被多线程共享
+- 线程间数据隔离，数据库连接，Session会话管理。
+
+每个线程都对应一个ThreadLocalMap, 而Threadlocal负责访问和维护ThreadLocalMap。
+set()方法就是把Threadlocal插入当前Thread维护的ThreadLocalMap中，如果你在线程1里面去set()，那么你在线程2里面去获取的时候，它取得是线程2的ThreadLocalMap，但是线程2里面的ThreadLocalMap并没有插入ThreadLocal。
 
 ## 简介
 
