@@ -72,7 +72,7 @@ isShowComments: true
 
 <div id='category'>
 
-[【分类】](/categories/后端/)
+[【分类】](/categories/后端%20Back-end/)
 
 </div>
 
@@ -155,6 +155,7 @@ isShowComments: true
         }
     }
     .list{
+        display: none;
         border: 1px solid #999;
         /*margin: 20px auto;*/
         position: relative;
