@@ -239,7 +239,7 @@ isShowComments: true
     }
 	
 	#fj,#se {
-		margin-top: 27px;
+		margin-top: 32px;
 	}
 	
 	@media screen and (max-width: 960px){
@@ -254,11 +254,7 @@ isShowComments: true
 		.list {
 		    margin: auto;
 		}
-		#fj {
-			font-size: 13px !important;
-			margin-top: 28px;
-		}
-		#se {
+		#fj,#se {
 			font-size: 13px !important;
 		}
 		#category,#tag {
