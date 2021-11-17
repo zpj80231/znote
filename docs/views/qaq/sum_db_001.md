@@ -40,7 +40,17 @@ isShowComments: false
 
 :::
 
-::: details 4. 左外连接，右外连接，说一下?
+::: details 4. delete，drop，truncate 区别？
+
+delete，drop，truncate 都有删除表的作用，区别在于：
+
+- delete 和 truncate 仅仅删除表数据，drop 连表数据和表结构一起删除，打个比方，delete 是单杀，truncate 是团灭，drop 是把电脑摔了。
+- delete 是 DML 语句，操作完以后如果没有不想提交事务还可以回滚，truncate 和 drop 是 DDL 语句，操作完马上生效，不能回滚，打个比方，delete 是发微信说分手，后悔还可以撤回，truncate 和 drop 是直接扇耳光说滚，不能反悔。
+- 执行的速度上，drop>truncate>delete，打个比方，drop 是神舟火箭，truncate 是和谐号动车，delete 是自行车。
+
+:::
+
+::: details 5. 左外连接，右外连接，说一下?
 
 - 左外连接：from 原表 left join 新表 on 关联关系<br/>
   `原表和新表能够关联的数据+无法通过关联关系关联到原表的数据`
@@ -50,13 +60,13 @@ isShowComments: false
 
 :::
 
-::: details 5. sql语句中怎么判断一个字段是不是空
+::: details 6. sql语句中怎么判断一个字段是不是空
 
 与空判断使用`  is null `或者` is not null `
 
 :::
 
-::: details 6. 数据源、数据库连接池、DBCP三者的关系？
+::: details 7. 数据源、数据库连接池、DBCP三者的关系？
 
 1. **数据源**：是连接数据库的一个<u>标准</u>
 2. **数据库**：连接池是实现数据源的一种<u>解决方案</u>
