@@ -72,6 +72,7 @@ module.exports = {
                 'backend/分布式系统概述',
                 'backend/API网关概述',
                 'backend/spring-security-01',
+                'backend/SchedulingConfigurer',
             ]
         },
         {
