@@ -1,5 +1,5 @@
 ---
-title: "Redis终结"
+title: Redis - 终结
 date: 2019-10-10
 tags: 
 - Redis

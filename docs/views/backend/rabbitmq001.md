@@ -1,5 +1,5 @@
 ---
-title: "RabbitMQ基础"
+title: RabbitMQ - 基础
 date: 2019-08-17
 tags: 
 - RabbitMQ
