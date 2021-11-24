@@ -1,5 +1,5 @@
 ---
-title: "RabbitMQ进阶"
+title: RabbitMQ - 进阶
 date: 2019-09-21
 tags: 
 - RabbitMQ
