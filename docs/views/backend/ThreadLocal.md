@@ -1,11 +1,11 @@
 ---
-title: ThreadLocal简介
+title: 线程池 - 简介
 date: 2020-03-31
 tags:
-- "多线程"
-- Java
+  - 多线程
+  - Java
 categories:
-- 后端 Back-end
+  - 后端 Back-end
 isShowComments: false
 ---
 
