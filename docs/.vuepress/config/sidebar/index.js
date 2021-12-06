@@ -74,6 +74,7 @@ module.exports = {
                 'backend/API网关概述',
                 'backend/spring-security-01',
                 'backend/SchedulingConfigurer',
+                'backend/ThreadTopCPU',
             ]
         },
         {
