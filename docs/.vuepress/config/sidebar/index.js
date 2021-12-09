@@ -26,6 +26,7 @@ module.exports = {
                 'specification/linux01',
                 'specification/objectModel',
                 'specification/提交规范',
+                'specification/javaNamingConvention',
             ]
         },
         {
