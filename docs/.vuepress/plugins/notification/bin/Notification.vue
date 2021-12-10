@@ -46,13 +46,13 @@
             this.setRandomShow()
         },
         methods: {
-            //点击关闭按钮后，整体通知区域5min内不再显示
+            //点击关闭按钮后，整体通知区域15min内不再显示
             closeNote() {
                 this.visible = false
                 this.closeBtn = true
                 setTimeout(() => {
                     this.closeBtn = false
-                }, (5*60*1000))
+                }, (15*60*1000))
             },
             check() {
                 let flag = navigator.userAgent.match(/(phone|pod|iPhone|iPod|ios|Android|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)
