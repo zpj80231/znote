@@ -1,0 +1,160 @@
+---
+title: 如何在jUnit4中应用两个@RunWith？
+date: 2021-08-11
+tags:
+- 单员测试
+- Java
+categories:
+- 后端 Back-end
+isShowComments: true
+---
+
+<Boxx/>
+
+比如正在使用 spring boot starter test 来编写 JUnit 测试用例。但很想使用 JunitParamrunner，它有助于为参数化测试传递文件。
+
+基本上它从文件中逐行读取数据，并为每一行调用一个测试用例。
+
+问题是同时使用需要通过@RunWith 和 SpringJUnit4ClassRunner 以及 JUnitParamsRunner。
+
+那需要在junit中@RunWith(SpringJUnit4ClassRunner.class)和@RunWith(Parameterized. class)这个要怎么写呢？
+
+<!-- more -->
+
+[[toc]]
+
+## 解决方案
+
+其实对于@RunWith(SpringJUnit4ClassRunner.class)，无非就是让测试运行于Spring的测试环境。
+
+而我们可以在测试类的构造函数中初始化上下文`TestContextManager`就相当于集成了spring测试环境，也相当于代替了`@RunWith(SpringJUnit4ClassRunner.class)`注解。
+
+1. 书写一个测试基类
+
+```java
+/**
+ * 测试基类，所有测试类都要继承此类
+ */
+@ContextConfiguration(locations="classpath: application-context.xml")
+//@RunWith(SpringJUnit4ClassRunner.class)
+public class BaseTest {
+
+    private TestContextManager testContextManager;
+
+    public ParametrizedTestWithSpring() throws Exception {
+        this.testContextManager = new TestContextManager(getClass());
+        this.testContextManager.prepareTestInstance(this);
+    }
+
+    @BeforeClass
+    public static void setUp() throws Exception {
+        URL url = BaseTest.class.getClassLoader().getResource("");
+        String path = url.getPath() = "../../../docker/config/";
+        System.setProperty("env.cfg", path);
+        System.setProperty("spring.profiles.active", "dev");
+    }
+}
+```
+
+2. 编写测试类，添加第二个@RunWith(Parameterized. class)
+
+```java
+@RunWith(Parameterized.class )
+public class Demo1ControllerTest extends BaseTest {
+    
+    private static final Logger logger = LoggerFactory.getLogger(Demo1ControllerTest.class);
+    // 测试参数
+    private String target;
+    // 预期返回结果
+    private String except;
+    @Autowired
+    private Demo1Controlle demo1Controller;
+
+    /**
+     * 测试案例集
+     */
+    @Parameters
+    public static Collection setParam() {
+       return Arrays.asList(new Object[][] { 
+           { "emplee_info", "empleeInfo" }, // 测试正常情况
+           { null, null }, // 测试null时处理情况
+           { "", "" }, // 测试空字符串的情况
+           { "employee_info", "EmployeeInfo" }, // 测试当首字母大写时的情况
+           { "employee_info_a", "employeeInfoA" }, // 测试当尾字母为大写时的情况
+           { "employee_a_info", "employeeAInfo" } // 测试多个相连字母大写时的情况
+       });
+    }
+
+    /**
+     * 参数化测试必须的构造函数
+     *
+     * @param except 期望的测试结果 ，对应参数集中的第一个参数
+     * @param target 测试数据，对应结果集中的第二个参数
+     */
+    public TestDemoParamter(String target, String except) {
+       this.except = except;
+       this.target = target;
+    }
+
+    @Test(timeout = 1000)
+    public void testParam(){
+        logger.info("入参：{}", target);
+        String except = demo1Controller.testParam();
+        logger.info("反参：{}", except);
+        Assert.assertEquals(except, target);
+    }
+}
+```
+
+## 知识扩展
+
+### @RunWith作用
+
+@RunWith 就是一个运行器：
+
+- @RunWith(JUnit4.class) 就是指用JUnit4来运行
+
+- @RunWith(SpringJUnit4ClassRunner.class), 让测试运行于Spring测试环境
+
+  此时需要搭配@ContextConfiguration 使用，Spring整合JUnit4测试时，使用注解引入多个配置文件
+
+- @RunWith(Suite.class) 的话就是一套测试集合
+
+@ContextConfiguration语法：
+
+- 单个文件
+
+  @ContextConfiguration(locations=“classpath：applicationContext.xml”)
+
+  @ContextConfiguration(classes = SimpleConfiguration.class)
+
+- 多个文件时，可用{}
+  
+  @ContextConfiguration(locations = { “classpath:spring1.xml”, “classpath:spring2.xml” })
+
+### 使用@RunWith 和@Parameters 进行参数化测试
+
+#### 什么是参数化
+
+- 怎么测试多分支？
+
+  如一个对考试分数进行评价的函数
+
+  返回值分别为“优秀，良好，一般，及格，不及格”
+
+  在编写测试的时候，如果编写 5 个测试方法，进而测试 5 种情况，是 一件很麻烦的事情。
+
+- 为了简化类似的测试，JUnit 提出了“参数化测试”的概念，只写一个测试函 数，把这若干种情况作为参数传递进去，一次性的完成测试。
+
+#### @Parameters：用于JUnit的参数化功能，用来标记准备数据的方法。
+
+注意：该方法需要满足一定的要求：
+
+1. 该方法必须为public static的
+2. 该方法返回值必须为java.util.Collection类型
+3. 该方法的名字不做要求
+4. 该方法没有参数
+5. 参数化测试必须有与之对应的构造函数
+
+具体demo实类如上的`Demo1ControllerTest`。
+
