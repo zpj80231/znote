@@ -2,7 +2,7 @@
 title: 如何在jUnit4中应用两个@RunWith？
 date: 2021-08-11
 tags:
-- 单员测试
+- 单元测试
 - Java
 categories:
 - 后端 Back-end
