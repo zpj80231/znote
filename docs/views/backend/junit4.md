@@ -151,9 +151,13 @@ public class Demo1ControllerTest extends BaseTest {
 注意：该方法需要满足一定的要求：
 
 1. 该方法必须为public static的
+
 2. 该方法返回值必须为java.util.Collection类型
+
 3. 该方法的名字不做要求
+
 4. 该方法没有参数
+
 5. 参数化测试必须有与之对应的构造函数
 
 具体demo实类如上的`Demo1ControllerTest`。
