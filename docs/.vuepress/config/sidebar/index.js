@@ -77,6 +77,7 @@ module.exports = {
                 'backend/spring-security-01',
                 'backend/SchedulingConfigurer',
                 'backend/ThreadTopCPU',
+                'backend/EasyExcel',
             ]
         },
         {
