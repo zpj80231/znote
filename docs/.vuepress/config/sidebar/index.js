@@ -27,6 +27,7 @@ module.exports = {
                 'specification/objectModel',
                 'specification/提交规范',
                 'specification/javaNamingConvention',
+                'specification/k8s基本命令与pod管理',
             ]
         },
         {
