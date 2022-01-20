@@ -36,6 +36,8 @@ isShowComments: true
 
 - 在互联网信息高速公路上​流浪。​。​
 
+<img src="https://ghchart.rshah.org/zpj80231" />
+
 ## 成熟标志
 
 - 爱您：[80231](/view/love.html)
