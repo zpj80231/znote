@@ -46,11 +46,35 @@ isShowComments: false
    ​		  (3)不具备自动容错和恢复功能，主机从机的宕机都会导致前端部分读写请求失败，需要等待机器重启或者手动切换前端的IP才能恢复	--- [更多](https://www.cnblogs.com/rzqz/p/7440249.html)
 
 ## redis提供的5中数据类型
-1. string	最大存储长度为512M
-2. list	(linkedlist)双向列表,分页
-3. hash  hashmap
-4. set 	hashset 	无序
-5. zset	treeset 	 有序
+
+![](https://img2018.cnblogs.com/blog/1289934/201906/1289934-20190621163930814-1395015700.png)
+
+1. ***string	最大存储长度为512M***
+
+   实战场景：
+   1) 缓存： 经典使用场景，把常用信息，字符串，图片或者视频等信息放到redis中，redis作为缓存层，mysql做持久化层，降低mysql的读写压力。
+   2) 计数器：redis是单线程模型，一个命令执行完才会执行下一个，同时数据可以一步落地到其他的数据源。
+   3) session：常见方案spring session + redis实现session共享
+   4) 原子计数器
+
+2. ***list	(linkedlist)双向列表***
+
+   实战场景：刷微博的下拉分页
+
+3. ***hash  hashmap***
+
+   实战场景：无，一般用到很少。
+
+4. ***set 	hashset 	无序***
+
+   实战场景：
+
+   1) 标签（tag）,给用户添加标签，或者用户给消息添加标签，这样有同一标签或者类似标签的可以给推荐关注的事或者关注的人。
+   2) 点赞，或点踩，收藏等，可以放到set中实现
+
+5. ***zset	treeset 	 有序***
+
+   实战场景：排行榜, 有序集合经典使用场景。
 
 ## redis使用场景
 1. 缓存  替数据库 MySQL Oracle 分担一部分压力
@@ -381,12 +405,12 @@ public class RedisServiceImpl implements RedisService {
 
 - 新增：数据库新增后，放到缓存中
 
-- 删除：删除缓存后，再删除数据库相应数据
+- 删除：删除数据库相应数据后删除缓存（或延时双删）
 
 - 查询：
 
 ![](/znote/img/backend/redis/缓存查询.png)
 
-- 更新：
+- 更新：一般是先跟新数据库，再删除缓存（或延时双删）
 
 ![](/znote/img/backend/redis/缓存更新.png)
