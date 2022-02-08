@@ -1,4 +1,4 @@
-name: "Dependabot Automerge - Action"
+name: Dependabot Automerge
 
 on:
   pull_request:
@@ -16,12 +16,12 @@ jobs:
           ignoreActions: worker,WIP
           checkInterval: 300
         env:
-          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: 'Automated dependency updates with dependabot'
         uses: pascalgn/automerge-action@v0.11.0
         if: steps.waitforstatuschecks.outputs.status == 'success'
         env:
           MERGE_LABELS: "update"
-          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           MERGE_DELETE_BRANCH: true
