@@ -22,8 +22,6 @@ isShowComments: true
 来自 [ZNOTE](https://zpj80231.gitee.io/znote/)
 :::
 
-<CanvasNest color="255,0,0" opacity='1'></CanvasNest>
-
 ## 一句话
 
 - Just do IT !    （翻译：我只是个搞 IT的！哭笑脸）
