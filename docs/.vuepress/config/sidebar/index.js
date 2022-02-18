@@ -80,9 +80,9 @@ module.exports = {
                 'backend/SchedulingConfigurer',
                 'backend/ThreadTopCPU',
                 'backend/EasyExcel',
-                'backend/java io模型',
-                'backend/SPI_JDKDubboSpring',
-                'backend/spring_application_json.md',
+                // 'backend/java_io模型',
+                // 'backend/SPI_JdkDubboSpring',
+                // 'backend/spring_application_json.md',
             ]
         },
         {
