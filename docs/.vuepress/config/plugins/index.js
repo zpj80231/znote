@@ -194,23 +194,23 @@ function getCardImgListDOM(dataList, row) {
         listDOM += `
       <div class="card-item ${ row ? 'row-' + row : '' }" >
         <div class="box-img">
-          <a href="${item.link}" target="_blank">
+          ${item.link ? `<a href="${item.link}" target="_blank">` : '' }
             <img src="${item.img}" class="no-zoom">
-          </a>
+          ${item.link ? `</a>` : '' }
         </div>
         <div class="box-info">
-          <a href="${item.link}" target="_blank">
+          ${item.link ? `<a href="${item.link}" target="_blank">` : '' }
             <p class="name">${item.name}</p>
             ${item.desc ? `<p class="desc">${item.desc}</p>` : ''}
-          </a>
+          ${item.link ? `</a>` : '' }
         </div>
         
         ${item.avatar || item.author
             ? `<div class="box-footer">
-              <a href="${item.link}" target="_blank">
+              ${item.link ? `<a href="${item.link}" target="_blank">` : '' }
                 ${item.avatar ? `<img src="${item.avatar}" class="no-zoom">` : ''}
                 ${item.author ? `<span>${item.author}</span>` : ''}
-              </a>
+              ${item.link ? `</a>` : '' }
             </div>`
             : ''
         }
