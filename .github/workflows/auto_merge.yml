@@ -1,15 +1,18 @@
-name: Dependabot Automerge
+name: Dependabot auto-merge
 
 on:
   pull_request:
 
+permissions:
+  pull-requests: write
+  contents: write
+
 jobs:
   worker:
     runs-on: ubuntu-latest
-
-    if: github.actor == 'dependabot[bot]'
+    if: ${{ github.actor == 'dependabot[bot]' }}
     steps:
-      - name: 'Wait for status checks'
+      - name: Wait for status checks
         id: waitforstatuschecks
         uses: WyriHaximus/github-action-wait-for-status@v1.2.0
         with:
@@ -17,11 +20,14 @@ jobs:
           checkInterval: 300
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: 'Automated dependency updates with dependabot'
-        uses: pascalgn/automerge-action@v0.11.0
-        if: steps.waitforstatuschecks.outputs.status == 'success'
+      - name: Dependabot metadata
+        id: metadata
+        uses: dependabot/fetch-metadata@v1.1.1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Enable auto-merge for Dependabot PRs
+        if: ${{ steps.metadata.outputs.update-type == 'version-update:semver-patch' }}
+        run: gh pr merge --auto --merge "$PR_URL"
         env:
-          MERGE_LABELS: "update"
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          MERGE_DELETE_BRANCH: true
+          PR_URL: ${{github.event.pull_request.html_url}}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
