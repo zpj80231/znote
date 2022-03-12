@@ -8201,10 +8201,10 @@ vuepress-plugin-nuggets-style-copy@^1.0.3:
   dependencies:
     clipboard "^2.0.4"
 
-vuepress-plugin-sitemap@2.3.0:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/vuepress-plugin-sitemap/-/vuepress-plugin-sitemap-2.3.0.tgz#4fc2573b62235ca80db237fe5e407a241067318b"
-  integrity sha512-ClEpb/sUpLbiFqRi885532EcfLdB8KQ7CSU4Q8VEsk95h7Vk/MpDsdptAKvDTstY/3Rxua2xFEx2dcjTjeF8Gw==
+vuepress-plugin-sitemap@2.3.1:
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/vuepress-plugin-sitemap/-/vuepress-plugin-sitemap-2.3.1.tgz#51298aca77a5de96396fdbd1103e1637dd61ae6a"
+  integrity sha512-n+8lbukhrKrsI9H/EX0EBgkE1pn85LAQFvQ5dIvrZP4Kz6JxPOPPNTQmZMhahQV1tXbLZQCEN7A1WZH4x+arJQ==
   dependencies:
     sitemap "^3.0.0"
 
