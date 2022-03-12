@@ -8187,10 +8187,10 @@ vuepress-plugin-copyright@^1.0.2:
   dependencies:
     "@shigma/stringify-object" "^3.3.0"
 
-vuepress-plugin-flowchart@1.4.3:
-  version "1.4.3"
-  resolved "https://registry.yarnpkg.com/vuepress-plugin-flowchart/-/vuepress-plugin-flowchart-1.4.3.tgz#1692807257c9ba02f764ced0caf930c627f65bdb"
-  integrity sha512-Vyhh2xiCvMoubwBBDdre5u2tekp3B0N9vGDxAbgHUJH5L6V1venq1pWsbhKi9Wmr2Pa/yOTq3se1ji2w/kDr+A==
+vuepress-plugin-flowchart@1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/vuepress-plugin-flowchart/-/vuepress-plugin-flowchart-1.5.0.tgz#42342767e643e5f9d56ae2e68f5d306224a717b4"
+  integrity sha512-mmLstal1v/S2h22wBYR51XIweqR2AMbQ+kDO44GswqtVfXODhfJLZX2D2oPwnx6x0lRMRkbnKUE8OVllcCizvg==
   dependencies:
     flowchart.js "^1.11.3"
 
