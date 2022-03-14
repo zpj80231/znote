@@ -1224,10 +1224,10 @@
   resolved "https://registry.yarnpkg.com/@vuepress-reco/vuepress-plugin-pagation/-/vuepress-plugin-pagation-1.6.0.tgz#c632aae1638ff9c67fe58c39ab617132be9eeecb"
   integrity sha512-QvmAqfbCnkvdLU0/yZWkFrL/PJgKhciB3FWgJu756FH66iqO/QKDPaZ1vlzI3RfYOIEwLEhPd1U9Rvt9ICaQtQ==
 
-"@vuepress-reco/vuepress-plugin-rss@1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@vuepress-reco/vuepress-plugin-rss/-/vuepress-plugin-rss-1.0.0.tgz#d08f0005ab6e75a9f88e2a832f1ced1f18832626"
-  integrity sha512-O55PPKUX3egKxXkdRtkKTfPRnz6lheGmsAPYs35a4xAAQDIlgVYjZNU+/j1Yu08X6+1lQmmfabcHJqhIcXzviw==
+"@vuepress-reco/vuepress-plugin-rss@1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@vuepress-reco/vuepress-plugin-rss/-/vuepress-plugin-rss-1.0.2.tgz#c52e1acccfea09ee7249673c6cc5d2768d51dc15"
+  integrity sha512-PgVTT689bTTUZYcDlTOplUb0yAceSXC6ZikPnzI8IXVsk1CfryKmxqHtoTf2tnZoWeL/wSW34EPVucpri/2bVw==
   dependencies:
     chalk "^2.4.1"
     fs-extra "^5.0.0"
