@@ -23,6 +23,6 @@
 		"vuepress-plugin-nuggets-style-copy": "^1.0.3",
 		"vuepress-plugin-sitemap": "2.3.1",
 		"vuepress-theme-reco": "1.6.11",
-		"whatwg-fetch": "3.0.0"
+		"whatwg-fetch": "3.6.2"
 	}
 }
