@@ -1365,19 +1365,13 @@
     register-service-worker "^1.7.0"
     workbox-build "^4.3.1"
 
-"@vuepress/plugin-register-components@1.2.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@vuepress/plugin-register-components/-/plugin-register-components-1.2.0.tgz#95aa0e0af94b2758b26ab98814c43b0f7bcd502b"
-  integrity sha512-C32b8sbGtDEX8I3SUUKS/w2rThiRFiKxmzNcJD996me7VY/4rgmZ8CxGtb6G9wByVoK0UdG1SOkrgOPdSCm80A==
+"@vuepress/plugin-register-components@1.9.7", "@vuepress/plugin-register-components@^1.4.0":
+  version "1.9.7"
+  resolved "https://registry.yarnpkg.com/@vuepress/plugin-register-components/-/plugin-register-components-1.9.7.tgz#0234f887b32c1d836fa68cdd06d7e851397fd268"
+  integrity sha512-l/w1nE7Dpl+LPMb8+AHSGGFYSP/t5j6H4/Wltwc2QcdzO7yqwC1YkwwhtTXvLvHOV8O7+rDg2nzvq355SFkfKA==
   dependencies:
-    "@vuepress/shared-utils" "^1.2.0"
-
-"@vuepress/plugin-register-components@^1.4.0":
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/@vuepress/plugin-register-components/-/plugin-register-components-1.4.0.tgz#0dafefd3baed6cc50b53f9826e84b25d83fed763"
-  integrity sha512-HmSzCTPVrlJJ8PSIXAvh4RkPy9bGmdrQuAXAtjiiq5rzBjL3uIg2VwzTrKDqf7FkCKs4lcRAEuNxB70bH6tddA==
-  dependencies:
-    "@vuepress/shared-utils" "^1.4.0"
+    "@vuepress/shared-utils" "1.9.7"
+    "@vuepress/types" "1.9.7"
 
 "@vuepress/plugin-search@^1.4.0":
   version "1.4.0"
