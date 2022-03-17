@@ -24,7 +24,14 @@ module.exports = {
     }],
     ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }],
     ['meta', { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }],
-    ['link', { rel: 'apple-touch-icon', href: 'https://infinitypro-img.infinitynewtab.com/custom-icon/8001de1jd3n68lbfnxxt564xvb0vl5.png?imageMogr2/thumbnail/240x/format/webp/blur/1x0/quality/100|imageslim' }],
+    // 适用于 Retina 屏的 iPad
+    ['link', { rel: 'apple-touch-icon-precomposed', sizes: '144x144', href: '/vuepress/apple-touch-icon-precomposed-144x144.png' }],
+    // 适用于 Retina 屏的 iPhone
+    ['link', { rel: 'apple-touch-icon-precomposed', sizes: '120x120', href: '/vuepress/apple-touch-icon-precomposed-120x120.png' }],
+    // 适用于 Retina 屏的 iPad
+    ['link', { rel: 'apple-touch-icon-precomposed', sizes: '72x72', href: '/vuepress/apple-touch-icon-precomposed-72x72.png' }],
+    // 适用于非 Retina 屏的 iPhone
+    ['link', { rel: 'apple-touch-icon-precomposed', sizes: '57x57', href: '/vuepress/apple-touch-icon-precomposed-57x57.png' }],
     ["script", {
       "language": "javascript",
       "type": "text/javascript",
@@ -38,7 +45,7 @@ module.exports = {
   ],
 
   //主题配置
-  theme: 'reco',
+  // theme: '',
   themeConfig: {
     nav,
     // sidebar: 'auto',// 自动形成侧边导航
