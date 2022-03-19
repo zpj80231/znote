@@ -64,7 +64,7 @@
     animation-delay:0.8s;
   }
   .title
-    margin 15rem auto 1rem
+    margin 12rem auto 1rem
     text-align center
     color $textColor
     color var(--text-color)
