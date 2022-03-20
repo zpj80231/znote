@@ -14,6 +14,7 @@
 		"jquery": "^3.6.0",
 		"js-yaml": "^3.14.0",
 		"moment": "^2.29.1",
+		"vue-server-renderer": "^2.6.11",
 		"vuepress": "^1.9.7",
 		"vuepress-plugin-auto-sidebar": "^1.5.0",
 		"vuepress-plugin-boxx": "0.0.7",
