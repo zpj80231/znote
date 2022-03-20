@@ -77,12 +77,13 @@
 import md5 from 'md5'
 import Navbar from '@theme/components/Navbar'
 import Sidebar from '@theme/components/Sidebar'
+import LoadingPage from '@theme/components/LoadingPage'
 import { resolveSidebarItems } from '@theme/helpers/utils'
 import Password from '@theme/components/Password'
 import { setTimeout } from 'timers'
 
 export default {
-  components: { Sidebar, Navbar, Password },
+  components: { Sidebar, Navbar, LoadingPage, Password },
 
   props: {
     sidebar: {
