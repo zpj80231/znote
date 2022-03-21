@@ -1,14 +1,14 @@
 {
-  "name": "VuePressThemeReco",
-  "short_name": "VPTR",
+  "name": "znote",
+  "short_name": "znote",
   "icons": [
     {
-      "src": "/icon_vuepress_reco.png",
+      "src": "/vuepress/android-chrome-192x192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/icon_vuepress_reco.png",
+      "src": "/vuepress/android-chrome-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
