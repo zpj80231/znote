@@ -9,13 +9,11 @@ module.exports = {
   title: "znote",
   description: '荷尽已无擎雨盖，菊残犹有傲霜枝。',
   head: [
-    ['link', {
-      rel: 'icon',
-      href: 'https://infinitypro-img.infinitynewtab.com/custom-icon/8001de1jd3n68lbfnxxt564xvb0vl5.png?imageMogr2/thumbnail/240x/format/webp/blur/1x0/quality/100|imageslim'
-    }],
-    ['meta', {name: 'viewport', content: 'width=device-width,initial-scale=1,user-scalable=no'}],
-    ['meta', {name: 'renderer', content: 'webkit'}],
-    ['meta', {name: 'referrer', content: 'never'}],
+    ['link', { rel: 'icon', href: '/logo.png' }],
+    ['link', { rel: 'manifest', href: '/manifest.json' }],
+    ['meta', { name: 'viewport', content: 'width=device-width,initial-scale=1,user-scalable=no'}],
+    ['meta', { name: 'renderer', content: 'webkit'}],
+    ['meta', { name: 'referrer', content: 'never'}],
     ['meta', {
       'data-draft-node': 'block',
       'data-draft-type': 'table',
@@ -24,14 +22,9 @@ module.exports = {
     }],
     ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }],
     ['meta', { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }],
-    // 适用于 Retina 屏的 iPad
-    ['link', { rel: 'apple-touch-icon-precomposed', sizes: '144x144', href: '/vuepress/apple-touch-icon-precomposed-144x144.png' }],
-    // 适用于 Retina 屏的 iPhone
-    ['link', { rel: 'apple-touch-icon-precomposed', sizes: '120x120', href: '/vuepress/apple-touch-icon-precomposed-120x120.png' }],
-    // 适用于 Retina 屏的 iPad
-    ['link', { rel: 'apple-touch-icon-precomposed', sizes: '72x72', href: '/vuepress/apple-touch-icon-precomposed-72x72.png' }],
-    // 适用于非 Retina 屏的 iPhone
-    ['link', { rel: 'apple-touch-icon-precomposed', sizes: '57x57', href: '/vuepress/apple-touch-icon-precomposed-57x57.png' }],
+    ['link', { rel: 'apple-touch-icon', href: '/vuepress/apple-touch-icon-152x152.png' }],
+    ['meta',{ name: 'msapplication-TileImage', content: '/vuepress/msapplication-icon-144x144.png'}],
+    ['meta', { name: 'msapplication-TileColor', content: '#000000' }],
     ["script", {
       "language": "javascript",
       "type": "text/javascript",
