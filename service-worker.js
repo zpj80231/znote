@@ -27,11 +27,11 @@ self.addEventListener('message', (event) => {
 self.__precacheManifest = [
   {
     "url": "404.html",
-    "revision": "db5b2afaab9a37a7b900894eaffbc716"
+    "revision": "431630589c1dba16e42a5dc51b713ef1"
   },
   {
     "url": "about/index.html",
-    "revision": "744ba2f351d2de497844887927f9034f"
+    "revision": "bd572d01307da310cfbf1cc48b42d808"
   },
   {
     "url": "assets/css/0.styles.7cb2793f.css",
@@ -446,8 +446,8 @@ self.__precacheManifest = [
     "revision": "0f2ca351ffaa24217e989251a604e2cf"
   },
   {
-    "url": "assets/js/app.282112a3.js",
-    "revision": "ce08adf34c84186f573b54326718f7b9"
+    "url": "assets/js/app.3109ec14.js",
+    "revision": "d74d35a4c2a1f5692b917cf0ca57f940"
   },
   {
     "url": "assets/js/vendors~flowchart.d45f6a23.js",
@@ -455,43 +455,43 @@ self.__precacheManifest = [
   },
   {
     "url": "categories/index.html",
-    "revision": "3f2aba7072a6253e5d2ac2ac34a07305"
+    "revision": "3bc6bd9f5fb7e2fa39187b2053c8cf73"
   },
   {
     "url": "categories/前端 Front-end/index.html",
-    "revision": "35528a6dae011b00c015f1b7574ef60a"
+    "revision": "2d9bd282100e469aaa3cf1925ee0aac7"
   },
   {
     "url": "categories/后端 Back-end/index.html",
-    "revision": "442d672e4c14ee8b66bfa7e12c0e13c9"
+    "revision": "693f33dede3e66aca414720f3f0c8560"
   },
   {
     "url": "categories/后端 Back-end/page/2/index.html",
-    "revision": "b710a7f321d1626a8feca4fd99cded52"
+    "revision": "3edb39f06ac868e5bff664c185942ec4"
   },
   {
     "url": "categories/后端 Back-end/page/3/index.html",
-    "revision": "c7904ebc9a806a54044a77e9b610a0dc"
+    "revision": "48e9c878000f4923e593cbda93efb8fe"
   },
   {
     "url": "categories/后端 Back-end/page/4/index.html",
-    "revision": "fda478b4f3095758796d55870784e974"
+    "revision": "dd5fd81e866ae6476f569dcae647c4c5"
   },
   {
     "url": "categories/知识晶体 Q&A/index.html",
-    "revision": "ac0eb12efea00fd96678ec63441a3081"
+    "revision": "4b32870944e932d75765e4c1fa66ffa1"
   },
   {
     "url": "categories/规范 Standard/index.html",
-    "revision": "2c007b7de1dac58e509ab4f7c37ce187"
+    "revision": "473faa3e2c5020b43699bed80cc14bd8"
   },
   {
     "url": "categories/随笔 Essay/index.html",
-    "revision": "5bcc97c2b4a88faee9ae393eeb4ceff6"
+    "revision": "8fea167ad1165d73e70accea1683ad7c"
   },
   {
     "url": "categories/随笔 Essay/page/2/index.html",
-    "revision": "0424150d7baa101e9854cc159fabbbc1"
+    "revision": "50f9a81720c4d8e687b94263d4d81ac5"
   },
   {
     "url": "iconfont/iconfont.css",
@@ -855,175 +855,179 @@ self.__precacheManifest = [
   },
   {
     "url": "index.html",
-    "revision": "2cebc81959148a9702a047ec6beca2c8"
+    "revision": "328da300588811deb2025d102edfef83"
   },
   {
     "url": "js/MouseClickEffect.js",
     "revision": "f1e5bfcef7a60110c9b56f2ad16691d6"
   },
   {
+    "url": "logo.png",
+    "revision": "bd08a101965b49db7000f7d97fae0685"
+  },
+  {
     "url": "other/friends.html",
-    "revision": "caecc13e7ac9031b32f93ffd3e061f85"
+    "revision": "aa62d696554ed4e58f8e93ae47ee18a3"
   },
   {
     "url": "other/project.html",
-    "revision": "45c36fa1899e4ee37a2127b9e2276e77"
+    "revision": "4fd2846b4e6af8c03c53f3cb47760e01"
   },
   {
     "url": "tag/Docker/index.html",
-    "revision": "7f5b22ee77c2254fad2fdf3831ca78d2"
+    "revision": "dee7e1eab6a6934f9d199a9476d0cc5d"
   },
   {
     "url": "tag/ECharts/index.html",
-    "revision": "acd3a914239620f87dadf1d05402924f"
+    "revision": "89cca2709660d79c649475f530ddaffe"
   },
   {
     "url": "tag/git/index.html",
-    "revision": "46990dd0473ac20c3d9f9778ce142fc4"
+    "revision": "e5b09c657cb2e1aa46813a758e35c0a7"
   },
   {
     "url": "tag/index.html",
-    "revision": "1111f2785979c10190dd3d452e4d860c"
+    "revision": "87b9d989be50937060d7c23c2eac759e"
   },
   {
     "url": "tag/IO模型/index.html",
-    "revision": "b9e9f09d911b081ba7f03bcc08e9b57d"
+    "revision": "04004f615b156d61b4ad5941c97b50ef"
   },
   {
     "url": "tag/Java/index.html",
-    "revision": "c923aa8687c977214d98a28e5882025c"
+    "revision": "125cd27c6d5166261bcde29777e6abf7"
   },
   {
     "url": "tag/Java/page/2/index.html",
-    "revision": "d39724f534445653394a51020f67a74d"
+    "revision": "3224ae93ce8e75b57c8e648bbf8a2afa"
   },
   {
     "url": "tag/JavaScript/index.html",
-    "revision": "5972b007ddc4b2eb8349dec0e5016943"
+    "revision": "c4fc41364d6fb22646b12e1c820de578"
   },
   {
     "url": "tag/json/index.html",
-    "revision": "630b058e4c1c777b59645a184ea3d5cc"
+    "revision": "7f172dc6a756a6283112aae52d5c50ab"
   },
   {
     "url": "tag/jvm/index.html",
-    "revision": "291a9f668c3f30dde759c6db7af864d3"
+    "revision": "e7e34576a59a44e945c15eb303313c6a"
   },
   {
     "url": "tag/jwt/index.html",
-    "revision": "0199aa27999ad438f904979a95fb387b"
+    "revision": "e75231b7b3af04b640294363101e267a"
   },
   {
     "url": "tag/k8s/index.html",
-    "revision": "3dcbeb298fca74f37f8f863bd61b2571"
+    "revision": "335147985f63ed875fbe91297f0d84e5"
   },
   {
     "url": "tag/linux/index.html",
-    "revision": "f348a1133d8403abec4d5142f8a152bd"
+    "revision": "9f54218763795a1a770a1815f8b4ebe2"
   },
   {
     "url": "tag/MyBatis/index.html",
-    "revision": "bc06a8efdbbea5efaa721268dc8aa922"
+    "revision": "dd1869158133aa53bb5a2ee7e894c5e2"
   },
   {
     "url": "tag/pdf/index.html",
-    "revision": "90e30b3078239c67c7efbaa81f7740be"
+    "revision": "28b4144503c27a0d4ab6c9e62e92632f"
   },
   {
     "url": "tag/poi/index.html",
-    "revision": "fabc22c6cd6e071948aa9602d0af7549"
+    "revision": "35c99ca8b8f3cd3113d32943ef777567"
   },
   {
     "url": "tag/RabbitMQ/index.html",
-    "revision": "31eff8ea604c28281b802de2a9754903"
+    "revision": "4775e4de4a91efc391eab813605ed773"
   },
   {
     "url": "tag/Redis/index.html",
-    "revision": "075e79082c653a829c48229daa16c430"
+    "revision": "489ae357afd58ad58c73bca77b7db666"
   },
   {
     "url": "tag/SPI/index.html",
-    "revision": "ce69be880caeddf760bb6293c5f7cc4b"
+    "revision": "7873fc853e265ffe78590e038b54abae"
   },
   {
     "url": "tag/SpringSecurity/index.html",
-    "revision": "d42e4458b8c54f3200188da58d17566d"
+    "revision": "2d12f67bbc5b6de034684faafe1b3d5c"
   },
   {
     "url": "tag/sql优化/index.html",
-    "revision": "3b3c40e313eac9242eb45f744a8efe36"
+    "revision": "773a451dd16a364dc3eba677f9eb2909"
   },
   {
     "url": "tag/Swagger2/index.html",
-    "revision": "abf8aac6a65492465c8c13ae8cc37e87"
+    "revision": "ccfae497e5e5780f4e4e74604c67f61d"
   },
   {
     "url": "tag/Via/index.html",
-    "revision": "78123ccdf890b2e62f2a4faad27db92c"
+    "revision": "a22337ab71f27f49ab8ba0b497e85dc4"
   },
   {
     "url": "tag/Vue/index.html",
-    "revision": "c48c174c33a904e7a5f4943ff4cf1dd4"
+    "revision": "c0d82eb9535e85e5d165adb8b9276b4d"
   },
   {
     "url": "tag/vuepress/index.html",
-    "revision": "2f763f144ba9d98b82b148360468fc8f"
+    "revision": "2ee8b200cd54bc168ea09254e66e7ea5"
   },
   {
     "url": "tag/zookeeper/index.html",
-    "revision": "b80502f0f556ffea53b8e0d68ef29e80"
+    "revision": "b64b20d5839a6bc3a00c7151772dea30"
   },
   {
     "url": "tag/分布式/index.html",
-    "revision": "fe10bec7087e6ccff460d4c75d649806"
+    "revision": "9d1a7bbd02ea1108535a8cc0b1a667d1"
   },
   {
     "url": "tag/单元测试/index.html",
-    "revision": "5a0bc228cd75cb3cfd792a73ddcdaf8a"
+    "revision": "d197e09b4390ed7086f95916544f3708"
   },
   {
     "url": "tag/复习/index.html",
-    "revision": "08efa3346a7f388705dba190be1d519c"
+    "revision": "ddb2f695b23eb489ce31b566ccf584da"
   },
   {
     "url": "tag/多线程/index.html",
-    "revision": "0ebb66db0c5d273084e5354677feecc3"
+    "revision": "f713166558d6c7912d7edc212e888091"
   },
   {
     "url": "tag/定时任务/index.html",
-    "revision": "33703400229216be210d4fb5bb322710"
+    "revision": "097615b8243988e8df1b0cde2fb25ccd"
   },
   {
     "url": "tag/开发规范/index.html",
-    "revision": "22d6d7a5b3a3d554a69fcd825ab98c6a"
+    "revision": "a58dccc91b71be93cb75706d51701d69"
   },
   {
     "url": "tag/日志/index.html",
-    "revision": "9313db9f0475e68825aedd514ee5d632"
+    "revision": "f6c7976597e8393ae433b58f63d37075"
   },
   {
     "url": "tag/源码分析/index.html",
-    "revision": "f82c006c5f6aa9370def14246251f81d"
+    "revision": "aa8ca7d4990551253c35a85f45bc2390"
   },
   {
     "url": "tag/网关/index.html",
-    "revision": "a3eddbdffba01ad3170199a59f7cd6c8"
+    "revision": "f05c7770e6e1c1358e4dde1214b0c5d4"
   },
   {
     "url": "tag/网络协议/index.html",
-    "revision": "2f5ad6c05c1c8d0493db233545c4323f"
+    "revision": "a03bb8954be6f68031743a8a60949189"
   },
   {
     "url": "tag/随笔/index.html",
-    "revision": "07a18954e484dd709cb7401ed5babad8"
+    "revision": "de3ef9c5a3fe967aafc51a16e3ba0f4f"
   },
   {
     "url": "tag/随笔/page/2/index.html",
-    "revision": "9d2cb0ba796b48778199ab8aef9cdc25"
+    "revision": "29881884ed9568b4e574ea158a9f9bcc"
   },
   {
     "url": "timeline/index.html",
-    "revision": "2e0f4e2e517533aef41b0b6b1a6afbef"
+    "revision": "f7ec8c4a4a385e6dce67124ecbada380"
   },
   {
     "url": "view/index.html",
@@ -1047,327 +1051,351 @@ self.__precacheManifest = [
   },
   {
     "url": "views/backend/annotationLog.html",
-    "revision": "9cb449f1859ce954a7b92f0af674d1b1"
+    "revision": "25ae43c36382c161b3a1278b07e98d8d"
   },
   {
     "url": "views/backend/API网关概述.html",
-    "revision": "1bbcf0de3d3bdf6565bc873a116612fa"
+    "revision": "2888e381a3dddb3f4dde91df8e46dfa4"
   },
   {
     "url": "views/backend/ArrayList.html",
-    "revision": "bed7fe5acf43c175a3440e7e303de9bd"
+    "revision": "bc0d4d6bb82a006b67305525c43b861e"
   },
   {
     "url": "views/backend/CountDownLatch.html",
-    "revision": "020d0ac95c70ca7d9e73cc20464967c4"
+    "revision": "848163edf99bf8294fea2c0906dff1bc"
   },
   {
     "url": "views/backend/docker.html",
-    "revision": "d1c40639bf125f3fb5b94ff126df5497"
+    "revision": "e060660b048f48f260e5c58c06daf64c"
   },
   {
     "url": "views/backend/EasyExcel.html",
-    "revision": "7b863b18b7be74174dd56fee0dac52a8"
+    "revision": "a593377bb1085483f391ead7b18204f2"
   },
   {
     "url": "views/backend/HashMap.html",
-    "revision": "998a2a834e8e6ae65a092abf7facdec2"
+    "revision": "28bfd0fc7f426f9a3ba27758f0760721"
   },
   {
     "url": "views/backend/itext.html",
-    "revision": "bf3d18ddc2c911b302b93d015fc253ce"
+    "revision": "adaa6e15ac59d07cfab1551eef1bb844"
   },
   {
     "url": "views/backend/java_io模型.html",
-    "revision": "2a807f51b636cf80ec22f90e94a536d7"
+    "revision": "4d04225ef2ebc614c290e52f38ae844f"
   },
   {
     "url": "views/backend/javaLock.html",
-    "revision": "856fcbd0e51c35c0fa5c6707c882907d"
+    "revision": "b3046138e12f02099d994834d63295d6"
   },
   {
     "url": "views/backend/JUC.html",
-    "revision": "5e634f62c5e1167112b22f88968c4cdf"
+    "revision": "5d6d087a9b298ffc3de256afc58587ff"
   },
   {
     "url": "views/backend/junit4.html",
-    "revision": "6cba1a7db52c2fe27f73790976a6384c"
+    "revision": "854701325c6017e90257aa4924a07d7f"
   },
   {
     "url": "views/backend/jvm.html",
-    "revision": "a01f07135d87c457b69dc7fa8ab0d71c"
+    "revision": "e2709bef83c3c3b70fbaa95543a36c0b"
   },
   {
     "url": "views/backend/jwt.html",
-    "revision": "99a018de1ca3da377ae4a22d6c5fc77b"
+    "revision": "0a8972577ba4b4d6d68077fc7d66e6d2"
   },
   {
     "url": "views/backend/mybatis一二级缓存.html",
-    "revision": "b8c57a604c949a797ef750fbf454cc64"
+    "revision": "3f55e969ad9eac96ec2fec970ce58aa9"
   },
   {
     "url": "views/backend/mysql_explain.html",
-    "revision": "08cbb7cb9a991a63a3bfef5d40280086"
+    "revision": "72e9cb9c68bda721a30601207593a4a1"
   },
   {
     "url": "views/backend/poi.html",
-    "revision": "6b562ed1cf6f9d80476af1c832e20f69"
+    "revision": "87e1a161136ba0805507fcfd5798cde5"
   },
   {
     "url": "views/backend/quartz.html",
-    "revision": "5b68037421a7197b6b9d320acf6cb02f"
+    "revision": "2fe41d307f87eb934f6821535d63db05"
   },
   {
     "url": "views/backend/rabbitmq001.html",
-    "revision": "315653f189c8f08bfd906164b3ebd743"
+    "revision": "63a9cc7739c3c51bfeab5ca8dbbb4f11"
   },
   {
     "url": "views/backend/rabbitmq002.html",
-    "revision": "d54cbffc3d7ee69fcd01a0f8f251b397"
+    "revision": "5ee7ffdf703de4567e19513512621262"
   },
   {
     "url": "views/backend/redis01.html",
-    "revision": "d76a2eeb4d6527a8ed9734136a93012c"
+    "revision": "8e8575c58822cf57dd4fb230e0ea0877"
   },
   {
     "url": "views/backend/redis02.html",
-    "revision": "ec6cf2873db401c0eede3eb16e743d5a"
+    "revision": "0ee2c51a661cdfe91bb3f037aa8b7e19"
   },
   {
     "url": "views/backend/ReentrantLock.html",
-    "revision": "807db1bb28d81d63cfc14d2bf4909ac2"
+    "revision": "7f8fd038ed411b6d54f2985f17f4fdeb"
   },
   {
     "url": "views/backend/SchedulingConfigurer.html",
-    "revision": "c32602e5e6d70bb8daf5246f08ee5b92"
+    "revision": "1b5bdae995eaa1a59ca9e159a1270cf0"
   },
   {
     "url": "views/backend/SPI_JdkDubboSpring.html",
-    "revision": "d95d51ddcac168e6c9dd30ee202512f7"
+    "revision": "fcdf45079679dc140762801e796d83ee"
   },
   {
     "url": "views/backend/spring_application_json.html",
-    "revision": "b89cfaea279001bab39b585ac156741b"
+    "revision": "0b1d5803132befd78616f91b1d8841d2"
   },
   {
     "url": "views/backend/spring-security-01.html",
-    "revision": "942468e508460f7b606077a37c5a71c9"
+    "revision": "4c5f1a710edaa74776fa41eb76d42d58"
   },
   {
     "url": "views/backend/SSH.html",
-    "revision": "e293d44b612bb21b8dbc3a6347a268d1"
+    "revision": "e62dd878add152c082889291ef1237a4"
   },
   {
     "url": "views/backend/swagger2.html",
-    "revision": "17393732cefa4485de5923909f658fe0"
+    "revision": "1bfc5cba787048d006badb7bedcbbd98"
   },
   {
     "url": "views/backend/thread.html",
-    "revision": "9027daf63c5b1ab027e1cfe12913b779"
+    "revision": "d86b75110ec4953e0f7ecf075b70428a"
   },
   {
     "url": "views/backend/ThreadLocal.html",
-    "revision": "2ce621618d1e887c246ffb1074cb68b0"
+    "revision": "dd827467f1bbe02e9c475a73bdde6f39"
   },
   {
     "url": "views/backend/ThreadPool.html",
-    "revision": "de0b650bf98c5182bed66b53bf0491a5"
+    "revision": "5156ac9f71e3a32bc6bae8fe841c407a"
   },
   {
     "url": "views/backend/ThreadPool2.html",
-    "revision": "d28f6c853afe1168fb9e6481954bb93c"
+    "revision": "617cd4c8d30446025df403aa808d3d7e"
   },
   {
     "url": "views/backend/ThreadTopCPU.html",
-    "revision": "e03786dd6acc0034e02ed8f83db93dee"
+    "revision": "ec1344d2c8144dd7d926d38b06f08e7b"
   },
   {
     "url": "views/backend/zookeeper.html",
-    "revision": "94808cef7f11cf9047bb7f1a8e991fb7"
+    "revision": "9a80dc438513ab75e8f93b002a2090d0"
   },
   {
     "url": "views/backend/分布式系统概述.html",
-    "revision": "eddc66ec7ce7b8b57c83309a408326be"
+    "revision": "7c3cb3d14ac7374545ce5af288ca8abf"
   },
   {
     "url": "views/essay/20190928.html",
-    "revision": "ff5b44e8ce262fae7e408691778222d8"
+    "revision": "d411a00e1df77fe0b0d4216b21d71120"
   },
   {
     "url": "views/essay/20191109.html",
-    "revision": "920c02793a7aa0cf2f34c5643f5e238d"
+    "revision": "a2e25b9cc1925bc912def8207a971dd4"
   },
   {
     "url": "views/essay/20191116.html",
-    "revision": "f28c34af202b771b263e1277218c9c56"
+    "revision": "270c2430b6e6cb9786b5b57e6dfc6a3b"
   },
   {
     "url": "views/essay/20191130.html",
-    "revision": "8b4d2fdc7538ef269bb69cf64d203c37"
+    "revision": "dc253e8151157c4c6b2c35bc2a15c3da"
   },
   {
     "url": "views/essay/20200227.html",
-    "revision": "209264d0d255ef2602bed4d3f8c0f5eb"
+    "revision": "94200bb378f0471f6cfa7e48f9f85a83"
   },
   {
     "url": "views/essay/20200301.html",
-    "revision": "89351e320d9fe9db4743fc916eac508e"
+    "revision": "9eb1bd0bf0bcde13a43629cbc5d8b1ab"
   },
   {
     "url": "views/essay/20200703.html",
-    "revision": "c8b0d01c4d5afacb6e1dcc2a9d4421f3"
+    "revision": "734ee67c312a5c4767bf733fc45001a5"
   },
   {
     "url": "views/essay/20200715.html",
-    "revision": "edfe668e7e168de2d12c5000b3b9e574"
+    "revision": "2023edb6e5b0c77ba3e99318a02aa546"
   },
   {
     "url": "views/essay/20200813.html",
-    "revision": "dea76726cef6342bee7ff7b5fa2c6a83"
+    "revision": "281da688e946e8589127cf2f0fb395e1"
   },
   {
     "url": "views/essay/20201012.html",
-    "revision": "89f8554d4a9de58d8e6d0803d4e22e9b"
+    "revision": "38e06257e9e9b217736c2893b3c91321"
   },
   {
     "url": "views/essay/20201119.html",
-    "revision": "4043afa189c7aacc0839da6db471beb1"
+    "revision": "b3cd85df84005eb8134ce5848678cfd3"
   },
   {
     "url": "views/essay/20211216.html",
-    "revision": "8b99c09f2df5c2879e2da24f250e1ed2"
+    "revision": "0515d6ab83503cb1cc142de65fb0eb9a"
   },
   {
     "url": "views/frontend/EChartsStudy.html",
-    "revision": "845f667465d4cd0ff531492c9ca723b7"
+    "revision": "a829c015f548aab533739c47e1d4cef3"
   },
   {
     "url": "views/frontend/js-json.html",
-    "revision": "8e8d4c7ac3ece3cf0500c8e8a1369782"
+    "revision": "66f8e4e66780fa0ad1ce3a5260ab4b82"
   },
   {
     "url": "views/frontend/reco-info.html",
-    "revision": "6734646fe777640684a7f96cf386225e"
+    "revision": "0c754c69dc1c54d3041c66c76e94fc54"
   },
   {
     "url": "views/frontend/TCP&UDP.html",
-    "revision": "5ea0d6211b71612056b8bcfd4695d79f"
+    "revision": "ca8ef9cfb0d732bb96a8e10010d7197e"
   },
   {
     "url": "views/frontend/viaStart.html",
-    "revision": "68c922293235c2bfb240dce395c7fe9a"
+    "revision": "e17eb5aea3d21af166dd3551e968b184"
   },
   {
     "url": "views/frontend/vue-demo.html",
-    "revision": "912a9c1f1b1ee3060a6140f6f73aa1bc"
+    "revision": "59ef3c06a7a946be338b9c0342b4facb"
   },
   {
     "url": "views/frontend/vuepress-plugin-boxx.html",
-    "revision": "49048974676cf31812d16e59c0a26a09"
+    "revision": "fe9f8cebc8c69b37f29d0838331e4c8c"
   },
   {
     "url": "views/index.html",
-    "revision": "3d9ba8b4f3a96e012ca082796a51bac5"
+    "revision": "931836cce3d07731ff038a9a31475227"
   },
   {
     "url": "views/qaq/sum_db_001.html",
-    "revision": "073ef1e2e1c37d6bd8b400d6ffc7e962"
+    "revision": "587bc8a0befd93d44529606175d463c0"
   },
   {
     "url": "views/qaq/sum_fe_001.html",
-    "revision": "bd67ca67e56c932548f4febf4d885d81"
+    "revision": "84b7bcca8d00b1039f80b61739b1d069"
   },
   {
     "url": "views/qaq/sum_fe_002.html",
-    "revision": "e8dcaf11f5ddb10dee4b30cfebd056ee"
+    "revision": "cc5379fb9aaef149afe55e1fb8c41a5e"
   },
   {
     "url": "views/qaq/sum_java_001.html",
-    "revision": "95202425279ef3a6f645e1b62d34ea28"
+    "revision": "97aefe298f7f11d57efd818b719e0bb3"
   },
   {
     "url": "views/qaq/sum_java_002.html",
-    "revision": "ec850761133607aef795086c864f2dfc"
+    "revision": "d6964152f7cc1366cd05f1980e7518cc"
   },
   {
     "url": "views/qaq/sum_ms_001.html",
-    "revision": "353d8f0da00ef7a09989b9097040af3f"
+    "revision": "597d3b0c99de3680968df8c2ecd66c83"
   },
   {
     "url": "views/qaq/sum_spring_001.html",
-    "revision": "0db2defb76a4cb2bdbe51f177aff8b9c"
+    "revision": "5bfcd7271e5df62bec5fc1b92a3dbd03"
   },
   {
     "url": "views/qaq/sum_spring_002.html",
-    "revision": "b91acff4eadf9444936ecabedef29d9e"
+    "revision": "5451929f5b98c0b37de6b21fb3050b07"
   },
   {
     "url": "views/qaq/sum_spring_003.html",
-    "revision": "c5ee339454fe73770b628896451ced75"
+    "revision": "8c49a58a80fb0bdb944207376727c8ab"
   },
   {
     "url": "views/specification/ali.html",
-    "revision": "5a1b147ec013c06303b3444f248b3fdf"
+    "revision": "d42aba923af72fc5c7ce3a55b1686f12"
   },
   {
     "url": "views/specification/git.html",
-    "revision": "3d1b1ed81529593f7f21474aa33fc14e"
+    "revision": "edf39e7e8825b065031ca0240221dd57"
   },
   {
     "url": "views/specification/guide.html",
-    "revision": "087db9d979bcee74f517c1dbe62c1c81"
+    "revision": "20446a130bb6b0aaedf0a371f5b9e5c4"
   },
   {
     "url": "views/specification/javaNamingConvention.html",
-    "revision": "944479c63b79ae2f905f1f9bdd9b469f"
+    "revision": "cb1fd29c3ebff48773449e9dacf7ee43"
   },
   {
     "url": "views/specification/k8s基本命令与pod管理.html",
-    "revision": "6d9c58fadf8848a99158e5a7dbb5499f"
+    "revision": "73f171e188e89deee7f6684e8dc55a69"
   },
   {
     "url": "views/specification/linux01.html",
-    "revision": "99d08fc0caa431b99437567d543082a6"
+    "revision": "0124bc27af443e384432142712beb352"
   },
   {
     "url": "views/specification/objectModel.html",
-    "revision": "b379e5b372c14215f95fd4d79f8d4635"
+    "revision": "f8ad5447f8af717985e77c40e0ab3c3a"
   },
   {
     "url": "views/specification/wildcard.html",
-    "revision": "25b55b77b5c75762680242e81c0ea4b2"
+    "revision": "91b4897a6ac6f72cc12040dee87f4260"
   },
   {
     "url": "views/specification/提交规范.html",
-    "revision": "8d303c572d1fd5643e1988ef5ed492c5"
+    "revision": "33f5df70a92000bba98984f21ac591e3"
   },
   {
-    "url": "vuepress/apple-touch-icon-precomposed-120x120.png",
-    "revision": "c946ab9687557a9c3d52e7f570bc41ed"
+    "url": "vuepress/android-chrome-192x192.png",
+    "revision": "1d552ce1b08897e193861e52fce75c46"
   },
   {
-    "url": "vuepress/apple-touch-icon-precomposed-144x144.png",
-    "revision": "ff45f0e95f784bff41ef6a0dd1e0b8c6"
+    "url": "vuepress/android-chrome-512x512.png",
+    "revision": "b10d527f7421e5c49c8179da93f2618c"
   },
   {
-    "url": "vuepress/apple-touch-icon-precomposed-57x57.png",
-    "revision": "262f68b495ed4f514d58337cba6f55ed"
+    "url": "vuepress/apple-touch-icon-120x120.png",
+    "revision": "f193672908cefb1707a52e20a8b47d23"
   },
   {
-    "url": "vuepress/apple-touch-icon-precomposed-72x72.png",
-    "revision": "b96fccc48de1b03bf9165d65e1af00e8"
+    "url": "vuepress/apple-touch-icon-152x152.png",
+    "revision": "05e7e91d3a15367aaefab14cde9ff8a5"
   },
   {
-    "url": "vuepress/fish.jpg",
-    "revision": "3cb672033db83620e4e024c9c747e13f"
+    "url": "vuepress/apple-touch-icon-180x180.png",
+    "revision": "5dba7a0b7762fc58003a34fb9dc89d62"
+  },
+  {
+    "url": "vuepress/apple-touch-icon-60x60.png",
+    "revision": "68e5f0f6aa25209f49e417a137aabc88"
+  },
+  {
+    "url": "vuepress/apple-touch-icon-76x76.png",
+    "revision": "41ea015e41a8a58ee2ac5beb6b9fa76f"
+  },
+  {
+    "url": "vuepress/apple-touch-icon.png",
+    "revision": "5dba7a0b7762fc58003a34fb9dc89d62"
+  },
+  {
+    "url": "vuepress/favicon-16x16.png",
+    "revision": "90ff735c65bf4543a09dff03f1bfc6e7"
+  },
+  {
+    "url": "vuepress/favicon-32x32.png",
+    "revision": "0710f03541c19ab5ca3a1f6dbe182cf6"
   },
   {
     "url": "vuepress/head-fish.jpg",
     "revision": "ab7a9c264c4e2e0cddbf8a3229e8b2a0"
   },
   {
-    "url": "vuepress/head.png",
-    "revision": "8919827e695ae6a739b646f05bb5d991"
+    "url": "vuepress/logo.png",
+    "revision": "75a7175d16facb204b22f536bb9bb289"
+  },
+  {
+    "url": "vuepress/msapplication-icon-144x144.png",
+    "revision": "85773a21c3d7e7f5cf779cd6329d7a24"
   },
   {
     "url": "vuepress/topic.png",
@@ -1382,12 +1410,16 @@ self.__precacheManifest = [
     "revision": "0098af9084c619fae94c3d593c609bbd"
   },
   {
-    "url": "vuepress/zpj80231-logo.png",
+    "url": "vuepress/zpj80231-logo-1.png",
+    "revision": "97de419e4928299047a1de1b2b249f63"
+  },
+  {
+    "url": "vuepress/zpj80231-logo-2.png",
     "revision": "a2aa1799583b0104477b398b98b757c3"
   },
   {
-    "url": "vuepress/zpj80231-logo2.png",
-    "revision": "97de419e4928299047a1de1b2b249f63"
+    "url": "vuepress/zpj80231-logo-bg.png",
+    "revision": "097cde6f5b50f6d9dabc79d51bf415ee"
   },
   {
     "url": "vuepress/个人微信二维码.jpg",
