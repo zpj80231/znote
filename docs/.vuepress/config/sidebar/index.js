@@ -82,7 +82,8 @@ module.exports = {
                 'backend/EasyExcel',
                 'backend/java_io模型',
                 'backend/SPI_JdkDubboSpring',
-                'backend/spring_application_json.md',
+                'backend/spring_application_json',
+                'backend/动态代理和静态代理区别',
             ]
         },
         {
