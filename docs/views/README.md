@@ -94,8 +94,6 @@ isShowComments: true
 
 </div>
 
-<CatalogGraph  root='/views/' title='概览' :height='320' />
-
 <script>
 	export default {
 		data() {
@@ -107,15 +105,15 @@ isShowComments: true
 			}
 		},
 		mounted() {
-			this.updateTime(this.changeTime)
+			this.updateTime(this.changeTime);
 			this.randomPic()
 		},
 		updated() {
 		},
 		methods: {
     		randomPic() {
-				let picList = ['kQWXr.gif','rddek.gif']
-				let imgShow = document.getElementById("imgShow")
+				let picList = ['kQWXr.gif','rddek.gif'];
+				let imgShow = document.getElementById("imgShow");
 				setInterval(() => {
 					if(this.active == 'active'){
 						this.active="noActive"
