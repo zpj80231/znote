@@ -84,6 +84,7 @@ module.exports = {
                 'backend/SPI_JdkDubboSpring',
                 'backend/spring_application_json',
                 'backend/动态代理和静态代理区别',
+                'backend/zk选举和一致性',
             ]
         },
         {
