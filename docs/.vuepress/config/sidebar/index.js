@@ -86,6 +86,7 @@ module.exports = {
                 'backend/动态代理和静态代理区别',
                 'backend/zk选举和一致性',
                 'backend/超时取消分析',
+                'backend/mini-ioc',
             ]
         },
         {
