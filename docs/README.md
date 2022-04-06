@@ -26,7 +26,7 @@ footer: MIT Licensed | Copyright © 2018-present Evan You
 
 <Clock/>
 
-::: tip 昨天 今天 明天
+::: tip 人的一生能有几天
 
 问一问，人的一生能有几天 <br/>
 算一算，人的一生不过三天 <br/>
@@ -43,6 +43,7 @@ footer: MIT Licensed | Copyright © 2018-present Evan You
 今天已成昨天 <br/>
 而你依然在我身边 <br/>
 
+啊。<br/>
 春梦无痕，秋夜缠绵 <br/>
 如歌岁月，似水流年 <br/>
 
@@ -55,7 +56,7 @@ footer: MIT Licensed | Copyright © 2018-present Evan You
 <!-- <CanvasNest color='0,23,255' zIndex='-2'></CanvasNest> -->
 
 <script>
-  
+
 </script>
 
 <style lang="stylus">
@@ -92,7 +93,7 @@ footer: MIT Licensed | Copyright © 2018-present Evan You
     height: 200px;
     min-height: 10vh;
     position: fixed;
-    top: -120%;
+    top: -114%;
     left: -1%;
     background: url(https://img.shields.io/github/stars/zpj80231/znote?style=social) right,url(https://img.shields.io/github/forks/zpj80231/znote?style=social) right;
     background-repeat: no-repeat, no-repeat;
@@ -102,6 +103,7 @@ footer: MIT Licensed | Copyright © 2018-present Evan You
 
 @media screen and (max-width: 780px) and (min-width: 541px){
   .wrap {
+    top:-133%;
     background: none;
   }
   .clock {
@@ -131,7 +133,7 @@ footer: MIT Licensed | Copyright © 2018-present Evan You
 
 @media screen and (max-width: 480px) and (min-width: 0px){
   .wrap {
-    top:-107%;
+    top:-103%;
     transform: scale(0.68,0.58);
     background: none;
   }
