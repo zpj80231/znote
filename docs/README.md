@@ -109,7 +109,7 @@ footer: MIT Licensed | Copyright © 2018-present Evan You
   .clock {
     max-width: 230px !important;
     max-height: 230px !important;
-    margin-top: 33% !important;
+    margin-top: 65% !important;
   }
   .home img {
     max-width: 520px !important;
