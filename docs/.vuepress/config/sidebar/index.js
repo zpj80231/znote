@@ -79,6 +79,7 @@ module.exports = {
                 'backend/spring-security-01',
                 'backend/SchedulingConfigurer',
                 'backend/ThreadTopCPU',
+                'backend/OOM分类及排查',
                 'backend/EasyExcel',
                 'backend/java_io模型',
                 'backend/SPI_JdkDubboSpring',
