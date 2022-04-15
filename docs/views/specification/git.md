@@ -303,9 +303,35 @@ $ git reset --keep [commit]
 # 后者的所有变化都将被前者抵消，并且应用到当前分支
 $ git revert [commit]
 
-# 暂时将未提交的变化移除，稍后再移入
-$ git stash
-$ git stash pop
+```
+
+## 切换分支暂存未提交的commit
+
+stash 命令能够将还未 commit 的代码存起来，让你的工作目录变得干净。
+
+切换分支时先用`git stash`, 从另一个分支切换到本分支用`git stash apply`, 即可恢复代码。
+
+```bash
+# 保存当前未commit的代码
+git stash
+
+# 保存当前未commit的代码并添加备注
+git stash save "备注的内容"
+
+# 列出stash的所有记录
+git stash list
+
+# 删除stash的所有记录
+git stash clear
+
+# 应用最近一次的stash
+git stash apply
+
+# 应用最近一次的stash，随后删除该记录
+git stash pop
+
+# 删除最近的一次stash
+git stash drop
 ```
 
 ## 十、其他
