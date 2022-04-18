@@ -15,6 +15,7 @@ isShowComments: false
 ## 序言
 
 - 由于在引入默认的VuePress Custom Containers太过笨重了，故闲来无事对其做一层封装简化使用
+- Github地址：[https://github.com/zpj80231/vuepress-plugin-boxx](https://github.com/zpj80231/vuepress-plugin-boxx)
 
 ## 安装
 
@@ -42,7 +43,7 @@ plugins: [
 - 引入：只需在你想要插入的地方加入 `<Boxx/>` 即可（如顶部所示）
 - 内容：默认随机展示名人名句，支持自定义
 - 样式：有三种样式，默认为 tip 样式，支持自定义
-- 注意：除`<Boxx/>`这个标签是必须外，标签属性均为可选，所有标签属性会在下文中详细介绍
+- 注意：除`<Boxx/>`这个标签是必须外，**标签属性均为可选**，所有标签属性会在下文中详细介绍
 
 ## 默认样式
 
