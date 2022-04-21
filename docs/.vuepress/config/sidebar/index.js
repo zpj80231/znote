@@ -58,6 +58,7 @@ module.exports = {
                 'backend/rabbitmq002',
                 'backend/redis01',
                 'backend/redis02',
+                'backend/redis使用场景',
                 'backend/SSH',
                 'backend/jwt',
                 'backend/swagger2',
