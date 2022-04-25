@@ -6,7 +6,6 @@ module.exports = {
             title: '知识晶体 Q&A',
             collapsable: true,
             children: [
-                'qaq/sum_ms_001',
                 'qaq/sum_fe_001',
                 'qaq/sum_fe_002',
                 'qaq/sum_java_001',
@@ -15,6 +14,7 @@ module.exports = {
                 'qaq/sum_spring_001',
                 'qaq/sum_spring_002',
                 'qaq/sum_spring_003',
+                'qaq/sum_ms_001',
             ]
         },
         {
