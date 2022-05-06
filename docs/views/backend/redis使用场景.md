@@ -16,11 +16,11 @@ Redis是一个key-value存储系统，现在在各种系统中的使用越来越
 
 ## 一、String 场景
 
-计数功能：
-
-- 例如掘金文章点击数量，阅读数量。
-- MySQL 缓存。
-- 集群环境下的 session 共享。
+- 计数：例如掘金文章点击数量，阅读数量。
+- 缓存：MySQL 缓存。
+- session共享：集群环境下的 session 共享。
+- 限流：限制一个公共API下某个用户每秒只能调用100次。
+  set设置key为userId:api，value为次数，过期时间为1s。(1s内每次调用则value加1)
 
 ## 二、Hash 场景
 
@@ -139,6 +139,34 @@ zunionstore topic:3day 3 topic:20191216 topic:20191217 topic:201912168
 
 // 3.查看近三日排行榜前三名，返回new:4 600 new:2 600 new:1 330
 zrevrange topic:3day 0 2 withscores
+```
+
+## 五、bitmap 场景
+
+如何用redis存储统计1亿用户一年的登陆情况，并快速检索任意时间窗口内的活跃用户数量？redis如何做亿级用户登录日活统计？
+
+利用redis的bitmap，value是一个二进制数据，每一位只能是0或者1。
+
+```java
+// setbit key offset value
+// 用户登录，用户id为整型
+setbit login:20220505 uid 1
+        
+// 判断用户某日是否登录过
+getbit login:20220505 uid
+        
+// 每日用户登录数量统计 bitcount key [start] [end]
+bitcount login:20220505
+
+// 活跃用户(连续三日登录)统计 bitop operation destkey key [key …]
+/* bitmap的bitop命令支持对bitmap进行AND(与)，(OR)或，XOR(亦或)，NOT(非)四种相关操作;
+    我们对近三日的bitmap做AND操作即可，操作之后会形成一个新的bitmap，
+    我们可以取名为login:top_count 
+ */
+/* 然后我们可以对login:top_count使用bitcount或者getbit命令，
+    用于统计活跃用户数量，或者查看某个用户是否为活跃用户
+ */
+bitop and login:top_count login:20201005 login:20201004 login:20201003
 ```
 
 以上就是了解Redis常见应用场景的详细内容。
