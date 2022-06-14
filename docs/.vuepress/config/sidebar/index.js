@@ -85,6 +85,7 @@ module.exports = {
                 'backend/java_io模型',
                 'backend/SPI_JdkDubboSpring',
                 'backend/spring_application_json',
+                'backend/springboot配置文件加载顺序',
                 'backend/动态代理和静态代理区别',
                 'backend/zk选举和一致性',
                 'backend/超时取消分析',
