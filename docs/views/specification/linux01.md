@@ -27,20 +27,24 @@ publish: true
 # 查找文件夹下或某个文件包含某字符的所有文件
 # -r 是递归查找
 # -n 是显示行号
+# -C 5 显示file文件里匹配字串那行以及上下5行
+# -B 5 显示前5行
+# -A 5 显示后5行
+# --include '*.html' 指定后缀名
 grep -rn "message" ./
 # 实时显示日志记录
 tail -100f a.log
+# 查找包含 2020 的 catalina.out文件所在的行
+find ./ -name catalina.out | xargs grep 2020
 ```
 
-## 切换目录
+## 根据pid查程序目录
 
 ```shell
-# 省
-cd /home/yx/server8.5.50/apache-tomcat-8.5.40/webapps/uapclient/WEB-INF/repository/application/plugins/
-# 总部
-cd /home/yx_zb/phantomjs #phantomjs路径
-# 查找包含 2020 的 catalina.out文件所在的行
-find ./ -name catalina.out |xargs grep 2020
+ps -ef | grep redis
+# root     14145     1  0 Jul08 ?        00:17:14 ./redis-server *:6379
+ls -al /proc/14145/exe
+# lrwxrwxrwx. 1 root root 0 7月 31 05:10 /proc/14145/exe -> /usr/local/bin/redis-server
 ```
 
 ## Tomcat
