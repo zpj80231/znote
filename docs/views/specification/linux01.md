@@ -81,13 +81,15 @@ ls  -l   文件
 
 > 参考：[ 白小黑..](https://blog.csdn.net/weixin_42711549/article/details/81156370)
 
-## 文件复制/移动
+## 文件复制/移动/大小
 
 ```shell
 #复制文件夹 -r
 cp -r a文件夹 b新文件夹
 #将/test1目录下的file1复制到/test3 目录，并将文件名改为file2
 mv /test1/file1 /test3/file2
+# 查看当前路径下各个目录大小(后面也可以跟指定目录)， -h 以K，M，G为单位，提高信息的可读性。
+du -sh *
 ```
 
 ## 上传下载
