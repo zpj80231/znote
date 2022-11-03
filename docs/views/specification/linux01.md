@@ -36,6 +36,8 @@ grep -rn "message" ./
 tail -100f a.log
 # 查找包含 2020 的 catalina.out文件所在的行
 find ./ -name catalina.out | xargs grep 2020
+# grep之后，按行统计行数 wc -l
+find ./ -name catalina.out | xargs grep 2020 | wc -l
 ```
 
 ## 根据pid查程序目录
