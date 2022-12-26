@@ -13,7 +13,7 @@
 		"axios": "^0.26.1",
 		"jquery": "^3.6.0",
 		"js-yaml": "^3.14.1",
-		"moment": "^2.29.3",
+		"moment": "^2.29.4",
 		"vuepress": "^1.9.7",
 		"vuepress-plugin-auto-sidebar": "^1.5.0",
 		"vuepress-plugin-boxx": "0.0.7",
