@@ -92,12 +92,13 @@ module.exports = [
         ]
     }],
 
-    ["vuepress-plugin-nuggets-style-copy", {
-        copyText: "复制代码",
-        tip: {
-            content: "复制成功!"
-        }
+    ['one-click-copy', {
+        copySelector: ['div[class*="language-"] pre', 'div[class*="aside-code"] aside'], // String or Array
+        copyMessage: 'Copied successfully!', // default is 'Copied successfully!'
+        toolTipMessage: 'Copy to clipboard', // default is ''Copy to clipboard'
+        duration: 800, // prompt message display time
     }],
+    // ['vuepress-plugin-code-copy', {align: "top", staticIcon: true}],
 
     ['copyright',{
         minLength: 10,
