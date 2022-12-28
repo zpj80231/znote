@@ -36,7 +36,11 @@ isShowComments: true
  * 测试基类，所有测试类都要继承此类
  */
 @ContextConfiguration(locations="classpath: application-context.xml")
-//@RunWith(SpringJUnit4ClassRunner.class)
+// @RunWith(SpringJUnit4ClassRunner.class)
+// @SpringBootTest
+// @RunWith(SpringRunner.class)
+// @EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class})
+// @ComponentScan(excludeFilters = {@ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = {XxlJobConfig.class})})
 public class BaseTest {
 
     private TestContextManager testContextManager;
