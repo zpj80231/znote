@@ -54,7 +54,7 @@ module.exports = {
                 'backend/itext',
                 'backend/poi',
                 'backend/quartz',
-                'backend/junit4',
+                'backend/单元测试1',
                 'backend/rabbitmq001',
                 'backend/rabbitmq002',
                 'backend/redis01',
