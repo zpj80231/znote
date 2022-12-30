@@ -1496,31 +1496,22 @@
   optionalDependencies:
     prettier "^1.18.2 || ^2.0.0"
 
-"@vue/composition-api@1.0.0-beta.21":
-  version "1.0.0-beta.21"
-  resolved "https://registry.npmmirror.com/@vue/composition-api/-/composition-api-1.0.0-beta.21.tgz"
-  integrity sha512-tgbvDpLvKQ1GrII424wsoyzPCsG0oTFf38emMq495SfLY7RmUqhVIl81pvnC5489PPrCxDkbauJHJrhlcXfbTQ==
+"@vuepress-reco/core@^1.6.14-beta.0":
+  version "1.6.14-beta.0"
+  resolved "https://registry.npmmirror.com/@vuepress-reco/core/-/core-1.6.14-beta.0.tgz#d7bba44b20c76c9a978aee4f428e906854dda10e"
+  integrity sha512-JQDCpwcubIcVkjfAaZS61QDFnjS3ID13Iq9Xg9uyGbgxbPL3oXXpARcGaYSKoLZLofH4jO8170BlkbhAUgU1Fw==
   dependencies:
-    tslib "^2.0.1"
-
-"@vuepress-reco/core@^1.6.9":
-  version "1.6.13"
-  resolved "https://registry.npmmirror.com/@vuepress-reco/core/-/core-1.6.13.tgz"
-  integrity sha512-smKeHeO34DmHZ18U5dPK60ycrnoLMcM0fHdfuzjwbyKBXfSknMLRQllauLKf7C7YhcOo17IoJsOCxryTZ13BjQ==
-  dependencies:
-    "@vue/composition-api" "1.0.0-beta.21"
     vue "^2.6.12"
-    vue-demi "^0.5.3"
     vue-property-decorator "^9.1.2"
 
-"@vuepress-reco/vuepress-plugin-back-to-top@^1.6.0":
+"@vuepress-reco/vuepress-plugin-back-to-top@^1.6.13":
   version "1.6.13"
-  resolved "https://registry.npmmirror.com/@vuepress-reco/vuepress-plugin-back-to-top/-/vuepress-plugin-back-to-top-1.6.13.tgz"
+  resolved "https://registry.npmmirror.com/@vuepress-reco/vuepress-plugin-back-to-top/-/vuepress-plugin-back-to-top-1.6.13.tgz#dfc31ed7354a9839fd7781532b0ea5722ad73fc0"
   integrity sha512-4KPllVU1ruD4SANuZ0wNQJwpcSctKJmWD4XhdAXOuoNc2kRzM4ic/xnWZ9YJuTlae94w4ocnmm3bZafWuewqRw==
 
-"@vuepress-reco/vuepress-plugin-comments@^1.6.0":
+"@vuepress-reco/vuepress-plugin-comments@^1.6.13":
   version "1.6.13"
-  resolved "https://registry.npmmirror.com/@vuepress-reco/vuepress-plugin-comments/-/vuepress-plugin-comments-1.6.13.tgz"
+  resolved "https://registry.npmmirror.com/@vuepress-reco/vuepress-plugin-comments/-/vuepress-plugin-comments-1.6.13.tgz#71d3291a3cc79085981beb42ac22cfa5191fc5d4"
   integrity sha512-KunbkxcMxYxelpVyN3FBcnVPXPifqlpctQHUllZk4As9q/PJALCvuJWZ0MWsM5CIdrUL9DBrGmSUW4amfOiUAw==
   dependencies:
     "@vssue/api-bitbucket-v2" "^1.1.1"
@@ -1531,9 +1522,9 @@
     valine "^1.4.18"
     vssue "^1.4.6"
 
-"@vuepress-reco/vuepress-plugin-pagation@^1.6.0":
+"@vuepress-reco/vuepress-plugin-pagation@^1.6.13":
   version "1.6.13"
-  resolved "https://registry.npmmirror.com/@vuepress-reco/vuepress-plugin-pagation/-/vuepress-plugin-pagation-1.6.13.tgz"
+  resolved "https://registry.npmmirror.com/@vuepress-reco/vuepress-plugin-pagation/-/vuepress-plugin-pagation-1.6.13.tgz#d6f388d64a552d8ba95a7a9bfa7d307a63bb6718"
   integrity sha512-6XPFCYFdMPao769TBA5lX0vAuzZsG/SlvxiioSxr0EDMCqEvvGaLq9/esJS8EyZ214byySIqRBoev55WOZlEyg==
 
 "@vuepress-reco/vuepress-plugin-rss@1.0.2":
@@ -8702,11 +8693,6 @@ tr46@^1.0.1:
   dependencies:
     punycode "^2.1.0"
 
-tslib@^2.0.1:
-  version "2.4.1"
-  resolved "https://registry.npmmirror.com/tslib/-/tslib-2.4.1.tgz"
-  integrity sha512-tGyy4dAjRIEwI7BzsB0lynWgOpfqjUdq91XXAlIWD2OwKBH7oCl/GZG/HT4BOHrTlPMOASlMQ7veyTqpmRcrNA==
-
 tty-browserify@0.0.0:
   version "0.0.0"
   resolved "https://registry.npmmirror.com/tty-browserify/-/tty-browserify-0.0.0.tgz"
@@ -9075,11 +9061,6 @@ vue-click-outside@1.1.0:
   resolved "https://registry.npmmirror.com/vue-click-outside/-/vue-click-outside-1.1.0.tgz"
   integrity sha512-pNyvAA9mRXJwPHlHJyjMb4IONSc7khS5lxGcMyE2EIKgNMAO279PWM9Hyq0d5J4FkiSRdmFLwnbjDd5UtPizHQ==
 
-vue-demi@^0.5.3:
-  version "0.5.4"
-  resolved "https://registry.npmmirror.com/vue-demi/-/vue-demi-0.5.4.tgz"
-  integrity sha512-m/cm/Jo+USFx4JNGvhXVuAAbeB+Dejc0O8hzarph9MMuxxcMEDxf+0UBzg79g15YwYGIToX957XvzG0xSufG9A==
-
 vue-disqus@^3.0.5:
   version "3.0.5"
   resolved "https://registry.npmmirror.com/vue-disqus/-/vue-disqus-3.0.5.tgz"
@@ -9284,22 +9265,20 @@ vuepress-plugin-smooth-scroll@^0.0.9:
   dependencies:
     smoothscroll-polyfill "^0.4.4"
 
-vuepress-theme-reco@1.6.11:
-  version "1.6.11"
-  resolved "https://registry.npmmirror.com/vuepress-theme-reco/-/vuepress-theme-reco-1.6.11.tgz"
-  integrity sha512-7q3zNRjfkuEDh9f5J3vZDvhP3W1L4xKdTn8pailDz3N64yilyF1Uf2bE+b+aDmzxYMmQUrMx6ByAFl61qgS9Gg==
+vuepress-theme-reco@1.6.16:
+  version "1.6.16"
+  resolved "https://registry.npmmirror.com/vuepress-theme-reco/-/vuepress-theme-reco-1.6.16.tgz#b9e9e6c326761b955e016732fe87407a80dffd6f"
+  integrity sha512-jWxNLrSLZ1QKqhf0zcrlxrg04Hshg4PJZd9Q0IOQFDkE7mGyOTWKg90TCkxPL8VDmJ8ns8j3FUZzr4oqAd2+iQ==
   dependencies:
-    "@vue/composition-api" "1.0.0-beta.21"
-    "@vuepress-reco/core" "^1.6.9"
-    "@vuepress-reco/vuepress-plugin-back-to-top" "^1.6.0"
-    "@vuepress-reco/vuepress-plugin-comments" "^1.6.0"
-    "@vuepress-reco/vuepress-plugin-pagation" "^1.6.0"
+    "@vuepress-reco/core" "^1.6.14-beta.0"
+    "@vuepress-reco/vuepress-plugin-back-to-top" "^1.6.13"
+    "@vuepress-reco/vuepress-plugin-comments" "^1.6.13"
+    "@vuepress-reco/vuepress-plugin-pagation" "^1.6.13"
     "@vuepress/plugin-blog" "1.9.2"
     "@vuepress/plugin-medium-zoom" "1.5.0"
     docsearch.js "2.6.3"
     md5 "2.2.1"
     vue-click-outside "1.1.0"
-    vue-demi "^0.5.3"
     vuepress-plugin-smooth-scroll "^0.0.9"
 
 vuepress@^1.9.7:
