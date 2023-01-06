@@ -56,6 +56,7 @@ module.exports = {
                 'backend/quartz',
                 'backend/单元测试1',
                 'backend/单元测试2',
+                'backend/单元测试3',
                 'backend/rabbitmq001',
                 'backend/rabbitmq002',
                 'backend/redis01',
