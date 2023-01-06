@@ -7,15 +7,15 @@ module.exports = [
             {
                 text: 'Projects🎈',
                 items: [{
-                    text: 'My Project',
+                    text: '✔ My Project',
                     link: '/other/project',
+                }, {
+                    text: '✔ 友情链接 →',
+                    link: '/other/friends',
                 }]
             }, {
                 text: 'Common sites🎈',
                 items: [{
-                    text: '✔ 友 链 →',
-                    link: '/other/friends',
-                }, {
                     text: 'Java SE API Documentation',
                     link: 'https://docs.oracle.com/javase/8/docs/api/index.html',
                 }, {
