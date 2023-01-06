@@ -7,10 +7,10 @@ module.exports = [
             {
                 text: 'Projects🎈',
                 items: [{
-                    text: '✔ My Project',
+                    text: '✔ My Project ✨',
                     link: '/other/project',
                 }, {
-                    text: '✔ 友情链接 →',
+                    text: '✔ 友 情 链 接 🎃',
                     link: '/other/friends',
                 }]
             }, {
