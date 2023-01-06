@@ -23,8 +23,7 @@
 
 - 已全局适配`手机模式`和`暗黑模式（iOS自适应）`请自行体验
 
-- 国内访问：[https://zpj80231.gitee.io/znote/](https://zpj80231.gitee.io/znote/) 速度加载会快一点（自Gitee实名认证后已不再同步更新，现在访问还是之前的旧版本）
-
+- 国内访问：[https://zpj80231.gitee.io/znote/](https://zpj80231.gitee.io/znote/) 速度加载会快一点（自Gitee实名认证后已不再同步更新，现在访问还是之前的旧版本）<br/>
   推荐访问：[https://zpj80231.github.io/znote/](https://zpj80231.github.io/znote/)
 
 ![](/docs/.vuepress/public/vuepress/znote.png)
@@ -43,8 +42,8 @@
 
 - 克隆项目，在项目文件夹下执行命令，加载依赖：`npm install`
 
-- 在项目文件夹下（node 16及以下）执行命令，运行项目：`npm run dev`
-  Windows（node 17+）版本以上运行：`npm run dev:win`
+- 在项目文件夹下（node 16及以下）执行命令，运行项目：`npm run dev`<br/>
+  Windows（node 17+）版本以上运行：`npm run dev:win`<br/>
   Mac（node 17+）版本以上运行：`npm run dev:mac`
 
 - 待启动成功后打开地址即可：[http://localhost:8080/znote/](http://localhost:8080/znote/)
