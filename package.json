@@ -1,9 +1,30 @@
 {
+	"name": "znote",
+	"version": "1.0.0",
+	"description": "VuePress 静态布局 Blog，清新+ 简洁+。",
+	"homepage": "https://zpj80231.github.io/znote",
+	"license": "MIT",
+	"keywords": [
+		"vuepress",
+		"vue",
+		"blog",
+		"theme"
+	],
+	"author": {
+		"name": "zpj80231"
+	},
+	"bugs": {
+		"url": "https://github.com/zpj80231/znote/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/zpj80231/znote.git"
+	},
 	"scripts": {
-		"docs:dev": "vuepress dev docs",
+		"dev": "vuepress dev docs",
 		"dev:win": "set NODE_OPTIONS=--openssl-legacy-provider & vuepress dev docs",
 		"dev:mac": "export NODE_OPTIONS=--openssl-legacy-provider & vuepress dev docs",
-		"docs:build": "vuepress build docs",
+		"build": "vuepress build docs",
 		"deploy": "bash deploy.sh"
 	},
 	"dependencies": {
