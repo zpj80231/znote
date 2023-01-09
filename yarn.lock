@@ -1665,13 +1665,13 @@
     "@vuepress/types" "1.9.7"
     nprogress "^0.2.0"
 
-"@vuepress/plugin-pwa@^1.9.7":
-  version "1.9.7"
-  resolved "https://registry.npmmirror.com/@vuepress/plugin-pwa/-/plugin-pwa-1.9.7.tgz"
-  integrity sha512-E8It9+Gbxuorja28Fg/3MtG5JBhdQ4XkuX65uqKl86n2uOjx50Zqndt7MWOzy9bMKzaV7gQw07UbUOMVSgKT0w==
+"@vuepress/plugin-pwa@^1.9.8":
+  version "1.9.8"
+  resolved "https://registry.npmmirror.com/@vuepress/plugin-pwa/-/plugin-pwa-1.9.8.tgz#18823248553479e006799c24d88a2aab387c6421"
+  integrity sha512-XQRLZNTUi9S7Gieo92K9FBxMPCIxJ8gx+i7MFiLnn39todjDtjUC1buuN9vuu3cKbNqUPDhu68g1D9qhDIK+kQ==
   dependencies:
-    "@vuepress/shared-utils" "1.9.7"
-    "@vuepress/types" "1.9.7"
+    "@vuepress/shared-utils" "1.9.8"
+    "@vuepress/types" "1.9.8"
     register-service-worker "^1.7.0"
     workbox-build "^4.3.1"
 
