@@ -154,10 +154,7 @@ publish: true
 在 Blog 搭建中遇到问题，推荐先去以下几个网址找答案：
 
 - vuepress官网：[https://vuepress.vuejs.org/zh/](https://vuepress.vuejs.org/zh/)
--
-
-vuepress自定义开发主题：[https://vuepress.vuejs.org/zh/theme/writing-a-theme.html](https://vuepress.vuejs.org/zh/theme/writing-a-theme.html)
-
+- vuepress自定义开发主题：[https://vuepress.vuejs.org/zh/theme/writing-a-theme.html](https://vuepress.vuejs.org/zh/theme/writing-a-theme.html)
 - vuepress-theme-reco官网：[https://vuepress-theme-reco.recoluan.com/](https://vuepress-theme-reco.recoluan.com/)
 
 如果在博客中遇到什么问题，不要一上来就问我，最好先查下相关资料，实在解决不了的可以找我咨询哈（减少无效沟通嘛），毕竟只有自己淌过的坑才能深入理解、印象深刻！
