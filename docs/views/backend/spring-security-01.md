@@ -1,9 +1,9 @@
 ---
-title: 初识 SpringSecurity
+title: Spring Security 初识
 date: 2021-09-16
 tags:
 - 分布式
-- SpringSecurity
+- Spring Security
 categories:
 - 后端 Back-end
 isShowComments: true
@@ -11,7 +11,7 @@ isShowComments: true
 
 <Boxx/>
 
-spring-security或者说web安全最核心的两个部分即：`认证（Authentication）` 和 `授权（Authorization）。`
+Spring Security或者说web安全最核心的两个部分即：`认证（Authentication）` 和 `授权（Authorization）。`
 
 - 认证：用户是否能登录
 - 授权：用户是否有权限去做某些事情
@@ -273,3 +273,5 @@ public  List<UserInfo>  getTestPreFilter(
 5. 完毕，测试！
 
 这次先简单了解一下SpringSecurity，下次留时间整点高级用法~
+
+<Reward/>
