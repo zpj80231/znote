@@ -2,10 +2,10 @@
 title: zk如何保证一致性及如何选举
 date: 2022-03-08
 tags:
-- 源码分析
-- ZooKeeper
+    - 分布式
+    - ZooKeeper
 categories:
-- 后端 Back-end
+    - 后端 Back-end
 isShowComments: false
 ---
 
