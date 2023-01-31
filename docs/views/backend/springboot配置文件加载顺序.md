@@ -1,8 +1,8 @@
 ---
-title: SpringBoot配置文件加载顺序
+title: Spring Boot 配置文件加载顺序
 date: 2022-04-28
 tags:
-  - springboot
+  - Spring Boot
 categories:
   - 后端 Back-end
 isShowComments: true
