@@ -3,7 +3,7 @@ title: Zookeeper 全解
 date: 2020-12-26
 tags:
     - 分布式
-    - zookeeper
+    - ZooKeeper
 categories:
     - 后端 Back-end
 isShowComments: false
