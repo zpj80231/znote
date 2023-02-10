@@ -1,6 +1,6 @@
 ---
 title: Linux 系统内存不足导致 Java 进程被杀掉
-date: 2022-12-19
+date: 2023-01-12
 tags:
  - linux
 categories:
