@@ -20,7 +20,7 @@ jobs:
           persist-credentials: false
 
       - name: Build
-        run: npm install -g yarn && yarn install && yarn run build
+        run: export NODE_OPTIONS=--openssl-legacy-provider && npm install -g yarn && yarn install && yarn run build
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@releases/v3
