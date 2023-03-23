@@ -46,7 +46,7 @@ Spring 也提供了 Web 支持，包括 MVC 架构和 RESTful 服务等。在设
 
 对 Spring 中的核心类：DefaultListableBeanFactory 做一个简单初步的实现：
 
-定义一些职责和能力：
+### 定义一些职责和能力：
 
 1. BeanFactory：提供获取 Bean 的能力；
 
@@ -57,7 +57,7 @@ Spring 也提供了 Web 支持，包括 MVC 架构和 RESTful 服务等。在设
 
 4. BeanDefinitionRegistry：提供注册 BeanDefinition 的能力；
 
-具体的实现：
+### 具体的实现：
 
 1. DefaultSingletonBeanRegistry： implements SingletonBeanRegistry， 实现了 单例Bean 的添加，获取；
 
@@ -70,7 +70,11 @@ Spring 也提供了 Web 支持，包括 MVC 架构和 RESTful 服务等。在设
 4. ★ DefaultListableBeanFactory：extends AbstractAutowireCapableBeanFactory implements BeanDefinitionRegistry， 实现注册
    BeanDefinition 的能力，获得一个 Bean 的能力；
 
-测试：
+### 将实现加入原有的逻辑中：
+
+- 无
+
+### 测试：
 
 ```java
 public void testDefaultListableBeanFactory(){
@@ -92,7 +96,7 @@ public void testDefaultListableBeanFactory(){
 
 上述方式只支持默认的无参构造实例化 Bean。
 
-定义一些职责和能力：
+### 定义一些职责和能力：
 
 1. InstantiationStrategy：要想容器支持对 Bean的有参构造器 实例化的方式，需要定义一个实例化策略接口 InstantiationStrategy，当然，定义这个 InstantiationStrategy 策略接口也是为了支持不同实例化方式方便扩展。
 
@@ -104,17 +108,17 @@ public void testDefaultListableBeanFactory(){
 - Constructor：通过哪个构造方法实例化
 - args：构造方法的参数
 
-具体的实现：
+### 具体的实现：
 
 - SimpleInstantiationStrategy：JDK 实例化策略
 
 - CglibSubclassingInstantiationStrategy：cglib 实例化策略
 
-将实现加入原有的逻辑中：
+### 将实现加入原有的逻辑中：
 
 1. AbstractAutowireCapableBeanFactory：修改 createBean(String beanName, BeanDefinition beanDefinition) 实现，加入支持有参构造的实例化策略  createBeanInstance(beanDefinition, beanName, args);。
 
-测试：
+### 测试：
 
 ```java
 @Test
@@ -137,23 +141,23 @@ public void testDefaultListableBeanFactoryGetBeanWithConstructor(){
 
 完成 Bean 的实例化之后，进行 Bean 的属性填充。
 
-定义一些职责和能力：
+### 定义一些职责和能力：
 
 - 无
 
-具体的实现：
+### 具体的实现：
 
 1. PropertyValue：将一个 Bean 本身的 字段名、字段值映射为一个 PropertyValue；
 2. PropertyValues：当一个 Bean 有多个字段时，将 PropertyValue 保存为一个集合；
 3. BeanReference：属性填充时可能遇到 Bean 的依赖，A 依赖 B, B 依赖 C, 循环调用实例化，主要解决 Bean依赖 问题的属性填充；
 
-将实现加入原有的逻辑中：
+### 将实现加入原有的逻辑中：
 
 1. BeanDefinition：之前只保存了实例化的类型Class（实例化用），现在将 PropertyValues 也填充进去（属性填充用）；
 2. AbstractAutowireCapableBeanFactory：修改 createBeanInstance(String beanName, BeanDefinition beanDefinition, Object[] args)
    加入属性填充步骤 applyPropertyValues(beanName, bean, beanDefinition)；
 
-测试：
+### 测试：
 
 ```java
  @Test
