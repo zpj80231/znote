@@ -49,6 +49,7 @@ module.exports = {
             collapsable: true,
             children: [
                 'backend/spring-source-01',
+                'backend/spring-source-02',
                 'backend/ArrayList',
                 'backend/HashMap',
                 'backend/docker',
