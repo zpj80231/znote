@@ -50,6 +50,7 @@ module.exports = {
             children: [
                 'backend/spring-source-01',
                 'backend/spring-source-02',
+                'backend/spring-source-03',
                 'backend/ArrayList',
                 'backend/HashMap',
                 'backend/docker',
