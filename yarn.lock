@@ -3584,6 +3584,11 @@
   "resolved" "https://registry.npmmirror.com/deepmerge/-/deepmerge-1.5.2.tgz"
   "version" "1.5.2"
 
+"deepmerge@^4.2.2":
+  "integrity" "sha512-3sUqbMEc77XqpdNO7FRyRog+eW3ph+GYCbj+rK+uYyRMuwsVy0rMiVtPn+QJlKFvWP/1PYpapqYn0Me2knFn+A=="
+  "resolved" "https://registry.npmmirror.com/deepmerge/-/deepmerge-4.3.1.tgz"
+  "version" "4.3.1"
+
 "default-gateway@^4.2.0":
   "integrity" "sha512-h6sMrVB1VMWVrW13mSc6ia/DwYYw5MN6+exNu1OaJeFac5aSAvwM7lZ0NVfTABuSkQelr4h5oebg3KB1XPdjgA=="
   "resolved" "https://registry.npmmirror.com/default-gateway/-/default-gateway-4.2.0.tgz"
@@ -4384,6 +4389,11 @@
     "locate-path" "^5.0.0"
     "path-exists" "^4.0.0"
 
+"flexsearch@^0.6.32":
+  "integrity" "sha512-EF1BWkhwoeLtbIlDbY/vDSLBen/E5l/f1Vg7iX5CDymQCamcx1vhlc3tIZxIDplPjgi0jhG37c67idFbjg+v+Q=="
+  "resolved" "https://registry.npmmirror.com/flexsearch/-/flexsearch-0.6.32.tgz"
+  "version" "0.6.32"
+
 "flowchart.js@^1.11.3":
   "integrity" "sha512-zphTaxdyqvHHu+8Cdf6HvamhArXpq9SyNe1zQ61maCIfTenaj3cMvjS1e/0gfPj7QTLTx3HroSzVqDXpL8naoQ=="
   "resolved" "https://registry.npmmirror.com/flowchart.js/-/flowchart.js-1.17.1.tgz"
@@ -4952,6 +4962,16 @@
   "integrity" "sha512-vy7ClnArOZwCnqZgvv+ddgHgJiAFXe3Ge9ML5/mBctVJoUoYPCdxVucOywjDARn6CVoh3dRSFdPHy2sX80L0Wg=="
   "resolved" "https://registry.npmmirror.com/html-tags/-/html-tags-3.2.0.tgz"
   "version" "3.2.0"
+
+"html-to-text@^7.0.0":
+  "integrity" "sha512-bnQRVDGgprdYkDRme4BH5xTxFo9ESorrfMHBWjtdgNVGkthXXQIGbmp3PRIjJVcaCP4mJMSuXtBi/lHqUCHUzw=="
+  "resolved" "https://registry.npmmirror.com/html-to-text/-/html-to-text-7.1.3.tgz"
+  "version" "7.1.3"
+  dependencies:
+    "deepmerge" "^4.2.2"
+    "he" "^1.2.0"
+    "htmlparser2" "^6.1.0"
+    "minimist" "^1.2.6"
 
 "htmlparser2@^6.1.0":
   "integrity" "sha512-gyyPk6rgonLFEDGoeRgQNaEUvdJ4ktTmmUh/h2t7s+M8oPpIPxgNACWa+6ESR57kXstwqPiCut0V8NRpcwgU7A=="
@@ -6009,7 +6029,7 @@
   "resolved" "https://registry.npmmirror.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz"
   "version" "4.5.0"
 
-"lodash@^4.17.10", "lodash@^4.17.11", "lodash@^4.17.14", "lodash@^4.17.15", "lodash@^4.17.20", "lodash@^4.17.21", "lodash@^4.17.3", "lodash@^4.17.5":
+"lodash@^4.17.10", "lodash@^4.17.11", "lodash@^4.17.14", "lodash@^4.17.15", "lodash@^4.17.19", "lodash@^4.17.20", "lodash@^4.17.21", "lodash@^4.17.3", "lodash@^4.17.5":
   "integrity" "sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg=="
   "resolved" "https://registry.npmmirror.com/lodash/-/lodash-4.17.21.tgz"
   "version" "4.17.21"
@@ -9370,6 +9390,15 @@
   dependencies:
     "flowchart.js" "^1.11.3"
 
+"vuepress-plugin-fulltext-search@^2.2.1":
+  "integrity" "sha512-+BOLOdOTvwg7+4z71fmpuZUaHSw+exrw8S9m0kvBUgIVDoe5VS/G3y4hcd+K1hukbkxE/ec10Ikk8hc/3zf2VQ=="
+  "resolved" "https://registry.npmmirror.com/vuepress-plugin-fulltext-search/-/vuepress-plugin-fulltext-search-2.2.1.tgz"
+  "version" "2.2.1"
+  dependencies:
+    "flexsearch" "^0.6.32"
+    "html-to-text" "^7.0.0"
+    "lodash" "^4.17.19"
+
 "vuepress-plugin-mailchimp@^1.4.1":
   "integrity" "sha512-4t5ZaKZXu5ZkwgE+WW//7CgXgz6DEhRefGrO5aql4PwapauNXlHKgQ2JMf9FRe5y5WHjNpDHYveEDNzISZmxJw=="
   "resolved" "https://registry.npmmirror.com/vuepress-plugin-mailchimp/-/vuepress-plugin-mailchimp-1.4.2.tgz"
@@ -9422,7 +9451,7 @@
     "vue-click-outside" "1.1.0"
     "vuepress-plugin-smooth-scroll" "^0.0.9"
 
-"vuepress@^1.0.0", "vuepress@^1.9.8", "vuepress@1.x":
+"vuepress@^1.0.0", "vuepress@^1.4.0", "vuepress@^1.9.8", "vuepress@1.x":
   "integrity" "sha512-bjfSSRHlpxsZIrJo4Ds0mjt01lwC5H/a7ynDqub4zgXl7/osSsM6GmEgIqlc8oMAQ7j3nY7EBsHdAyrQamPjwA=="
   "resolved" "https://registry.npmmirror.com/vuepress/-/vuepress-1.9.8.tgz"
   "version" "1.9.8"
