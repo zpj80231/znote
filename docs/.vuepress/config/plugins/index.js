@@ -65,22 +65,13 @@ module.exports = [
     //   }
     // ],
 
-    'flowchart',
-    "vuepress-plugin-boxx",
-    ['vuepress-plugin-smooth-scroll'],
-    //'vuepress-plugin-catalog-graph',
-    // ["vuepress-plugin-auto-sidebar", {
-    //     titleMap: {
-    //         "backend": "🎉 Hello Vuepress 🎉",
-    //         "qaq": "🎉 Auto Sidebar 🎉"
-    //     }
-    // }],
     require('../../plugins/detailsOpenFlag/index'),
     require('../../plugins/musicPlayer/index'),
     require('../../plugins/notification/index'),
-
-    [require('../../plugins/enhanced-search'), { // 可以添加第三方搜索链接的搜索框（原官方搜索框的参数仍可用）
-        thirdparty: [ // 可选，默认 []
+    // 可以添加第三方搜索链接的搜索框（原官方搜索框的参数仍可用）
+    [require('../../plugins/enhanced-search'), {
+        // 可选，默认 []
+        thirdparty: [
             {
                 title: '在 <span style="color: blue; ">Baidu</span> &nbsp;&nbsp;中搜索 ',
                 frontUrl: 'https://www.baidu.com/s?wd=',
@@ -92,20 +83,16 @@ module.exports = [
         ]
     }],
 
-    ['one-click-copy', {
-        copySelector: ['div[class*="language-"] pre', 'div[class*="aside-code"] aside'], // String or Array
-        copyMessage: 'Copied successfully!', // default is 'Copied successfully!'
-        toolTipMessage: 'Copy to clipboard', // default is ''Copy to clipboard'
-        duration: 800, // prompt message display time
-    }],
-    // ['vuepress-plugin-code-copy', {align: "top", staticIcon: true}],
-
+    ['flowchart'],
+    ["vuepress-plugin-boxx"],
+    ['vuepress-plugin-smooth-scroll'],
+    ['vuepress-plugin-code-copy', {align: "bottom", staticIcon: false}],
     ['copyright',{
         minLength: 10,
         clipboardComponent: path.resolve(__dirname, '../../components/Copyright.vue')
     },],
-
-    ['@vuepress/last-updated', { // "上次更新"时间格式
+    ['@vuepress/last-updated', {
+        // "上次更新"时间格式
         transformer: (timestamp, lang) => {
             const moment = require('moment') // https://momentjs.com/
             return moment(timestamp).utcOffset(480).format('YYYY/MM/DD, HH:mm:ss');
