@@ -89,7 +89,12 @@ module.exports = {
   },
   plugins,
   markdown: {
-    lineNumbers: true
+    lineNumbers: true,
+    // Markdown 文件的 headers (标题 & 小标题) 修改提取出的标题级别
+    extractHeaders: ['h2', 'h3', 'h4'],
+    extendMarkdown: md => {
+      md.use(require("markdown-it-disable-url-encode"));
+    }
   },
 
 }
