@@ -68,6 +68,7 @@ module.exports = [
     require('../../plugins/detailsOpenFlag/index'),
     require('../../plugins/musicPlayer/index'),
     require('../../plugins/notification/index'),
+    /*
     // 可以添加第三方搜索链接的搜索框（原官方搜索框的参数仍可用）
     [require('../../plugins/enhanced-search'), {
         // 可选，默认 []
@@ -82,10 +83,12 @@ module.exports = [
             }
         ]
     }],
+    */
 
     ['flowchart'],
     ["vuepress-plugin-boxx"],
     ['vuepress-plugin-smooth-scroll'],
+    ['vuepress-plugin-fulltext-search'],
     ['vuepress-plugin-code-copy', {align: "bottom", staticIcon: false}],
     ['copyright',{
         minLength: 10,
