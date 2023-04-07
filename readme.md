@@ -23,7 +23,7 @@
 
 - 推荐访问：[https://zpj80231.github.io/znote/](https://zpj80231.github.io/znote/)
 
-  国内访问：https://zpj80231.gitee.io/znote/](https://zpj80231.gitee.io/znote/) 速度加载会快一点（自Gitee实名认证后已不再同步更新，现在访问还是之前的旧版本）
+  国内访问：[https://zpj80231.gitee.io/znote/](https://zpj80231.gitee.io/znote/) 速度加载会快一点（自Gitee实名认证后已不再同步更新，现在访问还是之前的旧版本）
 
 - 说明：音乐播放器插件目前在外网环境下可以正常使用（使用的网易云API）
 
@@ -50,11 +50,9 @@
 
 - 克隆项目，在项目文件夹下执行命令，加载依赖：`npm install`
 
-- 在项目文件夹下（node 16及以下）执行命令，运行项目：`npm run dev`
+- 在项目文件夹下执行命令，运行项目：`npm run dev`
 
-  Windows（node 17+）版本以上运行：`npm run dev:win`
-
-  Mac（node 17+）版本以上运行：`npm run dev:mac`
+  在 Mac 上运行：`npm run dev:mac`
 
 - 待启动成功后打开地址即可：[http://localhost:8080/znote/](http://localhost:8080/znote/)
 
