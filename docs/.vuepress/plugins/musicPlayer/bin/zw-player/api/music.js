@@ -1,6 +1,5 @@
 import axios from 'axios'
-// const baseUrl = 'https://cloud-music-api-lyart.vercel.app/';
-const baseUrl = 'https://api-music.imsyy.top/';
+const baseUrl = 'https://neteasecloudmusicapi-zpj80231.vercel.app/';
 
 //获取歌词
 export const getWords=(id)=>{
