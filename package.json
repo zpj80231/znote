@@ -21,8 +21,7 @@
 		"url": "git+https://github.com/zpj80231/znote.git"
 	},
 	"scripts": {
-		"dev": "vuepress dev docs",
-		"dev:win": "set NODE_OPTIONS=--openssl-legacy-provider & vuepress dev docs",
+		"dev": "set NODE_OPTIONS=--openssl-legacy-provider & vuepress dev docs",
 		"dev:mac": "export NODE_OPTIONS=--openssl-legacy-provider & vuepress dev docs",
 		"build": "vuepress build docs",
 		"deploy": "bash deploy.sh"
