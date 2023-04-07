@@ -1,6 +1,6 @@
 # znote
 
- - 积丝成寸，积寸成尺；寸尺水已，遂成丈匹。
+ - 积丝成寸，积寸成尺；寸尺水已，遂成丈匹
 
 
 
@@ -19,13 +19,20 @@
 
 
 
+- 已全局适配 `手机模式` 和 `暗黑模式（iOS自适应）` 请自行体验
+
+- 推荐访问：[https://zpj80231.github.io/znote/](https://zpj80231.github.io/znote/)
+
+  国内访问：https://zpj80231.gitee.io/znote/](https://zpj80231.gitee.io/znote/) 速度加载会快一点（自Gitee实名认证后已不再同步更新，现在访问还是之前的旧版本）
+
+- 说明：音乐播放器插件目前在外网环境下可以正常使用（使用的网易云API）
+
+  验证播放器是否可用：能打开这个网站即可正常使用 --> [点击测试](https://neteasecloudmusicapi-zpj80231.vercel.app/search?keywords=%E6%B5%B7%E9%98%94%E5%A4%A9%E7%A9%BA)  
+
+  > 因为依赖项目 [NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusicApi) 使用 [Vercel](https://vercel.com/) 免费部署。而 Vercel 目前对国内网络不开放，所以要么自行搭建 NeteaseCloudMusicApi，要么使用魔法。
+
+
 - 本仓库代码使用 [MIT](https://github.com/SigureMo/notev/blob/master/LICENSE) 协议进行开源，但是全部文档内容使用 [CC 4.0 BY-SA](https://creativecommons.org/licenses/by-sa/4.0/) 协议进行发布
-
-- 已全局适配`手机模式`和`暗黑模式（iOS自适应）`请自行体验
-
-- 国内访问：[https://zpj80231.gitee.io/znote/](https://zpj80231.gitee.io/znote/) 速度加载会快一点（自Gitee实名认证后已不再同步更新，现在访问还是之前的旧版本）
-
-  推荐访问：[https://zpj80231.github.io/znote/](https://zpj80231.github.io/znote/)
 
 ![](/docs/.vuepress/public/vuepress/znote.png)
 
@@ -85,7 +92,7 @@ Dev
 
 下面是关键字说明及参考示例：
 
-1. 关键字说明
+### 关键字说明
 
 | 序号 | 关键字          | 注释                                        |
 | ---- | --------------- | ------------------------------------------- |
@@ -101,7 +108,7 @@ Dev
 | 10   | `[[toc]]`       | 生成目录及链接                              |
 | 11   | `<!-- more -->` | 在`<!-- more -->`之前的内容会展示为文章摘要 |
 
-2. 参考示例：
+### 参考示例
 
 ```yaml
 ---
