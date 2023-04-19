@@ -53,6 +53,7 @@ module.exports = {
                 'backend/spring-source-03',
                 'backend/spring-source-04',
                 'backend/spring-source-05',
+                'backend/spring-source-06',
                 'backend/ArrayList',
                 'backend/HashMap',
                 'backend/docker',
