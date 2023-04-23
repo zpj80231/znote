@@ -1,6 +1,9 @@
 {
   "name": "znote",
   "short_name": "znote",
+  "manifest_version": 2,
+  "version": "1.1.0",
+  "homepage_url": "https://zpj80231.github.io/znote/",
   "icons": [
     {
       "src": "/znote/vuepress/android-chrome-192x192.png",
@@ -13,7 +16,7 @@
       "type": "image/png"
     }
   ],
-  "start_url": "/index.html",
+  "start_url": "/znote/index.html",
   "display": "standalone",
   "background_color": "#fff",
   "theme_color": "#42b983"
