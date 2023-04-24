@@ -13,12 +13,12 @@ module.exports = [
     ['container', {
         type: 'right',
         defaultTitle: '',
-    },],
+    }],
     ['container', {
         type: 'theorem',
         before: info => `<div class="theorem"><p class="title">${info}</p>`,
         after: '</div>',
-    },],
+    }],
     ['container', {// 卡片列表
         type: CARD_LIST,
         render: (tokens, idx) => {
@@ -30,14 +30,13 @@ module.exports = [
             // 注意：修改这里面的代码后需要在md文件保存一下才会重新执行渲染
             return renderCardList(tokens, idx, CARD_LIST)
         }
-    },],
+    }],
     ['container', {// 图文卡片列表
             type: CARD_IMG_LIST,
             render: (tokens, idx) => {
                 return renderCardList(tokens, idx, CARD_IMG_LIST)
             }
-    },],
-
+    }],
     ['@vuepress/pwa', {
         serviceWorker: true,
         updatePopup: {
@@ -45,25 +44,18 @@ module.exports = [
             buttonText: "刷新"
         }
     }],
-
-    ['@vuepress/google-analytics',
-        {
+    ['@vuepress/google-analytics', {
             ga: 'UA-128189152-1'
         }
     ],
-
-    // [
-    //   '@vuepress/plugin-register-components',
-    //   {
-    //     components: [
-    //       {
-    //         name: 'reco-home-page-one',
-    //         path: path.resolve(__dirname, './components/HomePageOne.vue')
-    //       }
-    //     ],
-    //     componentsDir: path.resolve(__dirname, './demo')
-    //   }
-    // ],
+    ['sitemap', {
+            hostname: "https://zpj80231.github.io/znote/",
+            exclude: ['/404.html'],
+            dateFormatter: time => {
+                return time
+            }
+        }
+    ],
 
     require('../../plugins/detailsOpenFlag/index'),
     require('../../plugins/musicPlayer/index'),
@@ -85,19 +77,17 @@ module.exports = [
     }],
     */
 
-    ['flowchart'],
-    ["vuepress-plugin-boxx"],
+    ['vuepress-plugin-boxx'],
     ['vuepress-plugin-smooth-scroll'],
     ['vuepress-plugin-fulltext-search'],
     ['vuepress-plugin-code-copy', {align: "bottom", staticIcon: false}],
     ['copyright',{
-        minLength: 10,
+        minLength: 100,
         clipboardComponent: path.resolve(__dirname, '../../components/Copyright.vue')
     },],
     ['@vuepress/last-updated', {
-        // "上次更新"时间格式
         transformer: (timestamp, lang) => {
-            const moment = require('moment') // https://momentjs.com/
+            const moment = require('moment')
             return moment(timestamp).utcOffset(480).format('YYYY/MM/DD, HH:mm:ss');
         }
     }]
