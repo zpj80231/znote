@@ -30,10 +30,17 @@ export default {
       dom.setAttribute('src', '//qzonestyle.gtimg.cn/qzone/hybrid/app/404/search_children.js')
       document.body.append(dom)
     }
+    this.jump()
   },
   methods: {
     getMsg () {
       return msgs[Math.floor(Math.random() * msgs.length)]
+    },
+    jump() {
+      setTimeout(() => {
+        console.log(this.$site.base);
+        location.href = this.$site.base;
+      }, 3000)
     }
   }
 }
