@@ -1,6 +1,6 @@
 {
 	"name": "znote",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"description": "VuePress 静态布局 Blog，清新+ 简洁+。",
 	"homepage": "https://zpj80231.github.io/znote",
 	"license": "MIT",
@@ -27,7 +27,6 @@
 		"deploy": "bash deploy.sh"
 	},
 	"dependencies": {
-		"@vuepress-reco/vuepress-plugin-rss": "1.0.2",
 		"@vuepress/plugin-google-analytics": "1.9.8",
 		"@vuepress/plugin-medium-zoom": "^1.9.8",
 		"@vuepress/plugin-pwa": "^1.9.8",
@@ -42,7 +41,6 @@
 		"vuepress-plugin-code-copy": "^1.0.6",
 		"vuepress-plugin-container": "^2.1.5",
 		"vuepress-plugin-copyright": "^1.0.2",
-		"vuepress-plugin-flowchart": "1.5.0",
 		"vuepress-plugin-fulltext-search": "^2.2.1",
 		"vuepress-plugin-sitemap": "2.3.1",
 		"vuepress-plugin-smooth-scroll": "^0.0.10",
