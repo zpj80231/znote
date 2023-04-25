@@ -1,14 +1,16 @@
-name: Dependabot auto-merge
+name: Dependabot Auto Merge
 
 on:
   pull_request:
+  status: {}
 
 permissions:
   pull-requests: write
   contents: write
 
 jobs:
-  worker:
+  automerge:
+    name: Automerge PRs
     runs-on: ubuntu-latest
     if: ${{ github.actor == 'dependabot[bot]' }}
     steps:
@@ -16,7 +18,7 @@ jobs:
         id: waitforstatuschecks
         uses: WyriHaximus/github-action-wait-for-status@v1.7.1
         with:
-          ignoreActions: worker
+          ignoreActions: "Automerge PRs"
           checkInterval: 60
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
@@ -26,3 +28,4 @@ jobs:
         if: steps.waitforstatuschecks.outputs.status == 'success'
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          LABELS: automerge
