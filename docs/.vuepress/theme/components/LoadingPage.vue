@@ -3,72 +3,75 @@
     <h3 class="title" v-if="$site">{{$site.title}}</h3>
     <p class="description" v-if="$site">{{$site.description}}</p>
     <div class="loading">
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
+      <span
+        :style="{
+          width: '20px',
+          animationDuration:
+            duration.indexOf('s') === -1 ? duration + 's' : duration,
+          animationDelay: (parseInt(duration) / text.length) * index + 's',
+        }"
+        v-for="(char, index) in text"
+        :key="index"
+      >
+        {{ char }}
+      </span>
     </div>
   </div>
 </template>
 
 <script>
-
+export default {
+  props: {
+    text: {
+      type: String,
+      default: "Loading...",
+    },
+    duration: {
+      type: String,
+      default: "2s",
+    },
+  },
+};
 </script>
 
 <style lang="stylus" scoped>
 #loader-wrapper
   height: 100%;
   width: 100%;
-  background #fff
   background var(--background-color)
   .loading{
+    width 200px
     margin 5rem auto
+    display: flex;
     text-align center
-    padding 0 10px
+    justify-content: space-between;
+    background #23#0aafe6
   }
   .loading span{
-    display: inline-block;
-    width: 8px;
+    display: block;
     height: 100%;
     border-radius: 4px;
-    background: lightgreen;
-    -webkit-animation: load 1s ease infinite;
-    animation: load 1s ease infinite;
+    animation: ease infinite move;
   }
-  @-webkit-keyframes load{
-    0%,100%{
-      height: 40px;
-      background: lightgreen;
+  @keyframes move {
+    0% {
+      margin-top: -10px;
+      border-bottom: 1px solid;
     }
-    50%{
-      height: 70px;
-      margin: -15px 0;
-      background: lightblue;
+    50% {
+      margin-top: 10px;
+      border-bottom: none;
     }
-  }
-  .loading span:nth-child(2){
-    -webkit-animation-delay:0.2s;
-    animation-delay:0.2s;
-  }
-  .loading span:nth-child(3){
-    -webkit-animation-delay:0.4s;
-    animation-delay:0.4s;
-  }
-  .loading span:nth-child(4){
-    -webkit-animation-delay:0.6s;
-    animation-delay:0.6s;
-  }
-  .loading span:nth-child(5){
-    -webkit-animation-delay:0.8s;
-    animation-delay:0.8s;
+    100% {
+      margin-top: -10px;
+    }
   }
   .title
-    margin 12rem auto 1rem
+    margin 15% auto 1rem
     text-align center
     color $textColor
     color var(--text-color)
-    font-size 30px
+    font-size 40px
     box-sizing: border-box;
     padding: 0 10px;
     text-shadow 0 2px 10px rgba(0,0,0,0.2)
@@ -77,7 +80,7 @@
     text-align center
     color $textColor
     color var(--text-color)
-    font-size 22px
+    font-size 25px
     box-sizing: border-box;
     padding: 0 10px;
     text-shadow 0 2px 10px rgba(0,0,0,0.2);
