@@ -8,6 +8,7 @@
 		"vuepress",
 		"vue",
 		"blog",
+		"znote",
 		"theme"
 	],
 	"author": {
