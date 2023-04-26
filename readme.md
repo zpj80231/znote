@@ -1,8 +1,6 @@
 # znote
 
- - 积丝成寸，积寸成尺；寸尺水已，遂成丈匹
-
-
+- 积丝成寸，积寸成尺；寸尺水已，遂成丈匹
 
 <p align="center">
    <a href="https://zpj80231.github.io/znote/views/specification/guide.html" target="_blank"><img alt="Read the Docs" src="https://img.shields.io/badge/Docs-GetStarted-red?style=flat-square&logo=buffer"></a>
@@ -17,21 +15,16 @@
    <a href="https://zpj80231.gitee.io/znote/"><img alt="znote site" src="https://img.shields.io/badge/znote-pages-a06bc1?style=flat-square&logo=zulip"></a>
 </p>
 
-
-
 - 已全局适配 `手机模式` 和 `暗黑模式（iOS自适应）` 请自行体验
 
 - 推荐访问：[https://zpj80231.github.io/znote/](https://zpj80231.github.io/znote/)
-
-  国内访问：[https://zpj80231.gitee.io/znote/](https://zpj80231.gitee.io/znote/) 速度加载会快一点（自Gitee实名认证后已不再同步更新，现在访问还是之前的旧版本）
+  国内访问：[https://zpj80231.gitee.io/znote/](https://zpj80231.gitee.io/znote/) （自Gitee实名认证后已不再同步更新，现在访问还是之前的旧版本）
 
 - 说明：音乐播放器插件目前在外网环境下可以正常使用（使用的网易云API）
-
   验证播放器是否可用：能打开这个网站即可正常使用 --> [点击测试](https://neteasecloudmusicapi-zpj80231.vercel.app/search?keywords=%E6%B5%B7%E9%98%94%E5%A4%A9%E7%A9%BA)  
-
+  
   > 因为依赖项目 [NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusicApi) 使用 [Vercel](https://vercel.com/) 免费部署。而 Vercel 目前对国内网络不开放，所以要么自行搭建 NeteaseCloudMusicApi，要么使用魔法。
-
-
+  
 - 本仓库代码使用 [MIT](https://github.com/SigureMo/notev/blob/master/LICENSE) 协议进行开源，但是全部文档内容使用 [CC 4.0 BY-SA](https://creativecommons.org/licenses/by-sa/4.0/) 协议进行发布
 
 ![](/docs/.vuepress/public/vuepress/znote.png)
@@ -39,21 +32,15 @@
 ## 项目介绍
 
 - 记录生产级别问题排查处理（工作经验）
-
 - 技术栈知识点笔记总结（知识小结）
-
 - 个人牢骚发布（生活随笔）
-
 - 其它（欢迎入队）...
 
 ## 项目运行
 
 - 克隆项目，在项目文件夹下执行命令，加载依赖：`npm install`
-
 - 在项目文件夹下执行命令，运行项目：`npm run dev`
-
   在 Mac 上运行：`npm run dev:mac`
-
 - 待启动成功后打开地址即可：[http://localhost:8080/znote/](http://localhost:8080/znote/)
 
 ## 项目架构
