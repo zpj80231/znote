@@ -5,7 +5,6 @@
     <div class="loading">
       <span
         :style="{
-          width: '20px',
           animationDuration:
             duration.indexOf('s') === -1 ? duration + 's' : duration,
           animationDelay: (parseInt(duration) / text.length) * index + 's',
@@ -49,7 +48,8 @@ export default {
   }
   .loading span{
     display: block;
-    height: 100%;
+    width: 20px;
+    height: 22px;
     border-radius: 4px;
     animation: ease infinite move;
   }
