@@ -40,7 +40,7 @@ export default {
       setTimeout(() => {
         console.log(this.$site.base);
         location.href = this.$site.base;
-      }, 3000)
+      }, 5000)
     }
   }
 }
