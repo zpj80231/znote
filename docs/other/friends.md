@@ -98,8 +98,8 @@ reward: true
 ```yaml
 - name: znote
   desc: 荷尽已无擎雨盖，菊残犹有傲霜枝
-  avatar: https://zpj80231.gitee.io/znote/vuepress/head-fish.jpg
-  link: https://zpj80231.gitee.io/znote/
+  avatar: https://zpj80231.github.io/znote/vuepress/head-fish.jpg
+  link: https://zpj80231.github.io/znote/
   bgColor: '#FCDBA0'
   textColor: '#A05F2C'
 ```

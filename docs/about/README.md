@@ -7,7 +7,7 @@ isShowComments: true
 
 <p align="center"><img style="border-radius:41%;pointer-events:none;transform: scale(0.9);" :src="$withBase('/vuepress/head-fish.jpg')" alt="znote-head" width=160></p>
 <p align="center" style="margin-top: -15px;">
-  <a href="https://zpj80231.gitee.io/znote/" class="zi zi_textbook"></a> 
+  <a href="https://zpj80231.github.io/znote/" class="zi zi_textbook"></a> 
   <a href="mailto:zpj80231@163.com" class="zi zi_envelope"></a> 
   <a href="https://github.com/zpj80231" class="zi zi_tmGithub"></a>
   <a href="https://twitter.com/zpj80231" class="zi zi_tmTwitter"></a>
@@ -19,7 +19,7 @@ isShowComments: true
 世界上最远的距离，是我在 if 里你在 else 里，虽然经常一起出现，但却永不结伴执行。
 
 ::: right
-来自 [ZNOTE](https://zpj80231.gitee.io/znote/)
+来自 [ZNOTE](https://zpj80231.github.io/znote/)
 :::
 
 ## 一句话
@@ -46,7 +46,7 @@ isShowComments: true
 
 ## 社区
 
-- 博客：[https://zpj80231.gitee.io/znote](https://zpj80231.gitee.io/znote)
+- 博客：[https://zpj80231.github.io/znote](https://zpj80231.github.io/znote)
 - Github：[https://github.com/zpj80231](https://github.com/zpj80231)
 
 ## 部落
