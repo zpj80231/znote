@@ -2,9 +2,9 @@
   <div class="footer-wrapper">
     <span>
       <i class="iconfont reco-theme"></i>
-      <a target="blank" href="https://zpj80231.gitee.io/znote/">
+      <a target="blank" href="https://zpj80231.github.io/znote/">
         Powered by
-        <a href="https://zpj80231.gitee.io/znote/"><b>znote</b></a>
+        <a href="https://zpj80231.github.io/znote/"><b>znote</b></a>
       </a>
     </span>
     <span v-if="$themeConfig.record">
