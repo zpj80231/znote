@@ -2,6 +2,21 @@ name: Dependabot Auto Merge
 
 on:
   pull_request:
+    types:
+      - labeled
+      - unlabeled
+      - synchronize
+      - opened
+      - edited
+      - ready_for_review
+      - reopened
+      - unlocked
+  pull_request_review:
+    types:
+      - submitted
+  check_suite:
+    types:
+      - completed
   status: {}
 
 permissions:
@@ -22,10 +37,14 @@ jobs:
           checkInterval: 60
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-
-      - name: Merge
-        uses: pascalgn/automerge-action@v0.4.0
+      - name: Auto merge
+        id: automerge
+        uses: pascalgn/automerge-action@v0.15.6
         if: steps.waitforstatuschecks.outputs.status == 'success'
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-          LABELS: automerge
+          MERGE_LABELS: ""
+      - name: Feedback
+        if: steps.automerge.outputs.mergeResult == "merged"
+        run: |
+          echo "Pull request ${{ steps.automerge.outputs.pullRequestNumber }} merged!"
