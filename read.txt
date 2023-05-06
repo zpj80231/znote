@@ -1,3 +1,0 @@
-reco_luan：
-1.目前没有暴露reject命令，如果需要的话可以手动把主题文件放到 .vuepress/theme 目录下，注意主题引用的依赖放到项目根目录的package.json中，并无将无法接收后续的更新！
-2.想直接使用html文件的话将html文件放在 .vuepress/public 目录下
