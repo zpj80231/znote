@@ -6,24 +6,36 @@ on:
     branches:
       - master
 
+# 环境变量
+env:
+  TZ: Asia/Shanghai
+
 # 任务
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [ 15.9.0 ]
+        node-version: [ 16 ]
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3
         with:
           persist-credentials: false
 
-      - name: Build
-        run: export NODE_OPTIONS=--openssl-legacy-provider && npm install -g yarn && yarn install && yarn run build
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
 
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@releases/v3
+      - name: Build 🔧
+        run: |
+          export NODE_OPTIONS=--openssl-legacy-provider 
+          npm install 
+          npm run build
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@releases/v4
         with:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           BRANCH: gh-pages
