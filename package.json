@@ -25,7 +25,7 @@
 		"dev": "set NODE_OPTIONS=--openssl-legacy-provider & vuepress dev docs",
 		"dev:mac": "export NODE_OPTIONS=--openssl-legacy-provider & vuepress dev docs",
 		"build": "vuepress build docs",
-		"deploy": "bash deploy.sh"
+		"deploy": "bash ./utils/deploy.sh"
 	},
 	"dependencies": {
 		"@vuepress/plugin-google-analytics": "1.9.8",
