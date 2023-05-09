@@ -24,7 +24,7 @@ permissions:
   contents: write
 
 jobs:
-  automerge:
+  automergejob:
     name: Automerge PRs
     runs-on: ubuntu-latest
     if: ${{ github.actor == 'dependabot[bot]' }}
@@ -45,6 +45,6 @@ jobs:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
           MERGE_LABELS: ""
       - name: Feedback
-        if: steps.automerge.outputs.mergeResult == "merged"
+        id: feedback
         run: |
-          echo "Pull request ${{ steps.automerge.outputs.pullRequestNumber }} merged!"
+          echo "Pull request ${{ steps.automerge.outputs.pullRequestNumber }} ${{ steps.automerge.outputs.mergeResult }}!"
