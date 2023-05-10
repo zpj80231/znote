@@ -45,7 +45,7 @@
 		"vuepress-plugin-fulltext-search": "^2.2.1",
 		"vuepress-plugin-sitemap": "2.3.1",
 		"vuepress-plugin-smooth-scroll": "^0.0.10",
-		"vuepress-theme-reco": "1.6.16",
+		"vuepress-theme-reco": "1.6.17",
 		"whatwg-fetch": "3.6.2"
 	}
 }
