@@ -82,6 +82,7 @@ module.exports = {
                 'essay/20201119',
                 'essay/20211216',
                 'essay/20220808',
+                'essay/20230605',
             ]
         }
 
