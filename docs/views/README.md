@@ -100,7 +100,7 @@ isShowComments: true
 			return {
                 changeTime: '2000',
 				index: 2,
-				imgSrc: '/znote/view/比心1.png',
+				imgSrc: '/znote/view/rddek.gif',
 				active: 'active'
 			}
 		},
