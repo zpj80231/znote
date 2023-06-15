@@ -35,7 +35,7 @@ MyBatisCodeHelper-Pro 是我一直使用的一款 IDEA 插件，和其他同类�
 
 ## 下载 cfr
 
-一个 Java 反编译器，官网：https://www.benf.org/other/cfr/
+一个 Java 反编译器，官网：[https://www.benf.org/other/cfr](https://www.benf.org/other/cfr)
 
 下载好后，将 cfr-0.152.jar 和 MyBatisCodeHelper-Pro-obfuss.jar 放在同一目录下，执行命令：
 
@@ -205,14 +205,15 @@ jar uvf MyBatisCodeHelper-Pro-obfuss.jar com\ccnode\codegenerator\e\e\a.class
 
 最后再使用 [jd-gui](https://github.com/java-decompiler/jd-gui) 或其他反编译工具，先找到对应 class 文件，看一下是否替换成功。
 
-然后将更新后的这个 jar 包，替换原始 jar 包，重启 idea，输入离线激活码激活，大功告成。
+然后将更新后的这个 jar 包，替换原始 jar 包，重启 idea，按如下格式输入离线激活码激活，大功告成。
 
 ```json
 {
-    "paidKey": "随便写",
+    "paidKey": "abcdefg",
     "valid": true,
     "userMac": "离线注册唯一码",
     "validTo": 4859711999000
 }
 ```
 
+<Reward/>
