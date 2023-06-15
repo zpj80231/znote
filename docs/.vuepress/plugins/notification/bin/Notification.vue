@@ -68,10 +68,10 @@
                 var stepNum = 1
                 setInterval(() => {
                     stepNum++
-                    if(stepNum%2==0) {
+                    if(stepNum % 2 == 0) {
                         var nw = document.getElementsByClassName("notification-wrapper")[0]
                         if (nw == null || nw == undefined || nw.style == undefined) return;
-                        nw.style.bottom = (Math.random() * 73) + "%";
+                        nw.style.bottom = (Math.random() * (80 - 30) + 30) + "%";
                         nw.style.zoom = Math.random();
                     }
                     this.visible = this.getVisible()
