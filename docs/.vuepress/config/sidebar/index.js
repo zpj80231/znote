@@ -50,6 +50,7 @@ module.exports = {
             children: [
                 'backend/spring-source-01', 'backend/spring-source-02', 'backend/spring-source-03',
                 'backend/spring-source-04', 'backend/spring-source-05', 'backend/spring-source-06',
+                'backend/spring-source-07',
                 'backend/ArrayList', 'backend/HashMap', 'backend/docker', 'backend/itext', 'backend/poi',
                 'backend/quartz', 'backend/单元测试1', 'backend/单元测试2', 'backend/单元测试3',
                 'backend/rabbitmq001', 'backend/rabbitmq002', 'backend/redis01', 'backend/redis02',
