@@ -1,5 +1,5 @@
 ---
-title: JUC小结
+title: JUC 小结
 date: 2020-03-11
 tags:
 - Java

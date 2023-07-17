@@ -1,5 +1,5 @@
 ---
-title: zk如何保证一致性及如何选举
+title: ZooKeeper 如何保证一致性及如何选举
 date: 2022-03-08
 tags:
     - 分布式
