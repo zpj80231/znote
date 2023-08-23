@@ -2,6 +2,7 @@
 gb-pages/
 assets/
 docs/.vuepress/dist/
+/.fastRequest/
 
 # vscode
 .vscode/
