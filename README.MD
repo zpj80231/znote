@@ -1,3 +1,5 @@
+<img src="https://cdn.jsdelivr.net/gh/shiyindaxiaojie/images/readme/icon.png" align="right" />
+
 # znote
 
 - 积丝成寸，积寸成尺；寸尺水已，遂成丈匹
@@ -17,7 +19,7 @@
 
 - 已全局适配 `手机模式` 和 `暗黑模式（iOS自适应）` 请自行体验
 
-- 推荐访问：[https://zpj80231.github.io/znote/](https://zpj80231.github.io/znote/)
+- 推荐访问：[https://zpj80231.github.io/znote/](https://zpj80231.github.io/znote/)<br/>
   国内访问：[https://zpj80231.gitee.io/znote/](https://zpj80231.gitee.io/znote/) （自Gitee实名认证后已不再同步更新，现在访问还是之前的旧版本）
 
 - 说明：音乐播放器插件目前在外网环境下可以正常使用（使用的网易云API）
