@@ -11,10 +11,8 @@ docs/.vuepress/dist/
 .idea/
 
 # npm
-package-lock.json
 node_modules
 node_modules/
 
 # yarn
-yarn.lock
 yarn-error.log
