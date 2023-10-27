@@ -3,7 +3,7 @@ module.exports = {
     '/views/': [
         '',
         {
-            title: '知识晶体 Q&A',
+            title: '🍕 知识晶体 Q&A',
             collapsable: true,
             children: [
                 'qaq/sum_fe_001', 'qaq/sum_fe_002',
@@ -14,7 +14,7 @@ module.exports = {
             ]
         },
         {
-            title: '规范 Standard',
+            title: '🍳 规范 Standard',
             collapsable: true,
             children: [
                 'specification/ali', 'specification/git',
@@ -24,7 +24,7 @@ module.exports = {
             ]
         },
         {
-            title: '前端 Front-end',
+            title: '🏹 前端 Front-end',
             collapsable: true,
             children: [
                 'frontend/EChartsStudy', 'frontend/js-json', 'frontend/viaStart', 'frontend/vue-demo',
@@ -32,7 +32,7 @@ module.exports = {
             ]
         },
         {
-            title: '后端 Back-end',
+            title: '🔨 后端 Back-end',
             collapsable: true,
             children: [
                 'backend/spring-source-01', 'backend/spring-source-02', 'backend/spring-source-03',
@@ -54,7 +54,14 @@ module.exports = {
             ]
         },
         {
-            title: '随笔 Essay',
+            title: '🌴 命理学 Numerology',
+            collapsable: true,
+            children: [
+                'numerology/十神六亲.md',
+            ]
+        },
+        {
+            title: '🔗 随笔 Essay',
             collapsable: true,
             children: [
                 'essay/20190928', 'essay/20191109', 'essay/20191116', 'essay/20191130', 'essay/20200227',
