@@ -27,7 +27,7 @@ jobs:
   automergejob:
     name: Automerge PRs
     runs-on: ubuntu-latest
-    if: ${{ github.actor == 'dependabot[bot]' }}
+    if: ${{ github.actor == 'dependabot[bot]'  && !contains(github.event.pull_request.title, 'axios') }}
     steps:
       - name: Wait for status checks
         id: waitforstatuschecks
