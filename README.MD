@@ -42,8 +42,13 @@
 ## 项目运行
 
 - 克隆项目，在项目文件夹下执行命令，加载依赖：`npm install`
-- 在项目文件夹下执行命令，运行项目：`npm run dev`
-  在 Mac 上运行：`npm run dev:mac`
+
+- 在项目文件夹下执行命令运行项目：
+  
+  node14 版本：`npm run dev`
+  
+  node16 版本及以上：`npm run dev:node:16` ，在 Mac 上运行：`npm run dev:node:16:mac`
+  
 - 待启动成功后打开地址即可：[http://localhost:8080/znote/](http://localhost:8080/znote/)
 
 ## 项目架构
