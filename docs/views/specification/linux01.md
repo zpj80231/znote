@@ -34,6 +34,8 @@ publish: true
 grep -rn "message" ./
 # 实时显示日志记录
 tail -100f a.log
+# tail和多个grep使用
+tail -100f a.log | grep --line-buffer aa | grep bb
 # 查找包含 2020 的 catalina.out文件所在的行
 find ./ -name catalina.out | xargs grep 2020
 # grep之后，按行统计行数 wc -l
