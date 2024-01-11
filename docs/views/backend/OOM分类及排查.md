@@ -60,6 +60,19 @@ isShowComments: true
 3. 查看占用内存比较多的对象：jamp -histo pid | head -n 100
 4. 查看占用内存比较多的存活对象：jmap -histo:live pid | head -n 100
 
+
+当程序发生OOM退出系统时，一些瞬时信息都随着程序的终止而消失，而重现OOM问题往往比较困难或者耗时。此时若能在OOM时，自动导出dump文件就显得非常迫切。
+
+这里介绍一种比较常用的取得堆快照文件的方法，即使用 `-XX:+HeapDumpOnOutOfMemoryError`:在程序发生OOM时，导出应用程序的当前堆快照。`-XX: HeapDumpPath`:可以指定堆快照的保存位置。
+
+比如：
+
+```shell
+-Xmx100m -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=~\dump.hprof
+```
+
+若存在dump文件，使用Jhat、VisualVM等工具分析即可；
+
 ## 示例
 
 下面是对常见的 `java.lang.OutOfMemoryError: Java heap space ` 排查：
@@ -111,3 +124,9 @@ Caused by: sun.jvm.hotspot.debugger.DebuggerException: cannot open binary file
         at sun.jvm.hotspot.debugger.linux.LinuxDebuggerLocal$LinuxDebuggerLocalWorkerThread.run(LinuxDebuggerLocal.java:138)
 ```
 
+## 其他
+
+- [Linux服务器Java进程突然消失排查办法](https://blog.csdn.net/sdujava2011/article/details/107495018)
+
+
+<Reward/>
