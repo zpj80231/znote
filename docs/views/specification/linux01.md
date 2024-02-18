@@ -40,6 +40,10 @@ tail -100f a.log | grep --line-buffer aa | grep bb
 find ./ -name catalina.out | xargs grep 2020
 # grep之后，按行统计行数 wc -l
 find ./ -name catalina.out | xargs grep 2020 | wc -l
+# 查看当前路径下各个目录大小(后面也可以跟指定目录)， -h 以K，M，G为单位，提高信息的可读性。
+du -sh *
+# 查找当前目录下的大文件并倒叙排列
+du -sh * | sort -nr | head 
 ```
 
 ## 根据pid查程序目录
@@ -92,8 +96,6 @@ ls  -l   文件
 cp -r a文件夹 b新文件夹
 #将/test1目录下的file1复制到/test3 目录，并将文件名改为file2
 mv /test1/file1 /test3/file2
-# 查看当前路径下各个目录大小(后面也可以跟指定目录)， -h 以K，M，G为单位，提高信息的可读性。
-du -sh *
 ```
 
 ## 上传下载
