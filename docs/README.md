@@ -1,12 +1,13 @@
 ---
 home: true
-heroImage: '/vuepress/topic.png'
+heroImage: '/vuepress/index-read.gif'
 faceImage: '/vuepress/head.png'
 heroImageStyle: {
-  maxWidth: '680px',
+  maxWidth: '520px',
   width: '100%',
   display: block,
-  margin: '14% auto -16% auto',
+  margin: 'auto',
+  margin-bottom: '-3%',
   //border: '1px dashed #000',
   box-shadow: '8px 8px 20px #022',
   borderRadius: '10px',
@@ -24,7 +25,7 @@ features:
 footer: MIT Licensed | Copyright © 2018-present Evan You
 ---
 
-<Clock/>
+[//]: # (<Clock/>)
 
 ::: tip 人的一生能有几天
 
@@ -112,7 +113,7 @@ footer: MIT Licensed | Copyright © 2018-present Evan You
     margin-top: 65% !important;
   }
   .home img {
-    max-width: 520px !important;
+    /*max-width: 520px !important;*/
   }
 }
 
@@ -126,7 +127,7 @@ footer: MIT Licensed | Copyright © 2018-present Evan You
     margin-top: -10% !important;
   }
   .home img {
-    margin: 24% auto -6% auto !important;
+    /*margin: 24% auto -6% auto !important;*/
     max-width: 380px !important;
   }
 }
@@ -138,7 +139,7 @@ footer: MIT Licensed | Copyright © 2018-present Evan You
     background: none;
   }
   .home img {    
-    margin: 24% auto -6% auto !important;
+    /*margin: 24% auto -6% auto !important;*/
   }
   .home .feature {
     width: 100%;
