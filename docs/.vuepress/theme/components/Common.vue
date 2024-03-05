@@ -98,7 +98,7 @@ export default {
 
   data () {
     return {
-      isSidebarOpen: false,
+      isSidebarOpen: true,
       isHasKey: true,
       isHasPageKey: true,
       firstLoad: true
@@ -161,7 +161,7 @@ export default {
       return [
         {
           'no-navbar': !this.shouldShowNavbar,
-          'sidebar-open': this.isSidebarOpen,
+          'sidebar-open': !this.isSidebarOpen,
           'no-sidebar': !this.shouldShowSidebar
         },
         userPageClass
@@ -170,9 +170,22 @@ export default {
   },
 
   mounted () {
+    if (this.$site && this.$site.themeConfig) {
+      // 如果this.$site.themeConfig存在，则获取themeConfig对象
+      const { themeConfig } = this.$site
+      // 检查themeConfig对象中是否有isSidebarOpen属性，并且值为false
+      this.isSidebarOpen = themeConfig.isSidebarOpen
+    }
+
+    // 监听路由的变化
     this.$router.afterEach(() => {
-      // this.isSidebarOpen = false
-    })
+      // 检查this.$frontmatter是否存在
+      if (this.$frontmatter && this.$frontmatter.isSidebarOpen) {
+        // 检查$frontmatter对象中是否有isSidebarOpen属性，并且值为false
+        this.isSidebarOpen = this.$frontmatter.isSidebarOpen
+        alert("$frontmatter")
+      }
+    });
 
     this.hasKey()
     this.hasPageKey()
