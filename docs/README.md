@@ -74,7 +74,7 @@ footer: MIT Licensed | Copyright © 2018-present Evan You
    transition: all 1s!important;
 }
 .home img:hover {
-   //transform: scale(1)!important;
+   transform: scale(0.9,0.9) !important;
    transition:all 2s !important;
 }
 .home .features {

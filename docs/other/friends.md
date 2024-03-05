@@ -28,7 +28,7 @@ reward: true
 #  bgColor: '#FCE5BF'
 #  textColor: '#7B2532'
 - name: znote
-  desc: 荷尽已无擎雨盖，菊残犹有傲霜枝。
+  desc: 内在丰盈者，独行亦如众
   avatar: https://zpj80231.gitee.io/znote/vuepress/head-fish.jpg
   link: https://zpj80231.gitee.io/znote/
   bgColor: '#FCDBA0'
