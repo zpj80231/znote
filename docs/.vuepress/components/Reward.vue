@@ -44,7 +44,7 @@
         data() {
             return {
                 rewarder,
-                rewardImg: "/znote/vuepress/zanshang01.png"
+                rewardImg: "/znote/vuepress/zanshang.png"
             }
         }
     }
@@ -57,7 +57,7 @@
     }
 
     summary {
-        background-color: #faebd7;
+        background-color: #f092132e;
         text-align: center;
         margin: 0 auto;
         width: 150px;
