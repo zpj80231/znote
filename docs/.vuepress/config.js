@@ -41,10 +41,11 @@ module.exports = {
   // theme: '',
   themeConfig: {
     nav,
-    // sidebar: 'auto',// 自动形成侧边导航
+    // sidebar: 'auto', // 自动形成侧边导航
     sidebar,
-    // logo: '/vuepress/head-fish.jpg', //导航栏头像
-    authorAvatar: '/vuepress/head-fish.jpg', //首页右侧头像
+    isSidebarOpen: false, // 默认侧边栏是否打开
+    // logo: '/vuepress/head-fish.jpg', // 导航栏头像
+    authorAvatar: '/vuepress/head-fish.jpg', // 首页右侧头像
     // 搜索设置
     search: true,
     searchMaxSuggestions: 10,
