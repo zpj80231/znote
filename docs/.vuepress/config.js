@@ -7,7 +7,7 @@ module.exports = {
   // dest: 'gb-pages',//打包目录
   base: '/znote/',
   title: "znote",
-  description: '荷尽已无擎雨盖，菊残犹有傲霜枝。',
+  description: '内在丰盈者，独行亦如众',
   head: [
     ['meta', { name: 'viewport', content: 'width=device-width,initial-scale=1,user-scalable=no'}],
     ['meta', { name: 'renderer', content: 'webkit'}],
