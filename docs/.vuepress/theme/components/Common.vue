@@ -170,20 +170,15 @@ export default {
   },
 
   mounted () {
-    if (this.$site && this.$site.themeConfig) {
-      // 如果this.$site.themeConfig存在，则获取themeConfig对象
+    if (this.check() && this.$site && this.$site.themeConfig) {
       const { themeConfig } = this.$site
-      // 检查themeConfig对象中是否有isSidebarOpen属性，并且值为false
       this.isSidebarOpen = themeConfig.isSidebarOpen
     }
 
     // 监听路由的变化
     this.$router.afterEach(() => {
-      // 检查this.$frontmatter是否存在
       if (this.$frontmatter && this.$frontmatter.isSidebarOpen) {
-        // 检查$frontmatter对象中是否有isSidebarOpen属性，并且值为false
         this.isSidebarOpen = this.$frontmatter.isSidebarOpen
-        alert("$frontmatter")
       }
     });
 
@@ -193,6 +188,11 @@ export default {
   },
 
   methods: {
+    //返回true表示为pc端打开，返回false表示为手机端打开
+    check() {
+      let flag = navigator.userAgent.match(/(phone|pod|iPhone|iPod|ios|Android|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)
+      return !flag;
+    },
     hasKey () {
       const keyPage = this.$themeConfig.keyPage
       if (!keyPage || !keyPage.keys || keyPage.keys.length === 0) {
