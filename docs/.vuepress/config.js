@@ -6,7 +6,7 @@ const plugins = require('./config/plugins/')
 module.exports = {
   // dest: 'gb-pages',//打包目录
   base: '/znote/',
-  title: "znote",
+  title: "ZPJの自留地",
   description: '内在丰盈者，独行亦如众',
   head: [
     ['meta', { name: 'viewport', content: 'width=device-width,initial-scale=1,user-scalable=no'}],
@@ -44,7 +44,7 @@ module.exports = {
     // sidebar: 'auto', // 自动形成侧边导航
     sidebar,
     isSidebarOpen: false, // 默认侧边栏是否打开
-    // logo: '/vuepress/head-fish.jpg', // 导航栏头像
+    logo: '/vuepress/logo.png', // 导航栏头像
     authorAvatar: '/vuepress/head-fish.jpg', // 首页右侧头像
     // 搜索设置
     search: true,
