@@ -44,7 +44,7 @@ module.exports = {
     // sidebar: 'auto', // 自动形成侧边导航
     sidebar,
     isSidebarOpen: false, // 默认侧边栏是否打开
-    logo: '/vuepress/logo.png', // 导航栏头像
+    // logo: '/vuepress/logo.png', // 导航栏头像
     authorAvatar: '/vuepress/head-fish.jpg', // 首页右侧头像
     // 搜索设置
     search: true,
