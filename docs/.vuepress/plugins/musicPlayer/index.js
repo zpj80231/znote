@@ -1,7 +1,7 @@
 const { path } = require('@vuepress/shared-utils')
-global.navigator = {
-    userAgent: 'node.js'
-}
+// global.navigator = {
+//     userAgent: 'node.js'
+// }
 
 module.exports = (options, context) => ({
   define () {

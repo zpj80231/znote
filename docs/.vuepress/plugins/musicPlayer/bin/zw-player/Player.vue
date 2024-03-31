@@ -182,12 +182,12 @@ export default {
         }
     },
     mounted() {
-        // var check_flag = this.check();
-        // if(!check_flag) {
-        //     let musicPlayer = document.getElementById("musicPlayer");
-        //     musicPlayer.style.display='none';
-        //     return;
-        // }
+        var isPc = this.isPc();
+        if(!isPc) {
+            let musicPlayer = document.getElementById("musicPlayer");
+            musicPlayer.style.display='none';
+            return;
+        }
         if(1==Math.floor(Math.random()*10+1)){
             let path = this.$route.path
             if(path != '/' ) return
@@ -225,7 +225,7 @@ export default {
     },
     methods: {
         //返回true表示为pc端打开，返回false表示为手机端打开
-        check() {
+        isPc() {
           let flag = navigator.userAgent.match(/(phone|pod|iPhone|iPod|ios|Android|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)
           return !flag;
         },
