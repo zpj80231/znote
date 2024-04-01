@@ -182,23 +182,27 @@ export default {
         }
     },
     mounted() {
-        var isPc = this.isPc();
-        if(!isPc) {
-            let musicPlayer = document.getElementById("musicPlayer");
-            musicPlayer.style.display='none';
-            return;
-        }
-        if(1==Math.floor(Math.random()*10+1)){
+        let musicPlayer = document.getElementById("musicPlayer");
+        musicPlayer.style.display='none';
+
+        getMyMusic(myMusicId).then(res => {
+            if(this.isPc() && res.data.code === 200) {
+                this.Player();
+                this._getMusicType(myMusicId);
+                musicPlayer.style.display='block';
+            }
+        })
+
+        if(1 === Math.floor(Math.random() * 10 + 1)){
             let path = this.$route.path
-            if(path != '/' ) return
+            if(path !== '/' ) return
             let flag = sessionStorage.getItem('zk');
             if(flag == null) {
                 window.location.href=('/znote/view/index.html')
                 sessionStorage.setItem('zk', 'zv');
             }
         }
-        this.Player();
-        this._getMusicType(myMusicId);
+
     },
     created() {
     },
@@ -295,9 +299,9 @@ export default {
             this.disActive=this.disActive ? false : true;
         },
         _getMusicType(id){
-            if(this.thisMusicType!=id){
+            if(this.thisMusicType !== id){
                 this.notPlay=[];
-                if(id==-1){
+                if(id === -1){
                     if(this.myMusicList.length!=0){
                         this.musicList=this.myMusicList;
                         this.thisMusicType=id;
@@ -315,11 +319,10 @@ export default {
                     }else{//自定义库没有歌曲 提示需要搜索才可以添加
                         this.MusicAlert('没有歌曲,需要自己添加');
                     }
-
+                }else if(id === myMusicId){
+                    getMyMusic(id).then((res)=>{this.getMusicDetail(res, id)})
                 }else{
-                    if(myMusicId === id)
-                        getMyMusic(id).then((res)=>{this.getMusicDetail(res, id)})
-                        getHotMusic(id).then((res)=>{this.getMusicDetail(res, id)})
+                    getHotMusic(id).then((res)=>{this.getMusicDetail(res, id)})
                 }
             }
         },
