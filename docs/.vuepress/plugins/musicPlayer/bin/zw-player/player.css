@@ -1,6 +1,7 @@
 #musicPlayer {
     text-decoration: none;
     box-sizing: border-box;
+    display: none;
 }
 #music{
     width: 0px;

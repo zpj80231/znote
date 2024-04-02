@@ -182,9 +182,6 @@ export default {
         }
     },
     mounted() {
-        let musicPlayer = document.getElementById("musicPlayer");
-        musicPlayer.style.display='none';
-
         getMyMusic(myMusicId).then(res => {
             if(this.isPc() && res.data.code === 200) {
                 this.Player();
