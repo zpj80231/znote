@@ -186,7 +186,7 @@ export default {
             if(this.isPc() && res.data.code === 200) {
                 this.Player();
                 this._getMusicType(myMusicId);
-                musicPlayer.style.display='block';
+                document.getElementById("musicPlayer").style.display='block';
             }
         })
 
