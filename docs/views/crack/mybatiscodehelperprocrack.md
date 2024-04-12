@@ -1,5 +1,5 @@
 ---
-title: IDEA MyBatisCodeHelper-Pro-3.1.9 最新版破解
+title: IDEA MyBatisCodeHelper-Pro 最新版破解
 date: 2023-05-19
 tags:
    - 破解
@@ -29,7 +29,7 @@ MyBatisCodeHelper-Pro 是我一直使用的一款 IDEA 插件，和其他同类�
 
 ## 下载 MyBatisCodeHelper-Pro
 
-在 idea 插件市场：https://plugins.jetbrains.com/plugin/9837-mybatiscodehelperpro/versions 下载所需版本。
+在 idea [插件市场](https://plugins.jetbrains.com/plugin/9837-mybatiscodehelperpro/versions) 下载所需版本。
 
 下载目前最新版：MybatisCodeHelperNew-3.1.9.zip。解压，找到 jar 包：MyBatisCodeHelper-Pro-obfuss.jar。
 
@@ -215,5 +215,13 @@ jar uvf MyBatisCodeHelper-Pro-obfuss.jar com\ccnode\codegenerator\e\e\a.class
     "validTo": 4859711999000
 }
 ```
+
+## 成品
+
+最后，如果懒得搞的话，贴几个成品包吧，解压到 IDEA 插件目录即可，随缘更新：
+
+>链接: [https://pan.baidu.com/s/1_rKdAoDG8ldgojyWXO7Pgg](https://pan.baidu.com/s/1_rKdAoDG8ldgojyWXO7Pgg) 提取码: znot 复制这段内容后打开百度网盘手机App，操作更方便哦
+> 
+>-- 来自百度网盘超级会员v10的分享
 
 <Reward/>
