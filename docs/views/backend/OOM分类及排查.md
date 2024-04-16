@@ -124,8 +124,35 @@ Caused by: sun.jvm.hotspot.debugger.DebuggerException: cannot open binary file
         at sun.jvm.hotspot.debugger.linux.LinuxDebuggerLocal$LinuxDebuggerLocalWorkerThread.run(LinuxDebuggerLocal.java:138)
 ```
 
+## JVM 参数
+
+补充一下有意义的jvm启动参数：
+
+```shell
+-XX:ParallelGCThreads=4 （并行收集，几核机器设置几核）
+-Xms6g   （调优，设置新生代初始大小）
+-Xmx6g   （调优，设置新生代最大值）
+-Xmn2g   （调优，设置堆空间大小）
+-XX:MetaspaceSize=2048m
+-XX:MaxMetaspaceSize=2048m
+-XX:MaxDirectMemorySize=1g
+-XX:SurvivorRatio=8   （新老年代默认8:1:1）
+-XX:+UseConcMarkSweepGC  （使用CMS垃圾收集器）
+-XX:CMSMaxAbortablePrecleanTime=5000 （并发标记阶段之后、重新标记阶段之前，就让你执行这么长时间）
+-XX:+CMSClassUnloadingEnabled （允许类卸载，比如线上使用内存诊断工具Arthas，用完后会有残留）
+-XX:CMSInitiatingOccupancyFraction=80 （老年带到达80%，触发老年代收集）
+-XX:+UseCMSInitiatingOccupancyOnly（配合上面参数使用）
+-XX:+ExplicitGCInvokesConcurrent （针对System.gc()触发老年带的GC，否则就是fullGC）
+-Xloggc:/home/admin/logs/gc.log  （GC日志目录）
+-XX:+PrintGCDetails  （GC日志详细细节）
+-XX:+PrintGCDateStamps (每个垃圾收集事件发生的确切日期和时间戳)
+-XX:+HeapDumpOnOutOfMemoryError  （OOM）
+-XX:HeapDumpPath=/home/admin/logs/java.hprof （OOM）
+```
+
 ## 其他
 
+- [Alibaba Java诊断利器 Arthas](https://github.com/alibaba/arthas)
 - [Linux服务器Java进程突然消失排查办法](https://blog.csdn.net/sdujava2011/article/details/107495018)
 
 
