@@ -23,21 +23,23 @@
 - 推荐访问：[https://zpj80231.github.io/znote/](https://zpj80231.github.io/znote/)<br/>
   国内访问：[https://zpj80231.gitee.io/znote/](https://zpj80231.gitee.io/znote/) （自Gitee实名认证后已不再同步更新，现在访问还是之前的旧版本）
 
-- 说明：音乐播放器插件目前在外网环境下可以正常使用（使用的网易云API）
-  验证播放器是否可用：能打开这个网站即可正常使用 --> [点击测试](https://neteasecloudmusicapi-zpj80231.vercel.app/search?keywords=%E6%B5%B7%E9%98%94%E5%A4%A9%E7%A9%BA)  
-  
-  > 因为依赖项目 [NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusicApi) 使用 [Vercel](https://vercel.com/) 免费部署。而 Vercel 目前对国内网络不开放，所以要么自行搭建 NeteaseCloudMusicApi，要么使用魔法。
-  
+- 音乐播放器插件：目前已自动适配网络，在网络可达的情况下会加载音乐播放器插件并播放音乐，网络不可达的时候不会加载
+
+  > 音乐播放器插件目前在外网环境下可以正常使用（使用的网易云API）
+  > 验证播放器是否可用：能打开这个网站即会自动加载正常使用 --> [点击测试](https://neteasecloudmusicapi-zpj80231.vercel.app/search?keywords=%E6%B5%B7%E9%98%94%E5%A4%A9%E7%A9%BA)
+  > 因为依赖项目 [NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusicApi) 使用 [Vercel](https://vercel.com/) 免费部署。
+  > 而 Vercel 目前对国内网络不开放，所以要么自行搭建 NeteaseCloudMusicApi，要么使用魔法。
+
 - 本仓库代码使用 [MIT](https://github.com/SigureMo/notev/blob/master/LICENSE) 协议进行开源，但是全部文档内容使用 [CC 4.0 BY-SA](https://creativecommons.org/licenses/by-sa/4.0/) 协议进行发布
 
 ![](/docs/.vuepress/public/vuepress/znote.png)
 
 ## 项目介绍
 
-- 记录生产级别问题排查处理（工作经验）
-- 技术栈知识点笔记总结（知识小结）
-- 个人牢骚发布（生活随笔）
-- 其它（欢迎入队）...
+- 工作经验：记录生产级别问题排查处理
+- 知识小结：技术栈知识点笔记总结
+- 生活随笔：个人牢骚发布
+- 其它：欢迎入队 ...
 
 ## 项目运行
 
@@ -47,13 +49,13 @@
   
   node14 版本：`npm run dev`
   
-  node16 版本及以上：`npm run dev:node:16` ，在 Mac 上运行：`npm run dev:node:16:mac`
+  node16 版本及以上：`npm run dev:node:16` （在 Mac 上运行：`npm run dev:node:16:mac` ）
   
 - 待启动成功后打开地址即可：[http://localhost:8080/znote/](http://localhost:8080/znote/)
 
 ## 项目架构
 
-- 采用 vuepress 和 主题reco 二次构建
+- 采用 vuepress 和 主题 reco 二次构建
 
 ```lua
 ## 需要自己写主题样式的话，在.vuepress/ 下新建theme文件夹并按如下目录布局
@@ -81,7 +83,7 @@ Dev
 
 ## 如何使用
 
-对准备发布的文章（Markdown 格式），放置在项目`docs/views/`目录下，并在 Markdown 文件头部添加以下元素，项目发布后会自动识别文章标题、标签、分类、是否开启评论、是否加密、是否置顶、是否发布等一系列状态。
+对准备发布的文章（Markdown 格式），放置在项目 `docs/views/` 目录下，并在 Markdown 文件头部添加以下元素，项目发布后会自动识别文章标题、标签、分类、是否开启评论、是否加密、是否置顶、是否发布等一系列状态。
 
 下面是关键字说明及参考示例：
 
