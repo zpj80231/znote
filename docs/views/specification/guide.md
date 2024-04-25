@@ -21,8 +21,9 @@ sticky: 1
 
 # znote
 
-- 积丝成寸，积寸成尺；寸尺水已，遂成丈匹。
+- 积丝成寸，积寸成尺；寸尺水已，遂成丈匹
 
+<br/>
 <p align="center">
    <a href="https://zpj80231.github.io/znote/views/specification/guide.html" target="_blank"><img alt="Read the Docs" src="https://img.shields.io/badge/Docs-GetStarted-red?style=flat-square&logo=buffer"></a>
    <a href="https://github.com/zpj80231/znote" target="_blank"><img alt="GitHub" src="https://img.shields.io/badge/GitHub-znote-d05577?style=flat-square&logo=github"></a>
@@ -36,42 +37,44 @@ sticky: 1
    <a href="https://zpj80231.gitee.io/znote/"><img alt="znote site" src="https://img.shields.io/badge/znote-pages-a06bc1?style=flat-square&logo=zulip"></a>
 </p>
 
-- 本仓库代码使用 [MIT](https://github.com/SigureMo/notev/blob/master/LICENSE)
-  协议进行开源，但是全部文档内容使用 [CC 4.0 BY-SA](https://creativecommons.org/licenses/by-sa/4.0/) 协议进行发布
+- 已全局适配 `手机模式` 和 `暗黑模式（自适应）` 请自行体验
 
-- 已全局适配`手机模式`和`暗黑模式（iOS自适应）`请自行体验
+- 推荐访问：[https://zpj80231.github.io/znote/](https://zpj80231.github.io/znote/)<br/>
+  国内访问：[https://zpj80231.gitee.io/znote/](https://zpj80231.gitee.io/znote/) （自Gitee实名认证后已不再同步更新，现在访问还是之前的旧版本）
 
-- 国内访问：[https://zpj80231.gitee.io/znote/](https://zpj80231.gitee.io/znote/) 速度加载会快一点（自Gitee实名认证后已不再同步更新，现在访问还是之前的旧版本）
+- 音乐播放器插件：目前已自动适配网络，在网络可达的情况下会加载音乐播放器插件并播放音乐，网络不可达的时候不会加载
 
-  推荐访问：[https://zpj80231.github.io/znote/](https://zpj80231.github.io/znote/)
+  > 音乐播放器插件目前在外网环境下可以正常使用（使用的网易云API）<br/>
+  > 验证播放器是否可用：能打开这个网站即会自动加载正常使用 --> [点击测试](https://neteasecloudmusicapi-zpj80231.vercel.app/search?keywords=%E6%B5%B7%E9%98%94%E5%A4%A9%E7%A9%BA)<br/>
+  > 因为依赖项目 [NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusicApi) 使用 [Vercel](https://vercel.com/) 免费部署<br/>
+  > 而 Vercel 目前对国内网络不开放，所以要么自行搭建 NeteaseCloudMusicApi，要么使用魔法
 
-![](/docs/.vuepress/public/vuepress/znote.png)
+- 本仓库代码使用 [MIT](https://github.com/SigureMo/notev/blob/master/LICENSE) 协议进行开源，但是全部文档内容使用 [CC 4.0 BY-SA](https://creativecommons.org/licenses/by-sa/4.0/) 协议进行发布
+
+![](/znote/vuepress/znote.png)
 
 ## 项目介绍
 
-- 记录生产级别问题排查处理（工作经验）
-
-- 技术栈知识点笔记总结（知识小结）
-
-- 个人牢骚发布（生活随笔）
-
-- 其它（欢迎入队）...
+- 工作经验：记录生产级别问题排查处理
+- 知识小结：技术栈知识点笔记总结
+- 生活随笔：个人牢骚发布
+- 其它：欢迎入队 ...
 
 ## 项目运行
 
 - 克隆项目，在项目文件夹下执行命令，加载依赖：`npm install`
 
-- 在项目文件夹下（node 16及以下）执行命令，运行项目：`npm run dev`
+- 在项目文件夹下执行命令运行项目：
 
-  Windows（node 17+）版本以上运行：`npm run dev:win`
+  node14 版本：`npm run dev`
 
-  Mac（node 17+）版本以上运行：`npm run dev:mac`
+  node16 版本及以上：`npm run dev:node:16` （在 Mac 上运行：`npm run dev:node:16:mac`)
 
 - 待启动成功后打开地址即可：[http://localhost:8080/znote/](http://localhost:8080/znote/)
 
 ## 项目架构
 
-- 采用 vuepress 和 主题reco 二次构建
+- 采用 vuepress 和 主题 reco 二次构建
 
 ```lua
 ## 需要自己写主题样式的话，在.vuepress/ 下新建theme文件夹并按如下目录布局
@@ -99,11 +102,11 @@ Dev
 
 ## 如何使用
 
-对准备发布的文章（Markdown 格式），放置在项目`docs/views/`目录下，并在 Markdown 文件头部添加以下元素，项目发布后会自动识别文章标题、标签、分类、是否开启评论、是否加密、是否置顶、是否发布等一系列状态。
+对准备发布的文章（Markdown 格式），放置在项目 `docs/views/` 目录下，并在 Markdown 文件头部添加以下元素，项目发布后会自动识别文章标题、标签、分类、是否开启评论、是否加密、是否置顶、是否发布等一系列状态。
 
 下面是关键字说明及参考示例：
 
-1. 关键字说明
+### 关键字说明
 
 | 序号 | 关键字          | 注释                                        |
 | ---- | --------------- | ------------------------------------------- |
@@ -119,34 +122,34 @@ Dev
 | 10   | `[[toc]]`       | 生成目录及链接                              |
 | 11   | `<!-- more -->` | 在`<!-- more -->`之前的内容会展示为文章摘要 |
 
-2. 参考示例：
+### 参考示例
 
 ```yaml
 ---
 title: 文章标题
 date: 2020-02-02
 tags:
-  - 标签
+ - 标签
 categories:
-  - 分类
+ - 分类
 keys:
-  - '123456'
-sticky: 1
+ - '123456'
+sticky: 1 
 isShowComments: false
 publish: true
 ---
 
-  <Boxx/>
+<Boxx/>
 
-  [ [ toc ] ]
+[[toc]]
 
-  - 这里可以写`摘要`等其它
+- 这里可以写`摘要`等其它
 
-    <!-- more -->
+<!-- more -->
 
-  ## 正式开始你的markdown
+## 正式开始你的markdown
 
-  - To be or not to be, ...
+- To be or not to be, ...
 ```
 
 ## 写在最后
@@ -161,8 +164,7 @@ publish: true
 
 当然，遇到一些`有价值`的问题，还是欢迎来找我共同探讨的😉~~
 
-关于如何提问，在 Github 中这个项目可以说是相当 nice
-了，可以的话一定要过一遍，于人于己都有莫大的好处：[提问的智慧](https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way/blob/master/README-zh_CN.md)
+关于如何提问，在 Github 中这个项目可以说是相当 nice 了，可以的话一定要过一遍，于人于己都有莫大的好处：[提问的智慧](https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way/blob/master/README-zh_CN.md)
 
 ## 关于友链
 
