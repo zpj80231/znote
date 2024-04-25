@@ -27,8 +27,8 @@
 
   > 音乐播放器插件目前在外网环境下可以正常使用（使用的网易云API）<br/>
   > 验证播放器是否可用：能打开这个网站即会自动加载正常使用 --> [点击测试](https://neteasecloudmusicapi-zpj80231.vercel.app/search?keywords=%E6%B5%B7%E9%98%94%E5%A4%A9%E7%A9%BA)<br/>
-  > 因为依赖项目 [NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusicApi) 使用 [Vercel](https://vercel.com/) 免费部署。<br/>
-  > 而 Vercel 目前对国内网络不开放，所以要么自行搭建 NeteaseCloudMusicApi，要么使用魔法。
+  > 因为依赖项目 [NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusicApi) 使用 [Vercel](https://vercel.com/) 免费部署<br/>
+  > 而 Vercel 目前对国内网络不开放，所以要么自行搭建 NeteaseCloudMusicApi，要么使用魔法
 
 - 本仓库代码使用 [MIT](https://github.com/SigureMo/notev/blob/master/LICENSE) 协议进行开源，但是全部文档内容使用 [CC 4.0 BY-SA](https://creativecommons.org/licenses/by-sa/4.0/) 协议进行发布
 
