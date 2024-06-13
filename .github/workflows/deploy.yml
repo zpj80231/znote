@@ -40,3 +40,5 @@ jobs:
           BRANCH: gh-pages
           FOLDER: docs/.vuepress/dist
           CLEAN: true
+          FORCE: true
+          SINGLE_COMMIT: true
