@@ -59,7 +59,7 @@ module.exports = {
             title: '🌴 命理学 Numerology',
             collapsable: true,
             children: [
-                'numerology/十神六亲', 'numerology/十神性格', "numerology/会合冲刑害",
+                "numerology/会合冲刑害", 'numerology/十神六亲', 'numerology/十神性格', 'numerology/十神心得',
             ]
         },
         {
