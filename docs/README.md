@@ -6,9 +6,7 @@ heroImageStyle: {
   maxWidth: '520px',
   width: '100%',
   display: block,
-  margin: 'auto',
-  margin-bottom: '-3%',
-  //border: '1px dashed #000',
+  margin: '3% auto',
   box-shadow: '8px 8px 20px #022',
   borderRadius: '10px',
 }
