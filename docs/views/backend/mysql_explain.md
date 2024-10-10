@@ -1,5 +1,5 @@
 ---
-title: MySQL慢查询优化
+title: MySQL 慢查询优化
 date: 2020-05-16
 tags:
 - sql优化
