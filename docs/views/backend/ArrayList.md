@@ -1,5 +1,5 @@
 ---
-title: ArrayList底层实现和原理
+title: ArrayList 底层实现和原理
 date: 2017-06-13 20:53:26
 tags:
 - "源码分析"

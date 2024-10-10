@@ -1,5 +1,5 @@
 ---
-title: Java中的各种锁
+title: Java 中的各种锁
 date: 2020-04-27
 tags:
 - Java

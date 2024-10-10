@@ -1,5 +1,5 @@
 ---
-title: MyBatis中的一、二级缓存
+title: MyBatis 中的一、二级缓存
 date: 2021-04-23
 tags:
 - MyBatis
