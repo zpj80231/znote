@@ -6,7 +6,7 @@ const plugins = require('./config/plugins/')
 module.exports = {
   // dest: 'gb-pages',//打包目录
   base: '/znote/',
-  title: "ZPJの自留地",
+  title: "zの自留地",
   description: '内在丰盈者，独行亦如众',
   head: [
     ['meta', { name: 'viewport', content: 'width=device-width,initial-scale=1,user-scalable=no'}],
@@ -65,7 +65,7 @@ module.exports = {
     lastUpdated: true,
     lastUpdated: '上次更新', // string | boolean
     // 作者
-    author: 'zhāngpéngjūn',
+    author: 'z',
     // 备案号
     record: '京ICP备17067634号-1',
     // 项目开始时间

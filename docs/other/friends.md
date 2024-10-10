@@ -27,7 +27,7 @@ reward: true
 #  link: https://zscnb.gitee.io/
 #  bgColor: '#FCE5BF'
 #  textColor: '#7B2532'
-- name: ZPJの自留地
+- name: zの自留地
   desc: 内在丰盈者，独行亦如众
   avatar: https://zpj80231.github.io/znote/vuepress/head-fish.jpg
   link: https://zpj80231.github.io/znote/
@@ -96,7 +96,7 @@ reward: true
 如需友链，请 [联系我](https://mp.weixin.qq.com/s?__biz=MzU4MDY1NjE1MQ==&mid=100000138&idx=1&sn=6b5e532de9685de1bbf4051eaca2de86&chksm=7d52ccf24a2545e479c7b6ed4401bc850a341e54e10cbdd54ce72b757ea7c986c37585375fa2&scene=18#wechat_redirect) 或 <a> 留言👇 </a> 告知，格式如下：
 
 ```yaml
-- name: ZPJの自留地
+- name: zの自留地
   desc: 内在丰盈者，独行亦如众
   avatar: https://zpj80231.github.io/znote/vuepress/head-fish.jpg
   link: https://zpj80231.github.io/znote/
