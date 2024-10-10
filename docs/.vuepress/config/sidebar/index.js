@@ -41,7 +41,7 @@ module.exports = {
                 'backend/spring-source-10', 'backend/spring-source-11', 'backend/spring-source-12',
                 'backend/spring-source-13', 'backend/spring-source-14', 'backend/spring-source-15',
                 'backend/ArrayList', 'backend/HashMap', 'backend/docker', 'backend/itext', 'backend/poi',
-                'backend/quartz', 'backend/单元测试1', 'backend/单元测试2', 'backend/单元测试3',
+                'backend/quartz', 'backend/dubbo', 'backend/单元测试1', 'backend/单元测试2', 'backend/单元测试3',
                 'backend/rabbitmq001', 'backend/rabbitmq002', 'backend/redis01', 'backend/redis02',
                 'backend/redis使用场景', 'backend/SSH', 'backend/jwt', 'backend/swagger2', 'backend/thread',
                 'backend/ThreadLocal', 'backend/ThreadPool', 'backend/ThreadPool2', 'backend/annotationLog',
