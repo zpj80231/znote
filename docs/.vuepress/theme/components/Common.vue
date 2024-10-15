@@ -170,9 +170,14 @@ export default {
   },
 
   mounted () {
-    if (this.check() && this.$site && this.$site.themeConfig) {
+    if (this.$site && this.$site.themeConfig) {
       const { themeConfig } = this.$site
-      this.isSidebarOpen = themeConfig.isSidebarOpen
+      if (this.isPc()) {
+        this.isSidebarOpen = themeConfig.isSidebarOpen
+      } else {
+        // 手机端，侧边栏默认不打开
+        this.isSidebarOpen = true
+      }
     }
 
     // 监听路由的变化
@@ -188,8 +193,7 @@ export default {
   },
 
   methods: {
-    //返回true表示为pc端打开，返回false表示为手机端打开
-    check() {
+    isPc() {
       let flag = navigator.userAgent.match(/(phone|pod|iPhone|iPod|ios|Android|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)
       return !flag;
     },
