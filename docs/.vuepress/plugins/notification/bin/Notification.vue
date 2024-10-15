@@ -41,7 +41,7 @@
             }
         },
         mounted() {
-            if(!this.check()) { return }
+            if(!this.isPc()) { return }
             this.setStepImg()
             this.setRandomShow()
         },
@@ -54,7 +54,7 @@
                     this.closeBtn = false
                 }, (15*60*1000))
             },
-            check() {
+            isPc() {
                 let flag = navigator.userAgent.match(/(phone|pod|iPhone|iPod|ios|Android|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)
                 return !flag;
             },
