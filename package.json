@@ -24,9 +24,9 @@
 	"scripts": {
 		"dev": "vuepress dev docs",
 		"build": "vuepress build docs",
-		"dev:node:16": "set NODE_OPTIONS=--openssl-legacy-provider && vuepress dev docs",
-		"dev:node:16:mac": "export NODE_OPTIONS=--openssl-legacy-provider && vuepress dev docs",
-		"build:node:16:mac": "export NODE_OPTIONS=--openssl-legacy-provider && vuepress build docs",
+		"dev:node:options": "set NODE_OPTIONS=--openssl-legacy-provider && vuepress dev docs",
+		"dev:node:options:mac": "export NODE_OPTIONS=--openssl-legacy-provider && vuepress dev docs",
+		"build:node:options:mac": "export NODE_OPTIONS=--openssl-legacy-provider && vuepress build docs",
 		"deploy": "bash ./utils/deploy.sh"
 	},
 	"dependencies": {
@@ -34,13 +34,7 @@
 		"@vuepress/plugin-medium-zoom": "^1.9.8",
 		"@vuepress/plugin-pwa": "^1.9.8",
 		"@vuepress/plugin-register-components": "1.9.10",
-		"axios": "^0.26.1",
-		"jquery": "^3.6.0",
-		"js-yaml": "^3.14.1",
-		"markdown-it-disable-url-encode": "^1.0.1",
-		"moment": "^2.29.3",
-		"vuepress": "^1.9.8",
-		"vuepress-plugin-boxx": "0.0.7",
+		"vuepress-plugin-boxx": "^1.0.0",
 		"vuepress-plugin-code-copy": "^1.0.6",
 		"vuepress-plugin-container": "^2.1.5",
 		"vuepress-plugin-copyright": "^1.0.2",
@@ -48,6 +42,12 @@
 		"vuepress-plugin-sitemap": "2.3.1",
 		"vuepress-plugin-smooth-scroll": "^0.0.10",
 		"vuepress-theme-reco": "1.6.17",
+		"vuepress": "^1.9.10",
+		"js-yaml": "^3.14.1",
+		"axios": "^0.26.1",
+		"markdown-it-disable-url-encode": "^1.0.1",
+		"jquery": "^3.7.1",
+		"moment": "^2.30.1",
 		"whatwg-fetch": "3.6.20"
 	}
 }
