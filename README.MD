@@ -49,7 +49,7 @@
   
   node14 版本：`npm run dev`
   
-  node16 版本及以上：`npm run dev:node:16` （在 Mac 上运行：`npm run dev:node:16:mac` ）
+  node16 版本及以上：`npm run dev:node:options` （在 Mac 上运行：`npm run dev:node:options:mac` ）
   
 - 待启动成功后打开地址即可：[http://localhost:8080/znote/](http://localhost:8080/znote/)
 
