@@ -13,7 +13,7 @@ isShowComments: true
 
 在现代应用程序中，数据库连接池是提升性能和资源管理的关键组件。本文将从零开始，详细讲解如何实现一个高效的 JDBC 连接池。无论你是初学者还是有一定经验的开发者，相信本文都能为你提供有价值的指导。
 
-项目代码地址：[传送门](https://github.com/zpj80231/snail/tree/main/snail-source-code/source-jdbc-connection-pool)
+项目代码地址：[传送门](https://github.com/zpj80231/snail/tree/main/snail-source-code/source-jdbc-pool)
 
 <!-- more -->
 
