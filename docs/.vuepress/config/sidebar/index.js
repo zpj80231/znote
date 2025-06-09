@@ -57,6 +57,13 @@ module.exports = {
             ]
         },
         {
+            title: '🛠️ 手撸源码 Source-code',
+            collapsable: true,
+            children: [
+                "source/code/rpc/rpc-source-01", "source/code/rpc/rpc-source-02",
+            ]
+        },
+        {
             title: '🌴 命理学 Numerology',
             collapsable: true,
             children: [
