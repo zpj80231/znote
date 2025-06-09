@@ -4,7 +4,7 @@ sidebar: true
 date: 2019-08-21
 sidebarDepth: 0
 isShowComments: true
-next: backend/spring-source-01
+next: source/code/spring/spring-source-01
 ---
 
 <div style="height: 120px">
@@ -85,7 +85,7 @@ next: backend/spring-source-01
 
 <div id='fj'>
 
-[【前端】](/views/frontend/EChartsStudy.html) | [【后端】](/views/backend/spring-source-01.html)
+[【前端】](/views/frontend/EChartsStudy.html) | [【后端】](/views/source/code/spring/spring-source-01.html)
 
 </div>
 
