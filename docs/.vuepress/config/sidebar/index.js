@@ -35,6 +35,7 @@ module.exports = {
             title: '🔨 后端 Back-end',
             collapsable: true,
             children: [
+                'backend/SpringGateway宕机排查',
                 'backend/API网关概述', 'backend/SPI_JdkDubboSpring', 'backend/docker', 'backend/itext', 'backend/poi',
                 'backend/quartz', 'backend/dubbo', 'backend/单元测试1', 'backend/单元测试2', 'backend/单元测试3',
                 'backend/rabbitmq001', 'backend/rabbitmq002', 'backend/redis01', 'backend/redis02',
