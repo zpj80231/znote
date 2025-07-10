@@ -1,5 +1,5 @@
 ---
-title: 手写 RPC 02：项目结构及远程调用
+title: 手写RPC-02：项目结构及远程调用
 date: 2025-06-09
 tags:
   - 源码分析
@@ -16,8 +16,6 @@ isShowComments: true
 先对想做的东西有了清楚的认知之后，再下手或再去了解就简单多了。
 
 <!-- more -->
-
-我的项目源码地址参考：https://github.com/zpj80231/snail/tree/main/snail-source-code/source-rpc
 
 [[toc]]
 
@@ -54,9 +52,9 @@ public class RpcServerMultiple {
 
     public static void main(String[] args) {
         // 启动多个服务端，模拟serviceImpl在多个服务器上，客户端自动负载均衡
-        new Thread(() -> new RpcServerManager(8024).start()).start();
-        new Thread(() -> new RpcServerManager(8025).start()).start();
-        new Thread(() -> new RpcServerManager(8026).start()).start();
+        new RpcServerManager(8024).startAsync();
+        new RpcServerManager(8025).startAsync();
+        new RpcServerManager(8026).startAsync();
     }
 
 }
@@ -144,5 +142,6 @@ public class RpcClient {
 
 ![snail_rpc_client_connect_success.png](/znote/img/source/snail_rpc_client_connect_success.png)
 
+项目源码参考我的仓库：[https://github.com/zpj80231/snail/tree/main/snail-source-code/source-rpc](https://github.com/zpj80231/snail/tree/main/snail-source-code/source-rpc)
 
 <Reward/>
