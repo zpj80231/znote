@@ -1,5 +1,5 @@
 ---
-title: 手写 RPC 01：从零实现到扩展性设计
+title: 手写RPC-01：从零实现到扩展性设计
 date: 2025-05-23
 tags:
   - 源码分析
@@ -17,8 +17,6 @@ isShowComments: true
 
 通过手写此项目代码，不仅增强了对rpc框架底层的理解，同时也对netty网络编程、组件扩展、框架设计等都有了一定的认识和了解。
 
-我的项目源码地址参考：https://github.com/zpj80231/snail/tree/main/snail-source-code/source-rpc
-
 [[toc]]
 
 ## 基础框架定义
@@ -35,7 +33,7 @@ isShowComments: true
 - **注册中心集成**：
   - 默认内置本地文件注册中心（模拟 Zookeeper 路径方式）。
   - 支持扩展至 Nacos、Zookeeper 等第三方注册中心。
-- **分组与版本管理**：接口支持多实现场景，通过 Group/Version 控制服务路由。
+- **分组与版本管理**：接口支持多实现场景，通过 group、version 控制服务路由。
 - **注解驱动式注册**：无需配置文件即可快速上线服务。
 
 ## 客户端：服务发现与调用
@@ -68,5 +66,7 @@ isShowComments: true
 ## 总结
 
 本项目是一个学习和理解 RPC 框架设计的极佳实践材料。通过手动实现协议、注册中心、负载均衡、服务代理等模块，掌握现代 RPC 系统的运行原理和架构设计思路。
+
+项目源码参考我的仓库：[https://github.com/zpj80231/snail/tree/main/snail-source-code/source-rpc](https://github.com/zpj80231/snail/tree/main/snail-source-code/source-rpc)
 
 <Reward/>

@@ -56,7 +56,7 @@ module.exports = {
             title: '🛠️ 手撸源码 Source-code',
             collapsable: true,
             children: [
-                "source/code/rpc/rpc-source-01", "source/code/rpc/rpc-source-02",
+                "source/code/rpc/rpc-source-01", "source/code/rpc/rpc-source-02", "source/code/rpc/rpc-source-03",
                 'source/code/starter/spring-boot-starter-redis',
                 'source/code/spring/spring-source-01', 'source/code/spring/spring-source-02',
                 'source/code/spring/spring-source-03', 'source/code/spring/spring-source-04',
