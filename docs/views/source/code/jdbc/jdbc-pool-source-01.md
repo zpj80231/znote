@@ -31,7 +31,7 @@ isShowComments: true
 
 JDBC 连接池模块主要包含以下几个核心部分：
 
-```lua
+```java
 (base) ~/IdeaProjects/snail/snail-source-code/source-jdbc-connection-pool
 ├── pom.xml
 └── src
