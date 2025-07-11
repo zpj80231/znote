@@ -57,7 +57,7 @@ module.exports = {
             collapsable: true,
             children: [
                 "source/code/rpc/rpc-source-01", "source/code/rpc/rpc-source-02", "source/code/rpc/rpc-source-03",
-                'source/code/starter/spring-boot-starter-redis',
+                'source/code/starter/spring-boot-starter-redis-01', 'source/code/starter/spring-boot-starter-redis-02',
                 'source/code/spring/spring-source-01', 'source/code/spring/spring-source-02',
                 'source/code/spring/spring-source-03', 'source/code/spring/spring-source-04',
                 'source/code/spring/spring-source-05', 'source/code/spring/spring-source-06',
