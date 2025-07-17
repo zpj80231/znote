@@ -1,5 +1,5 @@
 ---
-title: 手写RPC-02：实践指南
+title: 手写RPC-02：快速实践与运行测试
 date: 2025-06-09
 tags:
   - 源码分析
@@ -11,28 +11,27 @@ isShowComments: true
 
 <Boxx/>
 
-对项目框架结构做一个简单的介绍，了解项目不同模块都是做什么的，然后对框架做一个运行测试。
-
-先对怎么使用有了清楚的认知之后，再带着问题，为什么要这么做，然后再下手或者再去了解就简单多了。
+在上一篇章中，我们详细探讨了 RPC 框架的整体设计思想和核心概念。本文作为实践篇，将快速搭建并运行 RPC 框架的示例，了解其项目结构和基本使用方式。通过实际运行，我们将对 RPC 框架的运作有一个直观的认知，为后续深入理解源码实现打下基础。
 
 <!-- more -->
 
 [[toc]]
 
-## 项目结构
+## 1. 项目结构概述
 
 大致分为核心包、客户端、服务端、api包、组件spi扩展、项目配置文件抽取等（我这里为了简单作为单体项目实现了，当然也可以拆分为多模块项目实现）。直接贴图吧
 
 ![snail_rpc_project.png](/znote/img/source/snail_rpc_project.png)
 
-## 使用
+## 2. 快速使用指南
 
-使用的话直接参考：RpcServer、RpcServerMultiple、RpcClient 这3个类即可
+框架提供了简洁的启动方式，可以通过 `RpcServer`、`RpcServerMultiple` 和 `RpcClient` 这三个示例类来体验其基本功能。
 
-主要逻辑就是：
+-   **服务端启动**：`RpcServer` 用于启动单个 RPC 服务端，它会自动发现并注册带有 `@RpcService` 注解的服务，并对外提供 RPC 调用能力。
+-   **多实例服务端启动**：`RpcServerMultiple` 用于启动多个 RPC 服务端实例，模拟服务在多台服务器上部署的场景，这对于后续测试负载均衡策略非常有用。
+-   **客户端调用**：`RpcClient` 用于模拟客户端发起 RPC 调用。它会自动发现可用的服务端实例，并通过动态代理无感知地调用远程服务。
 
-- 服务端启动，自动发现并注册，然后对外提供服务。
-- 客户端启动，函数调用时，自动代理、自动发现、负载均衡、远程调用。
+以下是核心示例代码：
 
 ```java
 @EnableRpcServer
@@ -118,17 +117,17 @@ public class RpcClient {
 }
 ```
 
-## 测试
+## 3. 测试
 
 直接启动上述3个类问题，先后顺序无所谓。
 
-### 启动客户端 RpcClient
+### 3.1 启动客户端 RpcClient
 
 这里我们先启动客户端，可以看到刚开始调用时都是连接拒绝（服务端没启动，没有对外提供服务）
 
 ![snail_rpc_client_connect_refused.png](/znote/img/source/snail_rpc_client_connect_refused.png)
 
-### 启动服务端 RpcServerMultiple
+### 3.2 启动服务端 RpcServerMultiple
 
 可以看到，服务端启动后，服务自动注册对外提供服务、收到客户端连接
 
@@ -136,7 +135,7 @@ public class RpcClient {
 ![snail_rpc_server_connect.png](/znote/img/source/snail_rpc_server_connect.png)
 
 
-### 再次查看客户端调用
+### 3.3 再次查看客户端调用结果
 
 与rpc服务端连接成功，并进行了负载均衡（取决于实现算法，默认轮询），远程调用成功
 

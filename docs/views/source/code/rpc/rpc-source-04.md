@@ -1,5 +1,5 @@
 ---
-title: 手写RPC-04：Spring 集成
+title: 手写RPC-04：Spring 框架深度集成
 date: 2025-07-27
 tags:
   - 源码分析
@@ -59,9 +59,10 @@ public class SourceRpcServerApplication {
 
 这些注解的作用类似于 Spring 的 @EnableXXX，本质上是通过 @Import 导入相关的配置类或注册器。
 
-### 2.2. 服务暴露与引用
+### 2.2. 服务暴露与引用示例
 
 - @RpcService：用于标注需要暴露为 RPC 服务的实现类
+  将服务实现类标记为 `@RpcService`，并可指定服务的 `group` 和 `version`，以便进行多版本或多环境管理。
 
 ```java
 @RpcService(group = "dev", version = "1.0.0")
@@ -76,6 +77,7 @@ public class HiServiceImplDevV1 implements HiService {
 ```
 
 - @RpcReference：用于注入远程服务代理
+  在需要引用远程服务的地方，使用 `@RpcReference` 注解标记接口字段。RPC 框架会自动为该字段注入一个代理对象，使得调用远程服务如同调用本地方法一般。
 
 ```java
 @Slf4j
@@ -316,20 +318,23 @@ public class RpcServiceScannerRegistrar implements ImportBeanDefinitionRegistrar
 
 ok，通过以上操作，与 Spring 集成就完成了。我们总结一下流程：
 
-1. 用户在启动类上添加 @EnableRpcService 或 @EnableRpcClient 注解
-2. 注解通过 @Import 导入注册器（如 RpcServiceScannerRegistrar）或其他配置
-3. 注册器扫描并注册服务 Bean
-4. 自动配置类注册 BeanPostProcessor
-5. BeanPostProcessor 在 Bean 初始化时处理服务暴露与远程代理注入
-6. RPC 框架完成与 Spring 的集成，用户可直接通过注解方式发布和引用远程服务
+1.  **启用 RPC 功能**：用户在 Spring Boot 启动类上添加 `@EnableRpcService` 或 `@EnableRpcClient` 注解。
+2.  **触发导入与注册**：这些 `@Enable` 注解通过 `@Import` 机制导入相应的 `BeanDefinitionRegistrar`（如 `RpcServiceScannerRegistrar`）或其他自动配置类。
+3.  **服务扫描与 Bean 注册**：`BeanDefinitionRegistrar` 负责根据注解配置的包路径，扫描带有 `@RpcService` 注解的服务实现类，并将其注册为 Spring `BeanDefinition`。
+4.  **注册 BeanPostProcessor**：自动配置类（如 `RpcServiceAutoConfiguration`）会向 Spring 容器注册 `RpcServiceBeanPostProcessor` 和 `RpcReferenceBeanPostProcessor`。
+5.  **处理服务暴露与引用**：
+    *   `RpcServiceBeanPostProcessor` 在服务实现 Bean 初始化完成后，将其暴露到 RPC 服务端并注册到服务注册中心。
+    *   `RpcReferenceBeanPostProcessor` 在客户端 Bean 初始化时，自动为带有 `@RpcReference` 注解的字段注入远程服务代理对象。
+6.  **完成集成**：至此，RPC 框架与 Spring 容器紧密结合，开发者可以直接通过注解方式发布和引用远程服务，享受透明的 RPC 调用体验。
+
 
 ## 6. 测试
 
-分别启动 ` source-rpc-client` 和 `source-rpc-server` 这两个 Spring-boot 模块。
+为了验证 RPC 框架与 Spring 的集成效果，我们分别启动 `source-rpc-client` 和 `source-rpc-server` 这两个 Spring Boot 模块。
 
 ![snail_rpc_spring_client_project.png](/znote/img/source/snail_rpc_spring_client_project.png)
 
-访问 `http://127.0.0.1:8021/hi` ，查看页面结果，多刷新几次，可以看到成功调用了同一接口的不同实现。
+启动成功后，访问客户端应用的 HTTP 接口：`http://127.0.0.1:8021/hi` 多次刷新页面，可以看到成功调用了同一接口的不同实现（通过负载均衡或分组版本路由），这验证了 RPC 框架在 Spring 环境下的正常运行和多实例服务的支持。
 
 ![snail_rpc_spring_client_http.png](/znote/img/source/snail_rpc_spring_client_http.png)
 
