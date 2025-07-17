@@ -1,5 +1,5 @@
 ---
-title: 手写RPC-02：项目结构及远程调用
+title: 手写RPC-02：实践指南
 date: 2025-06-09
 tags:
   - 源码分析
@@ -11,9 +11,9 @@ isShowComments: true
 
 <Boxx/>
 
-对项目结构做一个简单的介绍，了解项目不同模块都是做什么的，然后对框架做一个运行测试。
+对项目框架结构做一个简单的介绍，了解项目不同模块都是做什么的，然后对框架做一个运行测试。
 
-先对想做的东西有了清楚的认知之后，再下手或再去了解就简单多了。
+先对怎么使用有了清楚的认知之后，再带着问题，为什么要这么做，然后再下手或者再去了解就简单多了。
 
 <!-- more -->
 
@@ -141,6 +141,8 @@ public class RpcClient {
 与rpc服务端连接成功，并进行了负载均衡（取决于实现算法，默认轮询），远程调用成功
 
 ![snail_rpc_client_connect_success.png](/znote/img/source/snail_rpc_client_connect_success.png)
+
+欧克，现在知道了框架的运行机制，下一章我们看源码是怎么实现的。
 
 项目源码参考我的仓库：[https://github.com/zpj80231/snail/tree/main/snail-source-code/source-rpc](https://github.com/zpj80231/snail/tree/main/snail-source-code/source-rpc)
 
