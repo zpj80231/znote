@@ -36,20 +36,16 @@
 
 ## 项目介绍
 
-- 工作经验：记录生产级别问题排查处理
-- 知识小结：技术栈知识点笔记总结
-- 生活随笔：个人牢骚发布
-- 其它：欢迎入队 ...
+- **工作经验**：汇总生产环境中的问题排查与解决思路，积累实战经验。
+- **知识小结**：梳理各类技术栈核心要点与学习笔记，便于查阅和复习。
+- **生活随笔**：记录生活点滴与个人感悟，分享成长与思考。
+- **其他**：收录未分类内容及合作交流信息，欢迎入队共同进步🫡。
 
 ## 项目运行
 
 - 克隆项目，在项目文件夹下执行命令，加载依赖：`npm install`
 
-- 在项目文件夹下执行命令运行项目：
-  
-  node14 版本：`npm run dev`
-  
-  node16 版本及以上：`npm run dev:node:options` （在 Mac 上运行：`npm run dev:node:options:mac` ）
+- 在项目文件夹下执行命令运行项目：`npm run dev`
   
 - 待启动成功后打开地址即可：[http://localhost:8080/znote/](http://localhost:8080/znote/)
 
@@ -64,21 +60,21 @@ Dev
 │   └── .vuepress   // 配置目录
 │   │    ├── public // 静态资源
 │   │    ├── theme  // 主题
-│   │    │   ├── components // 组件
+│   │    │   ├── components    // 组件
 │   │    │   ├── global-components // 全局组件
-│   │    │   ├── layouts // 布局(包括首页在内)
-│   │    │   ├── styles  // 样式
-│   │    │   ├── util 	 // 工具
-│   │    │   ├── index.js // 入口配置
+│   │    │   ├── layouts       // 布局(包括首页在内)
+│   │    │   ├── styles        // 样式
+│   │    │   ├── util 	       // 工具
+│   │    │   ├── index.js      // 入口配置
 │   │    │   ├── noopModule.js // 依赖注入
 │   │    │   ├── package.json  // 主题依赖
 │   │    │   ├── README.md     // 主题说明
-│   │    └── config.js
-│   ├── about   // 项目模块
-│   ├── other   // 项目模块
-│   ├── views   // 项目模块
+│   │    └── config.js         // 配置文件
+│   ├── about       // 项目模块
+│   ├── other       // 项目模块
+│   ├── views       // 项目模块
 │   └── README.md   // 首页
-└── package.json //项目依赖
+└── package.json    // 项目依赖
 ```
 
 ## 如何使用
@@ -128,7 +124,7 @@ publish: true
 
 <!-- more -->
 
-## 正式开始你的markdown
+## 正式开始你的 markdown
 
 - To be or not to be, ...
 ```
