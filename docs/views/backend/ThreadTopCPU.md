@@ -11,7 +11,7 @@ isShowComments: true
 
 <Boxx/>
 
-找出某个Java进程中最耗费CPU的Java线程并定位堆栈信息，用到的命令有：ps、top、printf、jstack、grep。
+找出某个Java进程中最耗费CPU的Java线程并定位堆栈信息，用到的命令有：ps、top、printf、jstack、grep。当然还有神器：arthas。
 
 <!-- more -->
 
@@ -30,7 +30,7 @@ isShowComments: true
 
 这些问题在日常开发、维护中可能被很多人忽视（比如有的人遇到上面的问题只是重启服务器或者调大内存，而不会深究问题根源），但能够理解并解决这些问题是Java程序员进阶的必备要求。
 
-##  排查步骤
+##  传统排查步骤
 
 ### jps
 
@@ -145,7 +145,68 @@ printf "%x\n" 2968
 
 ---
 
-## 其他问题排查
+## Arthas 排查
+
+### jdk 环境
+
+1. 下载并解压 arthas
+
+   ```shell
+   cd /opt/arthas
+   
+   wget -O arthas-packaging-4.0.5-bin.zip 'https://maven.aliyun.com/repository/public/com/taobao/arthas/arthas-packaging/4.0.5/arthas-packaging-4.0.5-bin.zip'
+   
+   unzip arthas-packaging-4.0.5-bin.zip
+   ```
+
+2. 启动 arthas，[官网传送门](https://arthas.aliyun.com/doc/quick-start.html#_2-%E5%90%AF%E5%8A%A8-arthas)
+
+   ```shell
+   # https://arthas.aliyun.com/doc/quick-start.html#_2-%E5%90%AF%E5%8A%A8-arthas
+   java -jar arthas-boot.jar
+   ```
+
+   输入 `dashboard`，按 `回车/enter`，会展示当前进程的信息， 按 `ctrl+c` 可以中断执行。[dashboard 传送门](https://arthas.aliyun.com/doc/dashboard.html)
+
+   ![arthas-dashboard.png](/znote/img/backend/arthas/arthas-dashboard.png)
+
+   或者输入 `thread -n 10`，指定最忙的前 10 个线程并打印堆栈。[thread 传送门](https://arthas.aliyun.com/doc/thread.html)
+
+   ![arthas-thread.png](/znote/img/backend/arthas/arthas-thread.png)
+
+3. 最后根据线程堆栈并分析业务代码，定位问题即可
+
+### jre 环境
+
+如果是在 docker 里并且使用的是 jre 启动项目的话，需要 jre 结合 jattach 来使用 arthas：
+
+1. 不同系统 jattach 项目安装和配置指南，[传送门](https://blog.csdn.net/gitblog_01239/article/details/143042639)
+
+   ```shell
+   apt install jattach
+   ```
+
+2. 找出 java 进程 pid
+
+   ```shell
+   ps aux | grep java
+   ```
+
+   ![arthas-java-pid.png](/znote/img/backend/arthas/arthas-java-pid.png)
+
+   这里以 pid 是 7 的举例
+
+3. 需要使用如下命令启动 arthas
+
+   ```shell
+   pid=7;\
+   jattach ${pid} load instrument false /opt/arthas/arthas-agent.jar && \
+   java -jar /opt/arthas/arthas-client.jar 127.0.0.1 3658
+   ```
+
+4. 启动成功，使用 arthas 命令如 `dashboard` 和 `thread` 进行分析即可
+
+## 其他命令排查
 
 **查看某进程及某线程占用 CPU 的例子**
 
@@ -165,8 +226,9 @@ printf "%x\n" 2968
 
 ## 相关脚本
 
-1. 阿里开源的 Arthas
+1. 阿里开源的 [Arthas](https://arthas.aliyun.com/)
 
-2. 看了下有位大神提个 [issue](https://github.com/emacsist/emacsist.github.io/issues/2) , 推荐了个自动化脚本, 亲测更好用点. 这样子就可以免去上面的一步一步地查找和计算了.
-   所以, 这里也直接引用这个工具, 有需要的可以用下.<br/>
+2. 看了下有位大佬提个 [issue](https://github.com/emacsist/emacsist.github.io/issues/2) ，推荐了个自动化脚本，亲测更好用点。这样子就可以免去上面的一步一步地查找和计算了。
+   所以，这里也直接引用这个工具。有需要的可以用下。<br/>
    [show-busy-java-threads](https://github.com/oldratlee/useful-scripts/blob/master/docs/java.md#beer-show-busy-java-threads)
+
