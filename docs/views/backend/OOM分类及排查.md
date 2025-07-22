@@ -51,7 +51,7 @@ isShowComments: true
 3. 假设占用率最高的线程 ID 为6900，将其转换为 16 进制形式（因为 java native 线程以 16 进制形式输出）【printf '%x\n' 6900】
 4. 利用jstack打印出 java 线程调用栈信息 【jstack 9876 | grep '0x1af4' -A 50 --color】，这样就可以更好的定位问题
 
-线上解决示例参考上一篇文章：[找出某个Java进程中最耗费CPU的Java线程](/views/backend/ThreadTopCPU)
+线上解决示例参考上一篇文章：[找出某个Java进程中最耗费CPU的Java线程](/znote/views/backend/ThreadTopCPU)
 
 ## 内存占用过高排查流程
 

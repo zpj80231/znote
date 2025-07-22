@@ -24,9 +24,6 @@
 	"scripts": {
 		"dev": "vuepress dev docs",
 		"build": "vuepress build docs",
-		"dev:node:options": "set NODE_OPTIONS=--openssl-legacy-provider && vuepress dev docs",
-		"dev:node:options:mac": "export NODE_OPTIONS=--openssl-legacy-provider && vuepress dev docs",
-		"build:node:options:mac": "export NODE_OPTIONS=--openssl-legacy-provider && vuepress build docs",
 		"deploy": "bash ./utils/deploy.sh"
 	},
 	"dependencies": {
