@@ -43,6 +43,9 @@ jobs:
 
       - name: Build 🔧
         run: |
+          # 清理之前的构建文件
+          rm -rf docs/.vuepress/dist
+          rm -rf node_modules/.cache
           npm install 
           npm run build
 
@@ -57,7 +60,7 @@ jobs:
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4.7.3
         with:
-          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          token: ${{ secrets.ACCESS_TOKEN }}
           branch: gh-pages
           folder: docs/.vuepress/dist
           single-commit: true
