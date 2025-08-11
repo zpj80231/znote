@@ -37,18 +37,13 @@ module.exports = [
                 return renderCardList(tokens, idx, CARD_IMG_LIST)
             }
     }],
-    // ['@vuepress/pwa', {
-    //     serviceWorker: true,
-    //     updatePopup: {
-    //         message: "发现新内容可用",
-    //         buttonText: "刷新"
-    //     },
-    //     // 添加 Workbox 选项，强制 Service Worker 立即激活
-    //     workboxOptions: {
-    //         skipWaiting: true,
-    //         clientsClaim: true
-    //     }
-    // }],
+    ['@vuepress/pwa', {
+        serviceWorker: true,
+        updatePopup: {
+            message: "发现新内容可用",
+            buttonText: "刷新"
+        }
+    }],
     ['@vuepress/google-analytics', {
             ga: 'UA-128189152-1'
         }

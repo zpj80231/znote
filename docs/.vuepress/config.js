@@ -36,7 +36,7 @@ module.exports = {
     ["script", { "language": "javascript", "type": "text/javascript", "src": "https://cdn.bootcss.com/jquery/3.6.0/jquery.min.js"}],
     ["script", { "language": "javascript", "type": "text/javascript", "src": "/js/MouseClickEffect.js"}]
   ],
-
+  shouldPrefetch: false,
   //主题配置
   // theme: '',
   themeConfig: {
@@ -62,7 +62,6 @@ module.exports = {
       }
     },
     // 最后更新时间
-    lastUpdated: true,
     lastUpdated: '上次更新', // string | boolean
     // 作者
     author: 'z',
