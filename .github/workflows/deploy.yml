@@ -49,13 +49,11 @@ jobs:
           npm install 
           npm run build
 
-      - name: Inject Cache Busting Info into index.html ♻️
+      - name: Inject Cache Busting Info into HTML ♻️
         run: |
           BUILD_DATE=$(date "+%Y-%m-%d %H:%M:%S")
-          echo "Injecting build date: $BUILD_DATE into index.html"
-          # 该命令在 docs/.vuepress/dist/index.html 文件的 </head> 标签前插入一个包含当前构建日期的注释。
-          # 这种修改会改变文件内容，促使浏览器重新下载最新版本，从而解决缓存问题。
-          sed -i "/<\/head>/i\  <!-- Build Date: ${BUILD_DATE} -->" docs/.vuepress/dist/index.html
+          echo "Injecting build date: $BUILD_DATE into html files"
+          find docs/.vuepress/dist -name "*.html" -type f -print0 | xargs -0 -I {} bash -c "sed -i 's#</head>#<!-- Build Date: ${BUILD_DATE} -->\n</head>#' '{}'"
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4.7.3
