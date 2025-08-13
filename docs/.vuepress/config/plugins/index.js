@@ -37,11 +37,18 @@ module.exports = [
                 return renderCardList(tokens, idx, CARD_IMG_LIST)
             }
     }],
+    // 关闭 Service Worker，避免旧版本缓存导致的 404 与页面卡死
     ['@vuepress/pwa', {
-        serviceWorker: true,
+        serviceWorker: false,
         updatePopup: {
             message: "发现新内容可用",
             buttonText: "刷新"
+        },
+        // 保留生成配置，可根据需要后续再开启 SW
+        generateSWConfig: {
+            skipWaiting: true,
+            clientsClaim: true,
+            cleanupOutdatedCaches: true
         }
     }],
     ['@vuepress/google-analytics', {

@@ -29,12 +29,23 @@ module.exports = {
     ['link', { rel: 'apple-touch-icon', sizes: '180x180', href: '/vuepress/apple-touch-icon-180x180.png' }],
 
     ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }],
+    ['meta', { name: 'mobile-web-app-capable', content: 'yes' }],
     ['meta', { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }],
     ['meta',{ name: 'msapplication-TileImage', content: '/vuepress/msapplication-icon-144x144.png'}],
     ['meta', { name: 'msapplication-TileColor', content: '#000000' }],
 
     ["script", { "language": "javascript", "type": "text/javascript", "src": "https://cdn.bootcss.com/jquery/3.6.0/jquery.min.js"}],
-    ["script", { "language": "javascript", "type": "text/javascript", "src": "/js/MouseClickEffect.js"}]
+    ["script", { "language": "javascript", "type": "text/javascript", "src": "/js/MouseClickEffect.js"}],
+    // 注销历史 Service Worker，防止旧缓存拦截
+    ["script", {}, `
+      (function() {
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.getRegistrations && navigator.serviceWorker.getRegistrations().then(function(regs){
+            regs.forEach(function(reg){ reg.unregister(); });
+          });
+        }
+      })();
+    `]
   ],
   shouldPrefetch: false,
   //主题配置
