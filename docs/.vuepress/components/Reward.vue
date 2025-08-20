@@ -3,8 +3,9 @@
         <details class="custom-block details">
             <summary>打赏一下</summary>
             <br>
-            <p align="center" style="max-width: 200px; margin: 0 auto;">
-                <img :src="rewardImg" style="border: 1px solid #DDDDDD;" class="medium-zoom-image" />
+            <p align="center">
+                <img :src="rewardImgWeChat" style="max-width: 200px; max-height: 250px; border: 1px solid #DDDDDD;" />
+                <img :src="rewardImgAliPay" style="max-width: 200px; max-height: 250px; border: 1px solid #DDDDDD;" />
             </p>
             <p align="center">「真诚赞赏，手留余香」</p>
             <h3 id="打赏记录"><a href="#打赏记录" class="header-anchor">#</a> 打赏记录</h3>
@@ -35,8 +36,8 @@
 <script>
     let rewarder = [
         // ['打赏者','打助金额','支付方式','时间','备注'],
-        ['John', '12', '微信', '2020-06-09', 'tip of you'],
-        ['艾斯', '32', '支付宝', '2020-07-11', '火拳赞赏'],
+        ['John', '12', '微信', '2020-06-09', ''],
+        ['艾斯', '32', '支付宝', '2020-07-11', 'nice'],
         ['HickSalmon', '15', '微信', '2020-09-21', '有赏交流'],
     ]
     export default {
@@ -44,7 +45,8 @@
         data() {
             return {
                 rewarder,
-                rewardImg: "/znote/vuepress/zanshang.png"
+                rewardImgWeChat: "/znote/reward/rewardImgWeChat.jpg",
+                rewardImgAliPay: "/znote/reward/rewardImgAliPay.jpg"
             }
         }
     }
