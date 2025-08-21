@@ -4,7 +4,8 @@ const sidebar = require('./config/sidebar/')
 const plugins = require('./config/plugins/')
 
 module.exports = {
-  // dest: 'gb-pages',//打包目录
+  // 打包目录
+  // dest: 'gb-pages',
   base: '/znote/',
   title: "zの自留地",
   description: '内在丰盈者，独行亦如众',
@@ -13,7 +14,11 @@ module.exports = {
     ['meta', { name: 'renderer', content: 'webkit'}],
     ['meta', { name: 'referrer', content: 'never'}],
     ['meta', { 'data-draft-node': 'block', 'data-draft-type': 'table', 'data-size': 'normal', 'data-row-style': 'normal'}],
-
+    ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }],
+    ['meta', { name: 'mobile-web-app-capable', content: 'yes' }],
+    ['meta', { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }],
+    ['meta',{ name: 'msapplication-TileImage', content: '/vuepress/msapplication-icon-144x144.png'}],
+    ['meta', { name: 'msapplication-TileColor', content: '#000000' }],
     ['link', { rel: 'icon', href: '/logo.png' }],
     ['link', { rel: 'icon', type: 'image/png', sizes:'16x16', href: '/vuepress/favicon-16x16.png' }],
     ['link', { rel: 'icon', type: 'image/png', sizes:'32x32', href: '/vuepress/favicon-32x32.png' }],
@@ -27,13 +32,8 @@ module.exports = {
     ['link', { rel: 'apple-touch-icon', sizes: '144x144', href: '/vuepress/apple-touch-icon-144x144.png' }],
     ['link', { rel: 'apple-touch-icon', sizes: '152x152', href: '/vuepress/apple-touch-icon-152x152.png' }],
     ['link', { rel: 'apple-touch-icon', sizes: '180x180', href: '/vuepress/apple-touch-icon-180x180.png' }],
-
-    ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }],
-    ['meta', { name: 'mobile-web-app-capable', content: 'yes' }],
-    ['meta', { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }],
-    ['meta',{ name: 'msapplication-TileImage', content: '/vuepress/msapplication-icon-144x144.png'}],
-    ['meta', { name: 'msapplication-TileColor', content: '#000000' }],
-
+    // bump axios from 0.26.1 to 1.11.0
+    ["script", {}, "window.global = window; window.process = window.process || { env: { NODE_ENV: 'production' } };"],
     ["script", { "language": "javascript", "type": "text/javascript", "src": "/js/jquery.min.js"}],
     ["script", { "language": "javascript", "type": "text/javascript", "src": "/js/MouseClickEffect.js"}],
     // 注销历史 Service Worker，防止旧缓存拦截
@@ -48,7 +48,7 @@ module.exports = {
     `]
   ],
   shouldPrefetch: false,
-  //主题配置
+  // 主题配置
   // theme: '',
   themeConfig: {
     nav,
@@ -85,10 +85,10 @@ module.exports = {
     // 如果你的文档不在仓库的根部
     docsDir: 'docs',
     // 可选，默认为 master
-    //docsBranch: 'vuepress',
+    // docsBranch: 'vuepress',
     editLinks: true,
     editLinkText: '在 GitHub 上编辑此页！',
-    //评论
+    // 评论
     valineConfig: {
       appId: 'xbT4pPXCWQju5T7GXC5fUFlF-gzGzoHsz',
       appKey: 'bofA5chNQ60p37Ih9sMffSI0',
