@@ -206,6 +206,10 @@ printf "%x\n" 2968
 
 4. 启动成功，使用 arthas 命令如 `dashboard` 和 `thread` 进行分析即可
 
+### 常用命令速查表（Arthas）
+
+![arthas_command.png](/znote/img/backend/arthas/arthas_command.png)
+
 ## 其他命令排查
 
 **查看某进程及某线程占用 CPU 的例子**
