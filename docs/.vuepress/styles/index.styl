@@ -233,6 +233,25 @@ div.code-copy
 //正文图片样式
 .content__default:not(.custom) img
   border-radius: 1%
+
+// 使用CSS变量检测暗黑模式
+:root[style*="--background-color: #25272a"] img,
+:root[style*="--background-color: #25272a"] .content__default:not(.custom) img,
+:root[style*="--background-color: #25272a"] .abstract-item img,
+:root[style*="--background-color: #25272a"] .sidebar img,
+:root[style*="--background-color: #25272a"] .navbar img,
+:root[style*="--background-color: #25272a"] .theme-container img {
+  filter: brightness(0.7) !important;
+  transition: filter 0.3s ease;
+}
+
+// 暗黑模式下图片悬停时稍微提高亮度
+:root[style*="--background-color: #25272a"] img:hover,
+:root[style*="--background-color: #25272a"] .content__default:not(.custom) img:hover,
+:root[style*="--background-color: #25272a"] .abstract-item img:hover {
+  filter: brightness(0.85) !important;
+}
+
 //分类下的图片大小
 .abstract-item
   img
