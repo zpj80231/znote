@@ -252,6 +252,39 @@ div.code-copy
   filter: brightness(0.85) !important;
 }
 
+// 响应式暗黑模式图片亮度调整
+@media (max-width: $MQNarrow)
+  :root[style*="--background-color: #25272a"] img,
+  :root[style*="--background-color: #25272a"] .content__default:not(.custom) img,
+  :root[style*="--background-color: #25272a"] .abstract-item img,
+  :root[style*="--background-color: #25272a"] .sidebar img,
+  :root[style*="--background-color: #25272a"] .navbar img,
+  :root[style*="--background-color: #25272a"] .theme-container img {
+    filter: brightness(0.7) !important;
+  }
+  
+  :root[style*="--background-color: #25272a"] img:hover,
+  :root[style*="--background-color: #25272a"] .content__default:not(.custom) img:hover,
+  :root[style*="--background-color: #25272a"] .abstract-item img:hover {
+    filter: brightness(0.85) !important;
+  }
+
+@media (max-width: $MQMobile)
+  :root[style*="--background-color: #25272a"] img,
+  :root[style*="--background-color: #25272a"] .content__default:not(.custom) img,
+  :root[style*="--background-color: #25272a"] .abstract-item img,
+  :root[style*="--background-color: #25272a"] .sidebar img,
+  :root[style*="--background-color: #25272a"] .navbar img,
+  :root[style*="--background-color: #25272a"] .theme-container img {
+    filter: brightness(0.7) !important;
+  }
+  
+  :root[style*="--background-color: #25272a"] img:hover,
+  :root[style*="--background-color: #25272a"] .content__default:not(.custom) img:hover,
+  :root[style*="--background-color: #25272a"] .abstract-item img:hover {
+    filter: brightness(0.85) !important;
+  }
+
 //分类下的图片大小
 .abstract-item
   img
