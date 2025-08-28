@@ -64,29 +64,15 @@ module.exports = [
         }
     ],
 
-    require('../../plugins/detailsOpenFlag/index'),
-    require('../../plugins/musicPlayer/index'),
-    require('../../plugins/notification/index'),
-    /*
+    require('../../plugins/detailsOpenFlag'),
+    require('../../plugins/musicPlayer'),
+    require('../../plugins/notification'),
     // 可以添加第三方搜索链接的搜索框（原官方搜索框的参数仍可用）
-    [require('../../plugins/enhanced-search'), {
-        // 可选，默认 []
-        thirdparty: [
-            {
-                title: '在 <span style="color: blue; ">Baidu</span> &nbsp;&nbsp;中搜索 ',
-                frontUrl: 'https://www.baidu.com/s?wd=',
-            },
-            {
-                title: '在 <span style="color: red; ">Google</span> 中搜索 ',
-                frontUrl: 'https://www.google.com/search?q=',
-            }
-        ]
-    }],
-    */
+    require('../../plugins/enhancedSearch'),
 
     ['vuepress-plugin-boxx'],
     ['vuepress-plugin-smooth-scroll'],
-    ['vuepress-plugin-fulltext-search'],
+    // ['vuepress-plugin-fulltext-search'],
     ['vuepress-plugin-code-copy', {align: "bottom", staticIcon: false}],
     ['copyright',{
         minLength: 100,
