@@ -4,8 +4,7 @@
             <summary>打赏一下</summary>
             <br>
             <p align="center">
-                <img :src="rewardImgWeChat" style="max-width: 200px; max-height: 250px; border: 1px solid #DDDDDD;" />
-                <img :src="rewardImgAliPay" style="max-width: 200px; max-height: 250px; border: 1px solid #DDDDDD;" />
+                <img :src="weChatAliPayQrcode" style="max-width: 200px; max-height: 250px;" />
             </p>
             <p align="center">「真诚赞赏，手留余香」</p>
             <h3 id="打赏记录"><a href="#打赏记录" class="header-anchor">#</a> 打赏记录</h3>
@@ -45,8 +44,7 @@
         data() {
             return {
                 rewarder,
-                rewardImgWeChat: "/znote/reward/rewardImgWeChat.jpg",
-                rewardImgAliPay: "/znote/reward/rewardImgAliPay.jpg"
+                weChatAliPayQrcode: "/znote/reward/WeChatAliPayQrcode.png"
             }
         }
     }
@@ -61,11 +59,11 @@
     summary {
         background-color: #f092132e;
         text-align: center;
-        margin: 0 auto;
+        margin: -1% auto;
         width: 150px;
     }
 
     table th:nth-of-type(1), th:nth-of-type(4), th:nth-of-type(5) {
-        width: 22.5%;
+        width: 22%;
     }
 </style>
