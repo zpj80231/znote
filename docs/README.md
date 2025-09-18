@@ -1,10 +1,10 @@
 ---
 home: true
-heroImage: '/vuepress/index-read.gif'
+heroImage: ''
 faceImage: '/vuepress/head.png'
 heroImageStyle: {
-  maxWidth: '520px',
-  width: '100%',
+  max-width: '500px',
+  height: '280px',
   display: block,
   margin: '3% auto',
   box-shadow: '8px 8px 20px #022',
@@ -55,7 +55,60 @@ footer: MIT Licensed | Copyright © 2018-present Evan You
 <!-- <CanvasNest color='0,23,255' zIndex='-2'></CanvasNest> -->
 
 <script>
+export default {
+  data() {
+    return {}
+  },
+  mounted() {
+    this.setRandomHeroImage();
+  },
+  methods: {
+    setRandomHeroImage() {
+      const images = [
+        '/vuepress/index-read.gif',
+        '/vuepress/index-snoopy-1.gif',
+        '/vuepress/index-snoopy-2.jpeg',
+        '/vuepress/index-snoopy-3.gif',
+        '/vuepress/index-snoopy-4.gif',
+        '/vuepress/index-snoopy-5.gif',
+        '/vuepress/index-snoopy-6.gif',
+        '/vuepress/index-snoopy-7.gif',
+        '/vuepress/index-snoopy-8.gif'
+      ]
+      const selectedImage = images[Math.floor(Math.random() * images.length)] + '?v=' + Date.now()
 
+      // 找到 hero 容器
+      const heroContainer = document.querySelector('.home .hero')
+      if (!heroContainer) return
+
+      // 查找已有的 <img>
+      let heroImageElement = heroContainer.querySelector('img')
+
+      // 如果 frontmatter heroImage 为空时页面不会渲染 <img>，此处动态创建
+      if (!heroImageElement) {
+        heroImageElement = document.createElement('img')
+        heroImageElement.className = 'heroImage'
+        heroContainer.insertBefore(heroImageElement, heroContainer.firstChild)
+      }
+
+      // 应用 frontmatter 的样式到动态图片
+      const styleObj = (this.$page && this.$page.frontmatter && this.$page.frontmatter.heroImageStyle) || {}
+      Object.keys(styleObj || {}).forEach(key => {
+        const value = styleObj[key]
+        try {
+          if (key in heroImageElement.style) {
+            heroImageElement.style[key] = value
+          } else {
+            heroImageElement.style.setProperty(key, value)
+          }
+        } catch (e) {}
+      })
+
+      heroImageElement.src = selectedImage
+      heroImageElement.alt = 'hero'
+    }
+  }
+}
 </script>
 
 <style lang="stylus">
@@ -67,11 +120,11 @@ footer: MIT Licensed | Copyright © 2018-present Evan You
 .home .hero h1 {
     display: none;
 }
-.home img {
+.home .hero img {
    transform: scale(0.8,0.8) !important;
    transition: all 1s!important;
 }
-.home img:hover {
+.home .hero img:hover {
    transform: scale(0.9,0.9) !important;
    transition:all 2s !important;
 }
@@ -110,7 +163,7 @@ footer: MIT Licensed | Copyright © 2018-present Evan You
     max-height: 230px !important;
     margin-top: 65% !important;
   }
-  .home img {
+  .home .hero img {
     /*max-width: 520px !important;*/
   }
 }
@@ -124,7 +177,7 @@ footer: MIT Licensed | Copyright © 2018-present Evan You
     max-height: 200px !important;
     margin-top: -10% !important;
   }
-  .home img {
+  .home .hero img {
     /*margin: 24% auto -6% auto !important;*/
     max-width: 380px !important;
   }
@@ -136,7 +189,7 @@ footer: MIT Licensed | Copyright © 2018-present Evan You
     transform: scale(0.68,0.58);
     background: none;
   }
-  .home img {    
+  .home .hero img {    
     /*margin: 24% auto -6% auto !important;*/
   }
   .home .feature {
@@ -149,7 +202,7 @@ footer: MIT Licensed | Copyright © 2018-present Evan You
   }
   .clock {
     background: rgba(0, 0, 0, 0) none repeat scroll !important;
-    background-image: url() !important;
+    background-image: none !important;
   }
 }
 .clock {
