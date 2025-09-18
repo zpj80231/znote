@@ -67,7 +67,7 @@ export default {
       const images = [
         '/znote/vuepress/index-read.gif',
         '/znote/vuepress/index-snoopy-1.gif',
-        '/znote/vuepress/index-snoopy-2.jpeg',
+        '/znote/vuepress/index-snoopy-2.gif',
         '/znote/vuepress/index-snoopy-3.gif',
         '/znote/vuepress/index-snoopy-4.gif',
         '/znote/vuepress/index-snoopy-5.gif',
@@ -75,7 +75,7 @@ export default {
         '/znote/vuepress/index-snoopy-7.gif',
         '/znote/vuepress/index-snoopy-8.gif'
       ]
-      const selectedImage = images[Math.floor(Math.random() * images.length)] + '?v=' + Date.now()
+      const selectedImage = images[Math.floor(Math.random() * images.length)]
 
       // 找到 hero 容器
       const heroContainer = document.querySelector('.home .hero')
