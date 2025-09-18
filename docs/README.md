@@ -65,15 +65,15 @@ export default {
   methods: {
     setRandomHeroImage() {
       const images = [
-        '/vuepress/index-read.gif',
-        '/vuepress/index-snoopy-1.gif',
-        '/vuepress/index-snoopy-2.jpeg',
-        '/vuepress/index-snoopy-3.gif',
-        '/vuepress/index-snoopy-4.gif',
-        '/vuepress/index-snoopy-5.gif',
-        '/vuepress/index-snoopy-6.gif',
-        '/vuepress/index-snoopy-7.gif',
-        '/vuepress/index-snoopy-8.gif'
+        '/znote/vuepress/index-read.gif',
+        '/znote/vuepress/index-snoopy-1.gif',
+        '/znote/vuepress/index-snoopy-2.jpeg',
+        '/znote/vuepress/index-snoopy-3.gif',
+        '/znote/vuepress/index-snoopy-4.gif',
+        '/znote/vuepress/index-snoopy-5.gif',
+        '/znote/vuepress/index-snoopy-6.gif',
+        '/znote/vuepress/index-snoopy-7.gif',
+        '/znote/vuepress/index-snoopy-8.gif'
       ]
       const selectedImage = images[Math.floor(Math.random() * images.length)] + '?v=' + Date.now()
 
