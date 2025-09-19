@@ -178,7 +178,6 @@ export default {
     margin-top: -10% !important;
   }
   .home .hero img {
-    /*margin: 24% auto -6% auto !important;*/
     max-width: 380px !important;
   }
 }
@@ -190,7 +189,7 @@ export default {
     background: none;
   }
   .home .hero img {    
-    /*margin: 24% auto -6% auto !important;*/
+    max-width: 100% !important;
   }
   .home .feature {
     width: 100%;
@@ -215,15 +214,5 @@ export default {
   transform: scale(0.55) !important;
   transition: all 2s;
 }
-/*
-.wrap {
-  transition: all 2s;
-}
-.wrap:hover {
-  transform: scale(1.05) !important;
-  transition: all 2s;
-}
-*/
-
 </style>
 
