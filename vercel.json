@@ -11,6 +11,7 @@
   "rewrites": [
     { "source": "/znote", "destination": "/index.html" },
     { "source": "/znote/", "destination": "/index.html" },
+    { "source": "/znote/:path*/", "destination": "/:path*/index.html" },
     { "source": "/znote/:path*", "destination": "/:path*" }
   ]
 }
