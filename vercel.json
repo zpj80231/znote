@@ -1,0 +1,16 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "version": 2,
+  "buildCommand": "npm run build",
+  "installCommand": "npm install",
+  "outputDirectory": "docs/.vuepress/dist",
+  "redirects": [
+    { "source": "/", "destination": "/znote/", "permanent": true },
+    { "source": "/index.html", "destination": "/znote/", "permanent": true }
+  ],
+  "rewrites": [
+    { "source": "/znote", "destination": "/index.html" },
+    { "source": "/znote/", "destination": "/index.html" },
+    { "source": "/znote/:path*", "destination": "/:path*" }
+  ]
+}
