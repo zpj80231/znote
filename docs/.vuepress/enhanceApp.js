@@ -1,21 +1,23 @@
 import './public/iconfont/iconfont.css'
 
 export default ({
-  Vue,      // the version of Vue being used in the VuePress app
-  options,  // the options for the root Vue instance
-  router,   // the router instance for the app
-  siteData  // site metadata
+Vue,      // VuePress 应用中使用的 Vue 版本
+options,  // 根 Vue 实例的选项
+router,   // 应用的路由实例
+siteData  // 站点元数据
 }) => {
-  // 全局处理 URL 解码，仅针对标签页面解决中文标签直接访问 404 问题
-  router.beforeEach((to, from, next) => {
-    const currentPath = to.path
-    const decodedPath = decodeURIComponent(currentPath)
-    
-    // 只对标签页面进行 URL 解码处理，避免影响正常文档页面
-    if (currentPath.startsWith('/tag/') && currentPath !== decodedPath) {
-      next(decodedPath)
-    } else {
-      next()
+    // 解决中文分类、标签直接访问时的 404 问题
+    const DECODE_PATH_PREFIXES = ['/tag/', '/categories/']
+    const shouldDecodePath = (path) => {
+        return DECODE_PATH_PREFIXES.some(prefix => path.startsWith(prefix))
     }
-  })
+    router.beforeEach((to, from, next) => {
+        const currentPath = to.path
+        const decodedPath = decodeURIComponent(currentPath)
+        if (shouldDecodePath(currentPath) && currentPath !== decodedPath) {
+            next(decodedPath)
+        } else {
+            next()
+        }
+    })
 }
