@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>爱您</title>
+    <title>Love You</title>
     <style>
         *{
             padding: 0;
@@ -15,7 +15,7 @@
             position: relative;
             width: 400px;
             height: 300px;
-            margin: 200px auto;
+            margin: 5% auto 12% auto;
         }
         .left,.right{
             top: 0;
@@ -25,7 +25,6 @@
         }
         .left{
             left: 35px;
-
         }
         .right{
             right: 35px;
@@ -38,7 +37,6 @@
             height: 200px;
             transform: rotate(45deg);
             z-index: -1;
-
         }
         .heart{
             position: absolute;
@@ -73,24 +71,20 @@
         }
 
         #z{
-        	/*right: 60%;left: 40%;*/
-        	margin: -23% 30% ;
+            left: 40%;
         	position: absolute;
         	animation: a .8s ease infinite normal;
         }
         #w{
-        	margin: -23% 67% ;
+            right: 40%;
             position: absolute;
         	animation: a .8s ease infinite normal;
         }
         #con{
-        	/*margin: -3% 48% 3% 38%;*/
-        	/*position: relative;*/
+        	position: relative;
             width: 20px;
-            /*height: 300px;*/
-            margin: -7% 49.5%;
-            position: absolute;
-            /*width: 480px;*/
+            height: 300px;
+            margin: -8% auto;
         	animation: a .8s ease infinite normal;
         }
     </style>
@@ -101,7 +95,7 @@
         <div class="heart right"></div>
         <div class="heart bottom"></div>
     </div>
-    <div id='z' onclick='window.location.href="https://zpj80231.github.io/znote/";'>
+    <div id='z'>
     	<H2>ZPJ</H2>
     </div>
     <div id='w'>
@@ -109,13 +103,13 @@
     </div>
     <div id='con'>
     	<h1>
-    		字里行间，全都是你。
+    		字里行间，全都是你
     	</h1>
     </div>
 
 <script type="text/javascript">
-	var btn=document.getElementById('frame');	
-	btn.ondblclick=function(){
+	let btn = document.getElementById('frame');
+	btn.onclick = function() {
 		window.location.href="https://zpj80231.github.io/znote/";
 	}
 </script> 
