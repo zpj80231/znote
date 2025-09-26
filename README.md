@@ -20,8 +20,11 @@
 
 - 已全局适配 `手机模式` 和 `暗黑模式（自适应）` 请自行体验
 
-- 推荐访问：[https://zpj80231.github.io/znote/](https://zpj80231.github.io/znote/)<br/>
-  国内访问：[https://zpj80231.gitee.io/znote/](https://zpj80231.gitee.io/znote/) （自Gitee实名认证后已不再同步更新，现在访问还是之前的旧版本）
+- 推荐访问
+
+  - 支持 GitHUB Pages：[https://zpj80231.github.io/znote/](https://zpj80231.github.io/znote/)
+  - 支持 Vercel：[https://znote-six.vercel.app/](https://znote-six.vercel.app/)
+  - 国内访问：[https://zpj80231.gitee.io/znote/](https://zpj80231.gitee.io/znote/)（自实名认证后不再同步更新，现在访问还是之前的旧版本）
 
 - 音乐播放器插件：目前已自动适配网络，在网络可达的情况下会加载音乐播放器插件并播放音乐，网络不可达的时候不会加载
 
