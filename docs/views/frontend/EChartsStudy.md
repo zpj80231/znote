@@ -14,9 +14,9 @@ isShowComments: false
 
 ## 介绍
 
-1. 把常用的ECharts图表整理一下，方便日后的使用
+1. 把常用的 ECharts 图表整理一下，方便日后的使用
 
-2. 图表实例可见：[http://zpj80231.gitee.io/echartsstudy/](http://zpj80231.gitee.io/echartsstudy/)
+2. 图表实例可见：[https://zpj80231.github.io/echarts/](https://zpj80231.github.io/echarts/)
 
 
 ## 常用网址
@@ -24,13 +24,13 @@ isShowComments: false
 - 在ECharts官网运行编辑实例：
   
   - [https://www.echartsjs.com/gallery/editor.html?c=doc-example/getting-started](https://www.echartsjs.com/gallery/editor.html?c=doc-example/getting-started)
-- ECharts`option`中各参数详细配置项：
+- ECharts `option` 中各参数详细配置项：
 
   - [https://echarts.baidu.com/option.html#grid](https://echarts.baidu.com/option.html#grid)
 
 ## 图表展示如下
 
-- 柱+折线图
+- 柱 + 折线图
 
 ![](/znote/img/frontend/EChartsStudy/柱+折线图.png)
 
