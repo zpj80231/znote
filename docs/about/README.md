@@ -58,7 +58,7 @@ isShowComments: true
 ::: cardImgList 2
 ```yaml
 - img: /znote/img/other/766d39ee-fbf0-329e-8973-45e90625b579.jpg
-  link: /znote/view/shadowrocket.html
+  link: https://ccbaohe.com/appleID/
   name: For you
   desc: 你若盛开，清风自来。
 - img: /znote/img/other/c33a5027-85d3-3eb4-a785-dd404f674baa.jpg
