@@ -52,41 +52,42 @@ IDEA破解、全插件破解。项目地址：[https://github.com/zpj80231/idea-
 - 使用始皇的：[ja-netfilter](https://gitee.com/ja-netfilter/ja-netfilter) 激活，相关文件已在本仓库中，参考如下步骤激活：
 
     1. 克隆本仓库：`git clone https://github.com/zpj80231/idea-set.git`
-
     2. 进入仓库，复制 `ja-netfilter.jar` 文件的绝对路径
-
     3. 修改 JetBrains 的 `.vmoptions` 文件（文件在哪，Google 一下）
-
        ```shell
        # 比如 idea 在 Mac 上的地址
        ~/Library/Application\ Support/JetBrains/IntelliJIdea2025.2/idea.vmoptions
+       # 比如 idea 在 Windows11 上的地址
+       D:\IntelliJ IDEA 2025.2\bin\idea64.exe.vmoptions
+       
        # 比如 pycharm 在 Mac 上的地址
        ~/Library/Application\ Support/JetBrains/IntelliJIdea2025.2/pycharm.vmoptions
        
+       # 注: 注意文件名
        # 其他同理的。。。
        ```
-       在末尾填上（若没有 `.vmoptions` 文件则创建即可）：
+       在末尾填上（若没有 `.vmoptions` 文件则创建即可，若为 Windows 请注意上一步的文件名）：
        ```shell
-       -Xmx4096m
-       
        --add-opens=java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED
        --add-opens=java.base/jdk.internal.org.objectweb.asm.tree=ALL-UNNAMED
        
        -javaagent:/Users/xxx/idea-set/ja-netfilter.jar
        ```
-
        **将其中的 `/Users/xxx/idea-set/ja-netfilter.jar` 替换为本仓库下 `ja-netfilter.jar` 文件的绝对路径。**
-
-    4. 打开IDEA，填入激活码（activation_code.txt 文件内容）
+    4. 若已经打开请先关闭，打开IDEA，填入激活码（activation_code.txt 文件内容）
 
 - 激活后只需定期更新本仓库即可，这样你能一直获取到最新功能。当然，有能力的还是推荐购买正版激活。
 
 ### 2.4 非正式激活-支持功能列表
 
 - JetBrains 全家桶激活
-- 付费插件激活：
-    - 认证方式（使用佬友提供的linux.do认证提高使用门槛，认证需自行解决）：配合猴油脚本，手动添加 `MyJBLS.js` 脚本到猴油中，打开 [https://plugins.jetbrains.com](https://plugins.jetbrains.com/) 搜索你想要激活的插件，点击 `Generate Code` 按钮就能得到该插件的激活码，粘入到插件的 `Activation Code` 中即可
-    - ~~离线方式（影响太大，已下架自用）：配合猴油脚本，手动添加 `jetbra.js` 脚本到猴油中，打开 [https://plugins.jetbrains.com](https://plugins.jetbrains.com/) 搜索你想要激活的插件，点击 `Generate Code` 按钮就能得到该插件的激活码，粘入到插件的 `Activation Code` 中即可~~
+- 付费插件脚本：
+  - 认证方式（使用佬友提供的 LINUX.DO 认证提高使用门槛，认证需自行解决）：配合猴油脚本，手动添加 `_MyJBLS.js` 脚本到猴油中，打开 [https://plugins.jetbrains.com](https://plugins.jetbrains.com/) 搜索你想要激活的插件，点击 `Generate Code` 按钮就能得到该插件的激活码，粘入到插件的 `Activation Code` 中即可
+  - ~~离线方式（影响太大，已下架自用）~~
+- 付费插件激活码：
+  - 本仓库现只随缘更新 `Rainbow Brackets` 和 `MyBatisCodeHelperPro (Marketplace Edition)` 这两个插件 2 年的激活码
+  - 如果您是插件作者（望手下留情），或已知对以上 2 个插件造成恶意影响请联系我删除
+  - 不要再问，仓库内不会再添加其他任何付费插件的激活码
 - ~~GitHub Copilot 激活：cocopilot 公车已废弃~~
 - ~~Augment 激活：下载 Augment 插件，点击 Sign In 按钮【本地授权】，即可无限免费使用 Claude Sonnet 4 系列模型（代码开发和编程最强模型）~~
 
@@ -167,7 +168,7 @@ IDEA破解、全插件破解。项目地址：[https://github.com/zpj80231/idea-
 
 * Appearance & Behavior -> System Settings -> Language and Region
 
-![IDEA语言设置](https://youtrack.jetbrains.com/api/files/334-60562?sign=MTc1NTMwMjQwMDAwMHwxMS0xfDMzNC02MDU2Mnw2V1gyXzhweHA2bEFoLUQ2eUl2cm1vNy0wakoxNEJsVlgySHBSV3RMRmJNDQo&updated=1725353354506)
+![IDEA语言设置](https://img2024.cnblogs.com/blog/1714436/202410/1714436-20241011113851303-217888438.png)
 
 ### 5.5 代码模板
 
