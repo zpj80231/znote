@@ -42,6 +42,7 @@
 		"vuepress-plugin-container": "^2.1.5",
 		"vuepress-plugin-copyright": "^1.0.2",
 		"vuepress-plugin-fulltext-search": "^2.2.1",
+		"vuepress-plugin-mermaidjs": "^1.9.1",
 		"vuepress-plugin-sitemap": "2.3.1",
 		"vuepress-plugin-smooth-scroll": "^0.0.10",
 		"vuepress-theme-reco": "1.6.17",

@@ -71,6 +71,7 @@ module.exports = [
     require('../../plugins/enhancedSearch'),
 
     ['vuepress-plugin-boxx'],
+    ['vuepress-plugin-mermaidjs'],
     ['vuepress-plugin-smooth-scroll'],
     // ['vuepress-plugin-fulltext-search'],
     ['vuepress-plugin-code-copy', {align: "bottom", staticIcon: false}],
@@ -86,7 +87,6 @@ module.exports = [
     }]
 
 ]
-
 
 // 渲染md容器的卡片列表
 function renderCardList(tokens, idx, type) {
