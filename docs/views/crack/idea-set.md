@@ -68,9 +68,6 @@ IDEA破解、全插件破解。项目地址：[https://github.com/zpj80231/idea-
        ```
        在末尾填上（若没有 `.vmoptions` 文件则创建即可，若为 Windows 请注意上一步的文件名）：
        ```shell
-       --add-opens=java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED
-       --add-opens=java.base/jdk.internal.org.objectweb.asm.tree=ALL-UNNAMED
-       
        -javaagent:/Users/xxx/idea-set/ja-netfilter.jar
        ```
        **将其中的 `/Users/xxx/idea-set/ja-netfilter.jar` 替换为本仓库下 `ja-netfilter.jar` 文件的绝对路径。**
