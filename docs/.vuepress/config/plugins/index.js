@@ -19,7 +19,8 @@ module.exports = [
         before: info => `<div class="theorem"><p class="title">${info}</p>`,
         after: '</div>',
     }],
-    ['container', {// 卡片列表
+    // 卡片列表
+    ['container', {
         type: CARD_LIST,
         render: (tokens, idx) => {
             // tokens 是整个md文件的虚拟dom结构数组
@@ -31,7 +32,8 @@ module.exports = [
             return renderCardList(tokens, idx, CARD_LIST)
         }
     }],
-    ['container', {// 图文卡片列表
+    // 图文卡片列表
+    ['container', {
             type: CARD_IMG_LIST,
             render: (tokens, idx) => {
                 return renderCardList(tokens, idx, CARD_IMG_LIST)
@@ -63,18 +65,6 @@ module.exports = [
             }
         }
     ],
-
-    require('../../plugins/detailsOpenFlag'),
-    require('../../plugins/musicPlayer'),
-    require('../../plugins/notification'),
-    // 可以添加第三方搜索链接的搜索框（原官方搜索框的参数仍可用）
-    require('../../plugins/enhancedSearch'),
-
-    ['vuepress-plugin-boxx'],
-    ['vuepress-plugin-mermaidjs'],
-    ['vuepress-plugin-smooth-scroll'],
-    // ['vuepress-plugin-fulltext-search'],
-    ['vuepress-plugin-code-copy', {align: "bottom", staticIcon: false}],
     ['copyright',{
         minLength: 100,
         clipboardComponent: path.resolve(__dirname, '../../components/Copyright.vue')
@@ -84,7 +74,18 @@ module.exports = [
             const moment = require('moment')
             return moment(timestamp).utcOffset(480).format('YYYY/MM/DD, HH:mm:ss');
         }
-    }]
+    }],
+    ['vuepress-plugin-boxx'],
+    ['vuepress-plugin-mermaidjs'],
+    ['vuepress-plugin-smooth-scroll'],
+    // ['vuepress-plugin-fulltext-search'],
+    // ['vuepress-plugin-code-copy', {align: "top", staticIcon: false}],
+
+    require('../../plugins/detailsOpenFlag'),
+    require('../../plugins/musicPlayer'),
+    require('../../plugins/notification'),
+    require('../../plugins/enhancedSearch'),
+    require('../../plugins/codeCopy'),
 
 ]
 
