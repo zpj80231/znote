@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import Vue from 'vue'
-import CodeCopy from './copy.vue'
+import CodeCopy from './CodeCopy.vue'
 
 export default {
   updated() {
@@ -13,11 +13,9 @@ export default {
     $copyUpdates() {
       // 获取所有的dom，之后在所有的代码块上插入vue的组件
       const selector = typeof CODE_COPY_SELECTOR !== 'undefined' ? CODE_COPY_SELECTOR : 'div[class*="language-"] pre'
-      const copyText = typeof CODE_COPY_TEXT !== 'undefined' ? CODE_COPY_TEXT : 'Copy code'
-      const visibleTip = typeof CODE_COPY_VISIBLE_TIP !== 'undefined' ? CODE_COPY_VISIBLE_TIP : true
-      const time = typeof CODE_COPY_TIME !== 'undefined' ? CODE_COPY_TIME : 3000
-      const content = typeof CODE_COPY_CONTENT !== 'undefined' ? CODE_COPY_CONTENT : 'copy success'
-      const title = typeof CODE_COPY_TITLE !== 'undefined' ? CODE_COPY_TITLE : 'Tips'
+      const copyText = typeof CODE_COPY_TEXT !== 'undefined' ? CODE_COPY_TEXT : '复制代码'
+      const successText = typeof CODE_COPY_SUCCESS_TEXT !== 'undefined' ? CODE_COPY_SUCCESS_TEXT : '复制成功'
+      const duration = typeof CODE_COPY_RESET_DURATION !== 'undefined' ? CODE_COPY_RESET_DURATION : 1000
       const change = typeof CODE_COPY_CHANGE !== 'undefined' ? CODE_COPY_CHANGE : null
 
       const dom = Array.from(document.querySelectorAll(selector))
@@ -32,12 +30,11 @@ export default {
         const copy = new C({
           propsData: {
             copyText: copyText,
+            successText: successText,
             code: el.textContent,
-            visibleTip: visibleTip,
-            time: time,
-            content: content,
-            title: title,
-            change: change
+            duration: duration,
+            change: change,
+            target: el,
           }
         })
         copy.$mount()
