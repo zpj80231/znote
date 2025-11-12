@@ -1,5 +1,6 @@
 const path = require('path')
 const yaml = require('js-yaml')
+const moment = require("moment/moment");
 const CARD_LIST = 'cardList'
 const CARD_IMG_LIST = 'cardImgList'
 
@@ -34,10 +35,10 @@ module.exports = [
     }],
     // 图文卡片列表
     ['container', {
-            type: CARD_IMG_LIST,
-            render: (tokens, idx) => {
-                return renderCardList(tokens, idx, CARD_IMG_LIST)
-            }
+        type: CARD_IMG_LIST,
+        render: (tokens, idx) => {
+            return renderCardList(tokens, idx, CARD_IMG_LIST)
+        }
     }],
     // 关闭 Service Worker，避免旧版本缓存导致的 404 与页面卡死
     ['@vuepress/pwa', {
@@ -54,27 +55,27 @@ module.exports = [
         }
     }],
     ['@vuepress/google-analytics', {
-            ga: 'UA-128189152-1'
-        }
+        ga: 'UA-128189152-1'
+    }
     ],
     ['sitemap', {
-            hostname: "https://zpj80231.github.io/znote/",
-            exclude: ['/404.html'],
-            dateFormatter: time => {
-                return time
-            }
+        hostname: "https://zpj80231.github.io/znote/",
+        exclude: ['/404.html'],
+        dateFormatter: time => {
+            return time
         }
+    }
     ],
-    ['copyright',{
-        minLength: 100,
-        clipboardComponent: path.resolve(__dirname, '../../components/Copyright.vue')
-    },],
     ['@vuepress/last-updated', {
         transformer: (timestamp, lang) => {
             const moment = require('moment')
             return moment(timestamp).utcOffset(480).format('YYYY/MM/DD, HH:mm:ss');
         }
     }],
+    // ['vuepress-plugin-copyright',{
+    //     minLength: 100,
+    //     clipboardComponent: path.resolve(__dirname, '../../components/Copyright.vue')
+    // },],
     ['vuepress-plugin-boxx'],
     ['vuepress-plugin-mermaidjs'],
     ['vuepress-plugin-smooth-scroll'],
@@ -89,7 +90,9 @@ module.exports = [
 
 ]
 
-// 渲染md容器的卡片列表
+/**
+ * 渲染md容器的卡片列表
+ */
 function renderCardList(tokens, idx, type) {
     const END_TYPE = `container_${type}_close`,
         _tokens$idx = tokens[idx],
@@ -118,7 +121,7 @@ function renderCardList(tokens, idx, type) {
                 dataList = Array.isArray(dataObj) ? dataObj : dataObj.list
             }
 
-            if (dataList  && dataList.length) { // 有列表数据
+            if (dataList && dataList.length) { // 有列表数据
 
                 // 每行显示几个
                 let row = Number(info.split(' ').pop())
@@ -133,7 +136,7 @@ function renderCardList(tokens, idx, type) {
                     listDOM = getCardImgListDOM(dataList, row)
                 }
 
-                return `<div class="${type}Container"><div class="card-list">${ listDOM }</div>`
+                return `<div class="${type}Container"><div class="card-list">${listDOM}</div>`
             }
         }
     } else { // 渲染':::' 结尾
@@ -141,16 +144,17 @@ function renderCardList(tokens, idx, type) {
     }
 }
 
-
-// 将数据解析成DOM结构 - 普通卡片列表
+/**
+ * 将数据解析成DOM结构 - 普通卡片列表
+ */
 function getCardListDOM(dataList, row) {
     let listDOM = ''
     dataList.forEach(item => {
         listDOM += `
-      <${item.link ? 'a href="' + item.link +'" target="_blank"' : 'span' } class="card-item ${ row ? 'row-' + row : '' }"
-         style="${ item.bgColor ? 'background-color:' + item.bgColor + ';': '' }${ item.textColor ? 'color:' + item.textColor + ';': '' }"
+      <${item.link ? 'a href="' + item.link + '" target="_blank"' : 'span'} class="card-item ${row ? 'row-' + row : ''}"
+         style="${item.bgColor ? 'background-color:' + item.bgColor + ';' : ''}${item.textColor ? 'color:' + item.textColor + ';' : ''}"
       >
-        ${ item.avatar ? '<img src="'+ item.avatar +'" class="no-zoom">' : '' }
+        ${item.avatar ? '<img src="' + item.avatar + '" class="no-zoom">' : ''}
         <div>
           <p class="name">${item.name}</p>
           <p class="desc">${item.desc}</p>
@@ -161,31 +165,32 @@ function getCardListDOM(dataList, row) {
     return listDOM
 }
 
-
-// 将数据解析成DOM结构 - 图文卡片列表
+/**
+ * 将数据解析成DOM结构 - 图文卡片列表
+ */
 function getCardImgListDOM(dataList, row) {
     let listDOM = ''
     dataList.forEach(item => {
         listDOM += `
-      <div class="card-item ${ row ? 'row-' + row : '' }" >
+      <div class="card-item ${row ? 'row-' + row : ''}" >
         <div class="box-img">
-          ${item.link ? `<a href="${item.link}" target="_blank">` : '' }
+          ${item.link ? `<a href="${item.link}" target="_blank">` : ''}
             <img src="${item.img}" class="no-zoom">
-          ${item.link ? `</a>` : '' }
+          ${item.link ? `</a>` : ''}
         </div>
         <div class="box-info">
-          ${item.link ? `<a href="${item.link}" target="_blank">` : '' }
+          ${item.link ? `<a href="${item.link}" target="_blank">` : ''}
             <p class="name">${item.name}</p>
             ${item.desc ? `<p class="desc">${item.desc}</p>` : ''}
-          ${item.link ? `</a>` : '' }
+          ${item.link ? `</a>` : ''}
         </div>
         
         ${item.avatar || item.author
             ? `<div class="box-footer">
-              ${item.link ? `<a href="${item.link}" target="_blank">` : '' }
+              ${item.link ? `<a href="${item.link}" target="_blank">` : ''}
                 ${item.avatar ? `<img src="${item.avatar}" class="no-zoom">` : ''}
                 ${item.author ? `<span>${item.author}</span>` : ''}
-              ${item.link ? `</a>` : '' }
+              ${item.link ? `</a>` : ''}
             </div>`
             : ''
         }
