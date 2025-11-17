@@ -40,7 +40,7 @@ reward: true
 #  bgColor: '#1abc9c'
 #  textColor: '#c0392b'
 - name: Evan's Blog
-  avatar: https://jsd.cdn.zzko.cn/gh/xugaoyi/image_store/blog/20200103123203.jpg
+  avatar: https://xugaoyi.com/img/logo.png
   desc: 积跬步以至千里，致敬每个爱学习的你
   link: https://xugaoyi.com/
   bgColor: '#2980b9'
@@ -52,7 +52,7 @@ reward: true
   bgColor: 'rgb(136,181,214)'
   textColor: 'rgb(249,249,249)'
 - name: 田小波
-  avatar: https://www.tianxiaobo.com/images/tx.png
+  avatar: https://i0.hdslb.com/bfs/article/ac18f6b8bd9b03df51b68b3105885ed810211081.jpg@.webp
   desc: 欢迎访问田小波的技术博客
   link: https://www.tianxiaobo.com/
   bgColor: '#B39CD0'

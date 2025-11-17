@@ -53,25 +53,13 @@ IDEA破解、全插件破解。项目地址：[https://github.com/zpj80231/idea-
 
     1. 克隆本仓库：`git clone https://github.com/zpj80231/idea-set.git`
     2. 进入仓库，复制 `ja-netfilter.jar` 文件的绝对路径
-    3. 修改 JetBrains 的 `.vmoptions` 文件（文件在哪，Google 一下）
-       ```shell
-       # 比如 idea 在 Mac 上的地址
-       ~/Library/Application\ Support/JetBrains/IntelliJIdea2025.2/idea.vmoptions
-       # 比如 idea 在 Windows11 上的地址
-       D:\IntelliJ IDEA 2025.2\bin\idea64.exe.vmoptions
-       
-       # 比如 pycharm 在 Mac 上的地址
-       ~/Library/Application\ Support/JetBrains/IntelliJIdea2025.2/pycharm.vmoptions
-       
-       # 注: 注意文件名
-       # 其他同理的。。。
-       ```
-       在末尾填上（若没有 `.vmoptions` 文件则创建即可，若为 Windows 请注意上一步的文件名）：
-       ```shell
+    3. 修改 JetBrains 的 `.vmoptions` 文件 ，点击顶部菜单：`Help --> Edit Custom VM Options...`（或参考 [issue 13](https://github.com/zpj80231/idea-set/issues/13#issuecomment-3526721400)）
+       在末尾填上：
+       ```properties
        -javaagent:/Users/xxx/idea-set/ja-netfilter.jar
        ```
        **将其中的 `/Users/xxx/idea-set/ja-netfilter.jar` 替换为本仓库下 `ja-netfilter.jar` 文件的绝对路径。**
-    4. 若已经打开请先关闭，打开IDEA，填入激活码（activation_code.txt 文件内容）
+    4. 若已经打开请先关闭，打开 IDEA，填入激活码（activation_code.txt 文件内容）
 
 - 激活后只需定期更新本仓库即可，这样你能一直获取到最新功能。当然，有能力的还是推荐购买正版激活。
 

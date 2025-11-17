@@ -17,6 +17,8 @@ isShowComments: true
 
 [[toc]]
 
+> 仓库地址: https://github.com/zpj80231/snail
+
 ## 回顾 JDBC
 
 JDBC 的基本使用流程：
@@ -109,32 +111,11 @@ public class JDBCTest {
 | 用 `Executor` 屏蔽底层 JDBC 细节                             | 框架层   |
 | 支持 `#{}` 占位符与参数映射                                  | 框架层   |
 
-可以看到，优化之后，对于用户来说：只需要定义好 `数据源配置` 和 `mapper.xml` sql 即可。其他都交给框架解决。大大简化了 JDBC 操作。
+可以看到，优化之后，对于用户来说：只需要定义好 `数据源配置` 和 `mapper.xml` sql 即可。其他都交给框架解决。大大简化了 JDBC 模板代码的编写。
 
 ## Mybatis 加载流程
 
 Mybatis 的整个加载与执行流程可以拆分为以下几个核心步骤，每步对应特定的类与职责：
-
-1. **加载全局配置文件 (`mybatis-config.xml`)**
-   - 主要由 `XMLConfigBuilder` 实现，负责从 classpath 加载配置文件，并解析 `<dataSource>` 和 `<mappers>` 配置。
-
-2. **解析 mapper 文件 (`mapper/*.xml`)**
-   - `XMLMapperBuilder` 解析每个 Mapper 文件，读取 SQL、参数类型、结果类型等，注册到全局的 `Configuration` 中（`statementId` 映射到对应的 `MapperStatement` 对象）。
-
-3. **通过工厂获得 SqlSession（会话）**
-   - 用户通过 `SqlSessionFactoryBuilder` 创建 `SqlSessionFactory`，再通过工厂方法 `.openSession()` 获取 `SqlSession`，SqlSession 对外暴露了增删改查的 API。
-
-4. **执行 SQL：selectList / selectOne / update / delete**
-   - 用户调用 `SqlSession` 的方法（如 `selectList`），内部会通过 `Executor` 执行 SQL。
-   - 参数解析和 `#{}` 占位符替换工作由框架自动完成，用户传入参数实体即可。
-
-5. **结果映射绑定 Java 对象**
-   - JDBC 查询返回的 `ResultSet` 结果，框架自动将其映射到 Java POJO，通过反射或内省机制自动注入属性。
-
-6. **自动释放资源**
-   - 框架在会话关闭时，自动关闭数据库连接、预编译语句、结果集等，避免资源泄漏。
-
-流程结构示意如下：
 
 ```mermaid
 graph TB
@@ -164,6 +145,20 @@ class J step5
 class K step6
 ```
 
+1. **加载全局配置文件 (`mybatis-config.xml`)**
+   - 主要由 `XMLConfigBuilder` 实现，负责从 classpath 加载配置文件，并解析 `<dataSource>` 和 `<mappers>` 配置。
+2. **解析 mapper 文件 (`mapper/*.xml`)**
+   - `XMLMapperBuilder` 解析每个 Mapper 文件，读取 SQL、参数类型、结果类型等，注册到全局的 `Configuration` 中（`statementId` 映射到对应的 `MapperStatement` 对象）。
+3. **通过工厂获得 SqlSession（会话）**
+   - 用户通过 `SqlSessionFactoryBuilder` 创建 `SqlSessionFactory`，再通过工厂方法 `.openSession()` 获取 `SqlSession`，SqlSession 对外暴露了增删改查的 API。
+4. **执行 SQL：selectList / selectOne / update / delete**
+   - 用户调用 `SqlSession` 的方法（如 `selectList`），内部会通过 `Executor` 执行 SQL。
+   - 参数解析和 `#{}` 占位符替换工作由框架自动完成，用户传入参数实体即可。
+5. **结果映射绑定 Java 对象**
+   - JDBC 查询返回的 `ResultSet` 结果，框架自动将其映射到 Java POJO，通过反射或内省机制自动注入属性。
+6. **自动释放资源**
+   - 框架在会话关闭时，自动关闭数据库连接、预编译语句、结果集等，避免资源泄漏。
+
 通过这样的设计，Mybatis 实现了**配置、SQL、映射、执行、资源释放**各自分离、协作的优秀架构。
 
 ## MyBatis 核心角色
@@ -171,7 +166,6 @@ class K step6
 - 配置文件（用户层）
   - `mybati-config.xml`：Mybatis 配置文件（数据源、mapper位置等）
   - `mapper.xml`：sql 模板文件
-
 - 配置解析
   - `XMLConfigBuilder`：解析 `mybatis-config.xml`，构建 `Configuration`
   - `XMLMapperBuilder`：解析 `mapper/*.xml`，构建 `MapperStatement`
@@ -227,6 +221,7 @@ class K step6
 ## 小结
 
 - 通过抽象出 `Configuration / MapperStatement / SqlSession / Executor` 等角色和层次，我们把“重复且易错”的 JDBC 模板提炼为可复用、可扩展的迷你框架。
-- 下一篇将实现一个完整的 Mybatis 框架，实现这些类的运行闭环：从加载配置，文件解析，到执行查询并返回实体列表。
+
+- 下一篇将根据上述核心组件实现一个完整的 Mybatis 框架，实现这些类的运行闭环：从加载配置，文件解析，到执行查询并返回实体列表。
 
 <Reward/>

@@ -151,6 +151,54 @@ this is a test
 <Reward/>
 ```
 
+### 添加 iconfont 图标
+
+主题中已经内置了一些常用的图标，但有时不能完全满足我们的需要。主题支持使用 iconfont 图标，可以方便地集成 iconfont 来满足个性化的图标需求。
+
+1. 在 [iconfont 官网 ](https://www.iconfont.cn/) 中选择所需的图标，并添加到项目中。在项目页面，点击下载至本地，将下载的文件夹中的 iconfont.css、iconfont.woff2、iconfont.woff、iconfont.ttf 四个文件复制到 **styles** 目录下。
+
+![image-20230608143006122.png](https://s2.loli.net/2023/06/08/gJapmRyCGifqHFs.png)
+
+2. 在 enhanceApp.js 文件中引入 iconfont.css 文件。
+
+```js
+// enhanceApp.js 文件内容
+import '../.vuepress/styles/iconfont.css'
+```
+
+```css
+// iconfont.css 文件内容
+@font-face {
+  font-family: 'iconfont';  /* Project id 4106829 */
+  src: url('iconfont.woff2?t=1686190078548') format('woff2'),
+        url('iconfont.woff?t=1686190078548') format('woff'),
+        url('iconfont.ttf?t=1686190078548') format('truetype');
+}
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+// 图标
+.icon-docker:before{
+  content: "\e600";
+}
+// 图标
+.icon-vue:before {
+  content: "\e799";
+}
+```
+
+3. 在导航栏中使用
+
+```js
+{ text: 'Docker', link: '/docker/preface', icon: 'iconfont icon-docker' }
+```
+
+
+
 ## 写在最后
 
 在 Blog 搭建中遇到问题，推荐先去以下几个网址找答案：
