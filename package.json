@@ -31,7 +31,7 @@
 		"@vuepress/plugin-medium-zoom": "^1.9.8",
 		"@vuepress/plugin-pwa": "^1.9.8",
 		"@vuepress/plugin-register-components": "1.9.10",
-		"axios": "^1.11.0",
+		"axios": "^1.12.2",
 		"jquery": "^3.7.1",
 		"js-yaml": "^4.1.1",
 		"markdown-it-disable-url-encode": "^1.0.1",
@@ -42,7 +42,6 @@
 		"vuepress-plugin-mermaidjs": "^1.9.1",
 		"vuepress-plugin-sitemap": "2.3.1",
 		"vuepress-plugin-smooth-scroll": "^0.0.10",
-		"vuepress-theme-reco": "1.6.17",
-		"whatwg-fetch": "3.6.20"
+		"vuepress-theme-reco": "1.6.17"
 	}
 }
