@@ -19,7 +19,7 @@ isShowComments: true
 
 IDEA破解、全插件破解。项目地址：[https://github.com/zpj80231/idea-set](https://github.com/zpj80231/idea-set)
 
-本项目仅用于个人学习与参考，请勿转载分发、请勿用于商业用途。对于使用本项目造成的任何后果均与作者无关。如有侵权，请联系立即删除。
+本项目仅用于个人学习与参考，请勿转载分发、请勿用于商业用途。对于使用本项目造成的任何后果均与作者无关。如有侵权，请联系删除。
 
 ## 2. 激活
 
@@ -45,21 +45,21 @@ IDEA破解、全插件破解。项目地址：[https://github.com/zpj80231/idea-
 
 > 或者直接参考这篇文章：[免费正版 IntelliJ IDEA license 详细指南](https://blog.csdn.net/zlt2000/article/details/115611788)
 
-### 2.3 非正式激活（推荐）
-
-- ~~2021.1.3版本，已不推荐（搭配试用30天到期自动续期插件永久免费食用），IDEA官方历史版本下载地址：[https://www.jetbrains.com/idea/download/other.html](https://www.jetbrains.com/idea/download/other.html)~~
+### 2.3 非正式激活（推荐）🌟
 
 - 使用始皇的：[ja-netfilter](https://gitee.com/ja-netfilter/ja-netfilter) 激活，相关文件已在本仓库中，参考如下步骤激活：
 
     1. 克隆本仓库：`git clone https://github.com/zpj80231/idea-set.git`
     2. 进入仓库，复制 `ja-netfilter.jar` 文件的绝对路径
-    3. 修改 JetBrains 的 `.vmoptions` 文件 ，点击顶部菜单：`Help --> Edit Custom VM Options...`（或参考 [issue 13](https://github.com/zpj80231/idea-set/issues/13#issuecomment-3526721400)）
+    3. 打开并进入 IDEA（可以先试用），点击顶部菜单：`Help --> Edit Custom VM Options...`（参考 [issue 13](https://github.com/zpj80231/idea-set/issues/13#issuecomment-3526721400)）
        在末尾填上：
+       
        ```properties
+       # 将其中的 `/Users/xxx/idea-set/ja-netfilter.jar` 替换为绝对路径
        -javaagent:/Users/xxx/idea-set/ja-netfilter.jar
        ```
-       **将其中的 `/Users/xxx/idea-set/ja-netfilter.jar` 替换为本仓库下 `ja-netfilter.jar` 文件的绝对路径。**
-    4. 若已经打开请先关闭，打开 IDEA，填入激活码（activation_code.txt 文件内容）
+       
+    4. 重新打开 IDEA，点击顶部菜单：`Help --> Manage Subscriptions...`，填入激活码即可（activation_code.txt 文件内容）
 
 - 激活后只需定期更新本仓库即可，这样你能一直获取到最新功能。当然，有能力的还是推荐购买正版激活。
 
@@ -99,9 +99,9 @@ IDEA破解、全插件破解。项目地址：[https://github.com/zpj80231/idea-
 |----|:---------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | 1  | Lombok                           | 以简单的注解形式简化 POJO，现 IDEA 默认已自带                                                                                                                                                                                                                               |
 | 2  | SonarQube                        | 代码质量提升                                                                                                                                                                                                                                                     |
-| 3  | Grep Console                     | 对控制台输出的不同级别的日志进行上色，比如 Info 级别是黑色，WARN 级别是黄色，ERROR 是橙色。不用找日志把眼睛找瞎了。<br/>配色方案：[利用grep-console插件使Intellij idea显示多颜色调试日志](https://blog.csdn.net/weixin_39973810/article/details/110190844)                                                                     |
+| 3  | Grep Console                     | 对控制台输出的不同级别的日志进行上色。比如我的前景色设置：WARN 级别是黄色`FFD700`，ERROR 是红色`FF3030`                                                                       |
 | 4  | Translation                      | 翻译                                                                                                                                                                                                                                                         |
-| 5  | JRebel                           | 热加载插件，代码改动之后无需重启服务，被修改的类会自动重新加载，破解请自行百度<br/>或者参考：[JRebel插件使用详解](https://blog.csdn.net/lianghecai52171314/article/details/105637251)<br/>修改完 Java 代码后，就可以通过快捷键 Ctrl+shift+F9 刷新项目                                                                           |
+| 5  | JRebel                           | 热加载插件，代码改动之后无需重启服务，被修改的类会自动重新加载，破解请自行百度<br/>或者参考：[jrebel-license-active-server](https://github.com/yu-xiaoyao/jrebel-license-active-server)<br/>修改完 Java 代码后，就可以通过快捷键 Ctrl+Shift+F9 刷新项目                
 | 6  | CodeGlance Pro                   | 类似于 Sublime 的右侧，整体代码滚动条，使用此插件可以查看缩略图一样，快速切换到自己需要去的地方~                                                                                                                                                                                                      |
 | 7  | Rainbow Brackets                 | 彩色括号匹配                                                                                                                                                                                                                                                     |
 | 8  | Rainbow Variable                 | 方法内彩色变量匹配                                                                                                                                                                                                                                                  |
