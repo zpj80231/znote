@@ -105,6 +105,10 @@ module.exports = {
     lineNumbers: true,
     // Markdown 文件的 headers (标题 & 小标题) 修改提取出的标题级别
     extractHeaders: ['h2', 'h3', 'h4'],
+    // 配置 [[toc]] 显示的标题级别
+    toc: {
+      includeLevel: [2, 3, 4]
+    },
     extendMarkdown: md => {
       md.use(require("markdown-it-disable-url-encode"));
     }
