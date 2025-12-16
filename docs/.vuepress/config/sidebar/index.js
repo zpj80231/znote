@@ -14,7 +14,7 @@ module.exports = {
             ]
         },
         {
-            title: '🍳 规范 Standard',
+            title: '📐 规范 Standard',
             collapsable: true,
             children: [
                 'specification/ali', 'specification/git',
@@ -53,7 +53,14 @@ module.exports = {
             ]
         },
         {
-            title: '🛠️ 手撸源码 Source-code',
+            title: '⚙️ 一体化 DevOps',
+            collapsable: true,
+            children: [
+                'devops/Kubernetes-0', 'devops/Kubernetes-1', 'devops/Kubernetes-2',
+            ]
+        },
+        {
+            title: '🧩 手撸源码 Source-code',
             collapsable: true,
             children: [
                 "source/code/rpc/rpc-source-01", "source/code/rpc/rpc-source-02",
