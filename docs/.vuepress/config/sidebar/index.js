@@ -56,7 +56,7 @@ module.exports = {
             title: '⚙️ 一体化 DevOps',
             collapsable: true,
             children: [
-                'devops/Kubernetes-0', 'devops/Kubernetes-1', 'devops/Kubernetes-2',
+                'devops/Kubernetes-0', 'devops/Kubernetes-1', 'devops/Kubernetes-2', 'devops/Kubernetes-3',
             ]
         },
         {
