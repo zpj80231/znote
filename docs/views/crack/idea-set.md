@@ -51,15 +51,18 @@ IDEA破解、全插件破解。项目地址：[https://github.com/zpj80231/idea-
 
     1. 克隆本仓库：`git clone https://github.com/zpj80231/idea-set.git`
     2. 进入仓库，复制 `ja-netfilter.jar` 文件的绝对路径
-    3. 打开并进入 IDEA（可以先试用），点击顶部菜单：`Help --> Edit Custom VM Options...`（参考 [issue 13](https://github.com/zpj80231/idea-set/issues/13#issuecomment-3526721400)）
+    3. 打开并进入 JetBrains IDE，点击顶部菜单：`Help --> Edit Custom VM Options...`（参考 [issue 13](https://github.com/zpj80231/idea-set/issues/13#issuecomment-3526721400)）
        在末尾填上：
-       
+
        ```properties
-       # 将其中的 `/Users/xxx/idea-set/ja-netfilter.jar` 替换为绝对路径
+       ### 注意事项 ###
+       # 1.请退出或禁用：IDE 中登录的个人账号、CodeWithMe 等自家有远程交互能力的插件（这类插件可能存在遥测机制，导致掉线或激活无效）
+       # 2.请确保将 `/Users/xxx/idea-set/ja-netfilter.jar` 替换为实际的绝对路径
+       # 3.更新此配置和禁用相关插件后，务必重启 IDE 再输入激活码
        -javaagent:/Users/xxx/idea-set/ja-netfilter.jar
        ```
-       
-    4. 重新打开 IDEA，点击顶部菜单：`Help --> Manage Subscriptions...`，填入激活码即可（activation_code.txt 文件内容）
+
+    4. 更新 agent 配置后，一定要重启 IDEA。点击顶部菜单：`Help --> Manage Subscriptions...`，填入 `activate-code-app` 文件夹激活码
 
 - 激活后只需定期更新本仓库即可，这样你能一直获取到最新功能。当然，有能力的还是推荐购买正版激活。
 
@@ -186,6 +189,12 @@ IDEA破解、全插件破解。项目地址：[https://github.com/zpj80231/idea-
 
 ![image.png](https://img2020.cnblogs.com/blog/2608583/202111/2608583-20211121101224349-1524924883.png)
 ![image.png](https://img2020.cnblogs.com/blog/2608583/202111/2608583-20211121101320181-294946330.png)
+
+### 5.8 自定义后缀文件的语法高亮
+
+* Editor -> File Types
+
+![image.png](/znote/img/backend/0C1C8BF1-3F24-4BF0-AE5A-A3CD74DA3D18.png)
 
 
 <Reward/>
