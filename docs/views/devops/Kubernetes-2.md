@@ -4,7 +4,7 @@ date: 2025-12-15
 tags:
 - k8s
 categories:
-- 一体化 DevOps
+- 能力扩展 DevOps
 isShowComments: true
 ---
 

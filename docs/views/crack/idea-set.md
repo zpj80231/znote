@@ -69,13 +69,13 @@ IDEA破解、全插件破解。项目地址：[https://github.com/zpj80231/idea-
 ### 2.4 非正式激活-支持功能列表
 
 - JetBrains 全家桶激活
-- 付费插件脚本：
-  - 认证方式（使用佬友提供的 LINUX.DO 认证提高使用门槛，认证需自行解决）：配合猴油脚本，手动添加 `_MyJBLS.js` 脚本到猴油中，打开 [https://plugins.jetbrains.com](https://plugins.jetbrains.com/) 搜索你想要激活的插件，点击 `Generate Code` 按钮就能得到该插件的激活码，粘入到插件的 `Activation Code` 中即可
-  - ~~离线方式（影响太大，已下架自用）~~
 - 付费插件激活码：
-  - 本仓库现只随缘更新 `Rainbow Brackets` 和 `MyBatisCodeHelperPro (Marketplace Edition)` 这两个插件 2 年的激活码
-  - 如果您是插件作者（望手下留情），或已知对以上 2 个插件造成恶意影响请联系我删除
-  - 不要再问，仓库内不会再添加其他任何付费插件的激活码
+    - 本仓库现只随缘更新 `Rainbow Brackets` 和 `MyBatisCodeHelperPro (Marketplace Edition)` 这两个插件 2 年的激活码
+    - 如果您是插件作者（望手下留情），或已知对以上 2 个插件造成恶意影响请联系我删除
+    - 不要再问，仓库内不会再添加其他任何付费插件的激活码
+- ~~付费插件脚本（已下架自用）：~~
+    - ~~认证方式（使用佬友提供的 LINUX.DO 认证提高使用门槛，认证需自行解决）：配合猴油脚本，手动添加 `_MyJBLS.js` 脚本到猴油中，打开 [https://plugins.jetbrains.com](https://plugins.jetbrains.com/) 搜索你想要激活的插件，点击 `Generate Code` 按钮就能得到该插件的激活码，粘入到插件的 `Activation Code` 中即可~~
+    - ~~离线方式（影响太大，已下架自用）~~
 - ~~GitHub Copilot 激活：cocopilot 公车已废弃~~
 - ~~Augment 激活：下载 Augment 插件，点击 Sign In 按钮【本地授权】，即可无限免费使用 Claude Sonnet 4 系列模型（代码开发和编程最强模型）~~
 

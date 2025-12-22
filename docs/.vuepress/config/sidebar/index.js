@@ -14,7 +14,7 @@ module.exports = {
             ]
         },
         {
-            title: '📐 规范 Standard',
+            title: '🦄 规范 Standard',
             collapsable: true,
             children: [
                 'specification/ali', 'specification/git',
@@ -53,10 +53,11 @@ module.exports = {
             ]
         },
         {
-            title: '⚙️ 一体化 DevOps',
+            title: '🌵 能力扩展 DevOps',
             collapsable: true,
             children: [
                 'devops/Kubernetes-0', 'devops/Kubernetes-1', 'devops/Kubernetes-2', 'devops/Kubernetes-3',
+                'devops/Kubernetes-4', "devops/Kubernetes-5",
             ]
         },
         {
