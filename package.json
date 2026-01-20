@@ -32,7 +32,7 @@
 		"@vuepress/plugin-pwa": "^1.9.8",
 		"@vuepress/plugin-register-components": "1.9.10",
 		"axios": "^1.12.2",
-		"jquery": "^4.0.0",
+		"jquery": "3.7.1",
 		"js-yaml": "^4.1.1",
 		"markdown-it-disable-url-encode": "^1.0.1",
 		"moment": "^2.30.1",
