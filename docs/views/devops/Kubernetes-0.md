@@ -1,6 +1,6 @@
 ---
 title: Kubernetes-0 引入
-date: 2025-12-04
+date: 2025-10-07
 tags:
 - k8s
 categories:

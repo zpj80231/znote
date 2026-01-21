@@ -326,7 +326,9 @@ http://120.46.29.140:17000/alert-his-events/2758
 
 点击 **查看曲线**，也会直接跳转到浏览器，显示历史告警曲线：
 
+```java
 http://120.46.29.140:17000/metric/explorer?data\_source\_id=1\&data\_source\_name=prometheus\&mode=graph\&prom\_ql=up%7Bjob=\~%22dky-.%2A%22%7D%20==%200
+```
 
 ![](/znote/img/devops/nightingale/image-19.png)
 
