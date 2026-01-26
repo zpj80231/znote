@@ -60,7 +60,7 @@ module.exports = {
                 'devops/SpringBoot Prometheus Grafana 监控对接', 'devops/SpringBoot Skywalking 调用链路对接',
                 'devops/SpringBoot Prometheus 飞书告警对接', 'devops/SpringBoot Nightingale 飞书告警',
                 'devops/Kubernetes-0', 'devops/Kubernetes-1', 'devops/Kubernetes-2', 'devops/Kubernetes-3',
-                'devops/Kubernetes-4', "devops/Kubernetes-5",
+                'devops/Kubernetes-4', "devops/Kubernetes-5", "devops/Kubernetes-6"
             ]
         },
         {
