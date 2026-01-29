@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://zpj80231.github.io/znote/sitemap.xml
