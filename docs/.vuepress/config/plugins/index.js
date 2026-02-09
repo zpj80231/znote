@@ -62,14 +62,14 @@ module.exports = [
         hostname: "https://zpj80231.github.io/znote/",
         exclude: ['/404.html'],
         dateFormatter: time => {
-            return time
+            return new Date(time).toISOString()
         }
     }
     ],
     ['@vuepress/last-updated', {
         transformer: (timestamp, lang) => {
             const moment = require('moment')
-            return moment(timestamp).utcOffset(480).format('YYYY/MM/DD, HH:mm:ss');
+            return moment(timestamp).utcOffset(480).format('YYYY/MM/DD HH:mm:ss');
         }
     }],
     // ['vuepress-plugin-copyright',{
