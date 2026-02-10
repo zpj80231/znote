@@ -1,0 +1,13 @@
+{
+  "name": "zの自留地",
+  "short_name": "znote",
+  "start_url": "/znote/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2c3e50",
+  "icons": [
+    {"src": "/znote/vuepress/favicon-16x16.png", "sizes": "16x16", "type": "image/png"},
+    {"src": "/znote/vuepress/favicon-32x32.png", "sizes": "32x32", "type": "image/png"}
+  ]
+}
+
