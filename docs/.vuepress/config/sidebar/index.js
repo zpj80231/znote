@@ -61,6 +61,7 @@ module.exports = {
                 'devops/SpringBoot Prometheus 飞书告警对接', 'devops/SpringBoot Nightingale 飞书告警',
                 'devops/Kubernetes-0', 'devops/Kubernetes-1', 'devops/Kubernetes-2', 'devops/Kubernetes-3',
                 'devops/Kubernetes-4', "devops/Kubernetes-5", "devops/Kubernetes-6", "devops/Kubernetes-7",
+                'devops/Kubernetes-8',
             ]
         },
         {
