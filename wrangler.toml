@@ -1,15 +1,15 @@
 # Cloudflare Pages 配置文件
 name = "znote"
-type = "static"
 account_id = "25c729b220095e24275a8fb2938eb3ad"
 workers_dev = false
-route = ""
-zone_id = ""
+compatibility_date = "2026-03-03"
 
 [build]
 command = "npm run build"
 cwd = "."
-publish = "docs/.vuepress/dist"
+
+[assets]
+directory = "docs/.vuepress/dist"
 
 [pages]
 
