@@ -12,5 +12,13 @@ cwd = "."
 directory = "docs/.vuepress/dist"
 
 [pages]
+### Cloudflare Page 如果有根路径问题
+# 1. 登录 Cloudflare 控制台
+# 2. 选择您的域名
+# 3. 点击 "Rules" → "Page Rules"
+# 4. 创建重定向规则 ：
+#   - URL Pattern : `https://yourdomain.com/znote/*`
+#   - Forwarding URL → 301 Redirect
+#   - Destination URL : `https://yourdomain.com/${1}`
 
 [env]
