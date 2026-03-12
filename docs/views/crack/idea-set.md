@@ -1,5 +1,5 @@
 ---
-title: JetBrains IntelliJ IDEA 个人使用及配置
+title: JetBrains IntelliJ IDEA 个人使用及配置破解
 date: 2025-09-22
 tags:
    - 破解
@@ -59,6 +59,8 @@ IDEA破解、全插件破解。项目地址：[https://github.com/zpj80231/idea-
        # 1.请提前退出或禁用：IDE 中登录的个人账号、CodeWithMe 等自家有远程交互能力的插件（这类插件可能存在遥测机制，导致掉线或激活无效）
        # 2.请确保将 `/Users/xxx/idea-set/ja-netfilter.jar` 替换为实际的绝对路径
        # 3.更新此配置、禁用相关插件后，务必重启 IDE 再输入激活码
+       --add-opens=java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED
+       --add-opens=java.base/jdk.internal.org.objectweb.asm.tree=ALL-UNNAMED
        -javaagent:/Users/xxx/idea-set/ja-netfilter.jar
        ```
 
@@ -98,32 +100,32 @@ IDEA破解、全插件破解。项目地址：[https://github.com/zpj80231/idea-
 - 按需关闭自带插件。插件优化：[IDEA 关闭不必要的插件减少内存占用](https://blog.csdn.net/tutian2000/article/details/80074643)
 - 以下是推荐的插件：
 
-| 序号 | 名称                               | 备注                                                                                                                                                                                                                                                         |
-|----|:---------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 1  | Lombok                           | 以简单的注解形式简化 POJO，现 IDEA 默认已自带                                                                                                                                                                                                                               |
-| 2  | SonarQube                        | 代码质量提升                                                                                                                                                                                                                                                     |
-| 3  | Grep Console                     | 对控制台输出的不同级别的日志进行上色。比如我的前景色设置：WARN 级别是黄色`FFD700`，ERROR 是红色`FF3030`                                                                       |
-| 4  | Translation                      | 翻译                                                                                                                                                                                                                                                         |
-| 5  | JRebel                           | 热加载插件，代码改动之后无需重启服务，被修改的类会自动重新加载，破解请自行百度<br/>或者参考：[jrebel-license-active-server](https://github.com/yu-xiaoyao/jrebel-license-active-server)<br/>修改完 Java 代码后，就可以通过快捷键 Ctrl+Shift+F9 刷新项目                
-| 6  | CodeGlance Pro                   | 类似于 Sublime 的右侧，整体代码滚动条，使用此插件可以查看缩略图一样，快速切换到自己需要去的地方~                                                                                                                                                                                                      |
-| 7  | Rainbow Brackets                 | 彩色括号匹配                                                                                                                                                                                                                                                     |
-| 8  | Rainbow Variable                 | 方法内彩色变量匹配                                                                                                                                                                                                                                                  |
-| 9  | MyBatis Log Free                 | MyBatis 日志打印                                                                                                                                                                                                                                               |
-| 10 | MyBatisCodeHelper-Pro            | 生成 Mapper xml 文件<br/>快速从代码跳转到 Mapper 及从 Mapper 返回代码<br/> Mybatis 自动补全及语法错误提示<br/>集成 Mybatis Generator GUI 界面<br/>根据数据库注解，生成 Swagger Model 注解<br/>[MyBatisCodeHelper-Pro 破解指导](https://zpj80231.github.io/znote/views/crack/mybatiscodehelperprocrack.html) |
-| 11 | Maven Helper                     | 查找和排除冲突依赖项的简便方法，[IDEA Maven 镜像配置](https://blog.csdn.net/idto315/article/details/122888893)                                                                                                                                                                 |
-| 12 | maven-search                     | • 支持按类或仓库坐标快速查找 maven 依赖<br/>• 开启菜单：Tools/ Maven Search                                                                                                                                                                                                    |
-| 13 | Generate All Getter And Setter   | 当你进行对象之间赋值的时候，你会发现好麻烦呀，能不能有一个更好的办法呢~ 有，只要你选中需要生成 set 方法的对象，按下快捷键 alt+enter <br/> 使用 .allget 生成所有 getter 方法                                                                                                                                                 |
-| 14 | arthas idea                      | 基于 IntelliJ IDEA 开发的 Alibaba Arthas 命令生成插件，支持 Alibaba Arthas 官方常用的命令。                                                                                                                                                                                      |
-| 15 | Easy Javadoc                     | 能帮助开发者快速生成类、方法、属性等中文 Java Doc / K Doc，快捷键 Ctrl+\                                                                                                                                                                                                           |
-| 16 | Easy Naming                      | 选中需要命名的文本内容，按下快捷键 Alt + Z，AI智能命名。                                                                                                                                                                                                                          |
-| 17 | Key Promoter X                   | 对你的 IDEA 操作，会提示相应的快捷键是什么                                                                                                                                                                                                                                   |
-| 18 | Save Action X                    | 保存的时候进行格式化操作，去除某些文件的自动格式化<br/> `.*\.html`  `.*\.md`  `.*\.sql`  `.*\.xml`  `.*\.vue`                                                                                                                                                                       |
-| 19 | String Manipulation 或 ConverterX | 对字符串的操作，支持大小写驼峰转换，字符串加解密等                                                                                                                                                                                                                                  |
-| 20 | .ignore                          | 生成各种模板化的 git 忽略文件                                                                                                                                                                                                                                          |
-| 21 | JarEditor                        | 可以直接编辑jar包中的文件                                                                                                                                                                                                                                             |
-| 22 | Atom Material Icons              | 各种文件夹、文件图标                                                                                                                                                                                                                                                 |
-| 23 | Apifox Helper                    | 在线接口文档调试                                                                                                                                                                                                                                                   |
-| 24 | TONGYI Lingma                    | 通义灵码，AI 智能自动补全                                                                                                                                                                                                                                             |
+| 序号 | 名称                                | 备注                                                                                                                                                                                                                                                        |
+|----|:----------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1  | Lombok                            | 以简单的注解形式简化 POJO，现 IDEA 默认已自带                                                                                                                                                                                                                              |
+| 2  | SonarQube                         | 代码质量提升                                                                                                                                                                                                                                                    |
+| 3  | Grep Console                      | 对控制台输出的不同级别的日志进行上色。比如我的前景色设置：WARN 级别是黄色`FFD700`，ERROR 是红色`FF3030`                                                                                                                                                                                         |
+| 4  | Translation                       | 翻译                                                                                                                                                                                                                                                        |
+| 5  | JRebel、DebugTools                 | 热加载插件，代码改动之后无需重启服务，被修改的类会自动重新加载，破解请自行百度<br/>或者参考：[jrebel-license-active-server](https://github.com/yu-xiaoyao/jrebel-license-active-server)<br/>修改完 Java 代码后，就可以通过快捷键 Ctrl+Shift+F9 刷新项目                                                                  |
+| 6  | CodeGlance Pro                    | 类似于 Sublime 的右侧，整体代码滚动条，使用此插件可以查看缩略图一样，快速切换到自己需要去的地方~                                                                                                                                                                                                     |
+| 7  | Rainbow Brackets                  | 彩色括号匹配                                                                                                                                                                                                                                                    |
+| 8  | Rainbow Variable                  | 方法内彩色变量匹配                                                                                                                                                                                                                                                 |
+| 9  | MyBatis Log Free                  | MyBatis 日志打印                                                                                                                                                                                                                                              |
+| 10 | MyBatisCodeHelper-Pro             | 生成 Mapper xml 文件<br/>快速从代码跳转到 Mapper 及从 Mapper 返回代码<br/> Mybatis 自动补全及语法错误提示<br/>集成 Mybatis Generator GUI 界面<br/>根据数据库注解，生成 Swagger Model 注解<br/>[MyBatisCodeHelper-Pro 破解指导](https://zpj80231.github.io/znote/views/crack/mybatiscodehelperprocrack.html) |
+| 11 | Maven Helper                      | 查找和排除冲突依赖项的简便方法，[IDEA Maven 镜像配置](https://blog.csdn.net/idto315/article/details/122888893)                                                                                                                                                                |
+| 12 | maven-search                      | • 支持按类或仓库坐标快速查找 maven 依赖<br/>• 开启菜单：Tools/ Maven Search                                                                                                                                                                                                   |
+| 13 | Generate All Getter And Setter    | 当你进行对象之间赋值的时候，你会发现好麻烦呀，能不能有一个更好的办法呢~ 有，只要你选中需要生成 set 方法的对象，按下快捷键 alt+enter <br/> 使用 .allget 生成所有 getter 方法                                                                                                                                                |
+| 14 | arthas idea                       | 基于 IntelliJ IDEA 开发的 Alibaba Arthas 命令生成插件，支持 Alibaba Arthas 官方常用的命令。                                                                                                                                                                                     |
+| 15 | Easy Javadoc                      | 能帮助开发者快速生成类、方法、属性等中文 Java Doc / K Doc，快捷键 Ctrl+\                                                                                                                                                                                                          |
+| 16 | Show Comment                      | 在文件树、行末、JSON 等地方显示注释                                                                                                                                                                                                                                      |
+| 17 | Key Promoter X                    | 对你的 IDEA 操作，会提示相应的快捷键是什么                                                                                                                                                                                                                                  |
+| 18 | Save Action X                     | 保存的时候进行格式化操作，去除某些文件的自动格式化<br/> `.*\.html`  `.*\.md`  `.*\.sql`  `.*\.xml`  `.*\.vue`                                                                                                                                                                      |
+| 19 | String Manipulation 或 ConverterX  | 对字符串的操作，支持大小写驼峰转换，字符串加解密等                                                                                                                                                                                                                                 |
+| 20 | .ignore                           | 生成各种模板化的 git 忽略文件                                                                                                                                                                                                                                         |
+| 21 | JarEditor                         | 可以直接编辑jar包中的文件                                                                                                                                                                                                                                            |
+| 22 | Atom Material Icons               | 各种文件夹、文件图标                                                                                                                                                                                                                                                |
+| 23 | Apifox Helper                     | 在线接口文档调试                                                                                                                                                                                                                                                  |
+| 24 | TONGYI Lingma                     | 通义灵码，AI 智能自动补全                                                                                                                                                                                                                                            |
 
 ## 5. 常用配置
 
@@ -136,29 +138,39 @@ IDEA破解、全插件破解。项目地址：[https://github.com/zpj80231/idea-
 
 - Appearance & Behavior -> Appearance -> Theme
 
-![image.png](https://images.gitee.com/uploads/images/2019/0118/000955_8a1a2c2a_945727.png)
+![idea-theme.png](/znote/idea/idea-theme.png)
 
 ### 5.2 字体
 
-* 直接设置字体大小：Editor -> Font
+* IDEA 应用字体：Appearance & Behavior -> Appearance
+
+![IDEA应用字体](/znote/idea/idea-sidebar-font.png)
+
+* 代码字体：Editor -> Font
+
+![代码字体](/znote/idea/idea-code-font.png)
+
+* 控制台字体：Tools -> terminal
+
+![idea-control-font.png](/znote/idea/idea-control-font.png)
+
 * 使用鼠标滚轮调整字体大小：Editor -> General -> Change font size (Zoom) with Ctrl + Mouse Wheel
 
-![IDEA应用字体](https://images.gitee.com/uploads/images/2019/0118/000955_06dda8fd_945727.png)
-![代码字体](https://images.gitee.com/uploads/images/2019/0118/000955_dd80cfab_945727.png)
+![idea-control-font.png](/znote/idea/idea-mouse-wheel-font.png)
 
 ### 5.3 编码
 
 * Editor -> File encodings
 
-![IDEA编码设置](https://ucc.alicdn.com/pic/developer-ecology/vjpue72jdvvb2_20a1568e41754f01bfaced211af49527.png?x-oss-process=image%2Fresize%2Cw_1400%2Cm_lfit%2Fformat%2Cwebp)
+![IDEA编码设置](/znote/idea/idea-file-encodings.png)
 
 ### 5.4 切换语言
 
 * Appearance & Behavior -> System Settings -> Language and Region
 
-![IDEA语言设置](https://img2024.cnblogs.com/blog/1714436/202410/1714436-20241011113851303-217888438.png)
+![IDEA语言设置](/znote/idea/idea-language.png)
 
-### 5.5 代码模板
+### 5.5 代码实时模板
 
 类似 sysout：
 
@@ -167,7 +179,7 @@ IDEA破解、全插件破解。项目地址：[https://github.com/zpj80231/idea-
 
 相关配置见：[IDEA代码模板](https://blog.csdn.net/Yinyaowei/article/details/103836510)
 
-![image.png](https://images.gitee.com/uploads/images/2019/0118/000956_1335a7b5_945727.png)
+![image.png](/znote/idea/idea-live-templates.png)
 
 ### 5.6 文件头注释
 
@@ -181,20 +193,20 @@ IDEA破解、全插件破解。项目地址：[https://github.com/zpj80231/idea-
  */
 ```
 
-![image.png](https://images.gitee.com/uploads/images/2019/0118/000957_0a1a36f9_945727.png)
+![image.png](/znote/idea/idea-file-templates.png)
 
 ### 5.7 注释不顶格（不在行首）
 
 * Editor -> Code Style -> Java -> Code Generation
 
-![image.png](https://img2020.cnblogs.com/blog/2608583/202111/2608583-20211121101224349-1524924883.png)
-![image.png](https://img2020.cnblogs.com/blog/2608583/202111/2608583-20211121101320181-294946330.png)
+![image.png](/znote/idea/idea-code-style-java.png)
+![image.png](/znote/idea/idea-code-style-xml.png)
 
 ### 5.8 自定义后缀文件的语法高亮
 
 * Editor -> File Types
 
-![image.png](/znote/img/backend/0C1C8BF1-3F24-4BF0-AE5A-A3CD74DA3D18.png)
+![image.png](/znote/idea/idea-file-types.png)
 
 
 <Reward/>
