@@ -1,4 +1,9 @@
-// Cloudflare 要求的入口文件（不能改名）
+/**
+ * Cloudflare 入口文件（不能改名），自动识别，用于兼容项目根路径问题
+ *
+ * @param context
+ * @returns onRequest
+ */
 export const onRequest = async (context) => {
     const { request } = context;
     const url = new URL(request.url);
