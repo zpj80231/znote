@@ -1,4 +1,6 @@
-# Cloudflare Pages 配置文件
+##
+## Cloudflare Pages 配置文件
+##
 name = "znote"
 account_id = "9dea4d4c91be88e92ffe5a553a0d6980"
 workers_dev = false
@@ -12,7 +14,8 @@ cwd = "."
 directory = "docs/.vuepress/dist"
 
 [pages]
-### Cloudflare Page 如果有根路径问题
+### Cloudflare Page 如果有根路径问题，使用重定向解决 ###
+#
 # 1. 登录 Cloudflare 控制台
 # 2. 选择您的域名
 # 3. 点击 "Rules" → "Page Rules"
