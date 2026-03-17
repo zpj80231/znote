@@ -87,6 +87,7 @@ module.exports = [
     require('../../plugins/notification'),
     require('../../plugins/enhancedSearch'),
     require('../../plugins/codeCopy'),
+    require('../../plugins/cwd'),
 
 ]
 
