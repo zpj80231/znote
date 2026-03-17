@@ -34,7 +34,8 @@
         <Password v-show="!isHasPageKey" :isPage="true" class="password-wrapper-in" key="in"></Password>
         <div :class="{ 'hide': !isHasPageKey }">
           <slot></slot>
-          <Comments :isShowComments="shouldShowComments"/>
+          <Comments v-if="shouldShowValine" :isShowComments="shouldShowValine"/>
+          <CwdComments v-if="shouldShowCWD" :isShow="shouldShowCWD"/>
         </div>
       </div>
     </div>
@@ -65,7 +66,8 @@
           <Password v-if="!isHasPageKey" :isPage="true"></Password>
           <div v-else>
             <slot></slot>
-            <Comments :isShowComments="shouldShowComments"/>
+            <Comments v-if="shouldShowValine" :isShowComments="shouldShowValine"/>
+            <CwdComments v-if="shouldShowCWD" :isShow="shouldShowCWD"/>
           </div>
         </div>
       </transition>
@@ -109,16 +111,31 @@ export default {
     absoluteEncryption () {
       return this.$themeConfig.keyPage && this.$themeConfig.keyPage.absoluteEncryption === true
     },
-    // 是否显示评论
-    shouldShowComments () {
-      const { isShowComments, home } = this.$frontmatter
+    shouldShowValine () {
+      const valineConfig = this.$themeConfig.valineConfig
+      if (!valineConfig) return false
+      const frontmatter = this.$page.frontmatter || {}
+      const { isShowComments, home } = frontmatter
       return !(
         this.isComment == false ||
         isShowComments == false ||
         home == true
       )
     },
-
+    shouldShowCWD () {
+      const cwdConfig = this.$themeConfig.cwdConfig
+      if (!cwdConfig || !cwdConfig.serverUrl || !cwdConfig.appId) {
+        return false
+      }
+      const frontmatter = this.$page.frontmatter || {}
+      const { isShowComments, home } = frontmatter
+      const result = !(
+        this.isComment == false ||
+        isShowComments == false ||
+        home == true
+      )
+      return result
+    },
     shouldShowNavbar () {
       const { themeConfig } = this.$site
       const { frontmatter } = this.$page
@@ -175,12 +192,10 @@ export default {
       if (this.isPc()) {
         this.isSidebarOpen = themeConfig.isSidebarOpen
       } else {
-        // 手机端，侧边栏默认不打开
         this.isSidebarOpen = true
       }
     }
 
-    // 监听路由的变化
     this.$router.afterEach(() => {
       if (this.$frontmatter && this.$frontmatter.isSidebarOpen) {
         this.isSidebarOpen = this.$frontmatter.isSidebarOpen
@@ -223,7 +238,6 @@ export default {
       this.isSidebarOpen = typeof to === 'boolean' ? to : !this.isSidebarOpen
     },
 
-    // side swipe
     onTouchStart (e) {
       const themeConfig = this.$site && this.$site.themeConfig
       if (themeConfig && themeConfig.disableSwipe === true) return
@@ -313,7 +327,7 @@ export default {
 .fade-enter-active, .fade-leave-active {
   transition: opacity .5s;
 }
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+.fade-enter, .fade-leave-to {
   opacity: 0;
 }
 </style>
