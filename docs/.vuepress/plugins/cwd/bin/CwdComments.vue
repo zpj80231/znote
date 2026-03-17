@@ -18,9 +18,7 @@ export default {
   data() {
     return {
       cwdInstance: null,
-      isLoaded: false,
-      observer: null,
-      scriptLoaded: false
+      observer: null
     }
   },
   computed: {
@@ -28,17 +26,8 @@ export default {
       const config = this.$themeConfig.cwdConfig || {}
       return {
         serverUrl: config.serverUrl || '',
-        appId: config.appId || '',
-        darkMode: config.darkMode || 'auto',
-        lang: config.lang || 'zh-CN',
-        theme: config.theme || 'default',
-        emoji: config.emoji !== false,
-        avatar: config.avatar || 'robohash',
-        pageSize: config.pageSize || 10,
-        placeholder: config.placeholder || '欢迎评论...',
-        highlight: config.highlight !== false,
-        math: config.math === true,
-        uploadImage: config.uploadImage === true
+        siteId: config.siteId || '',
+        pageSize: config.pageSize || 10
       }
     }
   },
@@ -65,7 +54,6 @@ export default {
   methods: {
     loadCWDScript() {
       if (window.CWDComments) {
-        this.scriptLoaded = true
         this.initCWD()
         return
       }
@@ -73,7 +61,6 @@ export default {
         const checkLoaded = setInterval(() => {
           if (window.CWDComments) {
             clearInterval(checkLoaded)
-            this.scriptLoaded = true
             this.initCWD()
           }
         }, 100)
@@ -84,7 +71,6 @@ export default {
       script.src = 'https://unpkg.com/cwd-widget@latest/dist/cwd.js'
       script.async = true
       script.onload = () => {
-        this.scriptLoaded = true
         this.initCWD()
       }
       script.onerror = (e) => {
@@ -94,7 +80,6 @@ export default {
     },
     initCWD() {
       if (!window.CWDComments) {
-        console.warn('CWD Comments: CWDComments not loaded')
         return
       }
       if (!this.$refs.cwdContainer) {
@@ -104,8 +89,8 @@ export default {
         return
       }
       const options = this.cwdOptions
-      if (!options.serverUrl || !options.appId) {
-        console.warn('CWD Comments: serverUrl and appId are required')
+      if (!options.serverUrl || !options.siteId) {
+        console.warn('CWD Comments: serverUrl and siteId are required')
         return
       }
       this.destroyCWD()
@@ -114,9 +99,8 @@ export default {
       const cwdConfig = {
         el: this.$refs.cwdContainer,
         apiBaseUrl: options.serverUrl,
-        postSlug: this.getPostSlug(),
-        siteId: options.appId,
-        lang: options.lang,
+        postSlug: window.location.pathname,
+        siteId: options.siteId,
         theme: this.getDarkMode(),
         pageSize: options.pageSize
       }
@@ -126,7 +110,6 @@ export default {
         if (this.cwdInstance && typeof this.cwdInstance.mount === 'function') {
           this.cwdInstance.mount()
         }
-        this.isLoaded = true
         this.setupThemeObserver()
       } catch (e) {
         console.error('CWD Comments init error:', e)
@@ -142,13 +125,7 @@ export default {
       }
       this.cwdInstance = null
     },
-    getPostSlug() {
-      return window.location.pathname
-    },
     getDarkMode() {
-      const config = this.cwdOptions
-      if (config.darkMode === 'dark') return 'dark'
-      if (config.darkMode === 'light') return 'light'
       return this.detectDarkMode() ? 'dark' : 'light'
     },
     detectDarkMode() {
@@ -171,8 +148,6 @@ export default {
       if (this.observer) {
         this.observer.disconnect()
       }
-      const config = this.cwdOptions
-      if (config.darkMode !== 'auto') return
       this.observer = new MutationObserver(() => {
         this.updateTheme()
       })
@@ -193,7 +168,7 @@ export default {
     },
     refreshComments() {
       if (this.cwdInstance && typeof this.cwdInstance.updateConfig === 'function') {
-        this.cwdInstance.updateConfig({ postSlug: this.getPostSlug() })
+        this.cwdInstance.updateConfig({ postSlug: window.location.pathname })
       } else {
         this.initCWD()
       }
