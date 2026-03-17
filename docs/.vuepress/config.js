@@ -105,18 +105,8 @@ module.exports = {
             recordIP: true
         },
         // cwdConfig: {
-        //     serverUrl: 'https://cwd.bree.de5.net',  // CWD 服务端地址（必填）
-        //     appId: 'znote', // 应用 ID（必填）
-        //     darkMode: 'auto',      // 暗黑模式: 'auto' | 'dark' | 'light'
-        //     lang: 'zh-CN',         // 语言
-        //     theme: 'znote',      // 主题
-        //     emoji: true,           // 表情支持
-        //     avatar: 'robohash',    // 头像风格
-        //     pageSize: 10,          // 每页评论数
-        //     placeholder: '欢迎评论...',  // 占位文字
-        //     highlight: true,       // 代码高亮
-        //     math: false,           // 数学公式
-        //     uploadImage: false,    // 图片上传
+        //     serverUrl: 'https://cwd.bree.de5.net',
+        //     siteId: 'znote'
         // },
     },
     plugins,

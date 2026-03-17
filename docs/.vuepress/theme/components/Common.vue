@@ -124,7 +124,7 @@ export default {
     },
     shouldShowCWD () {
       const cwdConfig = this.$themeConfig.cwdConfig
-      if (!cwdConfig || !cwdConfig.serverUrl || !cwdConfig.appId) {
+      if (!cwdConfig || !cwdConfig.serverUrl || !cwdConfig.siteId) {
         return false
       }
       const frontmatter = this.$page.frontmatter || {}
