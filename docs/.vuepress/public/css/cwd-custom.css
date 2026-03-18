@@ -1,14 +1,14 @@
 /* CWD 评论系统自定义样式 - Shadow DOM 环境 */
 
 /* 隐藏点赞区域 */
-.like-section,
-.like-wrapper,
-.like-container,
-.like-area,
-[class*="like"],
-[id*="like"] {
-  display: none !important;
-}
+/*.like-section,*/
+/*.like-wrapper,*/
+/*.like-container,*/
+/*.like-area,*/
+/*[class*="like"],*/
+/*[id*="like"] {*/
+/*  display: none !important;*/
+/*}*/
 
 /* 隐藏表单标签 */
 .cwd-form-label,
@@ -141,7 +141,7 @@ button,
   border-radius: 4px !important;
   cursor: pointer !important;
   transition: all 0.2s ease !important;
-  border: 1px solid #dcdfe6 !important;
+  /*border: 1px solid #dcdfe6 !important;*/
   background-color: #fff !important;
   color: #606266 !important;
 }
@@ -295,6 +295,11 @@ button:hover,
 .cwd-comment {
   border-bottom: 1px solid #ebeef5 !important;
   padding: 1rem 0 !important;
+}
+
+/* 评论列表操作按钮样式 */
+.cwd-comment-actions {
+    gap: 0px;
 }
 
 /* 暗黑模式评论列表 */

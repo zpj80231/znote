@@ -251,11 +251,83 @@ export default {
       const shadowObserver = new MutationObserver(() => {
         this.updateInputsPlaceholder(shadowRoot)
         this.addThemeClassToShadowRoot(shadowRoot)
+        this.setupFormValidation(shadowRoot)
       })
       shadowObserver.observe(shadowRoot, {
         childList: true,
         subtree: true
       })
+      this.setupFormValidation(shadowRoot)
+    },
+    setupFormValidation(shadowRoot) {
+      const submitBtn = shadowRoot.querySelector('.cwd-btn-primary, button[type="submit"], .submit-button')
+      if (!submitBtn) return
+      
+      if (submitBtn._hasValidation) return
+      submitBtn._hasValidation = true
+      
+      const validateInputs = () => {
+        const inputs = shadowRoot.querySelectorAll('input[type="text"], input[type="email"], input[type="url"]')
+        let hasError = false
+        
+        inputs.forEach((input) => {
+          input.classList.remove('cwd-input-error')
+          void input.offsetWidth
+        })
+        
+        inputs.forEach((input, index) => {
+          if (index === 0 && !input.value.trim()) {
+            input.classList.add('cwd-input-error')
+            hasError = true
+          }
+          if (index === 1 && !input.value.trim()) {
+            input.classList.add('cwd-input-error')
+            hasError = true
+          }
+        })
+        
+        return hasError
+      }
+      
+      submitBtn.addEventListener('mouseenter', validateInputs)
+      submitBtn.addEventListener('click', (e) => {
+        const hasError = validateInputs()
+        if (hasError) {
+          e.preventDefault()
+          e.stopPropagation()
+        }
+      }, true)
+      
+      this.injectValidationStyles(shadowRoot)
+    },
+    injectValidationStyles(shadowRoot) {
+      let styleTag = shadowRoot.getElementById('cwd-validation-style')
+      if (!styleTag) {
+        styleTag = document.createElement('style')
+        styleTag.id = 'cwd-validation-style'
+        shadowRoot.appendChild(styleTag)
+      }
+      
+      styleTag.textContent = `
+        @keyframes cwd-shake {
+          0%, 100% { transform: translateX(0); }
+          10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+          20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+        
+        .cwd-input-error {
+          border-bottom-color: #f56c6c !important;
+          background-color: #fef0f0 !important;
+          animation: cwd-shake 0.5s ease-in-out;
+        }
+        .cwd-input-error::placeholder {
+          color: #f56c6c !important;
+        }
+        [data-theme="dark"] .cwd-input-error {
+          border-bottom-color: #f56c6c !important;
+          background-color: rgba(245, 108, 108, 0.1) !important;
+        }
+      `
     }
   }
 }
