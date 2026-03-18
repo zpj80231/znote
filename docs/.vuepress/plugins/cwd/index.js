@@ -8,17 +8,18 @@ module.exports = (options = {}, context) => {
       const cwdConfig = themeConfig.cwdConfig || {}
       const defaultOptions = {
         serverUrl: '',
-        appId: 'appId',
+        siteId: 'default',
         darkMode: 'auto',
         lang: 'zh-CN',
         theme: 'default',
         emoji: true,
         avatar: 'robohash',
         pageSize: 10,
-        placeholder: '欢迎评论...',
+        placeholder: '填写邮箱可以收到回复哦！',
         highlight: true,
         math: false,
         uploadImage: false,
+        customCssUrl: '',
       }
       const mergedOptions = { ...defaultOptions, ...cwdConfig, ...options }
       return {
