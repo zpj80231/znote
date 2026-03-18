@@ -58,27 +58,13 @@ export default {
         this.initCWD()
         return
       }
-      if (document.querySelector('script[src*="cwd-widget"]')) {
-        const checkLoaded = setInterval(() => {
-          if (window.CWDComments) {
-            clearInterval(checkLoaded)
-            this.initCWD()
-          }
-        }, 100)
-        setTimeout(() => clearInterval(checkLoaded), 10000)
-        return
-      }
-      const script = document.createElement('script')
-      // script.src = 'https://unpkg.com/cwd-widget@latest/dist/cwd.js'
-      // script.src = '/znote/public/js/cwd.js'
-      script.async = true
-      script.onload = () => {
-        this.initCWD()
-      }
-      script.onerror = (e) => {
-        console.error('Failed to load CWD comments script:', e)
-      }
-      document.head.appendChild(script)
+      const checkLoaded = setInterval(() => {
+        if (window.CWDComments) {
+          clearInterval(checkLoaded)
+          this.initCWD()
+        }
+      }, 100)
+      setTimeout(() => clearInterval(checkLoaded), 10000)
     },
     initCWD() {
       if (!window.CWDComments) {
