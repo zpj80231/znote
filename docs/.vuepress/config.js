@@ -40,6 +40,7 @@ module.exports = {
         // bump axios from 0.26.1 to 1.11.0
         ["script", {}, "window.global = window; window.process = window.process || { env: { NODE_ENV: 'production' } };"],
         ["script", {"language": "javascript", "type": "text/javascript", "src": "/js/jquery.min.js"}],
+        ["script", {"language": "javascript", "type": "text/javascript", "src": "/js/cwd.js"}],
         ["script", {"language": "javascript", "type": "text/javascript", "src": "/js/MouseClickEffect.js"}],
         // 注销历史 Service Worker，防止旧缓存拦截
         ["script", {}, `
@@ -106,7 +107,8 @@ module.exports = {
         },
         // cwdConfig: {
         //     serverUrl: 'https://cwd.bree.de5.net',
-        //     siteId: 'znote'
+        //     siteId: 'znote',
+        //     customCssUrl: '/znote/css/cwd-custom.css'
         // },
     },
     plugins,

@@ -1,8 +1,6 @@
 <template>
   <div class="cwd-comments-wrapper" v-show="isShow">
-    <ClientOnly>
       <div id="cwd-comments-container" ref="cwdContainer"></div>
-    </ClientOnly>
   </div>
 </template>
 
@@ -27,7 +25,10 @@ export default {
       return {
         serverUrl: config.serverUrl || '',
         siteId: config.siteId || '',
-        pageSize: config.pageSize || 10
+        pageSize: config.pageSize || 10,
+        customCssUrl: config.customCssUrl || '',
+        placeholder: config.placeholder || '填写邮箱可以收到回复哦！',
+        lang: config.lang || 'zh-CN'
       }
     }
   },
@@ -68,7 +69,8 @@ export default {
         return
       }
       const script = document.createElement('script')
-      script.src = 'https://unpkg.com/cwd-widget@latest/dist/cwd.js'
+      // script.src = 'https://unpkg.com/cwd-widget@latest/dist/cwd.js'
+      // script.src = '/znote/public/js/cwd.js'
       script.async = true
       script.onload = () => {
         this.initCWD()
@@ -102,7 +104,12 @@ export default {
         postSlug: window.location.pathname,
         siteId: options.siteId,
         theme: this.getDarkMode(),
-        pageSize: options.pageSize
+        pageSize: options.pageSize,
+        lang: options.lang
+      }
+      
+      if (options.customCssUrl) {
+        cwdConfig.customCssUrl = options.customCssUrl
       }
       
       try {
@@ -111,6 +118,7 @@ export default {
           this.cwdInstance.mount()
         }
         this.setupThemeObserver()
+        this.waitAndUpdateInputs()
       } catch (e) {
         console.error('CWD Comments init error:', e)
       }
@@ -165,6 +173,10 @@ export default {
         const newTheme = this.detectDarkMode() ? 'dark' : 'light'
         this.cwdInstance.updateConfig({ theme: newTheme })
       }
+      const container = this.$refs.cwdContainer
+      if (container && container.shadowRoot) {
+        this.addThemeClassToShadowRoot(container.shadowRoot)
+      }
     },
     refreshComments() {
       if (this.cwdInstance && typeof this.cwdInstance.updateConfig === 'function') {
@@ -172,6 +184,78 @@ export default {
       } else {
         this.initCWD()
       }
+    },
+    waitAndUpdateInputs() {
+      let attempts = 0
+      const maxAttempts = 50
+      const checkInterval = setInterval(() => {
+        attempts++
+        const container = this.$refs.cwdContainer
+        if (container && container.shadowRoot) {
+          clearInterval(checkInterval)
+          this.updateInputsPlaceholder(container.shadowRoot)
+          this.addThemeClassToShadowRoot(container.shadowRoot)
+          this.observeShadowRoot(container.shadowRoot)
+        }
+        if (attempts >= maxAttempts) {
+          clearInterval(checkInterval)
+        }
+      }, 100)
+    },
+    updateInputsPlaceholder(shadowRoot) {
+      const inputs = shadowRoot.querySelectorAll('input[type="text"], input[type="email"], input[type="url"]')
+      inputs.forEach((input, index) => {
+        const label = input.closest('div')?.querySelector('label') || 
+                     input.parentElement?.querySelector('label')
+        let placeholderText = ''
+        
+        if (label) {
+          placeholderText = label.textContent.trim()
+        } else if (input.name) {
+          const nameMap = {
+            'nickname': '昵称',
+            'name': '昵称',
+            'email': '邮箱',
+            'mail': '邮箱',
+            'website': '网址(http://)',
+            'url': '网址(http://)'
+          }
+          placeholderText = nameMap[input.name.toLowerCase()] || ''
+        } else if (index === 0) {
+          placeholderText = '昵称'
+        } else if (index === 1) {
+          placeholderText = '邮箱'
+        } else if (index === 2) {
+          placeholderText = '网址(http://)'
+        }
+        
+        if (placeholderText && !input.placeholder) {
+          input.placeholder = placeholderText
+        }
+      })
+      
+      const textarea = shadowRoot.querySelector('textarea')
+      if (textarea && !textarea.placeholder) {
+        textarea.placeholder = this.cwdOptions.placeholder
+      }
+    },
+    addThemeClassToShadowRoot(shadowRoot) {
+      const theme = this.getDarkMode()
+      const widget = shadowRoot.querySelector('.cwd-widget') || shadowRoot.firstChild
+      if (widget) {
+        widget.classList.remove('theme-light', 'theme-dark')
+        widget.classList.add(`theme-${theme}`)
+      }
+    },
+    observeShadowRoot(shadowRoot) {
+      const shadowObserver = new MutationObserver(() => {
+        this.updateInputsPlaceholder(shadowRoot)
+        this.addThemeClassToShadowRoot(shadowRoot)
+      })
+      shadowObserver.observe(shadowRoot, {
+        childList: true,
+        subtree: true
+      })
     }
   }
 }
@@ -179,8 +263,6 @@ export default {
 
 <style lang="stylus">
 .cwd-comments-wrapper
-  margin-top 2rem
-  padding 0 2.5rem
   max-width $contentWidth
   margin-left auto
   margin-right auto

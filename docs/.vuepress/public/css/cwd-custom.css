@@ -1,0 +1,154 @@
+/* CWD 评论系统自定义样式 - Shadow DOM 环境 */
+
+/* 隐藏点赞区域 */
+.like-section,
+.like-wrapper,
+.like-container,
+.like-area,
+[class*="like"],
+[id*="like"] {
+  display: none !important;
+}
+
+/* 隐藏表单标签 */
+.cwd-form-label,
+.form-label,
+label {
+  display: none !important;
+}
+
+/* 隐藏错误提示框 */
+.cwd-error-inline,
+.cwd-error,
+.error-message,
+.error-container {
+  display: none !important;
+}
+
+/* 隐藏标题区域 */
+.cwd-comments-header,
+.cwd-form-title,
+.cwd-header,
+.comment-header,
+.form-title {
+  display: none !important;
+}
+
+/* 调整整体表单容器样式 */
+.cwd-comment-form,
+.comment-form,
+.form-container,
+.cwd-widget .cwd-form-wrapper {
+  padding: 1.5rem !important;
+  background-color: #f5f7f9 !important;
+  border-radius: 8px !important;
+  margin-bottom: 1.5rem !important;
+}
+
+/* 暗黑模式下的表单容器 - Shadow DOM 内部 */
+[data-theme=dark] .cwd-comment-form,
+[data-theme=dark] .comment-form,
+[data-theme=dark] .form-container,
+[data-theme=dark] .cwd-form-wrapper {
+  background-color: #32363a !important;
+}
+
+/* 昵称、邮箱、网址输入框样式 - 改为下划线样式 */
+input[type="text"],
+input[type="email"],
+input[type="url"],
+.cwd-input,
+.form-input,
+.cwd-widget input {
+  border: none !important;
+  border-bottom: 1px solid #ddd !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  padding: 0.75rem 0 !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* 暗黑模式下的输入框 - Shadow DOM 内部 */
+[data-theme=dark] input[type="text"],
+[data-theme=dark] input[type="email"],
+[data-theme=dark] input[type="url"],
+[data-theme=dark] .cwd-input,
+[data-theme=dark] .form-input,
+[data-theme=dark] input {
+  border-bottom-color: #555 !important;
+  color: #ddd !important;
+}
+
+/* 输入框聚焦时的样式 */
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+.cwd-input:focus,
+.form-input:focus,
+.cwd-widget input:focus {
+  border-bottom-color: #3eaf7c !important;
+}
+
+/* 评论输入框样式 */
+textarea,
+.cwd-textarea,
+.form-textarea,
+.cwd-widget textarea {
+  border: none !important;
+  background: transparent !important;
+  padding: 1rem 0 !important;
+  resize: none !important;
+  border-radius: 0 !important;
+  min-height: 120px !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* 暗黑模式下的评论输入框 - Shadow DOM 内部 */
+[data-theme=dark] textarea,
+[data-theme=dark] .cwd-textarea,
+[data-theme=dark] .form-textarea {
+  color: #ddd !important;
+}
+
+/* 调整整体表单布局 - 三列网格 */
+.form-row,
+.input-row,
+.cwd-form-row,
+.cwd-widget .cwd-input-row {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 1rem !important;
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+  .form-row,
+  .input-row,
+  .cwd-form-row,
+  .cwd-widget .cwd-input-row {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* 提交按钮样式 */
+.submit-btn,
+.cwd-submit-btn,
+.comment-submit,
+.cwd-widget .submit-button {
+  margin-top: 1rem !important;
+  background-color: #3eaf7c !important;
+  border: none !important;
+  color: white !important;
+  padding: 0.75rem 1.5rem !important;
+  border-radius: 4px !important;
+  cursor: pointer !important;
+}
+
+.submit-btn:hover,
+.cwd-submit-btn:hover,
+.comment-submit:hover,
+.cwd-widget .submit-button:hover {
+  background-color: #359469 !important;
+}
