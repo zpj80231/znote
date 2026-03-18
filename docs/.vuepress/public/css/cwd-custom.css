@@ -302,6 +302,45 @@ button:hover,
     gap: 0px;
 }
 
+/* 点赞按钮样式 - 移除边框 */
+.cwd-comment-actions button,
+.cwd-comment-actions .like-btn,
+.cwd-comment-actions .like-button,
+.cwd-like-btn,
+.cwd-like-button {
+    border: none !important;
+    background: transparent !important;
+    padding: 0.25rem 0.5rem !important;
+}
+
+.cwd-comment-actions button:hover,
+.cwd-comment-actions .like-btn:hover,
+.cwd-comment-actions .like-button:hover,
+.cwd-like-btn:hover,
+.cwd-like-button:hover {
+    border: none !important;
+    background: transparent !important;
+}
+
+/* 暗黑模式点赞按钮 */
+[data-theme=dark] .cwd-comment-actions button,
+[data-theme=dark] .cwd-comment-actions .like-btn,
+[data-theme=dark] .cwd-comment-actions .like-button,
+[data-theme=dark] .cwd-like-btn,
+[data-theme=dark] .cwd-like-button {
+    border: none !important;
+    background: transparent !important;
+}
+
+[data-theme=dark] .cwd-comment-actions button:hover,
+[data-theme=dark] .cwd-comment-actions .like-btn:hover,
+[data-theme=dark] .cwd-comment-actions .like-button:hover,
+[data-theme=dark] .cwd-like-btn:hover,
+[data-theme=dark] .cwd-like-button:hover {
+    border: none !important;
+    background: transparent !important;
+}
+
 /* 暗黑模式评论列表 */
 [data-theme=dark] .comment-item,
 [data-theme=dark] .cwd-comment-item,
