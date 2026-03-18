@@ -22,7 +22,7 @@ label {
 .cwd-error,
 .error-message,
 .error-container {
-  display: none !important;
+  /*display: none !important;*/
 }
 
 /* 隐藏标题区域 */
