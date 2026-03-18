@@ -151,7 +151,7 @@ button:hover,
 .cwd-btn:hover,
 .cwd-widget button:hover {
   color: #3eaf7c !important;
-  border-color: #3eaf7c !important;
+  /*border-color: #3eaf7c !important;*/
   background-color: #fff !important;
 }
 
