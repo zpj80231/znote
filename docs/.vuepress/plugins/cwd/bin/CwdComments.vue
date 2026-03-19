@@ -276,6 +276,7 @@ export default {
       }
       
       submitBtn.addEventListener('mouseenter', validateInputs)
+      submitBtn.addEventListener('touchstart', validateInputs, { passive: true })
       submitBtn.addEventListener('click', (e) => {
         const hasError = validateInputs()
         if (hasError) {
