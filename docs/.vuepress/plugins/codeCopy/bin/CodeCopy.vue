@@ -37,7 +37,7 @@ export default {
       default: null
     },
     target: {
-        type: [Object, Element],
+      type: null,
       default: null
     }
   },
