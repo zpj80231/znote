@@ -84,6 +84,35 @@ export default {
           })
         }
       }
+    },
+    
+    /**
+     * 检测当前是否为暗黑模式
+     * 通过检查 CSS 变量 --background-color 的值来判断
+     */
+    isDarkMode() {
+      const root = document.querySelector(':root')
+      if (!root) return false
+      const bgColor = getComputedStyle(root).getPropertyValue('--background-color').trim()
+      // 暗黑模式下背景色为 #25272a 或类似的深色
+      return bgColor && (bgColor === '#25272a' || bgColor === 'rgb(37, 39, 42)')
+    },
+    
+    /**
+     * 更新按钮样式以适配当前模式
+     */
+    updateButtonStyle() {
+      if (this.$refs.btn) {
+        if (this.isDarkMode()) {
+          // 暗黑模式：使用更深的背景色
+          this.$refs.btn.style.background = 'rgba(65, 75, 105)'
+          this.$refs.btn.style.boxShadow = '0 2px 6px rgba(0, 0, 0, 0.25)'
+        } else {
+          // 明亮模式：使用默认背景色
+          this.$refs.btn.style.background = 'rgba(74, 85, 102, 0.7)'
+          this.$refs.btn.style.boxShadow = '0 2px 6px rgba(0, 0, 0, 0.15)'
+        }
+      }
     }
   },
   // 生命周期钩子 - 组件挂载后执行
@@ -104,24 +133,34 @@ export default {
       this.target.style.overflowX = 'auto'
       this.target.style.maxHeight = '100%'
     }
+    
+    // 初始化按钮样式
+    this.updateButtonStyle()
+    
+    // 监听模式切换
+    // 主题通过修改 :root 的 CSS 变量来切换模式
+    // 我们使用 MutationObserver 来监听样式变化
+    const root = document.querySelector(':root')
+    if (root) {
+      this.observer = new MutationObserver(() => {
+        this.updateButtonStyle()
+      })
+      this.observer.observe(root, {
+        attributes: true,
+        attributeFilter: ['style']
+      })
+    }
+  },
+  
+  // 生命周期钩子 - 组件销毁前执行
+  beforeDestroy() {
+    // 清理 MutationObserver
+    if (this.observer) {
+      this.observer.disconnect()
+    }
   }
 };
 </script>
-
-<style>
-/* 暗黑模式适配 - 必须放在非 scoped 的 style 中才能生效 */
-@media (prefers-color-scheme: dark) {
-  .v-expand-code-btn {
-    background: rgba(42, 53, 70, 0.7) !important;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25) !important;
-  }
-
-  .v-expand-code-btn:hover {
-    background: rgba(42, 53, 70, 0.9) !important;
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.35) !important;
-  }
-}
-</style>
 
 <style scoped>
 /* 展开/收起按钮样式 - 底部居中设计 */
