@@ -28,7 +28,7 @@ export default {
     },
     // 目标代码块元素（pre 元素）
     target: {
-      type: [Object, Element],
+      type: null,
       default: null
     }
   },
