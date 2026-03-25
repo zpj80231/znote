@@ -178,9 +178,10 @@ button:hover,
 .cwd-preview-btn,
 .cwd-widget .preview-button,
 .cwd-widget button[class*="preview"] {
-  background-color: #95d475 !important;
-  border: 1px solid #95d475 !important;
+  background-color: #5ead5a !important;
+  border: 1px solid #5ead5a !important;
   color: white !important;
+  opacity: .8;
 }
 
 .cwd-btn-preview:hover,
@@ -188,9 +189,10 @@ button:hover,
 .cwd-preview-btn:hover,
 .cwd-widget .preview-button:hover,
 .cwd-widget button[class*="preview"]:hover {
-  background-color: #7ec650 !important;
-  border-color: #7ec650 !important;
+  background-color: #4e924b !important;
+  border-color: #4e924b !important;
   color: white !important;
+  opacity: .8;
 }
 
 /* 暗黑模式预览按钮 */
@@ -199,9 +201,10 @@ button:hover,
 [data-theme=dark] .cwd-preview-btn,
 [data-theme=dark] .cwd-widget .preview-button,
 [data-theme=dark] .cwd-widget button[class*="preview"] {
-  background-color: #95d475 !important;
-  border-color: #95d475 !important;
+  background-color: #5ead5a !important;
+  border-color: #5ead5a !important;
   color: white !important;
+  opacity: .8;
 }
 
 [data-theme=dark] .cwd-btn-preview:hover,
@@ -209,9 +212,10 @@ button:hover,
 [data-theme=dark] .cwd-preview-btn:hover,
 [data-theme=dark] .cwd-widget .preview-button:hover,
 [data-theme=dark] .cwd-widget button[class*="preview"]:hover {
-  background-color: #7ec650 !important;
-  border-color: #7ec650 !important;
+  background-color: #4e924b !important;
+  border-color: #4e924b !important;
   color: white !important;
+  opacity: .8;
 }
 
 /* 提交按钮样式 - 蓝色系 */
