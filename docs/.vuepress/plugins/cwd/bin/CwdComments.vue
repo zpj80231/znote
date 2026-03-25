@@ -16,7 +16,8 @@ export default {
   data() {
     return {
       cwdInstance: null,
-      observer: null
+      observer: null,
+      emojiPickerVisible: false
     }
   },
   computed: {
@@ -238,12 +239,171 @@ export default {
         this.updateInputsPlaceholder(shadowRoot)
         this.addThemeClassToShadowRoot(shadowRoot)
         this.setupFormValidation(shadowRoot)
+        this.injectEmojiPicker(shadowRoot)
       })
       shadowObserver.observe(shadowRoot, {
         childList: true,
         subtree: true
       })
       this.setupFormValidation(shadowRoot)
+      this.injectEmojiPicker(shadowRoot)
+    },
+    injectEmojiPicker(shadowRoot) {
+      const textarea = shadowRoot.querySelector('textarea')
+      if (!textarea || textarea._hasEmojiPicker) return
+      textarea._hasEmojiPicker = true
+      
+      const textareaWrapper = textarea.parentElement
+      if (!textareaWrapper) return
+      
+      textareaWrapper.style.position = 'relative'
+      
+      const emojiBtn = document.createElement('button')
+      emojiBtn.type = 'button'
+      emojiBtn.className = 'cwd-emoji-btn'
+      emojiBtn.innerHTML = '😊'
+      emojiBtn.title = '选择表情'
+      emojiBtn.style.cssText = `
+        position: absolute;
+        right: 1px;
+        bottom: 10px;
+        height: 32px;
+        border: none;
+        background: transparent;
+        cursor: pointer;
+        font-size: 18px;
+        padding: 4px;
+        border-radius: 4px;
+        transition: background-color 0.2s;
+        z-index: 10;
+      `
+      
+      const emojiPicker = document.createElement('div')
+      emojiPicker.className = 'cwd-emoji-picker'
+      emojiPicker.style.cssText = `
+        position: absolute;
+        right: 10px;
+        bottom: 50px;
+        width: 280px;
+        max-height: 200px;
+        background: #fff;
+        border: 1px solid #e4e7ed;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        padding: 8px;
+        display: none;
+        flex-wrap: wrap;
+        gap: 4px;
+        z-index: 100;
+        overflow-y: auto;
+      `
+      
+      const emojis = [
+        '😀', '😃', '😄', '😁', '😆', '😅', '🤣', '😂', '🙂', '🙃',
+        '😉', '😊', '😇', '🥰', '😍', '🤩', '😘', '😗', '😚', '😙',
+        '🥲', '😋', '😛', '😜', '🤪', '😝', '🤑', '🤗', '🤭', '🤫',
+        '🤔', '🤐', '🤨', '😐', '😑', '😶', '😏', '😒', '🙄', '😬',
+        '🤥', '😌', '😔', '😪', '🤤', '😴', '😷', '🤒', '🤕', '🤢',
+        '🤮', '🤧', '🥵', '🥶', '🥴', '😵', '🤯', '🤠', '🥳', '🥸',
+        '😎', '🤓', '🧐', '😕', '😟', '🙁', '☹️', '😮', '😯', '😲',
+        '😳', '🥺', '😦', '😧', '😨', '😰', '😥', '😢', '😭', '😱',
+        '😖', '😣', '😞', '😓', '😩', '😫', '🥱', '😤', '😡', '😠',
+        '🤬', '👍', '👎', '👏', '🙌', '🤝', '💪', '❤️', '💔', '💯',
+        '🎉', '🎊', '🎁', '🏆', '⭐', '🌟', '✨', '💫', '🔥', '💡'
+      ]
+      
+      emojis.forEach(emoji => {
+        const emojiItem = document.createElement('span')
+        emojiItem.textContent = emoji
+        emojiItem.style.cssText = `
+          font-size: 20px;
+          padding: 4px;
+          cursor: pointer;
+          border-radius: 4px;
+          transition: background-color 0.2s;
+        `
+        emojiItem.addEventListener('mouseenter', () => {
+          emojiItem.style.backgroundColor = '#f0f0f0'
+        })
+        emojiItem.addEventListener('mouseleave', () => {
+          emojiItem.style.backgroundColor = 'transparent'
+        })
+        emojiItem.addEventListener('click', (e) => {
+          e.preventDefault()
+          e.stopPropagation()
+          const start = textarea.selectionStart
+          const end = textarea.selectionEnd
+          const text = textarea.value
+          textarea.value = text.substring(0, start) + emoji + text.substring(end)
+          textarea.selectionStart = textarea.selectionEnd = start + emoji.length
+          textarea.focus()
+          textarea.dispatchEvent(new Event('input', { bubbles: true }))
+          emojiPicker.style.display = 'none'
+          this.emojiPickerVisible = false
+        })
+        emojiPicker.appendChild(emojiItem)
+      })
+      
+      emojiBtn.addEventListener('click', (e) => {
+        e.preventDefault()
+        e.stopPropagation()
+        this.emojiPickerVisible = !this.emojiPickerVisible
+        emojiPicker.style.display = this.emojiPickerVisible ? 'flex' : 'none'
+      })
+      
+      document.addEventListener('click', (e) => {
+        if (!emojiPicker.contains(e.target) && !emojiBtn.contains(e.target)) {
+          emojiPicker.style.display = 'none'
+          this.emojiPickerVisible = false
+        }
+      })
+      
+      textareaWrapper.appendChild(emojiBtn)
+      textareaWrapper.appendChild(emojiPicker)
+      
+      this.injectEmojiStyles(shadowRoot)
+    },
+    injectEmojiStyles(shadowRoot) {
+      let styleTag = shadowRoot.getElementById('cwd-emoji-style')
+      if (!styleTag) {
+        styleTag = document.createElement('style')
+        styleTag.id = 'cwd-emoji-style'
+        shadowRoot.appendChild(styleTag)
+      }
+      
+      styleTag.textContent = `
+        .cwd-emoji-btn {
+          font-size: 18px !important;
+          border: none !important;
+          background: transparent !important;
+          box-shadow: none !important;
+          outline: none !important;
+        }
+        .cwd-emoji-btn:hover {
+          background-color: transparent !important;
+        }
+        [data-theme="dark"] .cwd-emoji-btn {
+          border: none !important;
+          background: transparent !important;
+        }
+        [data-theme="dark"] .cwd-emoji-btn:hover {
+          background-color: transparent !important;
+        }
+        .cwd-emoji-picker {
+          background: #fff !important;
+          border-color: #e4e7ed !important;
+        }
+        [data-theme="dark"] .cwd-emoji-picker {
+          background: #2a2a2a !important;
+          border-color: #4c4d4e !important;
+        }
+        .cwd-emoji-picker span:hover {
+          background-color: #f0f0f0 !important;
+        }
+        [data-theme="dark"] .cwd-emoji-picker span:hover {
+          background-color: #3a3a3a !important;
+        }
+      `
     },
     setupFormValidation(shadowRoot) {
       const submitBtn = shadowRoot.querySelector('.cwd-btn-primary, button[type="submit"], .submit-button')
