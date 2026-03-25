@@ -141,7 +141,6 @@ button,
   border-radius: 4px !important;
   cursor: pointer !important;
   transition: all 0.2s ease !important;
-  /*border: 1px solid #dcdfe6 !important;*/
   background-color: #fff !important;
   color: #606266 !important;
 }
@@ -151,7 +150,6 @@ button:hover,
 .cwd-btn:hover,
 .cwd-widget button:hover {
   color: #3eaf7c !important;
-  /*border-color: #3eaf7c !important;*/
   background-color: #fff !important;
 }
 
@@ -433,7 +431,6 @@ button:hover,
   font-size: 0.85rem !important;
   padding: 0.4rem 0.8rem !important;
   border-radius: 4px !important;
-  border: 1px solid #dcdfe6 !important;
   background-color: #fff !important;
   color: #606266 !important;
   cursor: pointer !important;
@@ -456,7 +453,8 @@ button:hover,
 .pagination .active,
 .cwd-pagination .active,
 .cwd-widget .pagination .active,
-.cwd-pagination-wrapper .active {
+.cwd-pagination-wrapper .active,
+.cwd-page-num-active {
   background-color: #3eaf7c !important;
   border-color: #3eaf7c !important;
   color: white !important;
@@ -472,14 +470,14 @@ button:hover,
 [data-theme=dark] .cwd-pagination-wrapper button,
 [data-theme=dark] .cwd-pagination-wrapper a {
   background-color: #32363a !important;
-  border-color: #4c4d4e !important;
   color: #bbb !important;
 }
 
 [data-theme=dark] .pagination .active,
 [data-theme=dark] .cwd-pagination .active,
 [data-theme=dark] .cwd-widget .pagination .active,
-[data-theme=dark] .cwd-pagination-wrapper .active {
+[data-theme=dark] .cwd-pagination-wrapper .active,
+[data-theme=dark] .cwd-page-num-active {
   background-color: #3eaf7c !important;
   border-color: #3eaf7c !important;
   color: white !important;
