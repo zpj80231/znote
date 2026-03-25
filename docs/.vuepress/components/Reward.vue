@@ -83,9 +83,9 @@
         gap: 6px;
     }
     
-    .reward-button:hover {
-        background-color: rgba(255,71,87,0.9);
-    }
+    //.reward-button:hover {
+    //    background-color: rgba(255,71,87,0.9);
+    //}
 
     table th:nth-of-type(1), th:nth-of-type(4), th:nth-of-type(5) {
         width: 22%;
