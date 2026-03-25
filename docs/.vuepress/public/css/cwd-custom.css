@@ -313,6 +313,11 @@ button:hover,
     padding: 0.25rem 0.5rem !important;
 }
 
+/* 已点赞按钮高亮样式 */
+.cwd-comment-like-button-liked {
+    color: #3eaf7c !important;
+}
+
 .cwd-comment-actions button:hover,
 .cwd-comment-actions .like-btn:hover,
 .cwd-comment-actions .like-button:hover,
