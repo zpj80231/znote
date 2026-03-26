@@ -319,6 +319,9 @@ button:hover,
 .cwd-comment-like-button-liked {
     color: #3eaf7c !important;
 }
+[data-theme=dark] .cwd-comment-like-button-liked {
+    color: #3eaf7c !important;
+}
 
 .cwd-comment-actions button:hover,
 .cwd-comment-actions .like-btn:hover,
