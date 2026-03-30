@@ -68,13 +68,13 @@ export default {
 // 清新风格颜色方案 - 浅色模式
 $monthColor1 = #8dd3c7 // 一月 - 浅青色
 $monthColor2  = #a6c8ff // 二月 - 冰蓝色
-$monthColor3 = #bebada // 三月 - 浅紫色
+$monthColor3 = #f8bbd0 // 三月 - 樱花粉（春）
 $monthColor4 = #fb8072 // 四月 - 浅红色
 $monthColor5 = #80b1d3 // 五月 - 浅蓝色
 $monthColor6 = #fdb462 // 六月 - 浅橙色
 $monthColor7 = #b3de69 // 七月 - 浅绿色
 $monthColor8 = #fccde5 // 八月 - 浅粉色
-$monthColor9 = #d9d9d9 // 九月 - 浅灰色
+$monthColor9 = #ffccbc // 九月 - 枫叶红（秋）
 $monthColor10 = #bc80bd // 十月 - 浅紫色
 $monthColor11 = #ccebc5 // 十一月 - 浅薄荷色
 $monthColor12 = #d16b7b // 十二月 - 酒红色
@@ -83,13 +83,13 @@ $monthColor12 = #d16b7b // 十二月 - 酒红色
 @media (prefers-color-scheme: dark)
   $monthColor1 = #4a9c93 // 一月 - 深青色
   $monthColor2 = #4f6fae // 二月 - 深冰蓝
-  $monthColor3 = #7a6da8 // 三月 - 深紫色
+  $monthColor3 = #c2185b // 三月 - 深樱花粉（春）
   $monthColor4 = #b85a4a // 四月 - 深红色
   $monthColor5 = #5a82a6 // 五月 - 深蓝色
   $monthColor6 = #c7824a // 六月 - 深橙色
   $monthColor7 = #7a9c4a // 七月 - 深绿色
   $monthColor8 = #b87a9a // 八月 - 深粉色
-  $monthColor9 = #8a8a8a // 九月 - 深灰色
+  $monthColor9 = #e64a19 // 九月 - 深枫叶红（秋）
   $monthColor10 = #8a6a8a // 十月 - 深紫色
   $monthColor11 = #7a9ca5 // 十一月 - 深薄荷色
   $monthColor12 = #8b3a44 // 十二月 - 深酒红
