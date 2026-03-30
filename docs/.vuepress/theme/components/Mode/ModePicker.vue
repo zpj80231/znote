@@ -36,6 +36,8 @@ export default {
       activateMode('dark')
     } else if (mode === 'light') {
       activateMode('light')
+    } else {
+      setMode()
     }
   },
 
