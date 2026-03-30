@@ -35,6 +35,9 @@ isShowComments: true
 - 在互联网信息高速公路上​流浪。​。​
 
 <img src="https://ghchart.rshah.org/zpj80231" />
+<div align="center">
+  <img src="https://raw.githubusercontent.com/zpj80231/zpj80231/output/github-contribution-grid-snake.svg" width="97%" />
+</div>
 
 ## 成熟标志
 
