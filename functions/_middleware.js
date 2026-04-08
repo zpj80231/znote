@@ -8,7 +8,7 @@ export const onRequest = async (context) => {
     const { request } = context;
     const url = new URL(request.url);
 
-    if (url.pathname.startsWith('/znote/')) {
+    if (url.pathname === '/znote' || url.pathname.startsWith('/znote/')) {
         url.pathname = url.pathname.replace('/znote', '');
         return await context.next(new Request(url, request));
     }
