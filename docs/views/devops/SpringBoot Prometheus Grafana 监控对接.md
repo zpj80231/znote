@@ -253,6 +253,7 @@ scrape_configs:
   #         env: dev
   #         project: DkCloud
 
+  # 手动校验：curl -u nacos:nacos "http://192.168.0.10:8848/nacos/prometheus/namespaceId/45138bce-488c-4849-95a6-a2d63f56aaa7"
   - job_name: 'dk-cloud-开发环境'
     http_sd_configs:
       - url: 'http://192.168.0.10:8848/nacos/prometheus/namespaceId/45138bce-488c-4849-95a6-a2d63f56aaa7'
