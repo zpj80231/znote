@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GIF头像挂件编辑器</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 15px;
+        }
+        .container { max-width: 1200px; margin: 0 auto; }
+        h1 { text-align: center; color: white; margin-bottom: 15px; font-size: 1.5rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); }
+        .main-content { display: flex; gap: 20px; align-items: flex-start; justify-content: center; flex-wrap: wrap; }
+        .control-panel { width: 260px; display: flex; flex-direction: column; gap: 10px; }
+        .card { background: white; border-radius: 12px; padding: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
+        .card-title { font-size: 0.95rem; color: #333; margin-bottom: 10px; padding-bottom: 6px; border-bottom: 2px solid #667eea; }
+        .upload-area { border: 2px dashed #ccc; border-radius: 8px; padding: 12px; text-align: center; cursor: pointer; transition: all 0.3s ease; margin-bottom: 6px; }
+        .upload-area:hover { border-color: #667eea; background: #f8f9ff; }
+        .upload-icon { font-size: 1.5rem; color: #ccc; margin-bottom: 4px; }
+        .upload-text { color: #666; font-size: 0.75rem; }
+        .upload-input { display: none; }
+        .option-group { margin-top: 8px; }
+        .option-label { display: flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.85rem; color: #333; }
+        .option-label input[type="checkbox"] { width: 16px; height: 16px; cursor: pointer; }
+        .btn { width: 100%; padding: 8px 16px; border: none; border-radius: 8px; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; margin-top: 6px; }
+        .btn-download { background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); color: white; }
+        .btn-download:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(56, 239, 125, 0.4); }
+        .btn-download:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+        .btn-delete { background: linear-gradient(135deg, #eb3349 0%, #f45c43 100%); color: white; margin-top: 5px; }
+        .btn-delete:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(235, 51, 73, 0.4); }
+        .btn-delete:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+        .result-area { background: white; border-radius: 12px; padding: 15px; box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
+        .result-title { font-size: 0.95rem; color: #333; margin-bottom: 10px; padding-bottom: 6px; border-bottom: 2px solid #667eea; text-align: center; }
+        .canvas-container { width: 300px; height: 300px; position: relative; background: repeating-conic-gradient(#f0f0f0 0% 25%, #fff 0% 50%) 50% / 20px 20px; border-radius: 10px; overflow: hidden; border: 2px solid #e0e0e0; }
+        .draggable-item { position: absolute; cursor: move; user-select: none; border: 2px solid transparent; border-radius: 4px; transition: border-color 0.2s; z-index: 1; }
+        .draggable-item.selected { border-color: #667eea; }
+        .draggable-item.circle-mode { border-radius: 50%; overflow: hidden; }
+        .draggable-item img { width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+        .draggable-item.circle-mode img { object-fit: cover; }
+        .resize-handle { position: absolute; width: 14px; height: 14px; background: #667eea; border: 2px solid white; border-radius: 50%; cursor: nwse-resize; z-index: 10; opacity: 0; transition: opacity 0.2s; }
+        .draggable-item.selected .resize-handle { opacity: 1; }
+        .resize-handle.top-left { top: -7px; left: -7px; cursor: nwse-resize; }
+        .resize-handle.top-right { top: -7px; right: -7px; cursor: nesw-resize; }
+        .resize-handle.bottom-left { bottom: -7px; left: -7px; cursor: nesw-resize; }
+        .resize-handle.bottom-right { bottom: -7px; right: -7px; cursor: nwse-resize; }
+        .layer-info { position: absolute; top: -22px; left: 0; background: rgba(102, 126, 234, 0.9); color: white; padding: 2px 8px; border-radius: 4px; font-size: 11px; white-space: nowrap; opacity: 0; transition: opacity 0.2s; }
+        .draggable-item.selected .layer-info { opacity: 1; }
+        .progress-container { display: none; margin-top: 10px; }
+        .progress-container.active { display: block; }
+        .progress-bar { width: 100%; height: 6px; background: #e0e0e0; border-radius: 4px; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); width: 0%; transition: width 0.3s ease; }
+        .progress-text { text-align: center; color: #666; font-size: 0.8rem; margin-top: 5px; }
+        .tips { background: #fff3cd; border-radius: 6px; padding: 10px; margin-top: 10px; font-size: 0.8rem; color: #856404; }
+        .tips-title { font-weight: 600; margin-bottom: 4px; }
+        .loading-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center; }
+        .loading-overlay.active { display: flex; }
+        .loading-spinner { background: white; padding: 25px 40px; border-radius: 12px; text-align: center; }
+        .spinner { width: 40px; height: 40px; border: 4px solid #f3f3f3; border-top: 4px solid #667eea; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 10px; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .item-counter { font-size: 0.75rem; color: #888; margin-top: 5px; }
+        .context-menu { position: fixed; background: white; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); padding: 8px 0; min-width: 150px; z-index: 1000; display: none; }
+        .context-menu.show { display: block; }
+        .context-menu-item { padding: 8px 16px; cursor: pointer; font-size: 0.9rem; color: #333; display: flex; align-items: center; gap: 8px; }
+        .context-menu-item:hover { background: #f0f3ff; }
+        .context-menu-item.danger { color: #eb3349; }
+        .context-menu-divider { height: 1px; background: #eee; margin: 4px 0; }
+    </style>
+<!-- Build Date: 2026-04-23 10:09:33 -->
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 GIF头像挂件编辑器</h1>
+        <div class="main-content">
+            <div class="control-panel">
+                <div class="card">
+                    <div class="card-title">👤 主人物头像</div>
+                    <div class="upload-area" id="avatarUpload">
+                        <div class="upload-icon">📤</div>
+                        <div class="upload-text">点击上传主人物<br>支持 PNG、JPG、GIF</div>
+                        <input type="file" class="upload-input" id="avatarInput" accept="image/*,.gif" multiple>
+                    </div>
+                    <div class="item-counter" id="avatarCounter">已上传: 0 个</div>
+                    <div class="option-group">
+                        <label class="option-label">
+                            <input type="checkbox" id="circleMode">
+                            设置为圆形头像
+                        </label>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-title">🖼️ 头像挂件/边框</div>
+                    <div class="upload-area" id="frameUpload">
+                        <div class="upload-icon">📤</div>
+                        <div class="upload-text">点击上传挂件<br>支持 PNG、JPG、GIF</div>
+                        <input type="file" class="upload-input" id="frameInput" accept="image/*,.gif" multiple>
+                    </div>
+                    <div class="item-counter" id="frameCounter">已上传: 0 个</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">⚙️ 操作</div>
+                    <button class="btn btn-delete" id="deleteBtn" disabled>🗑️ 删除选中项</button>
+                    <button class="btn btn-download" id="downloadBtn" disabled>📥 下载 GIF</button>
+                    <div class="progress-container" id="progressContainer">
+                        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+                        <div class="progress-text" id="progressText">正在生成 GIF...</div>
+                    </div>
+                    <div class="tips">
+                        <div class="tips-title">💡 使用提示：</div>
+                        <ul style="margin-left: 12px; margin-top: 3px; font-size: 0.7rem;">
+                            <li>拖拽调整位置</li>
+                            <li>拖动角落调整大小</li>
+                            <li>方向键微调位置</li>
+                            <li>+/- 键或滚轮缩放</li>
+                            <li>右键菜单更多操作</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="result-area">
+                <div class="result-title">✨ 合成区域 (300×300)</div>
+                <div class="canvas-container" id="canvasContainer"></div>
+            </div>
+        </div>
+    </div>
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"><div class="spinner"></div><div>正在处理中...</div></div>
+    </div>
+    
+    <div class="context-menu" id="contextMenu">
+        <div class="context-menu-item" data-action="top">⬆️ 置为顶层</div>
+        <div class="context-menu-item" data-action="bottom">⬇️ 置为底层</div>
+        <div class="context-menu-item" data-action="up">🔼 上移一层</div>
+        <div class="context-menu-item" data-action="down">🔽 下移一层</div>
+        <div class="context-menu-divider"></div>
+        <div class="context-menu-item danger" data-action="delete">🗑️ 删除</div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.js"></script>
+    <script src="https://unpkg.com/omggif@1.0.10/omggif.js"></script>
+    <script>
+        const avatarInput = document.getElementById('avatarInput');
+        const frameInput = document.getElementById('frameInput');
+        const avatarUpload = document.getElementById('avatarUpload');
+        const frameUpload = document.getElementById('frameUpload');
+        const canvasContainer = document.getElementById('canvasContainer');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const deleteBtn = document.getElementById('deleteBtn');
+        const circleMode = document.getElementById('circleMode');
+        const progressContainer = document.getElementById('progressContainer');
+        const progressFill = document.getElementById('progressFill');
+        const progressText = document.getElementById('progressText');
+        const loadingOverlay = document.getElementById('loadingOverlay');
+        const avatarCounter = document.getElementById('avatarCounter');
+        const frameCounter = document.getElementById('frameCounter');
+
+        let items = [];
+        let selectedItem = null;
+        let itemIdCounter = 0;
+        let currentDrag = null;
+        let currentResize = null;
+        let startX = 0, startY = 0, startWidth = 0, startHeight = 0, startLeft = 0, startTop = 0;
+        let maxZIndex = 1;
+
+        const contextMenu = document.getElementById('contextMenu');
+        let contextMenuItem = null;
+
+        function hideContextMenu() {
+            contextMenu.classList.remove('show');
+        }
+
+        document.addEventListener('click', (e) => {
+            if (!contextMenu.contains(e.target)) {
+                hideContextMenu();
+                contextMenuItem = null;
+            }
+        });
+
+        contextMenu.addEventListener('click', (e) => {
+            e.stopPropagation();
+            e.preventDefault();
+            
+            const menuItem = e.target.closest('.context-menu-item');
+            if (!menuItem) return;
+            
+            const action = menuItem.dataset.action;
+            const item = contextMenuItem;
+            
+            if (!item || !item.element || !action) return;
+            if (!document.body.contains(item.element)) return;
+            
+            const el = item.element;
+            const currentZ = parseInt(el.style.zIndex) || 1;
+            
+            switch (action) {
+                case 'delete':
+                    if (item.animationInterval) clearInterval(item.animationInterval);
+                    el.remove();
+                    items = items.filter(i => i.id !== item.id);
+                    if (selectedItem === item) selectItem(null);
+                    updateCounters();
+                    break;
+                case 'top':
+                    maxZIndex++;
+                    el.style.zIndex = maxZIndex;
+                    break;
+                case 'bottom': {
+                    const allZ = items.map(i => parseInt(i.element.style.zIndex) || 1);
+                    const minZ = Math.min(...allZ);
+                    if (minZ <= 1) {
+                        items.forEach(it => {
+                            it.element.style.zIndex = (parseInt(it.element.style.zIndex) || 1) + 1;
+                        });
+                        el.style.zIndex = 1;
+                        maxZIndex++;
+                    } else {
+                        el.style.zIndex = minZ - 1;
+                    }
+                    break;
+                }
+                case 'up':
+                    el.style.zIndex = currentZ + 1;
+                    if (currentZ + 1 > maxZIndex) maxZIndex = currentZ + 1;
+                    break;
+                case 'down': {
+                    if (currentZ <= 1) {
+                        items.forEach(it => {
+                            it.element.style.zIndex = (parseInt(it.element.style.zIndex) || 1) + 1;
+                        });
+                        el.style.zIndex = 1;
+                        maxZIndex++;
+                    } else {
+                        el.style.zIndex = currentZ - 1;
+                    }
+                    break;
+                }
+            }
+            hideContextMenu();
+            contextMenuItem = null;
+        });
+
+        function setupUploadArea(uploadArea, input) {
+            uploadArea.addEventListener('click', () => input.click());
+        }
+        setupUploadArea(avatarUpload, avatarInput);
+        setupUploadArea(frameUpload, frameInput);
+
+        async function parseGif(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = async (e) => {
+                    try {
+                        const arrayBuffer = e.target.result;
+                        const data = new Uint8Array(arrayBuffer);
+                        const gr = new GifReader(data);
+                        const width = gr.width;
+                        const height = gr.height;
+                        const numFrames = gr.numFrames();
+                        
+                        if (numFrames <= 1) {
+                            const img = new Image();
+                            img.onload = () => resolve({ isGif: false, img, width, height, frames: [img], delays: [100] });
+                            img.onerror = reject;
+                            img.src = URL.createObjectURL(new Blob([data], { type: 'image/gif' }));
+                            return;
+                        }
+                        
+                        const frames = [];
+                        const delays = [];
+                        const tempCanvas = document.createElement('canvas');
+                        tempCanvas.width = width;
+                        tempCanvas.height = height;
+                        const tempCtx = tempCanvas.getContext('2d');
+                        let prevImageData = null;
+                        
+                        for (let i = 0; i < numFrames; i++) {
+                            const frameInfo = gr.frameInfo(i);
+                            const imageData = new Uint8Array(width * height * 4);
+                            gr.decodeAndBlitFrameRGBA(i, imageData);
+                            
+                            const canvas = document.createElement('canvas');
+                            canvas.width = width;
+                            canvas.height = height;
+                            const ctx = canvas.getContext('2d');
+                            
+                            if (frameInfo.disposal === 2 && prevImageData) {
+                                ctx.putImageData(prevImageData, 0, 0);
+                            } else if (prevImageData && i > 0) {
+                                ctx.drawImage(frames[i - 1], 0, 0);
+                            }
+                            
+                            const imgData = new ImageData(new Uint8ClampedArray(imageData), width, height);
+                            ctx.putImageData(imgData, 0, 0);
+                            prevImageData = ctx.getImageData(0, 0, width, height);
+                            
+                            frames.push(canvas);
+                            delays.push(frameInfo.delay * 10);
+                        }
+                        
+                        console.log('Parsed GIF:', numFrames, 'frames');
+                        resolve({ isGif: true, frames, delays, width, height });
+                    } catch (err) {
+                        console.error('GIF parse error:', err);
+                        const img = new Image();
+                        img.onload = () => resolve({ isGif: false, img, width: img.width, height: img.height, frames: [img], delays: [100] });
+                        img.onerror = reject;
+                        img.src = URL.createObjectURL(file);
+                    }
+                };
+                reader.readAsArrayBuffer(file);
+            });
+        }
+
+        function updateCounters() {
+            const avatarCount = items.filter(i => i.type === 'avatar').length;
+            const frameCount = items.filter(i => i.type === 'frame').length;
+            avatarCounter.textContent = `已上传: ${avatarCount} 个`;
+            frameCounter.textContent = `已上传: ${frameCount} 个`;
+            downloadBtn.disabled = items.length === 0;
+        }
+
+        function selectItem(item) {
+            if (selectedItem) selectedItem.element.classList.remove('selected');
+            selectedItem = item;
+            if (item) {
+                item.element.classList.add('selected');
+                deleteBtn.disabled = false;
+            } else {
+                deleteBtn.disabled = true;
+            }
+        }
+
+        canvasContainer.addEventListener('click', (e) => {
+            if (e.target === canvasContainer) selectItem(null);
+        });
+
+        async function handleImageUpload(input, type) {
+            const files = input.files;
+            if (!files || files.length === 0) return;
+            loadingOverlay.classList.add('active');
+            
+            for (const file of files) {
+                try {
+                    const imgData = await parseGif(file);
+                    createDraggableItem(imgData, type);
+                } catch (err) {
+                    console.error('Error loading image:', err);
+                }
+            }
+            
+            loadingOverlay.classList.remove('active');
+            input.value = '';
+            updateCounters();
+        }
+
+        function createDraggableItem(imgData, type) {
+            const containerRect = canvasContainer.getBoundingClientRect();
+            const containerSize = Math.min(containerRect.width, containerRect.height);
+            const scale = Math.min(containerSize * 0.8 / imgData.width, containerSize * 0.8 / imgData.height);
+            const displayWidth = imgData.width * scale;
+            const displayHeight = imgData.height * scale;
+            
+            const item = document.createElement('div');
+            item.className = 'draggable-item';
+            if (type === 'avatar' && circleMode.checked) item.classList.add('circle-mode');
+            
+            const layerInfo = document.createElement('div');
+            layerInfo.className = 'layer-info';
+            layerInfo.textContent = type === 'avatar' ? '主人物' : '挂件';
+            item.appendChild(layerInfo);
+            
+            const img = document.createElement('img');
+            img.src = imgData.isGif ? imgData.frames[0].toDataURL() : imgData.img.src;
+            item.appendChild(img);
+            
+            ['top-left', 'top-right', 'bottom-left', 'bottom-right'].forEach(pos => {
+                const handle = document.createElement('div');
+                handle.className = `resize-handle ${pos}`;
+                handle.dataset.handle = pos;
+                item.appendChild(handle);
+            });
+            
+            item.style.width = displayWidth + 'px';
+            item.style.height = displayHeight + 'px';
+            item.style.left = (containerRect.width - displayWidth) / 2 + 'px';
+            item.style.top = (containerRect.height - displayHeight) / 2 + 'px';
+            maxZIndex++;
+            item.style.zIndex = maxZIndex;
+            
+            canvasContainer.appendChild(item);
+            
+            const itemData = { id: itemIdCounter++, element: item, type, imgData, currentFrame: 0 };
+            items.push(itemData);
+            
+            if (imgData.isGif && imgData.frames.length > 1) {
+                itemData.animationInterval = setInterval(() => {
+                    itemData.currentFrame = (itemData.currentFrame + 1) % imgData.frames.length;
+                    img.src = imgData.frames[itemData.currentFrame].toDataURL();
+                }, imgData.delays[itemData.currentFrame] || 100);
+            }
+            
+            item.addEventListener('mousedown', (e) => {
+                e.stopPropagation();
+                selectItem(itemData);
+                handleMouseDown(e, item);
+            });
+            
+            item.addEventListener('touchstart', (e) => {
+                e.stopPropagation();
+                selectItem(itemData);
+                const touch = e.touches[0];
+                handleMouseDown({ clientX: touch.clientX, clientY: touch.clientY, target: e.target, preventDefault: () => e.preventDefault() }, item);
+            });
+            
+            item.addEventListener('contextmenu', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                selectItem(itemData);
+                contextMenuItem = itemData;
+                contextMenu.style.left = e.clientX + 'px';
+                contextMenu.style.top = e.clientY + 'px';
+                contextMenu.classList.add('show');
+            });
+            
+            selectItem(itemData);
+        }
+
+        avatarInput.addEventListener('change', () => handleImageUpload(avatarInput, 'avatar'));
+        frameInput.addEventListener('change', () => handleImageUpload(frameInput, 'frame'));
+
+        circleMode.addEventListener('change', () => {
+            items.filter(i => i.type === 'avatar').forEach(item => {
+                if (circleMode.checked) item.element.classList.add('circle-mode');
+                else item.element.classList.remove('circle-mode');
+            });
+        });
+
+        deleteBtn.addEventListener('click', () => {
+            if (selectedItem) {
+                if (selectedItem.animationInterval) {
+                    clearInterval(selectedItem.animationInterval);
+                }
+                selectedItem.element.remove();
+                items = items.filter(i => i.id !== selectedItem.id);
+                selectItem(null);
+                updateCounters();
+            }
+        });
+
+        function handleMouseDown(e, item) {
+            if (e.target.classList.contains('resize-handle')) {
+                currentResize = { item, handle: e.target.dataset.handle };
+                const rect = item.getBoundingClientRect();
+                startWidth = rect.width;
+                startHeight = rect.height;
+                startLeft = parseFloat(item.style.left);
+                startTop = parseFloat(item.style.top);
+            } else {
+                currentDrag = item;
+                const rect = item.getBoundingClientRect();
+                startX = e.clientX - rect.left;
+                startY = e.clientY - rect.top;
+            }
+            e.preventDefault();
+        }
+
+        document.addEventListener('mousemove', (e) => {
+            const containerRect = canvasContainer.getBoundingClientRect();
+            if (currentDrag) {
+                currentDrag.style.left = (e.clientX - containerRect.left - startX) + 'px';
+                currentDrag.style.top = (e.clientY - containerRect.top - startY) + 'px';
+            }
+            if (currentResize) {
+                const item = currentResize.item;
+                const aspectRatio = startWidth / startHeight;
+                let newWidth, newHeight, newLeft = startLeft, newTop = startTop;
+                
+                if (currentResize.handle === 'bottom-right') {
+                    newWidth = e.clientX - containerRect.left - startLeft;
+                    newHeight = newWidth / aspectRatio;
+                } else if (currentResize.handle === 'bottom-left') {
+                    newWidth = startLeft + startWidth - (e.clientX - containerRect.left);
+                    newHeight = newWidth / aspectRatio;
+                    newLeft = e.clientX - containerRect.left;
+                } else if (currentResize.handle === 'top-right') {
+                    newWidth = e.clientX - containerRect.left - startLeft;
+                    newHeight = newWidth / aspectRatio;
+                    newTop = startTop + startHeight - newHeight;
+                } else if (currentResize.handle === 'top-left') {
+                    newWidth = startLeft + startWidth - (e.clientX - containerRect.left);
+                    newHeight = newWidth / aspectRatio;
+                    newLeft = e.clientX - containerRect.left;
+                    newTop = startTop + startHeight - newHeight;
+                }
+                
+                if (newWidth > 30 && newHeight > 30) {
+                    item.style.width = newWidth + 'px';
+                    item.style.height = newHeight + 'px';
+                    item.style.left = newLeft + 'px';
+                    item.style.top = newTop + 'px';
+                }
+            }
+        });
+
+        document.addEventListener('mouseup', () => { currentDrag = null; currentResize = null; });
+
+        document.addEventListener('touchmove', (e) => {
+            if (currentDrag || currentResize) {
+                const touch = e.touches[0];
+                const containerRect = canvasContainer.getBoundingClientRect();
+                if (currentDrag) {
+                    currentDrag.style.left = (touch.clientX - containerRect.left - startX) + 'px';
+                    currentDrag.style.top = (touch.clientY - containerRect.top - startY) + 'px';
+                }
+            }
+        });
+
+        document.addEventListener('touchend', () => { currentDrag = null; currentResize = null; });
+
+        async function generateGif() {
+            if (items.length === 0) { alert('请先上传图片'); return; }
+            
+            progressContainer.classList.add('active');
+            progressFill.style.width = '0%';
+            progressText.textContent = '正在准备...';
+            await new Promise(r => setTimeout(r, 50));
+            
+            const containerRect = canvasContainer.getBoundingClientRect();
+            const size = Math.min(800, Math.max(containerRect.width, containerRect.height));
+            const scale = size / containerRect.width;
+            
+            const tempCanvas = document.createElement('canvas');
+            tempCanvas.width = size;
+            tempCanvas.height = size;
+            const tempCtx = tempCanvas.getContext('2d');
+            
+            const workerScript = `// gif.worker.js 0.2.0 - https://github.com/jnordberg/gif.js
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){var NeuQuant=require("./TypedNeuQuant.js");var LZWEncoder=require("./LZWEncoder.js");function ByteArray(){this.page=-1;this.pages=[];this.newPage()}ByteArray.pageSize=4096;ByteArray.charMap={};for(var i=0;i<256;i++)ByteArray.charMap[i]=String.fromCharCode(i);ByteArray.prototype.newPage=function(){this.pages[++this.page]=new Uint8Array(ByteArray.pageSize);this.cursor=0};ByteArray.prototype.getData=function(){var rv="";for(var p=0;p<this.pages.length;p++){for(var i=0;i<ByteArray.pageSize;i++){rv+=ByteArray.charMap[this.pages[p][i]]}}return rv};ByteArray.prototype.writeByte=function(val){if(this.cursor>=ByteArray.pageSize)this.newPage();this.pages[this.page][this.cursor++]=val};ByteArray.prototype.writeUTFBytes=function(string){for(var l=string.length,i=0;i<l;i++)this.writeByte(string.charCodeAt(i))};ByteArray.prototype.writeBytes=function(array,offset,length){for(var l=length||array.length,i=offset||0;i<l;i++)this.writeByte(array[i])};function GIFEncoder(width,height){this.width=~~width;this.height=~~height;this.transparent=null;this.transIndex=0;this.repeat=-1;this.delay=0;this.image=null;this.pixels=null;this.indexedPixels=null;this.colorDepth=null;this.colorTab=null;this.neuQuant=null;this.usedEntry=new Array;this.palSize=7;this.dispose=-1;this.firstFrame=true;this.sample=10;this.dither=false;this.globalPalette=false;this.out=new ByteArray}GIFEncoder.prototype.setDelay=function(milliseconds){this.delay=Math.round(milliseconds/10)};GIFEncoder.prototype.setFrameRate=function(fps){this.delay=Math.round(100/fps)};GIFEncoder.prototype.setDispose=function(disposalCode){if(disposalCode>=0)this.dispose=disposalCode};GIFEncoder.prototype.setRepeat=function(repeat){this.repeat=repeat};GIFEncoder.prototype.setTransparent=function(color){this.transparent=color};GIFEncoder.prototype.addFrame=function(imageData){this.image=imageData;this.colorTab=this.globalPalette&&this.globalPalette.slice?this.globalPalette:null;this.getImagePixels();this.analyzePixels();if(this.globalPalette===true)this.globalPalette=this.colorTab;if(this.firstFrame){this.writeLSD();this.writePalette();if(this.repeat>=0){this.writeNetscapeExt()}}this.writeGraphicCtrlExt();this.writeImageDesc();if(!this.firstFrame&&!this.globalPalette)this.writePalette();this.writePixels();this.firstFrame=false};GIFEncoder.prototype.finish=function(){this.out.writeByte(59)};GIFEncoder.prototype.setQuality=function(quality){if(quality<1)quality=1;this.sample=quality};GIFEncoder.prototype.setDither=function(dither){if(dither===true)dither="FloydSteinberg";this.dither=dither};GIFEncoder.prototype.setGlobalPalette=function(palette){this.globalPalette=palette};GIFEncoder.prototype.getGlobalPalette=function(){return this.globalPalette&&this.globalPalette.slice&&this.globalPalette.slice(0)||this.globalPalette};GIFEncoder.prototype.writeHeader=function(){this.out.writeUTFBytes("GIF89a")};GIFEncoder.prototype.analyzePixels=function(){if(!this.colorTab){this.neuQuant=new NeuQuant(this.pixels,this.sample);this.neuQuant.buildColormap();this.colorTab=this.neuQuant.getColormap()}if(this.dither){this.ditherPixels(this.dither.replace("-serpentine",""),this.dither.match(/-serpentine/)!==null)}else{this.indexPixels()}this.pixels=null;this.colorDepth=8;this.palSize=7;if(this.transparent!==null){this.transIndex=this.findClosest(this.transparent,true)}};GIFEncoder.prototype.indexPixels=function(imgq){var nPix=this.pixels.length/3;this.indexedPixels=new Uint8Array(nPix);var k=0;for(var j=0;j<nPix;j++){var index=this.findClosestRGB(this.pixels[k++]&255,this.pixels[k++]&255,this.pixels[k++]&255);this.usedEntry[index]=true;this.indexedPixels[j]=index}};GIFEncoder.prototype.ditherPixels=function(kernel,serpentine){var kernels={FalseFloydSteinberg:[[3/8,1,0],[3/8,0,1],[2/8,1,1]],FloydSteinberg:[[7/16,1,0],[3/16,-1,1],[5/16,0,1],[1/16,1,1]],Stucki:[[8/42,1,0],[4/42,2,0],[2/42,-2,1],[4/42,-1,1],[8/42,0,1],[4/42,1,1],[2/42,2,1],[1/42,-2,2],[2/42,-1,2],[4/42,0,2],[2/42,1,2],[1/42,2,2]],Atkinson:[[1/8,1,0],[1/8,2,0],[1/8,-1,1],[1/8,0,1],[1/8,1,1],[1/8,0,2]]};if(!kernel||!kernels[kernel]){throw"Unknown dithering kernel: "+kernel}var ds=kernels[kernel];var index=0,height=this.height,width=this.width,data=this.pixels;var direction=serpentine?-1:1;this.indexedPixels=new Uint8Array(this.pixels.length/3);for(var y=0;y<height;y++){if(serpentine)direction=direction*-1;for(var x=direction==1?0:width-1,xend=direction==1?width:0;x!==xend;x+=direction){index=y*width+x;var idx=index*3;var r1=data[idx];var g1=data[idx+1];var b1=data[idx+2];idx=this.findClosestRGB(r1,g1,b1);this.usedEntry[idx]=true;this.indexedPixels[index]=idx;idx*=3;var r2=this.colorTab[idx];var g2=this.colorTab[idx+1];var b2=this.colorTab[idx+2];var er=r1-r2;var eg=g1-g2;var eb=b1-b2;for(var i=direction==1?0:ds.length-1,end=direction==1?ds.length:0;i!==end;i+=direction){var x1=ds[i][1];var y1=ds[i][2];if(x1+x>=0&&x1+x<width&&y1+y>=0&&y1+y<height){var d=ds[i][0];idx=index+x1+y1*width;idx*=3;data[idx]=Math.max(0,Math.min(255,data[idx]+er*d));data[idx+1]=Math.max(0,Math.min(255,data[idx+1]+eg*d));data[idx+2]=Math.max(0,Math.min(255,data[idx+2]+eb*d))}}}}};GIFEncoder.prototype.findClosest=function(c,used){return this.findClosestRGB((c&16711680)>>16,(c&65280)>>8,c&255,used)};GIFEncoder.prototype.findClosestRGB=function(r,g,b,used){if(this.colorTab===null)return-1;if(this.neuQuant&&!used){return this.neuQuant.lookupRGB(r,g,b)}var c=b|g<<8|r<<16;var minpos=0;var dmin=256*256*256;var len=this.colorTab.length;for(var i=0,index=0;i<len;index++){var dr=r-(this.colorTab[i++]&255);var dg=g-(this.colorTab[i++]&255);var db=b-(this.colorTab[i++]&255);var d=dr*dr+dg*dg+db*db;if((!used||this.usedEntry[index])&&d<dmin){dmin=d;minpos=index}}return minpos};GIFEncoder.prototype.getImagePixels=function(){var w=this.width;var h=this.height;this.pixels=new Uint8Array(w*h*3);var data=this.image;var srcPos=0;var count=0;for(var i=0;i<h;i++){for(var j=0;j<w;j++){this.pixels[count++]=data[srcPos++];this.pixels[count++]=data[srcPos++];this.pixels[count++]=data[srcPos++];srcPos++}}};GIFEncoder.prototype.writeGraphicCtrlExt=function(){this.out.writeByte(33);this.out.writeByte(249);this.out.writeByte(4);var transp,disp;if(this.transparent===null){transp=0;disp=0}else{transp=1;disp=2}if(this.dispose>=0){disp=dispose&7}disp<<=2;this.out.writeByte(0|disp|0|transp);this.writeShort(this.delay);this.out.writeByte(this.transIndex);this.out.writeByte(0)};GIFEncoder.prototype.writeImageDesc=function(){this.out.writeByte(44);this.writeShort(0);this.writeShort(0);this.writeShort(this.width);this.writeShort(this.height);if(this.firstFrame||this.globalPalette){this.out.writeByte(0)}else{this.out.writeByte(128|0|0|0|this.palSize)}};GIFEncoder.prototype.writeLSD=function(){this.writeShort(this.width);this.writeShort(this.height);this.out.writeByte(128|112|0|this.palSize);this.out.writeByte(0);this.out.writeByte(0)};GIFEncoder.prototype.writeNetscapeExt=function(){this.out.writeByte(33);this.out.writeByte(255);this.out.writeByte(11);this.out.writeUTFBytes("NETSCAPE2.0");this.out.writeByte(3);this.out.writeByte(1);this.writeShort(this.repeat);this.out.writeByte(0)};GIFEncoder.prototype.writePalette=function(){this.out.writeBytes(this.colorTab);var n=3*256-this.colorTab.length;for(var i=0;i<n;i++)this.out.writeByte(0)};GIFEncoder.prototype.writeShort=function(pValue){this.out.writeByte(pValue&255);this.out.writeByte(pValue>>8&255)};GIFEncoder.prototype.writePixels=function(){var enc=new LZWEncoder(this.width,this.height,this.indexedPixels,this.colorDepth);enc.encode(this.out)};GIFEncoder.prototype.stream=function(){return this.out};module.exports=GIFEncoder},{"./LZWEncoder.js":2,"./TypedNeuQuant.js":3}],2:[function(require,module,exports){var EOF=-1;var BITS=12;var HSIZE=5003;var masks=[0,1,3,7,15,31,63,127,255,511,1023,2047,4095,8191,16383,32767,65535];function LZWEncoder(width,height,pixels,colorDepth){var initCodeSize=Math.max(2,colorDepth);var accum=new Uint8Array(256);var htab=new Int32Array(HSIZE);var codetab=new Int32Array(HSIZE);var cur_accum,cur_bits=0;var a_count;var free_ent=0;var maxcode;var clear_flg=false;var g_init_bits,ClearCode,EOFCode;function char_out(c,outs){accum[a_count++]=c;if(a_count>=254)flush_char(outs)}function cl_block(outs){cl_hash(HSIZE);free_ent=ClearCode+2;clear_flg=true;output(ClearCode,outs)}function cl_hash(hsize){for(var i=0;i<hsize;++i)htab[i]=-1}function compress(init_bits,outs){var fcode,c,i,ent,disp,hsize_reg,hshift;g_init_bits=init_bits;clear_flg=false;n_bits=g_init_bits;maxcode=MAXCODE(n_bits);ClearCode=1<<init_bits-1;EOFCode=ClearCode+1;free_ent=ClearCode+2;a_count=0;ent=nextPixel();hshift=0;for(fcode=HSIZE;fcode<65536;fcode*=2)++hshift;hshift=8-hshift;hsize_reg=HSIZE;cl_hash(hsize_reg);output(ClearCode,outs);outer_loop:while((c=nextPixel())!=EOF){fcode=(c<<BITS)+ent;i=c<<hshift^ent;if(htab[i]===fcode){ent=codetab[i];continue}else if(htab[i]>=0){disp=hsize_reg-i;if(i===0)disp=1;do{if((i-=disp)<0)i+=hsize_reg;if(htab[i]===fcode){ent=codetab[i];continue outer_loop}}while(htab[i]>=0)}output(ent,outs);ent=c;if(free_ent<1<<BITS){codetab[i]=free_ent++;htab[i]=fcode}else{cl_block(outs)}}output(ent,outs);output(EOFCode,outs)}function encode(outs){outs.writeByte(initCodeSize);remaining=width*height;curPixel=0;compress(initCodeSize+1,outs);outs.writeByte(0)}function flush_char(outs){if(a_count>0){outs.writeByte(a_count);outs.writeBytes(accum,0,a_count);a_count=0}}function MAXCODE(n_bits){return(1<<n_bits)-1}function nextPixel(){if(remaining===0)return EOF;--remaining;var pix=pixels[curPixel++];return pix&255}function output(code,outs){cur_accum&=masks[cur_bits];if(cur_bits>0)cur_accum|=code<<cur_bits;else cur_accum=code;cur_bits+=n_bits;while(cur_bits>=8){char_out(cur_accum&255,outs);cur_accum>>=8;cur_bits-=8}if(free_ent>maxcode||clear_flg){if(clear_flg){maxcode=MAXCODE(n_bits=g_init_bits);clear_flg=false}else{++n_bits;if(n_bits==BITS)maxcode=1<<BITS;else maxcode=MAXCODE(n_bits)}}if(code==EOFCode){while(cur_bits>0){char_out(cur_accum&255,outs);cur_accum>>=8;cur_bits-=8}flush_char(outs)}}this.encode=encode}module.exports=LZWEncoder},{}],3:[function(require,module,exports){var ncycles=100;var netsize=256;var maxnetpos=netsize-1;var netbiasshift=4;var intbiasshift=16;var intbias=1<<intbiasshift;var gammashift=10;var gamma=1<<gammashift;var betashift=10;var beta=intbias>>betashift;var betagamma=intbias<<gammashift-betashift;var initrad=netsize>>3;var radiusbiasshift=6;var radiusbias=1<<radiusbiasshift;var initradius=initrad*radiusbias;var radiusdec=30;var alphabiasshift=10;var initalpha=1<<alphabiasshift;var alphadec;var radbiasshift=8;var radbias=1<<radbiasshift;var alpharadbshift=alphabiasshift+radbiasshift;var alpharadbias=1<<alpharadbshift;var prime1=499;var prime2=491;var prime3=487;var prime4=503;var minpicturebytes=3*prime4;function NeuQuant(pixels,samplefac){var network;var netindex;var bias;var freq;var radpower;function init(){network=[];netindex=new Int32Array(256);bias=new Int32Array(netsize);freq=new Int32Array(netsize);radpower=new Int32Array(netsize>>3);var i,v;for(i=0;i<netsize;i++){v=(i<<netbiasshift+8)/netsize;network[i]=new Float64Array([v,v,v,0]);freq[i]=intbias/netsize;bias[i]=0}}function unbiasnet(){for(var i=0;i<netsize;i++){network[i][0]>>=netbiasshift;network[i][1]>>=netbiasshift;network[i][2]>>=netbiasshift;network[i][3]=i}}function altersingle(alpha,i,b,g,r){network[i][0]-=alpha*(network[i][0]-b)/initalpha;network[i][1]-=alpha*(network[i][1]-g)/initalpha;network[i][2]-=alpha*(network[i][2]-r)/initalpha}function alterneigh(radius,i,b,g,r){var lo=Math.abs(i-radius);var hi=Math.min(i+radius,netsize);var j=i+1;var k=i-1;var m=1;var p,a;while(j<hi||k>lo){a=radpower[m++];if(j<hi){p=network[j++];p[0]-=a*(p[0]-b)/alpharadbias;p[1]-=a*(p[1]-g)/alpharadbias;p[2]-=a*(p[2]-r)/alpharadbias}if(k>lo){p=network[k--];p[0]-=a*(p[0]-b)/alpharadbias;p[1]-=a*(p[1]-g)/alpharadbias;p[2]-=a*(p[2]-r)/alpharadbias}}}function contest(b,g,r){var bestd=~(1<<31);var bestbiasd=bestd;var bestpos=-1;var bestbiaspos=bestpos;var i,n,dist,biasdist,betafreq;for(i=0;i<netsize;i++){n=network[i];dist=Math.abs(n[0]-b)+Math.abs(n[1]-g)+Math.abs(n[2]-r);if(dist<bestd){bestd=dist;bestpos=i}biasdist=dist-(bias[i]>>intbiasshift-netbiasshift);if(biasdist<bestbiasd){bestbiasd=biasdist;bestbiaspos=i}betafreq=freq[i]>>betashift;freq[i]-=betafreq;bias[i]+=betafreq<<gammashift}freq[bestpos]+=beta;bias[bestpos]-=betagamma;return bestbiaspos}function inxbuild(){var i,j,p,q,smallpos,smallval,previouscol=0,startpos=0;for(i=0;i<netsize;i++){p=network[i];smallpos=i;smallval=p[1];for(j=i+1;j<netsize;j++){q=network[j];if(q[1]<smallval){smallpos=j;smallval=q[1]}}q=network[smallpos];if(i!=smallpos){j=q[0];q[0]=p[0];p[0]=j;j=q[1];q[1]=p[1];p[1]=j;j=q[2];q[2]=p[2];p[2]=j;j=q[3];q[3]=p[3];p[3]=j}if(smallval!=previouscol){netindex[previouscol]=startpos+i>>1;for(j=previouscol+1;j<smallval;j++)netindex[j]=i;previouscol=smallval;startpos=i}}netindex[previouscol]=startpos+maxnetpos>>1;for(j=previouscol+1;j<256;j++)netindex[j]=maxnetpos}function inxsearch(b,g,r){var a,p,dist;var bestd=1e3;var best=-1;var i=netindex[g];var j=i-1;while(i<netsize||j>=0){if(i<netsize){p=network[i];dist=p[1]-g;if(dist>=bestd)i=netsize;else{i++;if(dist<0)dist=-dist;a=p[0]-b;if(a<0)a=-a;dist+=a;if(dist<bestd){a=p[2]-r;if(a<0)a=-a;dist+=a;if(dist<bestd){bestd=dist;best=p[3]}}}}if(j>=0){p=network[j];dist=g-p[1];if(dist>=bestd)j=-1;else{j--;if(dist<0)dist=-dist;a=p[0]-b;if(a<0)a=-a;dist+=a;if(dist<bestd){a=p[2]-r;if(a<0)a=-a;dist+=a;if(dist<bestd){bestd=dist;best=p[3]}}}}}return best}function learn(){var i;var lengthcount=pixels.length;var alphadec=30+(samplefac-1)/3;var samplepixels=lengthcount/(3*samplefac);var delta=~~(samplepixels/ncycles);var alpha=initalpha;var radius=initradius;var rad=radius>>radiusbiasshift;if(rad<=1)rad=0;for(i=0;i<rad;i++)radpower[i]=alpha*((rad*rad-i*i)*radbias/(rad*rad));var step;if(lengthcount<minpicturebytes){samplefac=1;step=3}else if(lengthcount%prime1!==0){step=3*prime1}else if(lengthcount%prime2!==0){step=3*prime2}else if(lengthcount%prime3!==0){step=3*prime3}else{step=3*prime4}var b,g,r,j;var pix=0;i=0;while(i<samplepixels){b=(pixels[pix]&255)<<netbiasshift;g=(pixels[pix+1]&255)<<netbiasshift;r=(pixels[pix+2]&255)<<netbiasshift;j=contest(b,g,r);altersingle(alpha,j,b,g,r);if(rad!==0)alterneigh(rad,j,b,g,r);pix+=step;if(pix>=lengthcount)pix-=lengthcount;i++;if(delta===0)delta=1;if(i%delta===0){alpha-=alpha/alphadec;radius-=radius/radiusdec;rad=radius>>radiusbiasshift;if(rad<=1)rad=0;for(j=0;j<rad;j++)radpower[j]=alpha*((rad*rad-j*j)*radbias/(rad*rad))}}}function buildColormap(){init();learn();unbiasnet();inxbuild()}this.buildColormap=buildColormap;function getColormap(){var map=[];var index=[];for(var i=0;i<netsize;i++)index[network[i][3]]=i;var k=0;for(var l=0;l<netsize;l++){var j=index[l];map[k++]=network[j][0];map[k++]=network[j][1];map[k++]=network[j][2]}return map}this.getColormap=getColormap;this.lookupRGB=inxsearch}module.exports=NeuQuant},{}],4:[function(require,module,exports){var GIFEncoder,renderFrame;GIFEncoder=require("./GIFEncoder.js");renderFrame=function(frame){var encoder,page,stream,transfer;encoder=new GIFEncoder(frame.width,frame.height);if(frame.index===0){encoder.writeHeader()}else{encoder.firstFrame=false}encoder.setTransparent(frame.transparent);encoder.setRepeat(frame.repeat);encoder.setDelay(frame.delay);encoder.setQuality(frame.quality);encoder.setDither(frame.dither);encoder.setGlobalPalette(frame.globalPalette);encoder.addFrame(frame.data);if(frame.last){encoder.finish()}if(frame.globalPalette===true){frame.globalPalette=encoder.getGlobalPalette()}stream=encoder.stream();frame.data=stream.pages;frame.cursor=stream.cursor;frame.pageSize=stream.constructor.pageSize;if(frame.canTransfer){transfer=function(){var i,len,ref,results;ref=frame.data;results=[];for(i=0,len=ref.length;i<len;i++){page=ref[i];results.push(page.buffer)}return results}();return self.postMessage(frame,transfer)}else{return self.postMessage(frame)}};self.onmessage=function(event){return renderFrame(event.data)}},{"./GIFEncoder.js":1}]},{},[4]);`;
+            
+            const workerBlob = new Blob([workerScript], { type: 'application/javascript' });
+            const workerUrl = URL.createObjectURL(workerBlob);
+            
+            const gif = new GIF({ workers: 2, quality: 10, width: size, height: size, workerScript: workerUrl, transparent: 0x00000000 });
+            
+            const sortedItems = [...items].sort((a, b) => {
+                const zA = parseInt(a.element.style.zIndex) || 1;
+                const zB = parseInt(b.element.style.zIndex) || 1;
+                return zA - zB;
+            });
+            
+            const itemsData = sortedItems.map(item => {
+                const el = item.element;
+                return {
+                    x: parseFloat(el.style.left) * scale,
+                    y: parseFloat(el.style.top) * scale,
+                    w: el.offsetWidth * scale,
+                    h: el.offsetHeight * scale,
+                    isCircle: el.classList.contains('circle-mode'),
+                    frames: item.imgData.frames,
+                    delays: item.imgData.delays || [100],
+                    frameIndex: 0,
+                    frameTime: 0
+                };
+            });
+            
+            const maxDuration = 5000;
+            const fps = 15;
+            const frameDelay = Math.floor(1000 / fps);
+            let totalFrames = 0;
+            let currentTime = 0;
+            
+            while (currentTime < maxDuration) {
+                tempCtx.clearRect(0, 0, size, size);
+                
+                for (const data of itemsData) {
+                    const frame = data.frames[data.frameIndex];
+                    
+                    if (data.isCircle) {
+                        tempCtx.save();
+                        tempCtx.beginPath();
+                        tempCtx.arc(data.x + data.w / 2, data.y + data.h / 2, Math.min(data.w, data.h) / 2, 0, Math.PI * 2);
+                        tempCtx.closePath();
+                        tempCtx.clip();
+                        tempCtx.drawImage(frame, data.x, data.y, data.w, data.h);
+                        tempCtx.restore();
+                    } else {
+                        tempCtx.drawImage(frame, data.x, data.y, data.w, data.h);
+                    }
+                    
+                    data.frameTime += frameDelay;
+                    const delay = data.delays[data.frameIndex] || 100;
+                    if (data.frameTime >= delay) {
+                        data.frameIndex = (data.frameIndex + 1) % data.frames.length;
+                        data.frameTime = 0;
+                    }
+                }
+                
+                gif.addFrame(tempCtx, { copy: true, delay: frameDelay });
+                totalFrames++;
+                currentTime += frameDelay;
+                
+                const progress = Math.floor((currentTime / maxDuration) * 50);
+                progressFill.style.width = progress + '%';
+                progressText.textContent = `正在生成帧 ${totalFrames}...`;
+                
+                if (totalFrames % 5 === 0) await new Promise(r => setTimeout(r, 0));
+            }
+            
+            progressText.textContent = '正在编码 GIF...';
+            
+            gif.on('progress', (p) => {
+                const progress = 50 + Math.floor(p * 50);
+                progressFill.style.width = progress + '%';
+            });
+            
+            gif.on('finished', (blob) => {
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'avatar-combo.gif';
+                a.click();
+                URL.revokeObjectURL(url);
+                progressContainer.classList.remove('active');
+            });
+            
+            gif.render();
+        }
+
+        downloadBtn.addEventListener('click', generateGif);
+
+        document.addEventListener('keydown', (e) => {
+            if (!selectedItem) return;
+            if (e.key === 'Delete' || e.key === 'Backspace') {
+                if (document.activeElement.tagName !== 'INPUT') deleteBtn.click();
+                return;
+            }
+            const el = selectedItem.element;
+            
+            if (e.key === '+' || e.key === '=') {
+                e.preventDefault();
+                scaleItem(el, 1.1);
+                return;
+            }
+            if (e.key === '-' || e.key === '_') {
+                e.preventDefault();
+                scaleItem(el, 0.9);
+                return;
+            }
+            
+            const step = e.shiftKey ? 10 : 1;
+            let left = parseFloat(el.style.left) || 0;
+            let top = parseFloat(el.style.top) || 0;
+            switch (e.key) {
+                case 'ArrowLeft': el.style.left = (left - step) + 'px'; e.preventDefault(); break;
+                case 'ArrowRight': el.style.left = (left + step) + 'px'; e.preventDefault(); break;
+                case 'ArrowUp': el.style.top = (top - step) + 'px'; e.preventDefault(); break;
+                case 'ArrowDown': el.style.top = (top + step) + 'px'; e.preventDefault(); break;
+            }
+        });
+
+        function scaleItem(el, factor) {
+            const currentWidth = el.offsetWidth;
+            const currentHeight = el.offsetHeight;
+            const currentLeft = parseFloat(el.style.left) || 0;
+            const currentTop = parseFloat(el.style.top) || 0;
+            
+            const newWidth = currentWidth * factor;
+            const newHeight = currentHeight * factor;
+            
+            if (newWidth < 20 || newHeight < 20) return;
+            if (newWidth > 600 || newHeight > 600) return;
+            
+            const centerX = currentLeft + currentWidth / 2;
+            const centerY = currentTop + currentHeight / 2;
+            
+            el.style.width = newWidth + 'px';
+            el.style.height = newHeight + 'px';
+            el.style.left = (centerX - newWidth / 2) + 'px';
+            el.style.top = (centerY - newHeight / 2) + 'px';
+        }
+
+        canvasContainer.addEventListener('wheel', (e) => {
+            if (!selectedItem) return;
+            e.preventDefault();
+            const factor = e.deltaY > 0 ? 0.95 : 1.05;
+            scaleItem(selectedItem.element, factor);
+        }, { passive: false });
+    </script>
+</body>
+</html>

@@ -1,0 +1,499 @@
+/* CWD 评论系统自定义样式 - Shadow DOM 环境 */
+
+/* 隐藏点赞区域 */
+/*.like-section,*/
+/*.like-wrapper,*/
+/*.like-container,*/
+/*.like-area,*/
+/*[class*="like"],*/
+/*[id*="like"] {*/
+/*  display: none !important;*/
+/*}*/
+
+/* 隐藏表单标签 */
+.cwd-form-label,
+.form-label,
+label {
+  display: none !important;
+}
+
+/* 隐藏错误提示框 */
+.cwd-error-inline,
+.cwd-error,
+.error-message,
+.error-container {
+  /*display: none !important;*/
+}
+
+/* 隐藏标题区域 */
+.cwd-comments-header,
+.cwd-form-title,
+.cwd-header,
+.comment-header,
+.form-title {
+  display: none !important;
+}
+
+/* 调整整体表单容器样式 */
+.cwd-comment-form,
+.comment-form,
+.form-container,
+.cwd-widget .cwd-form-wrapper {
+  background-color: #f5f7f9 !important;
+  border-radius: 8px !important;
+  margin-bottom: 1.5rem !important;
+}
+
+/* 暗黑模式下的表单容器 - Shadow DOM 内部 */
+[data-theme=dark] .cwd-comment-form,
+[data-theme=dark] .comment-form,
+[data-theme=dark] .form-container,
+[data-theme=dark] .cwd-form-wrapper {
+  background-color: #32363a !important;
+}
+
+/* 昵称、邮箱、网址输入框样式 - 改为下划线样式 */
+input[type="text"],
+input[type="email"],
+input[type="url"],
+.cwd-input,
+.form-input,
+.cwd-widget input {
+  border: none !important;
+  border-bottom: 1px solid #ddd !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  padding: 0.75rem 0 !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* 暗黑模式下的输入框 - Shadow DOM 内部 */
+[data-theme=dark] input[type="text"],
+[data-theme=dark] input[type="email"],
+[data-theme=dark] input[type="url"],
+[data-theme=dark] .cwd-input,
+[data-theme=dark] .form-input,
+[data-theme=dark] input {
+  border-bottom-color: #555 !important;
+  color: #ddd !important;
+}
+
+/* 输入框聚焦时的样式 */
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+.cwd-input:focus,
+.form-input:focus,
+.cwd-widget input:focus {
+  border-bottom-color: #3eaf7c !important;
+}
+
+/* 评论输入框样式 */
+textarea,
+.cwd-textarea,
+.form-textarea,
+.cwd-widget textarea {
+  border: none !important;
+  background: transparent !important;
+  padding: 1rem 0 !important;
+  resize: none !important;
+  border-radius: 0 !important;
+  min-height: 160px !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* 暗黑模式下的评论输入框 - Shadow DOM 内部 */
+[data-theme=dark] textarea,
+[data-theme=dark] .cwd-textarea,
+[data-theme=dark] .form-textarea {
+  color: #ddd !important;
+}
+
+/* 调整整体表单布局 - 三列网格 */
+.form-row,
+.input-row,
+.cwd-form-row,
+.cwd-widget .cwd-input-row {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 1rem !important;
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+  .form-row,
+  .input-row,
+  .cwd-form-row,
+  .cwd-widget .cwd-input-row {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* 按钮通用样式 - 更小更统一 */
+button,
+.btn,
+.cwd-btn,
+.cwd-widget button {
+  font-size: 0.8rem !important;
+  padding: 0.4rem 0.8rem !important;
+  border-radius: 4px !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  background-color: #fff !important;
+  color: #606266 !important;
+}
+
+button:hover,
+.btn:hover,
+.cwd-btn:hover,
+.cwd-widget button:hover {
+  color: #3eaf7c !important;
+  background-color: #fff !important;
+}
+
+/* 暗黑模式按钮 */
+[data-theme=dark] button,
+[data-theme=dark] .btn,
+[data-theme=dark] .cwd-btn,
+[data-theme=dark] .cwd-widget button {
+  background-color: #32363a !important;
+  border-color: #4c4d4e !important;
+  color: #bbb !important;
+}
+
+[data-theme=dark] button:hover,
+[data-theme=dark] .btn:hover,
+[data-theme=dark] .cwd-btn:hover,
+[data-theme=dark] .cwd-widget button:hover {
+  color: #3eaf7c !important;
+  border-color: #3eaf7c !important;
+  background-color: #32363a !important;
+}
+
+/* 预览按钮样式 - 浅绿色系 */
+.cwd-btn-preview,
+.preview-btn,
+.cwd-preview-btn,
+.cwd-widget .preview-button,
+.cwd-widget button[class*="preview"] {
+  background-color: #5ead5a !important;
+  border: 1px solid #5ead5a !important;
+  color: white !important;
+  opacity: .8;
+}
+
+.cwd-btn-preview:hover,
+.preview-btn:hover,
+.cwd-preview-btn:hover,
+.cwd-widget .preview-button:hover,
+.cwd-widget button[class*="preview"]:hover {
+  background-color: #4e924b !important;
+  border-color: #4e924b !important;
+  color: white !important;
+  opacity: .8;
+}
+
+/* 暗黑模式预览按钮 */
+[data-theme=dark] .cwd-btn-preview,
+[data-theme=dark] .preview-btn,
+[data-theme=dark] .cwd-preview-btn,
+[data-theme=dark] .cwd-widget .preview-button,
+[data-theme=dark] .cwd-widget button[class*="preview"] {
+  background-color: #5ead5a !important;
+  border-color: #5ead5a !important;
+  color: white !important;
+  opacity: .8;
+}
+
+[data-theme=dark] .cwd-btn-preview:hover,
+[data-theme=dark] .preview-btn:hover,
+[data-theme=dark] .cwd-preview-btn:hover,
+[data-theme=dark] .cwd-widget .preview-button:hover,
+[data-theme=dark] .cwd-widget button[class*="preview"]:hover {
+  background-color: #4e924b !important;
+  border-color: #4e924b !important;
+  color: white !important;
+  opacity: .8;
+}
+
+/* 提交按钮样式 - 蓝色系 */
+.cwd-btn-primary,
+.submit-btn,
+.cwd-submit-btn,
+.comment-submit,
+.cwd-widget .submit-button,
+.cwd-widget button[type="submit"] {
+  background-color: #409eff !important;
+  border: 1px solid #409eff !important;
+  color: white !important;
+  pointer-events: auto !important;
+}
+
+.cwd-btn-primary:hover,
+.submit-btn:hover,
+.cwd-submit-btn:hover,
+.comment-submit:hover,
+.cwd-widget .submit-button:hover,
+.cwd-widget button[type="submit"]:hover {
+  background-color: #337ecc !important;
+  border-color: #337ecc !important;
+  color: white !important;
+  pointer-events: auto !important;
+}
+
+/* 暗黑模式提交按钮 */
+[data-theme=dark] .cwd-btn-primary,
+[data-theme=dark] .submit-btn,
+[data-theme=dark] .cwd-submit-btn,
+[data-theme=dark] .comment-submit,
+[data-theme=dark] .cwd-widget .submit-button,
+[data-theme=dark] .cwd-widget button[type="submit"] {
+  background-color: #409eff !important;
+  border-color: #409eff !important;
+  color: white !important;
+}
+
+[data-theme=dark] .cwd-btn-primary:hover,
+[data-theme=dark] .submit-btn:hover,
+[data-theme=dark] .cwd-submit-btn:hover,
+[data-theme=dark] .comment-submit:hover,
+[data-theme=dark] .cwd-widget .submit-button:hover,
+[data-theme=dark] .cwd-widget button[type="submit"]:hover {
+  background-color: #337ecc !important;
+  border-color: #337ecc !important;
+  color: white !important;
+}
+
+/* 预览区域样式 */
+.preview-content,
+.cwd-preview-content,
+.cwd-widget .preview-area,
+.cwd-widget .markdown-preview,
+.cwd-preview {
+  background-color: #f5f7f9 !important;
+  border-radius: 8px !important;
+  padding: 1rem !important;
+  margin-top: 0.5rem !important;
+  border: 1px solid #e4e7ed !important;
+}
+
+/* 暗黑模式预览区域 */
+[data-theme=dark] .preview-content,
+[data-theme=dark] .cwd-preview-content,
+[data-theme=dark] .cwd-widget .preview-area,
+[data-theme=dark] .cwd-widget .markdown-preview,
+[data-theme=dark] .cwd-preview {
+  background-color: #32363a !important;
+  border-color: #4c4d4e !important;
+  color: #bbb !important;
+}
+
+/* 评论列表样式 */
+.comment-item,
+.cwd-comment-item,
+.cwd-widget .comment-list li,
+.cwd-comment {
+  border-bottom: 1px solid #ebeef5 !important;
+  padding: 1rem 0 !important;
+}
+
+/* 评论列表操作按钮样式 */
+.cwd-comment-actions {
+    gap: 0px;
+}
+
+/* 点赞按钮样式 - 移除边框 */
+.cwd-comment-actions button,
+.cwd-comment-actions .like-btn,
+.cwd-comment-actions .like-button,
+.cwd-like-btn,
+.cwd-like-button {
+    border: none !important;
+    background: transparent !important;
+    padding: 0.25rem 0.5rem !important;
+}
+
+/* 已点赞按钮高亮样式 */
+.cwd-comment-like-button-liked {
+    color: #3eaf7c !important;
+}
+[data-theme=dark] .cwd-comment-like-button-liked {
+    color: #3eaf7c !important;
+}
+
+.cwd-comment-actions button:hover,
+.cwd-comment-actions .like-btn:hover,
+.cwd-comment-actions .like-button:hover,
+.cwd-like-btn:hover,
+.cwd-like-button:hover {
+    border: none !important;
+    background: transparent !important;
+}
+
+/* 暗黑模式点赞按钮 */
+[data-theme=dark] .cwd-comment-actions button,
+[data-theme=dark] .cwd-comment-actions .like-btn,
+[data-theme=dark] .cwd-comment-actions .like-button,
+[data-theme=dark] .cwd-like-btn,
+[data-theme=dark] .cwd-like-button {
+    border: none !important;
+    background: transparent !important;
+}
+
+[data-theme=dark] .cwd-comment-actions button:hover,
+[data-theme=dark] .cwd-comment-actions .like-btn:hover,
+[data-theme=dark] .cwd-comment-actions .like-button:hover,
+[data-theme=dark] .cwd-like-btn:hover,
+[data-theme=dark] .cwd-like-button:hover {
+    border: none !important;
+    background: transparent !important;
+}
+
+/* 暗黑模式评论列表 */
+[data-theme=dark] .comment-item,
+[data-theme=dark] .cwd-comment-item,
+[data-theme=dark] .cwd-widget .comment-list li,
+[data-theme=dark] .cwd-comment {
+  border-bottom-color: #4c4d4e !important;
+}
+
+/* 评论内容文字 */
+.comment-content,
+.cwd-comment-content,
+.cwd-widget .comment-body,
+.cwd-widget .comment-text,
+.cwd-comment .comment-content {
+  color: #303133 !important;
+}
+
+/* 暗黑模式评论内容文字 */
+[data-theme=dark] .comment-content,
+[data-theme=dark] .cwd-comment-content,
+[data-theme=dark] .cwd-widget .comment-body,
+[data-theme=dark] .cwd-widget .comment-text,
+[data-theme=dark] .cwd-comment .comment-content {
+  color: #bbb !important;
+}
+
+/* 评论者昵称 */
+.comment-author,
+.cwd-comment-author,
+.cwd-widget .comment-author,
+.cwd-widget .comment-name,
+.cwd-comment .comment-author {
+  color: #303133 !important;
+  font-weight: 500 !important;
+}
+
+/* 暗黑模式评论者昵称 */
+[data-theme=dark] .comment-author,
+[data-theme=dark] .cwd-comment-author,
+[data-theme=dark] .cwd-widget .comment-author,
+[data-theme=dark] .cwd-widget .comment-name,
+[data-theme=dark] .cwd-comment .comment-author {
+  color: #ddd !important;
+}
+
+/* 评论时间 */
+.comment-time,
+.cwd-comment-time,
+.cwd-widget .comment-time,
+.cwd-widget .comment-date,
+.cwd-comment .comment-time {
+  color: #909399 !important;
+  font-size: 0.85rem !important;
+}
+
+/* 暗黑模式评论时间 */
+[data-theme=dark] .comment-time,
+[data-theme=dark] .cwd-comment-time,
+[data-theme=dark] .cwd-widget .comment-time,
+[data-theme=dark] .cwd-widget .comment-date,
+[data-theme=dark] .cwd-comment .comment-time {
+  color: #777 !important;
+}
+
+/* 分页样式 */
+.pagination,
+.cwd-pagination,
+.cwd-widget .pagination,
+.cwd-pagination-wrapper {
+  margin-top: 1.5rem !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+}
+
+.pagination button,
+.pagination a,
+.cwd-pagination button,
+.cwd-pagination a,
+.cwd-widget .pagination button,
+.cwd-widget .pagination a,
+.cwd-pagination-wrapper button,
+.cwd-pagination-wrapper a {
+  font-size: 0.85rem !important;
+  padding: 0.4rem 0.8rem !important;
+  border-radius: 4px !important;
+  background-color: #fff !important;
+  color: #606266 !important;
+  cursor: pointer !important;
+  min-width: 32px !important;
+  text-align: center !important;
+}
+
+.pagination button:hover,
+.pagination a:hover,
+.cwd-pagination button:hover,
+.cwd-pagination a:hover,
+.cwd-widget .pagination button:hover,
+.cwd-widget .pagination a:hover,
+.cwd-pagination-wrapper button:hover,
+.cwd-pagination-wrapper a:hover {
+  color: #3eaf7c !important;
+  border-color: #3eaf7c !important;
+}
+
+.pagination .active,
+.cwd-pagination .active,
+.cwd-widget .pagination .active,
+.cwd-pagination-wrapper .active,
+.cwd-page-num-active {
+  background-color: #3eaf7c !important;
+  border-color: #3eaf7c !important;
+  color: white !important;
+}
+
+/* 暗黑模式分页 */
+[data-theme=dark] .pagination button,
+[data-theme=dark] .pagination a,
+[data-theme=dark] .cwd-pagination button,
+[data-theme=dark] .cwd-pagination a,
+[data-theme=dark] .cwd-widget .pagination button,
+[data-theme=dark] .cwd-widget .pagination a,
+[data-theme=dark] .cwd-pagination-wrapper button,
+[data-theme=dark] .cwd-pagination-wrapper a {
+  background-color: #32363a !important;
+  color: #bbb !important;
+}
+
+[data-theme=dark] .pagination .active,
+[data-theme=dark] .cwd-pagination .active,
+[data-theme=dark] .cwd-widget .pagination .active,
+[data-theme=dark] .cwd-pagination-wrapper .active,
+[data-theme=dark] .cwd-page-num-active {
+  background-color: #3eaf7c !important;
+  border-color: #3eaf7c !important;
+  color: white !important;
+}
+
+/* 评论输入框背景图片 */
+.cwd-form-textarea {
+    background-image: url('/znote/img/other/comment.png') !important;
+    background-position: 90% 60% !important;
+    background-size: 16rem 10rem !important;
+    background-repeat: no-repeat !important;
+}
