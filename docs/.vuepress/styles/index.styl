@@ -221,6 +221,11 @@ div.code-copy
   filter: brightness(0.85) !important;
 }
 
+// 暗黑模式下保留友链卡片头像的旋转缩放过渡
+:root[style*="--background-color: #25272a"] .cardListContainer .card-list .card-item img {
+  transition: all .4s;
+}
+
 // 响应式暗黑模式图片亮度调整
 @media (max-width: $MQNarrow)
   :root[style*="--background-color: #25272a"] img,
