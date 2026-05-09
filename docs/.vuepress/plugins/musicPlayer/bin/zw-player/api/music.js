@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = 'https://neteasecloudmusicapi-zpj80231.vercel.app/';
+const baseUrl = 'https://music.bree.de5.net/';
 
 //获取歌词
 export const getWords=(id)=>{
