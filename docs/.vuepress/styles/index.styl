@@ -79,9 +79,19 @@ summary {
 .page, .password-wrapper-in {
     margin-left: 4rem !important;
 }
-.comments-wrapper {
+.comments-wrapper,
+.cwd-comments-wrapper {
     padding: 2rem 2rem 2rem 6rem !important;
 }
+.cwd-comments-wrapper {
+    padding-top: 0rem !important;
+}
+
+@media (min-width: ($MQMobile + 1px))
+  .theme-container.sidebar-open
+    .cwd-comments-wrapper
+      padding 0 2rem 2rem 2rem !important
+
 #valine .vwrap .vedit #veditor{
   background: url('/znote/img/other/comment.png')
   background-position: 90% 60%
@@ -98,8 +108,11 @@ $mobileSidebarWidth = $sidebarWidth * 0.82
     width $mobileSidebarWidth !important;
   .page, .password-wrapper-in
     margin-left $mobileSidebarWidth !important;
-  .comments-wrapper
+  .comments-wrapper,
+  .cwd-comments-wrapper
     padding: 2rem 2rem 2rem $mobileSidebarWidth*1.1 !important;
+  .cwd-comments-wrapper
+    padding-top 0rem !important;
 
 // wide mobile
 @media (max-width: $MQMobile)
@@ -110,8 +123,11 @@ $mobileSidebarWidth = $sidebarWidth * 0.82
     transition transform .2s ease
   .page, .password-wrapper-in
     margin-left 0  !important;
-  .comments-wrapper
+  .comments-wrapper,
+  .cwd-comments-wrapper
     padding: 2rem 2rem 2rem 2rem !important;
+  .cwd-comments-wrapper
+    padding-top 0rem !important;
   .theme-container
     &.sidebar-open
       .sidebar
@@ -139,6 +155,8 @@ $mobileSidebarWidth = $sidebarWidth * 0.82
       margin-left 0  !important;
     .comments-wrapper
       padding: 2rem 2rem 2rem 2rem !important;
+    .cwd-comments-wrapper
+      padding: 0 2rem 2rem 2rem !important;
 
 //标签列表样式
 .abstract-item {
