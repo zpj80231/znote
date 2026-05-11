@@ -65,34 +65,32 @@ export default {
 <style lang="stylus" scoped>
 @require '../styles/wrapper.styl'
 
-// 清新风格颜色方案 - 浅色模式
-$monthColor1 = #8dd3c7 // 一月 - 浅青色
-$monthColor2  = #a6c8ff // 二月 - 冰蓝色
-$monthColor3 = #f8bbd0 // 三月 - 樱花粉（春）
-$monthColor4 = #fb8072 // 四月 - 浅红色
-$monthColor5 = #80b1d3 // 五月 - 浅蓝色
-$monthColor6 = #fdb462 // 六月 - 浅橙色
-$monthColor7 = #b3de69 // 七月 - 浅绿色
-$monthColor8 = #fccde5 // 八月 - 浅粉色
-$monthColor9 = #ffccbc // 九月 - 枫叶红（秋）
-$monthColor10 = #bc80bd // 十月 - 浅紫色
-$monthColor11 = #ccebc5 // 十一月 - 浅薄荷色
-$monthColor12 = #d16b7b // 十二月 - 酒红色
+$monthColor1 = #d96c75 // 一月 - 玫瑰红
+$monthColor2 = #d98542 // 二月 - 暖橙
+$monthColor3 = #d0a63a // 三月 - 金黄
+$monthColor4 = #a6b842 // 四月 - 青柠
+$monthColor5 = #6fb65a // 五月 - 草绿
+$monthColor6 = #43b37b // 六月 - 翡翠绿
+$monthColor7 = #38aaa5 // 七月 - 湖青
+$monthColor8 = #3f9bc7 // 八月 - 天蓝
+$monthColor9 = #5d86d6 // 九月 - 靛蓝
+$monthColor10 = #8273d1 // 十月 - 紫罗兰
+$monthColor11 = #ad6fc1 // 十一月 - 淡紫
+$monthColor12 = #cf6da0 // 十二月 - 莓粉
 
-// 暗黑模式下的颜色调整
 @media (prefers-color-scheme: dark)
-  $monthColor1 = #4a9c93 // 一月 - 深青色
-  $monthColor2 = #4f6fae // 二月 - 深冰蓝
-  $monthColor3 = #c2185b // 三月 - 深樱花粉（春）
-  $monthColor4 = #b85a4a // 四月 - 深红色
-  $monthColor5 = #5a82a6 // 五月 - 深蓝色
-  $monthColor6 = #c7824a // 六月 - 深橙色
-  $monthColor7 = #7a9c4a // 七月 - 深绿色
-  $monthColor8 = #b87a9a // 八月 - 深粉色
-  $monthColor9 = #e64a19 // 九月 - 深枫叶红（秋）
-  $monthColor10 = #8a6a8a // 十月 - 深紫色
-  $monthColor11 = #7a9ca5 // 十一月 - 深薄荷色
-  $monthColor12 = #8b3a44 // 十二月 - 深酒红
+  $monthColor1 = #b84f59 // 一月 - 深玫瑰红
+  $monthColor2 = #b66a32 // 二月 - 深暖橙
+  $monthColor3 = #aa862d // 三月 - 深金黄
+  $monthColor4 = #849436 // 四月 - 深青柠
+  $monthColor5 = #5f923f // 五月 - 深草绿
+  $monthColor6 = #379063 // 六月 - 深翡翠绿
+  $monthColor7 = #2f8f8b // 七月 - 深湖青
+  $monthColor8 = #337fa3 // 八月 - 深天蓝
+  $monthColor9 = #4f6fb5 // 九月 - 深靛蓝
+  $monthColor10 = #685fb1 // 十月 - 深紫罗兰
+  $monthColor11 = #8c59a0 // 十一月 - 深淡紫
+  $monthColor12 = #aa5683 // 十二月 - 深莓粉
 
 .timeline-wrapper
   box-sizing border-box
