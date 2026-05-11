@@ -16,6 +16,14 @@ const modeOptions = {
     '--text-color': '#2c3e50',
     '--border-color': '#eaecef',
     '--code-color': 'rgba(27, 31, 35, 0.05)',
+    '--code-block-bg': '#f6f8fa',
+    '--code-block-color': '#24292e',
+    '--code-line-highlight': 'rgba(217, 119, 6, 0.15)',
+    '--code-line-highlight-border': 'rgba(217, 119, 6, 0.75)',
+    '--code-line-number-bg': 'rgba(27, 31, 35, 0.04)',
+    '--code-line-number-color': 'rgba(36, 41, 46, 0.45)',
+    '--code-lang-color': 'rgba(36, 41, 46, 0.45)',
+    '--code-divider-color': 'rgba(27, 31, 35, 0.12)',
     '--mask-color': '#888'
   },
   dark: {
@@ -35,6 +43,14 @@ const modeOptions = {
     '--text-color': '#aaa',
     '--border-color': 'rgba(0, 0, 0, .3)',
     '--code-color': 'rgba(0, 0, 0, .3)',
+    '--code-block-bg': '#161b22',
+    '--code-block-color': '#e6edf3',
+    '--code-line-highlight': 'rgba(251, 191, 36, 0.18)',
+    '--code-line-highlight-border': 'rgba(251, 191, 36, 0.82)',
+    '--code-line-number-bg': 'rgba(255, 255, 255, 0.035)',
+    '--code-line-number-color': 'rgba(230, 237, 243, 0.38)',
+    '--code-lang-color': 'rgba(230, 237, 243, 0.5)',
+    '--code-divider-color': 'rgba(255, 255, 255, 0.1)',
     '--mask-color': '#000'
   }
 }
