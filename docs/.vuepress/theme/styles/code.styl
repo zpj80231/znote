@@ -1,6 +1,6 @@
 .content__default
   code
-    color lighten($textColor, 20%)
+    color var(--text-color)
     padding 0.25rem 0.5rem
     margin 0
     font-size 0.85em
@@ -17,20 +17,21 @@
     line-height 1.4
     padding 1.25rem 1.5rem
     margin 0.85rem 0
-    background-color $codeBgColor
+    background-color var(--code-block-bg)
     border-radius 6px
     overflow auto
     code
-      color #fff
+      color var(--code-block-color)
       padding 0
       background-color transparent
       border-radius 0
 
 div[class*="language-"]
   position relative
-  background-color $codeBgColor
+  background-color var(--code-block-bg)
   border-radius 6px
   font-size 13.6px
+  box-shadow inset 0 0 0 1px var(--code-divider-color)
   .highlight-lines
     user-select none
     padding-top 1.3rem
@@ -40,7 +41,9 @@ div[class*="language-"]
     width 100%
     line-height 1.4
     .highlighted
-      background-color rgba(0, 0, 0, 66%)
+      background-color var(--code-line-highlight)
+      border-left 3px solid var(--code-line-highlight-border)
+      box-sizing border-box
   pre, pre[class*="language-"]
     background transparent
     position relative
@@ -51,7 +54,7 @@ div[class*="language-"]
     top 0.8em
     right 1em
     font-size 0.75rem
-    color rgba(255, 255, 255, 0.4)
+    color var(--code-lang-color)
   &:not(.line-numbers-mode)
     .line-numbers-wrapper
       display none
@@ -67,7 +70,9 @@ div[class*="language-"]
           display block
           width $lineNumbersWrapperWidth
           height 100%
-          background-color rgba(0, 0, 0, 66%)
+          background-color var(--code-line-highlight)
+          border-left 3px solid var(--code-line-highlight-border)
+          box-sizing border-box
     pre
       padding-left $lineNumbersWrapperWidth + 1 rem
       vertical-align middle
@@ -76,7 +81,7 @@ div[class*="language-"]
       top 0
       width $lineNumbersWrapperWidth
       text-align center
-      color rgba(255, 255, 255, 0.3)
+      color var(--code-line-number-color)
       padding 1.25rem 0
       line-height 1.4
       br
@@ -95,8 +100,8 @@ div[class*="language-"]
       width $lineNumbersWrapperWidth
       height 100%
       border-radius 6px 0 0 6px
-      border-right 1px solid rgba(0, 0, 0, 66%)
-      background-color $codeBgColor
+      border-right 1px solid var(--code-divider-color)
+      background-color var(--code-line-number-bg)
 
 
 for lang in $codeLang
