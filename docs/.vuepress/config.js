@@ -69,7 +69,10 @@ module.exports = {
         search: true,
         searchMaxSuggestions: 10,
         smoothScroll: true,
-        sidebarDepth: 2,
+        // 右侧菜单目录开关
+        rightMenuBar: true,
+        // 侧边栏目录深度
+        sidebarDepth: 0,
         blogConfig: {
             category: {
                 location: 2, // 在导航栏菜单中所占的位置，默认2
@@ -113,6 +116,7 @@ module.exports = {
     },
     plugins,
     markdown: {
+        // 代码块高亮：```js {2,4-6}
         lineNumbers: true,
         // Markdown 文件的 headers (标题 & 小标题) 修改提取出的标题级别
         extractHeaders: ['h2', 'h3', 'h4'],

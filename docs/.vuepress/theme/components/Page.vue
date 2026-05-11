@@ -1,5 +1,7 @@
 <template>
   <main class="page">
+    <RightMenu v-if="showRightMenu" />
+
     <ModuleTransition>
       <slot v-show="recoShowModule" name="top"/>
     </ModuleTransition>
@@ -92,10 +94,11 @@ import { resolvePage, outboundRE, endingSlashRE } from '@theme/helpers/utils'
 import ModuleTransition from '@theme/components/ModuleTransition'
 import moduleTransitonMixin from '@theme/mixins/moduleTransiton'
 import RecentlyUpdateArticle from './RecentlyUpdateArticle.vue'
+import RightMenu from './RightMenu.vue'
 
 export default {
   mixins: [moduleTransitonMixin],
-  components: { PageInfo, ModuleTransition, RecentlyUpdateArticle },
+  components: { PageInfo, ModuleTransition, RecentlyUpdateArticle, RightMenu },
 
   props: ['sidebarItems'],
 
@@ -113,6 +116,15 @@ export default {
   computed: {
     isShowUpdateBar() {
       return this.updateBarConfig && this.updateBarConfig.showToArticle === false ? false : true
+    },
+    showRightMenu () {
+      const headers = this.$page.headers || []
+      return (
+        this.$themeConfig.rightMenuBar !== false &&
+        this.$frontmatter.home !== true &&
+        this.$frontmatter.sidebar !== false &&
+        headers.length > 0
+      )
     },
     showAccessNumber () {
       return this.$themeConfig.commentsSolution === 'valine'
