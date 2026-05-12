@@ -85,6 +85,26 @@ div[class*="language-"]
     background transparent
     position relative
     z-index 1
+    scrollbar-width none
+    -ms-overflow-style none
+    &::-webkit-scrollbar
+      width 0
+      height 0
+    &:hover,
+    &:focus,
+    &:focus-within
+      scrollbar-width thin
+      scrollbar-color var(--code-divider-color) transparent
+      &::-webkit-scrollbar
+        width 8px
+        height 8px
+      &::-webkit-scrollbar-track
+        background transparent
+      &::-webkit-scrollbar-thumb
+        background-color var(--code-divider-color)
+        border-radius 999px
+        border 2px solid transparent
+        background-clip content-box
   &::before
     position absolute
     z-index 3
