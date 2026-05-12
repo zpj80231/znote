@@ -37,6 +37,8 @@ export default {
     return {
       isExpanded: false,      // 当前是否展开状态
       codeContainer: null,    // 代码块容器元素（pre 的父元素）
+      lineNumbersWrapper: null, // 行号容器元素
+      highlightLines: null,   // 高亮行容器元素
       containerTop: 0         // 代码块容器距离页面顶部的位置
     }
   },
@@ -70,12 +72,16 @@ export default {
           // 展开：移除高度限制
           this.codeContainer.style.maxHeight = 'none'
           this.codeContainer.style.overflowY = 'visible'
+          this.target.style.maxHeight = 'none'
           this.target.style.paddingBottom = '0.7rem'
+          this.updateRelatedLayers(false)
         } else {
           // 收起：恢复高度限制
-          this.codeContainer.style.maxHeight = this.maxHeight + 'px'
-          this.codeContainer.style.overflowY = 'hidden'
+          this.codeContainer.style.maxHeight = 'none'
+          this.codeContainer.style.overflowY = 'visible'
+          this.target.style.maxHeight = this.maxHeight + 'px'
           this.target.style.paddingBottom = ''
+          this.updateRelatedLayers(true)
           
           // 等待 DOM 更新后滚动到代码块位置
           this.$nextTick(() => {
@@ -86,6 +92,16 @@ export default {
           })
         }
       }
+    },
+
+    updateRelatedLayers(collapsed) {
+      const maxHeight = collapsed ? this.maxHeight + 'px' : 'none'
+      const overflow = collapsed ? 'hidden' : 'visible'
+      ;[this.lineNumbersWrapper, this.highlightLines].forEach((el) => {
+        if (!el) return
+        el.style.maxHeight = maxHeight
+        el.style.overflow = overflow
+      })
     }
   },
   // 生命周期钩子 - 组件挂载后执行
@@ -94,17 +110,20 @@ export default {
     // 这样可以同时限制代码和行号的显示
     if (this.target && this.target.parentElement) {
       this.codeContainer = this.target.parentElement
+      this.lineNumbersWrapper = this.codeContainer.querySelector('.line-numbers-wrapper')
+      this.highlightLines = this.codeContainer.querySelector('.highlight-lines')
       
       // 设置容器样式
       this.codeContainer.style.paddingBottom = '0em'
-      this.codeContainer.style.maxHeight = this.maxHeight + 'px'
-      this.codeContainer.style.overflowY = 'hidden'
-      this.codeContainer.style.transition = 'max-height 0.3s ease'
+      this.codeContainer.style.maxHeight = 'none'
+      this.codeContainer.style.overflowY = 'visible'
       
       // 确保 pre 元素内部可以滚动
       this.target.style.overflowY = 'auto'
       this.target.style.overflowX = 'auto'
-      this.target.style.maxHeight = '100%'
+      this.target.style.maxHeight = this.maxHeight + 'px'
+      this.target.style.transition = 'max-height 0.3s ease'
+      this.updateRelatedLayers(true)
     }
   }
 };
