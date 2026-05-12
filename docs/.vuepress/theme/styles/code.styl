@@ -25,6 +25,41 @@
       padding 0
       background-color transparent
       border-radius 0
+      .token
+        &.comment,
+        &.prolog,
+        &.doctype,
+        &.cdata
+          color var(--code-token-comment)
+        &.punctuation
+          color var(--code-token-punctuation)
+        &.property,
+        &.tag,
+        &.boolean,
+        &.number,
+        &.constant,
+        &.symbol
+          color var(--code-token-number)
+        &.selector,
+        &.attr-name,
+        &.string,
+        &.char,
+        &.builtin
+          color var(--code-token-string)
+        &.operator,
+        &.entity,
+        &.url,
+        &.variable
+          color var(--code-token-operator)
+        &.atrule,
+        &.attr-value,
+        &.keyword
+          color var(--code-token-keyword)
+        &.function,
+        &.method
+          color var(--code-token-function)
+        &.class-name
+          color var(--code-token-class)
 
 div[class*="language-"]
   position relative
