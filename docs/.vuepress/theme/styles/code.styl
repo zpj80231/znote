@@ -132,11 +132,11 @@ div[class*="language-"]
       content ''
       position absolute
       z-index 2
-      top 0
-      left 0
-      width $lineNumbersWrapperWidth
-      height calc(100% - 6px)
-      border-radius 6px 0 0 6px
+      top 1px
+      left 1px
+      width "calc(%s - 1px)" % $lineNumbersWrapperWidth
+      height calc(100% - 7px)
+      border-radius 5px 0 0 0
       background-color var(--code-block-bg)
       background-image linear-gradient(var(--code-line-number-bg), var(--code-line-number-bg))
       pointer-events none
