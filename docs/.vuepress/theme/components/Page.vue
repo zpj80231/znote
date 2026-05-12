@@ -15,10 +15,28 @@
     </ModuleTransition>
 
     <ModuleTransition delay="0.16">
+      <div
+        v-if="pageSlotTop && isShowPageSlotTop"
+        v-show="recoShowModule"
+        class="html-module-slot page-slot page-slot-top"
+        v-html="pageSlotTop"
+      />
+    </ModuleTransition>
+
+    <ModuleTransition delay="0.20">
       <Content v-show="recoShowModule" class="theme-reco-content" />
     </ModuleTransition>
 
     <ModuleTransition delay="0.24">
+      <div
+        v-if="pageSlotBottom && isShowPageSlotBottom"
+        v-show="recoShowModule"
+        class="html-module-slot page-slot page-slot-bottom"
+        v-html="pageSlotBottom"
+      />
+    </ModuleTransition>
+
+    <ModuleTransition delay="0.28">
       <footer v-show="recoShowModule" class="page-edit">
         <div
           class="edit-link"
@@ -42,7 +60,7 @@
       </footer>
     </ModuleTransition>
 
-    <ModuleTransition delay="0.32">
+    <ModuleTransition delay="0.36">
       <div class="page-nav" v-if="recoShowModule && (prev || next)">
         <p class="inner">
           <span
@@ -75,7 +93,7 @@
       </div>
     </ModuleTransition>
 
-    <ModuleTransition delay="0.40">
+    <ModuleTransition delay="0.44">
       <slot v-show="recoShowModule" name="bottom"/>
     </ModuleTransition>
 
@@ -116,6 +134,18 @@ export default {
   computed: {
     isShowUpdateBar() {
       return this.updateBarConfig && this.updateBarConfig.showToArticle === false ? false : true
+    },
+    pageSlotTop () {
+      return this.getHtmlModule('pageT')
+    },
+    pageSlotBottom () {
+      return this.getHtmlModule('pageB')
+    },
+    isShowPageSlotTop () {
+      return this.getHtmlModuleShowStatus('pageTshowMode')
+    },
+    isShowPageSlotBottom () {
+      return this.getHtmlModuleShowStatus('pageBshowMode')
     },
     showRightMenu () {
       const headers = this.$page.headers || []
@@ -186,6 +216,24 @@ export default {
   },
 
   methods: {
+    getHtmlModule (module) {
+      const { htmlModules } = this.$themeConfig
+      return htmlModules ? htmlModules[module] : ''
+    },
+    getHtmlModuleShowStatus (prop) {
+      const { htmlModules } = this.$themeConfig
+      if (!htmlModules) return false
+      if (htmlModules[prop] === 'article') {
+        return this.isArticle()
+      }
+      if (htmlModules[prop] === 'custom') {
+        return !this.isArticle()
+      }
+      return true
+    },
+    isArticle () {
+      return this.$frontmatter.article !== false && this.$frontmatter.home !== true
+    },
     createEditLink (repo, docsRepo, docsDir, docsBranch, path) {
       const bitbucket = /bitbucket.org/
       if (bitbucket.test(repo)) {
@@ -259,6 +307,13 @@ function flatten (items, res) {
     margin: 0 auto;
     padding: 1rem 2.5rem;
     color var(--text-color)
+  .page-slot
+    @extend $wrapper
+    padding-top 0
+    padding-bottom 1rem
+  .page-slot-bottom
+    padding-top 1rem
+    padding-bottom 0
   .page-edit
     @extend $wrapper
     padding-top 1rem

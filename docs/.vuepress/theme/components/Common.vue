@@ -23,9 +23,21 @@
         <Sidebar
           :items="sidebarItems"
           @toggle-sidebar="toggleSidebar">
+          <div
+            v-if="sidebarSlotTop && isShowSidebarSlotTop"
+            class="html-module-slot sidebar-slot sidebar-slot-top"
+            v-html="sidebarSlotTop"
+            slot="top"
+          />
           <slot
             name="sidebar-top"
             slot="top"/>
+          <div
+            v-if="sidebarSlotBottom && isShowSidebarSlotBottom"
+            class="html-module-slot sidebar-slot sidebar-slot-bottom"
+            v-html="sidebarSlotBottom"
+            slot="bottom"
+          />
           <slot
             name="sidebar-bottom"
             slot="bottom"/>
@@ -55,9 +67,21 @@
           <Sidebar
             :items="sidebarItems"
             @toggle-sidebar="toggleSidebar">
+            <div
+              v-if="sidebarSlotTop && isShowSidebarSlotTop"
+              class="html-module-slot sidebar-slot sidebar-slot-top"
+              v-html="sidebarSlotTop"
+              slot="top"
+            />
             <slot
               name="sidebar-top"
               slot="top"/>
+            <div
+              v-if="sidebarSlotBottom && isShowSidebarSlotBottom"
+              class="html-module-slot sidebar-slot sidebar-slot-bottom"
+              v-html="sidebarSlotBottom"
+              slot="bottom"
+            />
             <slot
               name="sidebar-bottom"
               slot="bottom"/>
@@ -71,6 +95,26 @@
           </div>
         </div>
       </transition>
+    </div>
+    <div
+      v-if="windowSlotLeftBottom"
+      v-show="showWindowSlotLeftBottom"
+      class="custom-html-window custom-html-window-lb"
+    >
+      <div class="custom-html-window-inner">
+        <button class="custom-html-window-close" type="button" aria-label="关闭" @click="showWindowSlotLeftBottom = false">×</button>
+        <div v-html="windowSlotLeftBottom" />
+      </div>
+    </div>
+    <div
+      v-if="windowSlotRightBottom"
+      v-show="showWindowSlotRightBottom"
+      class="custom-html-window custom-html-window-rb"
+    >
+      <div class="custom-html-window-inner">
+        <button class="custom-html-window-close" type="button" aria-label="关闭" @click="showWindowSlotRightBottom = false">×</button>
+        <div v-html="windowSlotRightBottom" />
+      </div>
     </div>
   </div>
 </template>
@@ -103,7 +147,9 @@ export default {
       isSidebarOpen: true,
       isHasKey: true,
       isHasPageKey: true,
-      firstLoad: true
+      firstLoad: true,
+      showWindowSlotLeftBottom: true,
+      showWindowSlotRightBottom: true
     }
   },
 
@@ -135,6 +181,24 @@ export default {
         home == true
       )
       return result
+    },
+    sidebarSlotTop () {
+      return this.getHtmlModule('sidebarT')
+    },
+    sidebarSlotBottom () {
+      return this.getHtmlModule('sidebarB')
+    },
+    windowSlotLeftBottom () {
+      return this.getHtmlModule('windowLB')
+    },
+    windowSlotRightBottom () {
+      return this.getHtmlModule('windowRB')
+    },
+    isShowSidebarSlotTop () {
+      return this.getHtmlModuleShowStatus('sidebarTshowMode')
+    },
+    isShowSidebarSlotBottom () {
+      return this.getHtmlModuleShowStatus('sidebarBshowMode')
     },
     shouldShowNavbar () {
       const { themeConfig } = this.$site
@@ -208,6 +272,24 @@ export default {
   },
 
   methods: {
+    getHtmlModule (module) {
+      const { htmlModules } = this.$themeConfig
+      return htmlModules ? htmlModules[module] : ''
+    },
+    getHtmlModuleShowStatus (prop) {
+      const { htmlModules } = this.$themeConfig
+      if (!htmlModules) return false
+      if (htmlModules[prop] === 'article') {
+        return this.isArticle()
+      }
+      if (htmlModules[prop] === 'custom') {
+        return !this.isArticle()
+      }
+      return true
+    },
+    isArticle () {
+      return this.$frontmatter.article !== false && this.$frontmatter.home !== true
+    },
     isPc() {
       let flag = navigator.userAgent.match(/(phone|pod|iPhone|iPod|ios|Android|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)
       return !flag;
@@ -315,6 +397,40 @@ export default {
   padding 2rem 2rem 2rem 22rem
   max-width: $contentWidth;
   margin: 0 auto;
+.sidebar-slot
+  padding 0.75rem 1.5rem
+  border-bottom 1px solid var(--border-color)
+.sidebar-slot-bottom
+  border-top 1px solid var(--border-color)
+  border-bottom 0
+.custom-html-window
+  position fixed
+  bottom 1.5rem
+  z-index 20
+  max-width 280px
+  color var(--text-color)
+.custom-html-window-lb
+  left 1.5rem
+.custom-html-window-rb
+  right 1.5rem
+.custom-html-window-inner
+  position relative
+  border 1px solid var(--border-color)
+  border-radius 4px
+  background var(--background-color)
+  box-shadow 0 6px 18px rgba(0, 0, 0, .12)
+  overflow hidden
+.custom-html-window-close
+  position absolute
+  top 0.25rem
+  right 0.35rem
+  z-index 1
+  border 0
+  background transparent
+  color var(--text-color)
+  cursor pointer
+  font-size 1rem
+  line-height 1
 @media (max-width: $MQNarrow)
   .theme-container.no-sidebar
     .comments-wrapper
@@ -324,6 +440,8 @@ export default {
 @media (max-width: $MQMobile)
   .comments-wrapper
     padding-left: 2rem
+  .custom-html-window
+    display none
 .fade-enter-active, .fade-leave-active {
   transition: opacity .5s;
 }
