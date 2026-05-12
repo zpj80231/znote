@@ -2,6 +2,7 @@ const path = require('path')
 const nav = require('./config/nav/')
 const sidebar = require('./config/sidebar/')
 const plugins = require('./config/plugins/')
+const htmlModules = require('./config/htmlModules')
 
 module.exports = {
     // 打包目录
@@ -52,12 +53,23 @@ module.exports = {
         }
       })();
     `]
-    ],
+    ].concat(
+        // 接入万维广告
+        // 1. 把 WWAds 给你的广告 HTML 填到 htmlModules.js
+        // 2. 部署时设置：WWADS_ENABLE=true, WWADS_VERIFY=你的校验值
+        process.env.WWADS_VERIFY
+            ? [['meta', {name: 'wwads-cn-verify', content: process.env.WWADS_VERIFY}]]
+            : [],
+        process.env.WWADS_ENABLE === 'true'
+            ? [['script', {async: true, src: 'https://cdn.wwads.cn/js/makemoney.js', type: 'text/javascript'}]]
+            : []
+    ),
     shouldPrefetch: false,
     // 主题配置
     // theme: '',
     themeConfig: {
         nav,
+        htmlModules,
         // sidebar: 'auto', // 自动形成侧边导航
         sidebar,
         isSidebarOpen: false, // 默认侧边栏是否打开
