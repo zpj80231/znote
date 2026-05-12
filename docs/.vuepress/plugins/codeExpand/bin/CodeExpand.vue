@@ -2,7 +2,7 @@
   <span>
     <span ref="btn" class="v-expand-code-btn" @click="toggleExpand">
       <span class="arrow" :class="{ expanded: isExpanded }"></span>
-      {{buttonText}}
+      <span class="label">{{buttonText}}</span>
     </span>
   </span>
 </template>
@@ -14,12 +14,12 @@ export default {
     // 展开按钮文本
     expandText: {
       type: String,
-      default: '展开'
+      default: '展开更多'
     },
     // 收起按钮文本
     collapseText: {
       type: String,
-      default: '收起'
+      default: '收起代码'
     },
     // 代码块最大高度（像素）
     maxHeight: {
@@ -84,35 +84,6 @@ export default {
           })
         }
       }
-    },
-    
-    /**
-     * 检测当前是否为暗黑模式
-     * 通过检查 CSS 变量 --background-color 的值来判断
-     */
-    isDarkMode() {
-      const root = document.querySelector(':root')
-      if (!root) return false
-      const bgColor = getComputedStyle(root).getPropertyValue('--background-color').trim()
-      // 暗黑模式下背景色为 #25272a 或类似的深色
-      return bgColor && (bgColor === '#25272a' || bgColor === 'rgb(37, 39, 42)')
-    },
-    
-    /**
-     * 更新按钮样式以适配当前模式
-     */
-    updateButtonStyle() {
-      if (this.$refs.btn) {
-        if (this.isDarkMode()) {
-          // 暗黑模式：使用更深的背景色
-          this.$refs.btn.style.background = 'rgba(65, 75, 105)'
-          this.$refs.btn.style.boxShadow = '0 2px 6px rgba(0, 0, 0, 0.25)'
-        } else {
-          // 明亮模式：使用默认背景色
-          this.$refs.btn.style.background = 'rgba(74, 85, 102, 0.7)'
-          this.$refs.btn.style.boxShadow = '0 2px 6px rgba(0, 0, 0, 0.15)'
-        }
-      }
     }
   },
   // 生命周期钩子 - 组件挂载后执行
@@ -133,83 +104,89 @@ export default {
       this.target.style.overflowX = 'auto'
       this.target.style.maxHeight = '100%'
     }
-    
-    // 初始化按钮样式
-    this.updateButtonStyle()
-    
-    // 监听模式切换
-    // 主题通过修改 :root 的 CSS 变量来切换模式
-    // 我们使用 MutationObserver 来监听样式变化
-    const root = document.querySelector(':root')
-    if (root) {
-      this.observer = new MutationObserver(() => {
-        this.updateButtonStyle()
-      })
-      this.observer.observe(root, {
-        attributes: true,
-        attributeFilter: ['style']
-      })
-    }
-  },
-  
-  // 生命周期钩子 - 组件销毁前执行
-  beforeDestroy() {
-    // 清理 MutationObserver
-    if (this.observer) {
-      this.observer.disconnect()
-    }
   }
 };
 </script>
 
 <style scoped>
-/* 展开/收起按钮样式 - 底部居中设计 */
 .v-expand-code-btn {
   cursor: pointer;
-  color: rgba(224, 224, 224, 0.8);
-  transition: all 0.2s ease;
+  color: var(--code-block-color) !important;
+  transition: color 0.16s ease, opacity 0.16s ease, background 0.16s ease;
   position: absolute;
   z-index: 10;
-  bottom: 0.5em;
-  left: 50%;
-  transform: translateX(-50%);
+  right: 0;
+  bottom: 0;
+  left: 0;
   font-size: 0.75rem;
-  padding: 0.35rem 1.25rem;
-  background: rgba(74, 85, 102, 0.7);
-  border-radius: 20px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-  backdrop-filter: blur(4px);
-  display: flex;
+  font-weight: 500;
+  line-height: 1;
+  height: 2rem;
+  padding: 0;
+  background: linear-gradient(to bottom, var(--code-block-bg) 0, var(--code-line-highlight) 42%, var(--code-line-highlight) 100%);
+  border: 0;
+  border-radius: 0 0 6px 6px;
+  box-shadow: none;
+  display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
+  justify-content: center;
+  gap: 0.34rem;
+  opacity: 0.96;
+  user-select: none;
+  white-space: nowrap;
 }
 
-/* 箭头样式 - 使用 CSS 绘制三角形 */
+.v-expand-code-btn:after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 0.05rem;
+  background: linear-gradient(90deg, var(--code-line-highlight) 0, var(--code-line-highlight-border) 18%, var(--code-line-highlight) 50%, var(--code-line-highlight-border) 82%, var(--code-line-highlight) 100%);
+  opacity: 0.95;
+  pointer-events: none;
+}
+
 .v-expand-code-btn .arrow {
   display: inline-block;
-  width: 0;
-  height: 0;
-  border-left: 4px solid transparent;
-  border-right: 4px solid transparent;
-  border-top: 6px solid rgba(224, 224, 224, 0.8);
-  transition: transform 0.3s ease;
+  width: 0.38rem;
+  height: 0.38rem;
+  position: relative;
+  z-index: 1;
+  flex: 0 0 auto;
 }
 
-/* 展开状态下箭头旋转 180 度 */
-.v-expand-code-btn .arrow.expanded {
-  transform: rotate(180deg);
+.v-expand-code-btn .arrow:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0.34rem;
+  height: 0.34rem;
+  border-right: 1px solid currentColor;
+  border-bottom: 1px solid currentColor;
+  transform: translate(-50%, -60%) rotate(45deg);
+  transition: transform 0.2s ease;
 }
 
-/* 按钮 hover 状态 - 背景加深，轻微上浮 */
+.v-expand-code-btn .arrow.expanded:after {
+  transform: translate(-50%, -40%) rotate(225deg);
+}
+
+.v-expand-code-btn .label {
+  position: relative;
+  z-index: 1;
+  color: inherit;
+}
+
 .v-expand-code-btn:hover {
-  background: rgba(74, 85, 102, 0.9);
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
-  transform: translateX(-50%) translateY(-1px);
-  color: rgba(255, 255, 255, 0.95);
+  background: linear-gradient(to bottom, var(--code-block-bg) 0, var(--code-line-highlight) 28%, var(--code-line-highlight-border) 100%);
+  opacity: 1;
 }
 
-/* hover 时箭头颜色变亮 */
-.v-expand-code-btn:hover .arrow {
-  border-top: 6px solid rgba(255, 255, 255, 0.95);
+.v-expand-code-btn:hover:after {
+  background: linear-gradient(90deg, var(--code-line-highlight) 0, var(--code-line-highlight) 14%, var(--code-line-highlight-border) 50%, var(--code-line-highlight) 86%, var(--code-line-highlight) 100%);
+  opacity: 1;
 }
 </style>
