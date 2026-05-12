@@ -144,7 +144,7 @@ export default {
   line-height: 1;
   height: 2rem;
   padding: 0;
-  background: linear-gradient(to bottom, var(--code-block-bg) 0, var(--code-line-highlight) 42%, var(--code-line-highlight) 100%);
+  background: linear-gradient(to bottom, var(--code-block-bg) 0, var(--code-line-highlight) 42%, var(--code-line-highlight-border) 200%);
   border: 0;
   border-radius: 0 0 6px 6px;
   box-shadow: none;
