@@ -33,8 +33,8 @@ export default {
       // 获取配置参数，使用 define 注入的全局常量，若无则使用默认值
       const selector = typeof CODE_EXPAND_SELECTOR !== 'undefined' ? CODE_EXPAND_SELECTOR : 'div[class*="language-"] pre'
       const maxHeight = typeof CODE_EXPAND_MAX_HEIGHT !== 'undefined' ? CODE_EXPAND_MAX_HEIGHT : 500
-      const expandText = typeof CODE_EXPAND_TEXT !== 'undefined' ? CODE_EXPAND_TEXT : '展开'
-      const collapseText = typeof CODE_COLLAPSE_TEXT !== 'undefined' ? CODE_COLLAPSE_TEXT : '收起'
+      const expandText = typeof CODE_EXPAND_TEXT !== 'undefined' ? CODE_EXPAND_TEXT : '展开更多'
+      const collapseText = typeof CODE_COLLAPSE_TEXT !== 'undefined' ? CODE_COLLAPSE_TEXT : '收起代码'
 
       // 获取所有匹配的代码块元素
       const dom = Array.from(document.querySelectorAll(selector))

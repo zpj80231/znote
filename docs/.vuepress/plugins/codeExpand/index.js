@@ -11,16 +11,16 @@ const { path } = require('@vuepress/shared-utils')
  * @param {Object} options - 插件配置选项
  * @param {string} options.selector - 代码块选择器，默认选择所有语言的代码块
  * @param {number} options.maxHeight - 代码块最大高度（像素），默认 500px
- * @param {string} options.expandText - 展开按钮文本，默认 "展开"
- * @param {string} options.collapseText - 收起按钮文本，默认 "收起"
+ * @param {string} options.expandText - 展开按钮文本，默认 "展开更多"
+ * @param {string} options.collapseText - 收起按钮文本，默认 "收起代码"
  * @returns {Object} VuePress 插件配置对象
  */
 module.exports = (options = {}) => {
   const {
     selector = 'div[class*="language-"] pre',
     maxHeight = 500,
-    expandText = '展开',
-    collapseText = '收起',
+    expandText = '展开更多',
+    collapseText = '收起代码',
   } = options
 
   return {
