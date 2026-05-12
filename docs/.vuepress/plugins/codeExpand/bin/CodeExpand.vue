@@ -70,10 +70,12 @@ export default {
           // 展开：移除高度限制
           this.codeContainer.style.maxHeight = 'none'
           this.codeContainer.style.overflowY = 'visible'
+          this.target.style.paddingBottom = '0.7rem'
         } else {
           // 收起：恢复高度限制
           this.codeContainer.style.maxHeight = this.maxHeight + 'px'
           this.codeContainer.style.overflowY = 'hidden'
+          this.target.style.paddingBottom = ''
           
           // 等待 DOM 更新后滚动到代码块位置
           this.$nextTick(() => {
