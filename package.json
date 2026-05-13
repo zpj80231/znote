@@ -45,6 +45,7 @@
 		"vuepress-theme-reco": "1.6.17"
 	},
 	"devDependencies": {
+		"@mr-hope/vuepress-plugin-seo": "^1.30.0",
 		"core-js": "^3.49.0",
 		"vuepress-plugin-canonical": "^1.0.0"
 	}
