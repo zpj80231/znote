@@ -3,6 +3,9 @@ const yaml = require('js-yaml')
 const moment = require("moment/moment");
 const CARD_LIST = 'cardList'
 const CARD_IMG_LIST = 'cardImgList'
+const siteUrl = process.env.SITE_URL || 'https://bree.de5.net'
+const siteBase = process.env.SITE_BASE || '/znote/'
+const siteBaseUrl = `${siteUrl}${siteBase}`.replace(/\/+$/, '/')
 
 module.exports = [
     ['container', {
@@ -59,13 +62,17 @@ module.exports = [
     }
     ],
     ['sitemap', {
-        hostname: "https://zpj80231.github.io/znote/",
+        hostname: siteBaseUrl,
         exclude: ['/404.html'],
         dateFormatter: time => {
             return new Date(time).toISOString()
         }
     }
     ],
+    ['vuepress-plugin-canonical', {
+        baseURL: siteBaseUrl.replace(/\/$/, ''),
+        stripExtension: true
+    }],
     ['@vuepress/last-updated', {
         transformer: (timestamp, lang) => {
             const moment = require('moment')

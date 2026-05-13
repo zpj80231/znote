@@ -7,7 +7,7 @@ const htmlModules = require('./config/htmlModules')
 module.exports = {
     // 打包目录
     // dest: 'gb-pages',
-    base: '/znote/',
+    base: process.env.VUEPRESS_BASE || '/znote/',
     title: "zの自留地",
     description: '内在丰盈者，独行亦如众',
     head: [
@@ -110,7 +110,7 @@ module.exports = {
         // 可选，默认为 master
         // docsBranch: 'vuepress',
         editLinks: true,
-        editLinkText: '在 GitHub 上编辑此页！',
+        editLinkText: '编辑此页',
         // 评论
         // valineConfig: {
         //     appId: 'xbT4pPXCWQju5T7GXC5fUFlF-gzGzoHsz',
