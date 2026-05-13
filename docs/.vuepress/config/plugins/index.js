@@ -57,10 +57,6 @@ module.exports = [
             cleanupOutdatedCaches: true
         }
     }],
-    ['@vuepress/google-analytics', {
-        ga: 'UA-128189152-1'
-    }
-    ],
     ['sitemap', {
         hostname: siteBaseUrl,
         exclude: ['/404.html'],
