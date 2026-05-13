@@ -2,7 +2,7 @@
 	"name": "znote",
 	"version": "1.1.0",
 	"description": "VuePress 静态布局 Blog，清新+ 简洁+。",
-	"homepage": "https://zpj80231.github.io/znote",
+	"homepage": "https://bree.de5.net/znote/",
 	"license": "MIT",
 	"keywords": [
 		"vuepress",
@@ -43,5 +43,9 @@
 		"vuepress-plugin-sitemap": "2.3.1",
 		"vuepress-plugin-smooth-scroll": "0.0.10",
 		"vuepress-theme-reco": "1.6.17"
+	},
+	"devDependencies": {
+		"core-js": "^3.49.0",
+		"vuepress-plugin-canonical": "^1.0.0"
 	}
 }
