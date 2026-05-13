@@ -1,8 +1,8 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "version": 2,
-  "buildCommand": "npm run build",
-  "installCommand": "npm install",
+  "buildCommand": "pnpm run build",
+  "installCommand": "pnpm install --frozen-lockfile",
   "outputDirectory": "docs/.vuepress/dist",
   "redirects": [
     { "source": "/", "destination": "/znote/", "permanent": true },

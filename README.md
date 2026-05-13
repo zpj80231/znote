@@ -46,9 +46,17 @@
 
 ## 项目运行
 
-- 克隆项目，在项目文件夹下执行命令，加载依赖：`npm install`
-- 在项目文件夹下执行命令运行项目：`npm run dev`
+> 本项目使用 [pnpm](https://pnpm.io/) 作为包管理器（更快、更省磁盘、更严格的依赖隔离）。如尚未安装，执行以下命令一次性启用（Node 16.10+ 内置 Corepack）：
+>
+> ```bash
+> corepack enable
+> corepack prepare pnpm@latest --activate
+> ```
+
+- 克隆项目，在项目文件夹下执行命令，加载依赖：`pnpm install`
+- 在项目文件夹下执行命令运行项目：`pnpm run dev`
 - 待启动成功后打开地址即可：[http://localhost:8080/znote/](http://localhost:8080/znote/)
+- 构建生产产物：`pnpm run build`，产物输出至 `docs/.vuepress/dist/`
 
 ## 项目架构
 
