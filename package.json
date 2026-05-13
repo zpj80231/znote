@@ -26,6 +26,7 @@
 		"build": "vuepress build docs",
 		"deploy": "bash ./utils/deploy.sh"
 	},
+	"packageManager": "pnpm@10.28.2",
 	"dependencies": {
 		"@vuepress/plugin-google-analytics": "1.9.10",
 		"@vuepress/plugin-medium-zoom": "1.9.10",
