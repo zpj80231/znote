@@ -73,6 +73,10 @@ module.exports = [
         baseURL: siteBaseUrl.replace(/\/$/, ''),
         stripExtension: true
     }],
+    [require('../../plugins/robots'), {
+        host: siteUrl,
+        sitemap: `${siteBase}sitemap.xml`
+    }],
     ['@vuepress/last-updated', {
         transformer: (timestamp, lang) => {
             const moment = require('moment')
