@@ -14,6 +14,7 @@ module.exports = {
         ['meta', {name: 'viewport', content: 'width=device-width,initial-scale=1,user-scalable=no'}],
         ['meta', {name: 'renderer', content: 'webkit'}],
         ['meta', {name: 'referrer', content: 'strict-origin-when-cross-origin'}],
+        ['meta', {name: 'baidu-site-verification', content: 'codeva-FEUyXuB9mk'}],
         ['meta', {
             'data-draft-node': 'block',
             'data-draft-type': 'table',
