@@ -67,6 +67,9 @@ export default {
   watch: {
     '$route' () {
       this.$nextTick(this.updateMenu)
+    },
+    activeHash () {
+      this.$nextTick(this.scrollActiveItemIntoView)
     }
   },
 
@@ -127,6 +130,34 @@ export default {
       }
 
       this.activeHash = decodeURIComponent(current.id)
+    },
+    scrollActiveItemIntoView () {
+      const container = this.$el && this.$el.querySelector('.right-menu-content')
+      if (!container) return
+      const activeItem = container.querySelector('.right-menu-item.active')
+      if (!activeItem) return
+
+      const containerRect = container.getBoundingClientRect()
+      const itemRect = activeItem.getBoundingClientRect()
+      const padding = 8
+      const itemTop = itemRect.top - containerRect.top + container.scrollTop
+      const itemBottom = itemTop + itemRect.height
+      const viewTop = container.scrollTop
+      const viewBottom = viewTop + container.clientHeight
+
+      let target = null
+      if (itemTop < viewTop) {
+        target = Math.max(0, itemTop - padding)
+      } else if (itemBottom > viewBottom) {
+        target = itemBottom - container.clientHeight + padding
+      }
+      if (target === null) return
+
+      if (typeof container.scrollTo === 'function') {
+        container.scrollTo({ top: target, behavior: 'smooth' })
+      } else {
+        container.scrollTop = target
+      }
     },
     initContainerObserver () {
       const container = document.querySelector('.theme-container')
