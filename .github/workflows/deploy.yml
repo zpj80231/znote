@@ -37,18 +37,22 @@ jobs:
           persist-credentials: false
           fetch-depth: 0
 
+      - name: Setup pnpm 📦
+        uses: pnpm/action-setup@v4
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
 
       - name: Build 🔧
         run: |
           # 清理之前的构建文件
           rm -rf docs/.vuepress/dist
           rm -rf node_modules/.cache
-          npm install 
-          npm run build
+          pnpm install --frozen-lockfile
+          pnpm run build
 
       - name: Inject Cache Busting Info into HTML ♻️
         run: |

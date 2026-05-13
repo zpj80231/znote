@@ -28,7 +28,7 @@ compatibility_date = "2026-03-03"
 ##   - GitHub Actions 已配置 fetch-depth: 0 获取完整历史
 ##   - Cloudflare Pages 无此配置项，需在构建命令中手动处理
 ##
-command = "git fetch --unshallow 2>/dev/null || git fetch --depth=100000 2>/dev/null || true && npm run build"
+command = "git fetch --unshallow 2>/dev/null || git fetch --depth=100000 2>/dev/null || true && corepack enable && pnpm install --frozen-lockfile && pnpm run build"
 cwd = "."
 
 [assets]
