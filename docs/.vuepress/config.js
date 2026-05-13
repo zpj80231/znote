@@ -13,7 +13,7 @@ module.exports = {
     head: [
         ['meta', {name: 'viewport', content: 'width=device-width,initial-scale=1,user-scalable=no'}],
         ['meta', {name: 'renderer', content: 'webkit'}],
-        ['meta', {name: 'referrer', content: 'never'}],
+        ['meta', {name: 'referrer', content: 'strict-origin-when-cross-origin'}],
         ['meta', {
             'data-draft-node': 'block',
             'data-draft-type': 'table',
@@ -40,19 +40,27 @@ module.exports = {
         ['link', {rel: 'apple-touch-icon', sizes: '180x180', href: '/vuepress/apple-touch-icon-180x180.png'}],
         // bump axios from 0.26.1 to 1.11.0
         ["script", {}, "window.global = window; window.process = window.process || { env: { NODE_ENV: 'production' } };"],
-        ["script", {"language": "javascript", "type": "text/javascript", "src": "/js/jquery.min.js"}],
-        ["script", {"language": "javascript", "type": "text/javascript", "src": "/js/cwd.js"}],
-        ["script", {"language": "javascript", "type": "text/javascript", "src": "/js/MouseClickEffect.js"}],
+        ["script", {"defer": true, "language": "javascript", "type": "text/javascript", "src": "/js/jquery.min.js"}],
+        ["script", {"defer": true, "language": "javascript", "type": "text/javascript", "src": "/js/cwd.js"}],
+        ["script", {"defer": true, "language": "javascript", "type": "text/javascript", "src": "/js/MouseClickEffect.js"}],
+        // Google Analytics (GA4)
+        ["script", {async: true, src: "https://www.googletagmanager.com/gtag/js?id=G-NCYBBYN93V"}],
+        ["script", {}, `
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-NCYBBYN93V');
+        `],
         // 注销历史 Service Worker，防止旧缓存拦截
         ["script", {}, `
-      (function() {
-        if ('serviceWorker' in navigator) {
-          navigator.serviceWorker.getRegistrations && navigator.serviceWorker.getRegistrations().then(function(regs){
-            regs.forEach(function(reg){ reg.unregister(); });
-          });
-        }
-      })();
-    `]
+          (function() {
+            if ('serviceWorker' in navigator) {
+              navigator.serviceWorker.getRegistrations && navigator.serviceWorker.getRegistrations().then(function(regs){
+                regs.forEach(function(reg){ reg.unregister(); });
+              });
+            }
+          })();
+        `]
     ].concat(
         // 接入万维广告
         // 1. 把 WWAds 给你的广告 HTML 填到 htmlModules.js
