@@ -71,18 +71,14 @@ module.exports = [
     ],
     ['vuepress-plugin-canonical', {
         baseURL: siteBaseUrl.replace(/\/$/, ''),
-        stripExtension: true
+        stripExtension: false
     }],
     [require('@mr-hope/vuepress-plugin-seo'), {
         hostname: siteUrl,
         author: 'z',
         autoDescription: true,
         fallBackImage: `${siteBaseUrl}vuepress/znote.png`,
-        isArticle: page => Boolean(page._filePath && !page.frontmatter.home),
-        seo: ogp => ({
-            ...ogp,
-            'og:url': ogp['og:url'].replace(/\.html$/, '')
-        })
+        isArticle: page => Boolean(page._filePath && !page.frontmatter.home)
     }],
     [require('../../plugins/robots'), {
         host: siteUrl,
