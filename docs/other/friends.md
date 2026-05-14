@@ -29,7 +29,7 @@ reward: true
 #  textColor: '#7B2532'
 - name: zの自留地
   desc: 内在丰盈者，独行亦如众
-  avatar: https://zpj80231.github.io/znote/img/site/head-fish.jpg
+  avatar: https://zpj80231.github.io/znote/img/site/head.jpg
   link: https://zpj80231.github.io/znote/
   bgColor: '#97b8e5'
   textColor: '#2c3e50'
@@ -98,7 +98,7 @@ reward: true
 ```yaml
 - name: zの自留地
   desc: 内在丰盈者，独行亦如众
-  avatar: https://zpj80231.github.io/znote/img/site/head-fish.jpg
+  avatar: https://zpj80231.github.io/znote/img/site/head.jpg
   link: https://zpj80231.github.io/znote/
   bgColor: '#FCDBA0'
   textColor: '#A05F2C'

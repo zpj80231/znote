@@ -5,7 +5,7 @@ sidebar: false
 isShowComments: true
 ---
 
-<p align="center"><img style="border-radius:41%;pointer-events:none;transform: scale(0.9);" :src="$withBase('/img/site/head-fish.jpg')" alt="znote-head" width=160></p>
+<p align="center"><img style="border-radius:41%;pointer-events:none;transform: scale(0.9);" :src="$withBase('/img/site/head.jpg')" alt="znote-head" width=160></p>
 <p align="center" style="margin-top: -15px;">
   <a href="https://zpj80231.github.io/znote/" class="zi zi_textbook"></a> 
   <a href="mailto:zpj80231@163.com" class="zi zi_envelope"></a> 

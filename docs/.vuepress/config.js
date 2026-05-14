@@ -85,7 +85,7 @@ module.exports = {
         // 禁用移动端左滑唤出侧边栏
         disableSwipe: true,
         // logo: '/img/site/logo.png', // 导航栏头像
-        authorAvatar: '/img/site/head-fish.jpg', // 首页右侧头像
+        authorAvatar: '/img/site/head.jpg', // 首页右侧头像
         // 搜索设置
         search: true,
         searchMaxSuggestions: 10,
