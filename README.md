@@ -35,7 +35,7 @@
 
 - 本仓库代码使用 [MIT](https://github.com/SigureMo/notev/blob/master/LICENSE) 协议进行开源，但是全部文档内容使用 [CC 4.0 BY-SA](https://creativecommons.org/licenses/by-sa/4.0/) 协议进行发布
 
-![](/docs/.vuepress/public/vuepress/znote.png)
+![](/docs/.vuepress/public/img/site/znote.png)
 
 ## 项目介绍
 

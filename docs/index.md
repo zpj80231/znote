@@ -1,7 +1,7 @@
 ---
 home: true
 heroImage: ''
-faceImage: '/vuepress/head.png'
+faceImage: '/img/site/head.png'
 heroImageStyle: {
   max-width: '500px',
   height: '280px',
@@ -65,15 +65,15 @@ export default {
   methods: {
     setRandomHeroImage() {
       const images = [
-        '/znote/vuepress/index-read.gif',
-        '/znote/vuepress/index-snoopy-1.gif',
-        '/znote/vuepress/index-snoopy-2.gif',
-        '/znote/vuepress/index-snoopy-3.gif',
-        '/znote/vuepress/index-snoopy-4.gif',
-        '/znote/vuepress/index-snoopy-5.gif',
-        '/znote/vuepress/index-snoopy-6.gif',
-        '/znote/vuepress/index-snoopy-7.gif',
-        '/znote/vuepress/index-snoopy-8.gif'
+        '/znote/img/site/index-read.gif',
+        '/znote/img/site/index-snoopy-1.gif',
+        '/znote/img/site/index-snoopy-2.gif',
+        '/znote/img/site/index-snoopy-3.gif',
+        '/znote/img/site/index-snoopy-4.gif',
+        '/znote/img/site/index-snoopy-5.gif',
+        '/znote/img/site/index-snoopy-6.gif',
+        '/znote/img/site/index-snoopy-7.gif',
+        '/znote/img/site/index-snoopy-8.gif'
       ]
       const selectedImage = images[Math.floor(Math.random() * images.length)]
 

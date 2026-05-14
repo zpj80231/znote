@@ -134,7 +134,7 @@ next: source/code/rpc/rpc-source-01
 			return {
                 changeTime: '2000',
 				index: 2,
-				imgSrc: '/znote/view/rddek.gif',
+				imgSrc: '/znote/img/other/rddek.gif',
 				active: 'active'
 			}
 		},
@@ -154,7 +154,7 @@ next: source/code/rpc/rpc-source-01
 					}else {
 						this.active="active";
 					}
-					this.imgSrc = '/znote/view/' + picList[Math.floor(Math.random() * picList.length)]
+					this.imgSrc = '/znote/img/other/' + picList[Math.floor(Math.random() * picList.length)]
 
 				}, 5000)
 			},

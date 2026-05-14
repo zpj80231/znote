@@ -9,14 +9,14 @@
 const pageTop = `
 <div class="pin-adv">
   <a href="https://easysearch.cn" target="_blank" rel="noopener noreferrer">
-    <img class="no-zoom" style="border-radius:3px;" src="/znote/donate/easySearch-banner-2.png" alt="EasySearch">
+    <img class="no-zoom" style="border-radius:3px;" src="/znote/img/donate/easySearch-banner-2.png" alt="EasySearch">
   </a>
 </div> `
 
 const sidebarTop = `
 <div class="pin-adv pin-adv-sidebar">
   <a href="https://easysearch.cn" target="_blank" rel="noopener noreferrer">
-    <img class="no-zoom" height="60" width="224" src="/znote/donate/easySearch-banner-1.webp" alt="EasySearch">
+    <img class="no-zoom" height="60" width="224" src="/znote/img/donate/easySearch-banner-1.webp" alt="EasySearch">
   </a>
 </div> `
 
