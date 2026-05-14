@@ -35,7 +35,9 @@ export default {
 
   computed: {
     headers () {
-      return this.$page.headers || []
+      const depth = this.$themeConfig.rightMenuBarDepth
+      const all = this.$page.headers || []
+      return typeof depth === 'number' ? all.filter(h => h.level <= depth + 1) : all
     },
     menuStyle () {
       const style = {}

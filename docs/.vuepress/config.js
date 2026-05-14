@@ -92,6 +92,8 @@ module.exports = {
         smoothScroll: true,
         // 右侧菜单目录开关
         rightMenuBar: true,
+        // 右侧菜单目录深度，可选；不配置则显示 $page.headers 全部层级
+        // rightMenuBarDepth: 3,
         // 侧边栏目录深度
         sidebarDepth: 0,
         blogConfig: {
