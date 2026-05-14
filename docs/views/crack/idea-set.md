@@ -21,6 +21,8 @@ IDEA破解、全插件破解。项目地址：[https://github.com/zpj80231/idea-
 
 本项目仅用于个人学习与参考，请勿转载分发、请勿用于商业用途。对于使用本项目造成的任何后果均与作者无关。如有侵权，请联系删除。
 
+🐷 不更新不代表不能用，放心升级 IDE，稳稳适配新版本。
+
 ## 2. 激活
 
 ### 2.1 正式激活
@@ -54,13 +56,13 @@ IDEA破解、全插件破解。项目地址：[https://github.com/zpj80231/idea-
     3. 打开并进入 JetBrains IDE，点击顶部菜单：`Help --> Edit Custom VM Options...`（参考 [issue 13](https://github.com/zpj80231/idea-set/issues/13#issuecomment-3526721400)）
        在末尾填上：
 
-       ```properties
-       ### idea-set 注意事项 ###
-       # 1.请提前退出或禁用：IDE 中登录的个人账号、CodeWithMe 等自家有远程交互能力的插件（这类插件可能存在遥测机制，导致掉线或激活无效）
-       # 2.请确保将 `/Users/xxx/idea-set/ja-netfilter.jar` 替换为实际的绝对路径
-       # 3.更新此配置、禁用相关插件后，务必重启 IDE 再输入激活码
-       -javaagent:/Users/xxx/idea-set/ja-netfilter.jar
-       ```
+    ```properties
+   ### idea-set 注意事项 ###
+   # 1.请提前退出或禁用：IDE 中登录的个人账号、CodeWithMe 等自家有远程交互能力的插件（这类插件可能存在遥测机制，导致掉线或激活无效）
+   # 2.请确保将 `/Users/xxx/idea-set/ja-netfilter.jar` 替换为实际的绝对路径
+   # 3.更新此配置、禁用相关插件后，务必重启 IDE 再输入激活码
+   -javaagent:/Users/xxx/idea-set/ja-netfilter.jar
+    ```
 
     4. 更新 agent 配置后，一定要重启 IDEA。点击顶部菜单：`Help --> Manage Subscriptions...`，填入 `activate-code-app` 文件夹激活码
 
@@ -95,7 +97,12 @@ IDEA破解、全插件破解。项目地址：[https://github.com/zpj80231/idea-
 
 ## 4. 常用插件
 
+### 4.1 插件优化
+
 - 按需关闭自带插件。插件优化：[IDEA 关闭不必要的插件减少内存占用](https://blog.csdn.net/tutian2000/article/details/80074643)
+
+### 4.2 插件推荐
+
 - 以下是推荐的插件：
 
 | 序号 | 名称                                | 备注                                                                                                                                                                                                                                                        |
@@ -106,7 +113,7 @@ IDEA破解、全插件破解。项目地址：[https://github.com/zpj80231/idea-
 | 4  | Translation                       | 翻译                                                                                                                                                                                                                                                        |
 | 5  | JRebel、DebugTools                 | 热加载插件，代码改动之后无需重启服务，被修改的类会自动重新加载，破解请自行百度<br/>或者参考：[jrebel-license-active-server](https://github.com/yu-xiaoyao/jrebel-license-active-server)<br/>修改完 Java 代码后，就可以通过快捷键 Ctrl+Shift+F9 刷新项目                                                                  |
 | 6  | CodeGlance Pro                    | 类似于 Sublime 的右侧，整体代码滚动条，使用此插件可以查看缩略图一样，快速切换到自己需要去的地方~                                                                                                                                                                                                     |
-| 7  | Rainbow Brackets                  | 彩色括号匹配                                                                                                                                                                                                                                                    |
+| 7  | Rainbow Brackets                  | 彩色括号匹配（每一版都得重新破解，很烦），推荐使用这个替换 [Color Brackets](https://plugins.jetbrains.com/plugin/24560-color-brackets)           |
 | 8  | Rainbow Variable                  | 方法内彩色变量匹配                                                                                                                                                                                                                                                 |
 | 9  | MyBatis Log Free                  | MyBatis 日志打印                                                                                                                                                                                                                                              |
 | 10 | MyBatisCodeHelper-Pro             | 生成 Mapper xml 文件<br/>快速从代码跳转到 Mapper 及从 Mapper 返回代码<br/> Mybatis 自动补全及语法错误提示<br/>集成 Mybatis Generator GUI 界面<br/>根据数据库注解，生成 Swagger Model 注解<br/>[MyBatisCodeHelper-Pro 破解指导](https://zpj80231.github.io/znote/views/crack/mybatiscodehelperprocrack.html) |
