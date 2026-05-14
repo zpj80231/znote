@@ -17,15 +17,6 @@ on:
 env:
   TZ: Asia/Shanghai
 
-# GitHub 官方 Pages 部署所需权限（使用内置的 GITHUB_TOKEN）
-# - contents: read     拉取仓库代码
-# - pages: write       写入 GitHub Pages 服务
-# - id-token: write    用于 GitHub OIDC 鉴权（actions/deploy-pages 内部使用）
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
 # 只允许同时进行一次部署，跳过正在运行和最新队列之间的运行队列
 # 但是，不要取消正在进行的运行，因为我们希望允许这些生产部署完成
 concurrency:
@@ -36,10 +27,6 @@ concurrency:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    # 绑定到 github-pages 环境，部署成功后此处 URL 会显示在 Actions 运行详情中
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     strategy:
       matrix:
         node-version: [ 22 ]
@@ -74,21 +61,15 @@ jobs:
           find docs/.vuepress/dist -name "*.html" -type f -print0 | xargs -0 -I {} bash -c "sed -i 's#</head>#<!-- Build Date: ${BUILD_DATE} -->\n</head>#' '{}'"
 
       # ---------- GitHub Pages 官方部署 3 步 ----------
-      # 前置要求：仓库 Settings → Pages → Source 必须设置为 "GitHub Actions"
+      # 前置要求：仓库 Settings → Pages → Source 必须设置为 "Deploy from a branch"
       # 站点访问地址：https://zpj80231.github.io/znote/ （默认）
       #            或在 Settings → Pages → Custom domain 配置自定义域名
-
-      # 1) 初始化 Pages 运行环境，输出 base_path 等供后续步骤使用
-      - name: Setup Pages 📄
-        uses: actions/configure-pages@v5
-
-      # 2) 把构建产物打包上传为 Pages artifact（默认名 github-pages）
-      - name: Upload artifact 📤
-        uses: actions/upload-pages-artifact@v3
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4.7.3
         with:
-          path: docs/.vuepress/dist
-
-      # 3) 触发 GitHub Pages 服务从 artifact 拉取并发布；输出的 page_url 会注入到 environment
-      - name: Deploy to GitHub Pages 🚀
-        id: deployment
-        uses: actions/deploy-pages@v4
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          branch: gh-pages
+          folder: docs/.vuepress/dist
+          single-commit: true
+          clean: true
+          force: true
