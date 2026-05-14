@@ -50,6 +50,7 @@ export default {
   },
 
   mounted () {
+    document.body.classList.add('has-right-menu')
     this.$nextTick(this.updateMenu)
     this.initContainerObserver()
     window.addEventListener('scroll', this.requestUpdateActiveHash, { passive: true })
@@ -58,6 +59,7 @@ export default {
   },
 
   beforeDestroy () {
+    document.body.classList.remove('has-right-menu')
     window.removeEventListener('scroll', this.requestUpdateActiveHash)
     window.removeEventListener('resize', this.requestUpdateActiveHash)
     window.removeEventListener('hashchange', this.updateActiveHashFromHash)
@@ -257,6 +259,10 @@ $rightMenuWidth = 230px
 
 @media (max-width: 1280px)
   .right-menu-wrapper
+    display none
+
+@media (min-width: 1281px)
+  body.has-right-menu .theme-reco-content .table-of-contents
     display none
 
 </style>
