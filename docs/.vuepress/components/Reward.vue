@@ -46,7 +46,7 @@
         data() {
             return {
                 rewarder,
-                weChatAliPayQrcode: "/znote/reward/WeChatAliPayQrcode.png",
+                weChatAliPayQrcode: "/znote/img/reward/WeChatAliPayQrcode.png",
                 isShow: false
             }
         },

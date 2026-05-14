@@ -143,37 +143,37 @@ IDEA破解、全插件破解。项目地址：[https://github.com/zpj80231/idea-
 
 - Appearance & Behavior -> Appearance -> Theme
 
-![idea-theme.png](/znote/idea/idea-theme.png)
+![idea-theme.png](/znote/img/idea/idea-theme.png)
 
 ### 5.2 字体
 
 * IDEA 应用字体：Appearance & Behavior -> Appearance
 
-![IDEA应用字体](/znote/idea/idea-sidebar-font.png)
+![IDEA应用字体](/znote/img/idea/idea-sidebar-font.png)
 
 * 代码字体：Editor -> Font
 
-![代码字体](/znote/idea/idea-code-font.png)
+![代码字体](/znote/img/idea/idea-code-font.png)
 
 * 控制台字体：Tools -> terminal
 
-![idea-control-font.png](/znote/idea/idea-control-font.png)
+![idea-control-font.png](/znote/img/idea/idea-control-font.png)
 
 * 使用鼠标滚轮调整字体大小：Editor -> General -> Change font size (Zoom) with Ctrl + Mouse Wheel
 
-![idea-control-font.png](/znote/idea/idea-mouse-wheel-font.png)
+![idea-control-font.png](/znote/img/idea/idea-mouse-wheel-font.png)
 
 ### 5.3 编码
 
 * Editor -> File encodings
 
-![IDEA编码设置](/znote/idea/idea-file-encodings.png)
+![IDEA编码设置](/znote/img/idea/idea-file-encodings.png)
 
 ### 5.4 切换语言
 
 * Appearance & Behavior -> System Settings -> Language and Region
 
-![IDEA语言设置](/znote/idea/idea-language.png)
+![IDEA语言设置](/znote/img/idea/idea-language.png)
 
 ### 5.5 代码实时模板
 
@@ -184,7 +184,7 @@ IDEA破解、全插件破解。项目地址：[https://github.com/zpj80231/idea-
 
 相关配置见：[IDEA代码模板](https://blog.csdn.net/Yinyaowei/article/details/103836510)
 
-![image.png](/znote/idea/idea-live-templates.png)
+![image.png](/znote/img/idea/idea-live-templates.png)
 
 ### 5.6 文件头注释
 
@@ -198,20 +198,20 @@ IDEA破解、全插件破解。项目地址：[https://github.com/zpj80231/idea-
  */
 ```
 
-![image.png](/znote/idea/idea-file-templates.png)
+![image.png](/znote/img/idea/idea-file-templates.png)
 
 ### 5.7 注释不顶格（不在行首）
 
 * Editor -> Code Style -> Java -> Code Generation
 
-![image.png](/znote/idea/idea-code-style-java.png)
-![image.png](/znote/idea/idea-code-style-xml.png)
+![image.png](/znote/img/idea/idea-code-style-java.png)
+![image.png](/znote/img/idea/idea-code-style-xml.png)
 
 ### 5.8 自定义后缀文件的语法高亮
 
 * Editor -> File Types
 
-![image.png](/znote/idea/idea-file-types.png)
+![image.png](/znote/img/idea/idea-file-types.png)
 
 
 <Reward/>
