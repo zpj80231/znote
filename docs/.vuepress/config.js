@@ -24,21 +24,21 @@ module.exports = {
         ['meta', {name: 'apple-mobile-web-app-capable', content: 'yes'}],
         ['meta', {name: 'mobile-web-app-capable', content: 'yes'}],
         ['meta', {name: 'apple-mobile-web-app-status-bar-style', content: 'black'}],
-        ['meta', {name: 'msapplication-TileImage', content: '/vuepress/msapplication-icon-144x144.png'}],
+        ['meta', {name: 'msapplication-TileImage', content: '/img/site/msapplication-icon-144x144.png'}],
         ['meta', {name: 'msapplication-TileColor', content: '#000000'}],
         ['link', {rel: 'icon', href: '/logo.png'}],
-        ['link', {rel: 'icon', type: 'image/png', sizes: '16x16', href: '/vuepress/favicon-16x16.png'}],
-        ['link', {rel: 'icon', type: 'image/png', sizes: '32x32', href: '/vuepress/favicon-32x32.png'}],
-        ['link', {rel: 'mask-icon', href: '/vuepress/safari-pinned-tab.svg'}],
+        ['link', {rel: 'icon', type: 'image/png', sizes: '16x16', href: '/img/site/favicon-16x16.png'}],
+        ['link', {rel: 'icon', type: 'image/png', sizes: '32x32', href: '/img/site/favicon-32x32.png'}],
+        ['link', {rel: 'mask-icon', href: '/img/site/safari-pinned-tab.svg'}],
         ['link', {rel: 'manifest', href: '/manifest.json'}],
-        ['link', {rel: 'apple-touch-icon', sizes: '57x57', href: '/vuepress/apple-touch-icon-57x57.png'}],
-        ['link', {rel: 'apple-touch-icon', sizes: '60x60', href: '/vuepress/apple-touch-icon-60x60.png'}],
-        ['link', {rel: 'apple-touch-icon', sizes: '72x72', href: '/vuepress/apple-touch-icon-72x72.png'}],
-        ['link', {rel: 'apple-touch-icon', sizes: '76x76', href: '/vuepress/apple-touch-icon-76x76.png'}],
-        ['link', {rel: 'apple-touch-icon', sizes: '120x120', href: '/vuepress/apple-touch-icon-120x120.png'}],
-        ['link', {rel: 'apple-touch-icon', sizes: '144x144', href: '/vuepress/apple-touch-icon-144x144.png'}],
-        ['link', {rel: 'apple-touch-icon', sizes: '152x152', href: '/vuepress/apple-touch-icon-152x152.png'}],
-        ['link', {rel: 'apple-touch-icon', sizes: '180x180', href: '/vuepress/apple-touch-icon-180x180.png'}],
+        ['link', {rel: 'apple-touch-icon', sizes: '57x57', href: '/img/site/apple-touch-icon-57x57.png'}],
+        ['link', {rel: 'apple-touch-icon', sizes: '60x60', href: '/img/site/apple-touch-icon-60x60.png'}],
+        ['link', {rel: 'apple-touch-icon', sizes: '72x72', href: '/img/site/apple-touch-icon-72x72.png'}],
+        ['link', {rel: 'apple-touch-icon', sizes: '76x76', href: '/img/site/apple-touch-icon-76x76.png'}],
+        ['link', {rel: 'apple-touch-icon', sizes: '120x120', href: '/img/site/apple-touch-icon-120x120.png'}],
+        ['link', {rel: 'apple-touch-icon', sizes: '144x144', href: '/img/site/apple-touch-icon-144x144.png'}],
+        ['link', {rel: 'apple-touch-icon', sizes: '152x152', href: '/img/site/apple-touch-icon-152x152.png'}],
+        ['link', {rel: 'apple-touch-icon', sizes: '180x180', href: '/img/site/apple-touch-icon-180x180.png'}],
         // bump axios from 0.26.1 to 1.11.0
         ["script", {}, "window.global = window; window.process = window.process || { env: { NODE_ENV: 'production' } };"],
         ["script", {"defer": true, "language": "javascript", "type": "text/javascript", "src": "/js/jquery.min.js"}],
@@ -84,8 +84,8 @@ module.exports = {
         isSidebarOpen: false, // 默认侧边栏是否打开
         // 禁用移动端左滑唤出侧边栏
         disableSwipe: true,
-        // logo: '/vuepress/logo.png', // 导航栏头像
-        authorAvatar: '/vuepress/head-fish.jpg', // 首页右侧头像
+        // logo: '/img/site/logo.png', // 导航栏头像
+        authorAvatar: '/img/site/head-fish.jpg', // 首页右侧头像
         // 搜索设置
         search: true,
         searchMaxSuggestions: 10,

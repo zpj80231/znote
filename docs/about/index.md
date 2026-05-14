@@ -5,7 +5,7 @@ sidebar: false
 isShowComments: true
 ---
 
-<p align="center"><img style="border-radius:41%;pointer-events:none;transform: scale(0.9);" :src="$withBase('/vuepress/head-fish.jpg')" alt="znote-head" width=160></p>
+<p align="center"><img style="border-radius:41%;pointer-events:none;transform: scale(0.9);" :src="$withBase('/img/site/head-fish.jpg')" alt="znote-head" width=160></p>
 <p align="center" style="margin-top: -15px;">
   <a href="https://zpj80231.github.io/znote/" class="zi zi_textbook"></a> 
   <a href="mailto:zpj80231@163.com" class="zi zi_envelope"></a> 
@@ -80,9 +80,9 @@ isShowComments: true
 <p align="center">
 <table style="display: contents;">
     <tr>
-        <td><img :src="$withBase('/vuepress/个人微信二维码.jpg')" width=160>
+        <td><img :src="$withBase('/img/site/个人微信二维码.jpg')" width=160>
         </td>
-        <td><img :src="$withBase('/vuepress/公众号二维码.jpg')" width=160>
+        <td><img :src="$withBase('/img/site/公众号二维码.jpg')" width=160>
         </td>
     </tr>
     <tr>
