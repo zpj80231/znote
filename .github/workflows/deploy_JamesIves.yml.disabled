@@ -1,0 +1,75 @@
+#
+# 构建 VuePress 站点并将其部署到 GitHub Pages 的工作流程
+#
+name: Deploy GitHub Pages
+
+# 触发条件：在 push 到 master 分支后
+# 如果你使用 `main` 分支作为默认分支，请将其更改为 `main`
+on:
+  push:
+    branches:
+      - master
+
+  # 允许你从 Actions 选项卡手动运行此工作流程
+  workflow_dispatch:
+
+# 环境变量
+env:
+  TZ: Asia/Shanghai
+
+# 只允许同时进行一次部署，跳过正在运行和最新队列之间的运行队列
+# 但是，不要取消正在进行的运行，因为我们希望允许这些生产部署完成
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+# 任务
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [ 22 ]
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: Setup pnpm 📦
+        uses: pnpm/action-setup@v4
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
+
+      - name: Build 🔧
+        run: |
+          # 清理之前的构建文件
+          rm -rf docs/.vuepress/dist
+          rm -rf node_modules/.cache
+          pnpm install --frozen-lockfile
+          pnpm run build
+
+      - name: Inject Cache Busting Info into HTML ♻️
+        run: |
+          BUILD_DATE=$(date "+%Y-%m-%d %H:%M:%S")
+          echo "Injecting build date: $BUILD_DATE into html files"
+          find docs/.vuepress/dist -name "*.html" -type f -print0 | xargs -0 -I {} bash -c "sed -i 's#</head>#<!-- Build Date: ${BUILD_DATE} -->\n</head>#' '{}'"
+
+      # ---------- GitHub Pages 官方部署 3 步 ----------
+      # 前置要求：仓库 Settings → Pages → Source 必须设置为 "Deploy from a branch"
+      # 站点访问地址：https://zpj80231.github.io/znote/ （默认）
+      #            或在 Settings → Pages → Custom domain 配置自定义域名
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4.7.3
+        with:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          branch: gh-pages
+          folder: docs/.vuepress/dist
+          single-commit: true
+          clean: true
+          force: true
