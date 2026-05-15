@@ -134,7 +134,7 @@ next: source/code/rpc/rpc-source-01
 			return {
                 changeTime: '2000',
 				index: 2,
-				imgSrc: '/znote/img/other/rddek.gif',
+				imgSrc: '/znote/img/other/rddek.webp',
 				active: 'active'
 			}
 		},
@@ -146,7 +146,7 @@ next: source/code/rpc/rpc-source-01
 		},
 		methods: {
     		randomPic() {
-				let picList = ['kQWXr.gif','rddek.gif'];
+				let picList = ['kQWXr.webp','rddek.webp'];
 				let imgShow = document.getElementById("imgShow");
 				setInterval(() => {
 					if(this.active === 'active'){
