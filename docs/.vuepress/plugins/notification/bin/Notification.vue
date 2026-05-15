@@ -1,7 +1,7 @@
 <template>
     <transition name="fade">
         <div v-if="visible" class="notification-wrapper" :style="wrapperStyle">
-            <img :src="$withBase('/img/other/person_lital.gif')"
+            <img :src="$withBase('/img/other/person_lital.webp')"
                  style="pointer-events: none;border: 1px solid #DDDDDD;width: 100%;"
                  :class="{'active': isActive}"/>
             <i :class="['btn-close1', {'active': isActive}]" @click="closeNote">
