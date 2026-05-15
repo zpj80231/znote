@@ -1,6 +1,5 @@
 const path = require('path')
 const yaml = require('js-yaml')
-const moment = require("moment/moment");
 const CARD_LIST = 'cardList'
 const CARD_IMG_LIST = 'cardImgList'
 const siteUrl = process.env.SITE_URL || 'https://bree.de5.net'
@@ -82,8 +81,10 @@ module.exports = [
     }],
     ['@vuepress/last-updated', {
         transformer: (timestamp, lang) => {
-            const moment = require('moment')
-            return moment(timestamp).utcOffset(480).format('YYYY/MM/DD HH:mm:ss');
+            const dayjs = require('dayjs')
+            const utc = require('dayjs/plugin/utc')
+            dayjs.extend(utc)
+            return dayjs(timestamp).utcOffset(480).format('YYYY/MM/DD HH:mm:ss');
         }
     }],
     // ['vuepress-plugin-copyright',{
