@@ -65,15 +65,15 @@ export default {
   methods: {
     setRandomHeroImage() {
       const images = [
-        '/znote/img/site/index-read.gif',
-        '/znote/img/site/index-snoopy-1.gif',
-        '/znote/img/site/index-snoopy-2.gif',
-        '/znote/img/site/index-snoopy-3.gif',
-        '/znote/img/site/index-snoopy-4.gif',
-        '/znote/img/site/index-snoopy-5.gif',
-        '/znote/img/site/index-snoopy-6.gif',
-        '/znote/img/site/index-snoopy-7.gif',
-        '/znote/img/site/index-snoopy-8.gif'
+        '/znote/img/site/index-read.webp',
+        '/znote/img/site/index-snoopy-1.webp',
+        '/znote/img/site/index-snoopy-2.webp',
+        '/znote/img/site/index-snoopy-3.webp',
+        '/znote/img/site/index-snoopy-4.webp',
+        '/znote/img/site/index-snoopy-5.webp',
+        '/znote/img/site/index-snoopy-6.webp',
+        '/znote/img/site/index-snoopy-7.webp',
+        '/znote/img/site/index-snoopy-8.webp'
       ]
       const selectedImage = images[Math.floor(Math.random() * images.length)]
 
