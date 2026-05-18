@@ -171,7 +171,7 @@ function getCardListDOM(dataList, row) {
       <${item.link ? 'a href="' + item.link + '" target="_blank"' : 'span'} class="card-item ${row ? 'row-' + row : ''}"
          style="${item.bgColor ? 'background-color:' + item.bgColor + ';' : ''}${item.textColor ? 'color:' + item.textColor + ';' : ''}"
       >
-        ${item.avatar ? '<img src="' + item.avatar + '" class="no-zoom">' : ''}
+        ${item.avatar ? '<img src="' + item.avatar + '" referrerpolicy="no-referrer" class="no-zoom">' : ''}
         <div>
           <p class="name">${item.name}</p>
           <p class="desc">${item.desc}</p>
@@ -192,7 +192,7 @@ function getCardImgListDOM(dataList, row) {
       <div class="card-item ${row ? 'row-' + row : ''}" >
         <div class="box-img">
           ${item.link ? `<a href="${item.link}" target="_blank">` : ''}
-            <img src="${item.img}" class="no-zoom">
+            <img src="${item.img}" referrerpolicy="no-referrer" class="no-zoom">
           ${item.link ? `</a>` : ''}
         </div>
         <div class="box-info">
@@ -205,7 +205,7 @@ function getCardImgListDOM(dataList, row) {
         ${item.avatar || item.author
             ? `<div class="box-footer">
               ${item.link ? `<a href="${item.link}" target="_blank">` : ''}
-                ${item.avatar ? `<img src="${item.avatar}" class="no-zoom">` : ''}
+                ${item.avatar ? `<img src="${item.avatar}" referrerpolicy="no-referrer" class="no-zoom">` : ''}
                 ${item.author ? `<span>${item.author}</span>` : ''}
               ${item.link ? `</a>` : ''}
             </div>`
