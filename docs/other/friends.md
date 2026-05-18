@@ -52,7 +52,7 @@ reward: true
   bgColor: 'rgb(136,181,214)'
   textColor: 'rgb(249,249,249)'
 - name: 田小波
-  avatar: https://i0.hdslb.com/bfs/article/ac18f6b8bd9b03df51b68b3105885ed810211081.jpg@.webp
+  avatar: https://i0.hdslb.com/bfs/article/ac18f6b8bd9b03df51b68b3105885ed810211081.jpg
   desc: 欢迎访问田小波的技术博客
   link: https://www.tianxiaobo.com/
   bgColor: '#B39CD0'
