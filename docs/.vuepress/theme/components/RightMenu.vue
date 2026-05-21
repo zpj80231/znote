@@ -111,9 +111,10 @@ export default {
       const viewportWidth = document.documentElement.clientWidth || window.innerWidth
       const menuWidth = 230
       const gap = 16
+      const horizontalOffset = window.matchMedia('(min-width: 1281px)').matches ? -32 : 0
 
       const top = Math.max(stickyTop, contentTop - window.pageYOffset)
-      const left = Math.min(contentRect.right + gap, viewportWidth - menuWidth - gap)
+      const left = Math.min(contentRect.right + gap + horizontalOffset, viewportWidth - menuWidth - gap)
 
       this.menuTop = Math.round(top)
       this.menuLeft = Math.round(Math.max(gap, left))
