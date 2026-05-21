@@ -2,100 +2,102 @@
   <main class="page">
     <RightMenu v-if="showRightMenu" />
 
-    <ModuleTransition>
-      <slot v-show="recoShowModule" name="top"/>
-    </ModuleTransition>
+    <div class="page-body">
+      <ModuleTransition>
+        <slot v-show="recoShowModule" name="top"/>
+      </ModuleTransition>
 
-    <ModuleTransition delay="0.08">
-      <div v-show="recoShowModule" class="page-title">
-        <h1>{{$page.title}}</h1>
-        <hr>
-        <PageInfo :pageInfo="$page" :showAccessNumber="showAccessNumber"></PageInfo>
-      </div>
-    </ModuleTransition>
-
-    <ModuleTransition delay="0.16">
-      <div
-        v-if="pageSlotTop && isShowPageSlotTop"
-        v-show="recoShowModule"
-        class="html-module-slot page-slot page-slot-top"
-        v-html="pageSlotTop"
-      />
-    </ModuleTransition>
-
-    <ModuleTransition delay="0.20">
-      <Content v-show="recoShowModule" class="theme-reco-content" />
-    </ModuleTransition>
-
-    <ModuleTransition delay="0.24">
-      <div
-        v-if="pageSlotBottom && isShowPageSlotBottom"
-        v-show="recoShowModule"
-        class="html-module-slot page-slot page-slot-bottom"
-        v-html="pageSlotBottom"
-      />
-    </ModuleTransition>
-
-    <ModuleTransition delay="0.28">
-      <footer v-show="recoShowModule" class="page-edit">
-        <div
-          class="edit-link"
-          v-if="editLink"
-        >
-          <a
-            :href="editLink"
-            target="_blank"
-            rel="noopener noreferrer"
-          >{{ editLinkText }}</a>
-          <OutboundLink/>
+      <ModuleTransition delay="0.08">
+        <div v-show="recoShowModule" class="page-title">
+          <h1>{{$page.title}}</h1>
+          <hr>
+          <PageInfo :pageInfo="$page" :showAccessNumber="showAccessNumber"></PageInfo>
         </div>
+      </ModuleTransition>
 
+      <ModuleTransition delay="0.16">
         <div
-          class="last-updated"
-          v-if="lastUpdated"
-        >
-          <span class="prefix">{{ lastUpdatedText }}: </span>
-          <span class="time">{{ lastUpdated }}</span>
-        </div>
-      </footer>
-    </ModuleTransition>
+          v-if="pageSlotTop && isShowPageSlotTop"
+          v-show="recoShowModule"
+          class="html-module-slot page-slot page-slot-top"
+          v-html="pageSlotTop"
+        />
+      </ModuleTransition>
 
-    <ModuleTransition delay="0.36">
-      <div class="page-nav" v-if="recoShowModule && (prev || next)">
-        <p class="inner">
-          <span
-            v-if="prev"
-            class="prev"
+      <ModuleTransition delay="0.20">
+        <Content v-show="recoShowModule" class="theme-reco-content" />
+      </ModuleTransition>
+
+      <ModuleTransition delay="0.24">
+        <div
+          v-if="pageSlotBottom && isShowPageSlotBottom"
+          v-show="recoShowModule"
+          class="html-module-slot page-slot page-slot-bottom"
+          v-html="pageSlotBottom"
+        />
+      </ModuleTransition>
+
+      <ModuleTransition delay="0.28">
+        <footer v-show="recoShowModule" class="page-edit">
+          <div
+            class="edit-link"
+            v-if="editLink"
           >
-            ←
-            <router-link
+            <a
+              :href="editLink"
+              target="_blank"
+              rel="noopener noreferrer"
+            >{{ editLinkText }}</a>
+            <OutboundLink/>
+          </div>
+
+          <div
+            class="last-updated"
+            v-if="lastUpdated"
+          >
+            <span class="prefix">{{ lastUpdatedText }}: </span>
+            <span class="time">{{ lastUpdated }}</span>
+          </div>
+        </footer>
+      </ModuleTransition>
+
+      <ModuleTransition delay="0.36">
+        <div class="page-nav" v-if="recoShowModule && (prev || next)">
+          <p class="inner">
+            <span
               v-if="prev"
               class="prev"
-              :to="prev.path"
             >
-              {{ prev.title || prev.path }}
-            </router-link>
-          </span>
+              ←
+              <router-link
+                v-if="prev"
+                class="prev"
+                :to="prev.path"
+              >
+                {{ prev.title || prev.path }}
+              </router-link>
+            </span>
 
-          <span
-            v-if="next"
-            class="next"
-          >
-            <router-link
+            <span
               v-if="next"
-              :to="next.path"
+              class="next"
             >
-              {{ next.title || next.path }}
-            </router-link>
-            →
-          </span>
-        </p>
-      </div>
-    </ModuleTransition>
+              <router-link
+                v-if="next"
+                :to="next.path"
+              >
+                {{ next.title || next.path }}
+              </router-link>
+              →
+            </span>
+          </p>
+        </div>
+      </ModuleTransition>
 
-    <ModuleTransition delay="0.44">
-      <slot v-show="recoShowModule" name="bottom"/>
-    </ModuleTransition>
+      <ModuleTransition delay="0.44">
+        <slot v-show="recoShowModule" name="bottom"/>
+      </ModuleTransition>
+    </div>
 
     <RecentlyUpdateArticle
       :length="3"
@@ -302,6 +304,8 @@ function flatten (items, res) {
   padding-top 5rem
   padding-bottom 2rem
   display block
+  .page-body
+    width 100%
   .page-title
     max-width: $contentWidth;
     margin: 0 auto;
@@ -357,5 +361,14 @@ function flatten (items, res) {
       font-size .8em
       float none
       text-align left
+
+@media (min-width: 1281px)
+  body.has-right-menu
+    .page
+      .page-body
+        transform translateX(-2rem)
+    .comments-wrapper,
+    .cwd-comments-wrapper
+      transform translateX(-2rem)
 
 </style>
