@@ -300,6 +300,8 @@ function flatten (items, res) {
 <style lang="stylus">
 @require '../styles/wrapper.styl'
 
+$rightMenuLayoutOffset = -2rem
+
 .page
   padding-top 5rem
   padding-bottom 2rem
@@ -366,9 +368,11 @@ function flatten (items, res) {
   body.has-right-menu
     .page
       .page-body
-        transform translateX(-2rem)
+        transform translateX($rightMenuLayoutOffset)
+      .article-list
+        transform translateX($rightMenuLayoutOffset)
     .comments-wrapper,
     .cwd-comments-wrapper
-      transform translateX(-2rem)
+      transform translateX($rightMenuLayoutOffset)
 
 </style>
