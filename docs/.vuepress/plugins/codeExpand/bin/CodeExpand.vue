@@ -133,81 +133,77 @@ export default {
 .v-expand-code-btn {
   cursor: pointer;
   color: var(--code-block-color) !important;
-  transition: color 0.16s ease, opacity 0.16s ease, background 0.16s ease;
+  transition: color 0.2s ease, background 0.2s ease;
   position: absolute;
   z-index: 10;
   right: 0;
   bottom: 0;
   left: 0;
-  font-size: 0.75rem;
+  font-size: 0.82rem;
   font-weight: 500;
-  line-height: 1;
-  height: 2rem;
+  line-height: 1rem;
+  height: 2.4rem;
   padding: 0;
-  background: linear-gradient(to bottom, var(--code-block-bg) 0, var(--code-line-highlight) 42%, var(--code-line-highlight-border) 200%);
+  background: linear-gradient(to bottom, transparent 0%, var(--code-block-bg) 22%);
+  -webkit-mask-image: radial-gradient(ellipse 88% 100% at 50% 100%, rgba(0,0,0,1) 0%, rgba(0,0,0,0.7) 60%, rgba(0,0,0,0) 100%);
+  mask-image: radial-gradient(ellipse 88% 100% at 50% 100%, rgba(0,0,0,1) 0%, rgba(0,0,0,0.7) 60%, rgba(0,0,0,0) 100%);
   border: 0;
-  border-radius: 0 0 6px 6px;
+  border-radius: 0;
   box-shadow: none;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.34rem;
-  opacity: 0.96;
+  gap: 0.32rem;
+  opacity: 0.95;
   user-select: none;
   white-space: nowrap;
 }
 
-.v-expand-code-btn:after {
-  content: '';
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  height: 0.05rem;
-  background: linear-gradient(90deg, var(--code-line-highlight) 0, var(--code-line-highlight-border) 18%, var(--code-line-highlight) 50%, var(--code-line-highlight-border) 82%, var(--code-line-highlight) 100%);
-  opacity: 0.95;
-  pointer-events: none;
-}
-
 .v-expand-code-btn .arrow {
-  display: inline-block;
-  width: 0.38rem;
-  height: 0.38rem;
-  position: relative;
-  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1rem;
+  height: 1rem;
   flex: 0 0 auto;
+  border-radius: 50%;
+  background: var(--code-line-highlight);
+  transition: background 0.2s ease, transform 0.25s ease;
 }
 
 .v-expand-code-btn .arrow:after {
   content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0.34rem;
-  height: 0.34rem;
-  border-right: 1px solid currentColor;
-  border-bottom: 1px solid currentColor;
-  transform: translate(-50%, -60%) rotate(45deg);
-  transition: transform 0.2s ease;
+  width: 0.32rem;
+  height: 0.32rem;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg);
+  margin-top: -0.08rem;
+  transition: transform 0.25s ease;
 }
 
-.v-expand-code-btn .arrow.expanded:after {
-  transform: translate(-50%, -40%) rotate(225deg);
+.v-expand-code-btn .arrow.expanded {
+  transform: rotate(180deg);
 }
 
 .v-expand-code-btn .label {
-  position: relative;
-  z-index: 1;
   color: inherit;
+  opacity: 0.82;
+  transition: opacity 0.2s ease;
 }
 
 .v-expand-code-btn:hover {
-  background: linear-gradient(to bottom, var(--code-block-bg) 0, var(--code-line-highlight) 28%, var(--code-line-highlight-border) 100%);
+  background: linear-gradient(to bottom, transparent 0%, var(--code-block-bg) 14%);
+  -webkit-mask-image: radial-gradient(ellipse 92% 100% at 50% 100%, rgba(0,0,0,1) 0%, rgba(0,0,0,0.7) 60%, rgba(0,0,0,0) 100%);
+  mask-image: radial-gradient(ellipse 92% 100% at 50% 100%, rgba(0,0,0,1) 0%, rgba(0,0,0,0.7) 60%, rgba(0,0,0,0) 100%);
   opacity: 1;
 }
 
-.v-expand-code-btn:hover:after {
-  background: linear-gradient(90deg, var(--code-line-highlight) 0, var(--code-line-highlight) 14%, var(--code-line-highlight-border) 50%, var(--code-line-highlight) 86%, var(--code-line-highlight) 100%);
+.v-expand-code-btn:hover .arrow {
+  background: var(--code-line-highlight-border);
+}
+
+.v-expand-code-btn:hover .label {
   opacity: 1;
 }
 </style>
