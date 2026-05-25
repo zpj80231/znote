@@ -261,6 +261,9 @@ export default {
     }
 
     this.$router.afterEach(() => {
+      if (!this.isPc()) {
+        this.isSidebarOpen = true
+      }
       if (this.$frontmatter && this.$frontmatter.isSidebarOpen) {
         this.isSidebarOpen = this.$frontmatter.isSidebarOpen
       }
