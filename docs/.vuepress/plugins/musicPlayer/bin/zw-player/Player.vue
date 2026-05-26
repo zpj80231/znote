@@ -1,5 +1,5 @@
 <template>
-    <div id="musicPlayer">
+    <div id="musicPlayer" v-show="visible">
         <transition name="dis_list">
             <div class="list_box" v-if="listIsDis">
                 <transition name="music_alert">
@@ -9,7 +9,7 @@
                 <div class="music_list">
                     <div class="list_l">
                         <ul class="music_type">
-                            <li v-for="item in musicTypeList" @click="_getMusicType(item.id)" :class="{type_active:item.id==thisMusicType}">{{item.name}}</li>
+                            <li v-for="item in musicTypeList" :key="item.id" @click="_getMusicType(item.id)" :class="{type_active:item.id==thisMusicType}">{{item.name}}</li>
                         </ul>
                         <div class="list_title">
                             <span style="font-size: 14px;">歌曲列表</span>
@@ -17,8 +17,8 @@
                             <div class="music_search_box">
                                 <input type="text" class="music_search" v-model="musicSearchVal" placeholder="搜索歌曲">
                                 <transition name="music_search">
-                                    <ul  class="search_list" v-if="musicSearchVal!=''">
-                                        <li v-for="item in musicSearchList" @click="ListAdd(item)">
+                                    <ul class="search_list" v-if="musicSearchVal!=''">
+                                        <li v-for="item in musicSearchList" :key="item.id" @click="ListAdd(item)">
                                             <span class="music_search_name">{{item.name}}</span>
                                             <span class="music_search_ar">{{item.artists[0].name}}</span>
                                         </li>
@@ -30,7 +30,7 @@
                             <span>歌曲</span><span>歌手</span><span>专辑</span>
                         </div>
                         <ul class="_list">
-                            <li v-for="(item,index) in thisMusicList" @mouseover="ButtonActive(index)" @dblclick="ListPlay((thisListPage-1)*10+index)">
+                            <li v-for="(item,index) in thisMusicList" :key="item.id" @mouseover="ButtonActive(index)" @dblclick="ListPlay((thisListPage-1)*10+index)">
                                 <div class="this_music_shlter" v-if="(thisListPage-1)*10+index==thisMusicIndex"></div>
                                 <span>{{item.name}}</span><span>{{item.ar[0].name}}</span><span>{{item.al.name}}</span>
                                 <transition name="list_button">
@@ -42,8 +42,8 @@
                             </li>
                         </ul>
                         <div class="list_page">
-                            <div class="page_last" v-if="thisListPage!=1"  @click="ListChange(true)"><</div>
-                            <div class="page_next"  v-if="thisListPage!=Math.ceil(musicList.length/10)" @click="ListChange(false)">></div>
+                            <div class="page_last" v-if="thisListPage!=1" @click="ListChange(true)"><</div>
+                            <div class="page_next" v-if="thisListPage!=Math.ceil(musicList.length/10)" @click="ListChange(false)">></div>
                         </div>
                     </div>
                     <div class="list_r">
@@ -78,17 +78,17 @@
                     <div class="dis_list" @click="DisList">···</div>
                     <p class="music_title">{{musicTitle}}</p>
                     <p class="music_intro">歌手: {{musicName}}</p>
-                    <ul class="music_words">
+                    <ul class="music_words" ref="lyricBox">
                         <div class="music_words_box" :style="{top:wordsTop+'px'}">
-                            <li v-for="(item,index) in musicWords" class="music_word" :class="{word_highlight:wordIndex==index}">{{item}}</li>
+                            <li v-for="(item,index) in musicWords" :key="index" ref="lyricLines" class="music_word" :class="{word_highlight:wordIndex==index}">{{item}}</li>
                         </div>
                     </ul>
                 </div>
                 <div class="control_box">
-                    <div class="control_button">
+                    <div class="control_button" @click="togglePlay">
                         <img :src="playIcon" alt="" class="control_icon">
                     </div>
-                    <div class="progress">
+                    <div class="progress" ref="progress" @mousedown="handleProgressDown">
                         <div class="progress_c" :style="{width:currentProgress}">
                             <div class="progress_circle">
                                 <div class="progress_circle_c"></div>
@@ -97,23 +97,13 @@
                     </div>
                 </div>
             </div>
-            <video id="music" autoplay='autoplay' :src="musicUrl" name="media">
-            </video>
+            <audio id="music" ref="audio" autoplay :src="musicUrl" :loop="musicState===1"></audio>
         </div>
     </div>
-
 </template>
-<script>
-// var jsdom = require('jsdom').jsdom;
-// global.document = jsdom('');
-// global.window = document.defaultView;
-// Object.keys(document.defaultView).forEach((property) => {
-//   if (typeof global[property] === 'undefined') {
-//     global[property] = document.defaultView[property];
-//   }
-// });
 
-import { getWords,getMusicInfo,getMusicUrl,getHotMusic,getMyMusic,getSearchSuggest,getHotTalk } from './api/music'
+<script>
+import { getWords, getMusicInfo, getMusicUrl, getHotMusic, getMyMusic, getSearchSuggest, getHotTalk } from './api/music'
 import pan from './img/pan.png'
 import play from './img/play.png'
 import pause from './img/pause.png'
@@ -124,394 +114,393 @@ import state0 from './img/state_0.png'
 import state1 from './img/state_1.png'
 import talkicon1 from './img/talkicon1.png'
 import talkicon2 from './img/talkicon2.png'
-import $ from 'jquery'
+
 const myMusicId = 3068309305
+
 export default {
-    name:'Player',
+    name: 'Player',
     data() {
         return {
-            o:0,
-            top:0,
-            pan,
-            play,
-            pause,
-            add,
-            shlter,
-            listPlay,
-            state0,
-            state1,
-            talkicon1,
-            talkicon2,
-            playState:true,
-            playIcon:pause,//pause
-            musicImg:'',
-            musicUrl:'',
-            musicWords:[],
-            musicTitle:'',
-            musicName:'',
-            wordsTime:[],
-            wordsTop:0,
-            wordIndex:0,
-            currentProgress:'0%',
-            musicList:[],
-            myMusicList:[],   //存储在本地   可以开始判断有没有 让用户一开始就听这个列表
-            thisMusicIndex:1,
-            disActive:false,
-            listIsDis:false,
-            listButtonActiveIndex:-1,
-            thisListPage:1,
-            musicTypeList:[
-                {name:'热歌榜',id:3778678},
-                {name:'新歌榜',id:3779629},
-                {name:'飙升榜',id:19723756},
-                {name:'抖音榜',id:2250011882},
-                {name:'我的单曲',id:myMusicId},
-                {name:'My Songs',id:-1}
+            visible: false,
+            o: 0,
+            top: 0,
+            pan, play, pause, add, shlter, listPlay, state0, state1, talkicon1, talkicon2,
+            playState: true,
+            playIcon: pause,
+            musicImg: '',
+            musicUrl: '',
+            musicWords: [],
+            musicTitle: '',
+            musicName: '',
+            wordsTime: [],
+            wordsTop: 0,
+            wordIndex: 0,
+            currentProgress: '0%',
+            musicList: [],
+            myMusicList: [],
+            thisMusicIndex: 1,
+            disActive: false,
+            listIsDis: false,
+            listButtonActiveIndex: -1,
+            thisListPage: 1,
+            musicTypeList: [
+                { name: '热歌榜', id: 3778678 },
+                { name: '新歌榜', id: 3779629 },
+                { name: '飙升榜', id: 19723756 },
+                { name: '抖音榜', id: 2250011882 },
+                { name: '我的单曲', id: myMusicId },
+                { name: 'My Songs', id: -1 }
             ],
-            thisMusicType:-1,
-            notPlay:[],
-            musicState:0, //0列表循环  1单曲循环
-            musicStateButton:state1,
-            musicSearchVal:'',
-            musicSearchList:[],
-            musicAlertVal:'',
-            musicAlertState:false,
-            musicAlertTimer:'',
-            //新增歌词评论
-            hotTalkList:[]
+            thisMusicType: -1,
+            notPlay: [],
+            musicState: 0, // 0 列表循环  1 单曲循环
+            musicStateButton: state1,
+            musicSearchVal: '',
+            musicSearchList: [],
+            musicAlertVal: '',
+            musicAlertState: false,
+            musicAlertTimer: null,
+            hotTalkList: [],
+            isDraggingProgress: false,
+            _onMouseMove: null,
+            _onMouseUp: null
+        }
+    },
+    computed: {
+        thisMusicList() {
+            return this.musicList.slice((this.thisListPage - 1) * 10, this.thisListPage * 10)
+        }
+    },
+    watch: {
+        musicSearchVal() {
+            if (this.musicSearchVal === '') {
+                this.musicSearchList = []
+            } else {
+                getSearchSuggest(this.musicSearchVal).then((res) => {
+                    if (res.data.result.songs === undefined) {
+                        this.musicSearchList = []
+                    } else {
+                        this.musicSearchList = res.data.result.songs
+                    }
+                })
+            }
         }
     },
     mounted() {
         getMyMusic(myMusicId).then(res => {
-            if(this.isPc() && res.data.code === 200) {
-                this.Player();
-                this._getMusicType(myMusicId);
-                document.getElementById("musicPlayer").style.display='block';
+            if (this.isPc() && res.data.code === 200) {
+                this.visible = true
+                this.$nextTick(() => {
+                    const audio = this.$refs.audio
+                    if (audio) {
+                        audio.addEventListener('timeupdate', this.onTimeUpdate)
+                        audio.addEventListener('ended', this.onAudioEnded)
+                    }
+                    this._getMusicType(myMusicId)
+                })
             }
         })
-
-        if(1 === Math.floor(Math.random() * 10 + 1)){
-            let path = this.$route.path
-            if(path !== '/' ) return
-            let flag = sessionStorage.getItem('zk');
-            if(flag == null) {
-                window.location.href=('/znote/static/index.html')
-                sessionStorage.setItem('zk', 'zv');
-            }
+    },
+    beforeDestroy() {
+        clearTimeout(this.musicAlertTimer)
+        const audio = this.$refs.audio
+        if (audio) {
+            audio.removeEventListener('timeupdate', this.onTimeUpdate)
+            audio.removeEventListener('ended', this.onAudioEnded)
         }
-
-    },
-    created() {
-    },
-    computed: {
-        thisMusicList(){
-            return [...this.musicList].splice((this.thisListPage-1)*10,10);  //分页
-        },
-
-    },
-    watch: {
-        musicSearchVal(){
-            if(this.musicSearchVal==''){
-                this.musicSearchList=[];
-            }else{
-                getSearchSuggest(this.musicSearchVal).then((res)=>{
-                    if(res.data.result.songs==undefined){
-                        this.musicSearchList=[];
-                    }else{
-                        this.musicSearchList=res.data.result.songs;
-                    }
-                })
-            }
-        }
+        if (this._onMouseMove) document.removeEventListener('mousemove', this._onMouseMove)
+        if (this._onMouseUp) document.removeEventListener('mouseup', this._onMouseUp)
     },
     methods: {
-        //返回true表示为pc端打开，返回false表示为手机端打开
         isPc() {
-          let flag = navigator.userAgent.match(/(phone|pod|iPhone|iPod|ios|Android|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)
-          return !flag;
+            const flag = navigator.userAgent.match(/(phone|pod|iPhone|iPod|ios|Android|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)
+            return !flag
         },
-        MusicAlert(val){
-            this.musicAlertState=true;
-            this.musicAlertVal=val;
-            clearTimeout(this.musicAlertTimer);
-            this.musicAlertTimer=setTimeout(()=>{
-                this.musicAlertState=false;
-                this.musicAlertVal='';
-            },2000);
+        MusicAlert(val) {
+            this.musicAlertState = true
+            this.musicAlertVal = val
+            clearTimeout(this.musicAlertTimer)
+            this.musicAlertTimer = setTimeout(() => {
+                this.musicAlertState = false
+                this.musicAlertVal = ''
+            }, 2000)
         },
-        ListAdd(obj){
-            getMusicInfo(obj.id).then((res)=>{
-                this.musicSearchVal='';
-                if(this.myMusicList.length==0){
-                    this.myMusicList=[res.data.songs[0]];
-                    this._getMusicType(-1);
-                    //第一次搜索直接播放
-                }else{
-                    this.myMusicList.push(res.data.songs[0]);
-                    //提示已经添加进去
-
+        ListAdd(obj) {
+            getMusicInfo(obj.id).then((res) => {
+                this.musicSearchVal = ''
+                if (this.myMusicList.length === 0) {
+                    this.myMusicList = [res.data.songs[0]]
+                    this._getMusicType(-1)
+                } else {
+                    this.myMusicList.push(res.data.songs[0])
                 }
-                this.MusicAlert('添加成功');
+                this.MusicAlert('添加成功')
             })
         },
-        MusicStateChange(){
-            if(this.musicState==0){
-                this.musicState=1;
-                this.musicStateButton=this.state0;
-                this.MusicAlert('已切换为单曲循环模式');
-            }else{
-                this.musicState=0;
-                this.musicStateButton=this.state1;
-                this.MusicAlert('已切换为列表循环模式');
+        MusicStateChange() {
+            if (this.musicState === 0) {
+                this.musicState = 1
+                this.musicStateButton = this.state0
+                this.MusicAlert('已切换为单曲循环模式')
+            } else {
+                this.musicState = 0
+                this.musicStateButton = this.state1
+                this.MusicAlert('已切换为列表循环模式')
             }
         },
-        DisList(){
-            this.listIsDis=this.listIsDis ? false : true;
+        DisList() {
+            this.listIsDis = !this.listIsDis
         },
-        ListChange(isLast){
-            if(isLast){
-                this.thisListPage--;
-            }else{
-                this.thisListPage++;
-            }
+        ListChange(isLast) {
+            this.thisListPage += isLast ? -1 : 1
         },
-        ListPlay(id){
-            if(this.thisMusicIndex!=id){
-                this.thisMusicIndex=id>this.musicList.length-1 ? 0 : id;
-                this._getInfo();
-                this.top=0;
-                this.o=0;
-                this.wordIndex=0;
-                this.wordsTop=0;
-                this.currentProgress='0%';
-                if(!this.playState){
-                    $('.control_icon').click();
+        ListPlay(id) {
+            if (this.thisMusicIndex !== id) {
+                this.thisMusicIndex = id > this.musicList.length - 1 ? 0 : id
+                this._getInfo()
+                this.resetLyricState()
+                if (!this.playState) {
+                    this.togglePlay()
                 }
             }
         },
-        ButtonActive(id){
-            this.listButtonActiveIndex=id;
+        ButtonActive(id) {
+            this.listButtonActiveIndex = id
         },
-        DisActive(){
-            this.disActive=this.disActive ? false : true;
+        DisActive() {
+            this.disActive = !this.disActive
         },
-        _getMusicType(id){
-            if(this.thisMusicType !== id){
-                this.notPlay=[];
-                if(id === -1){
-                    if(this.myMusicList.length!=0){
-                        this.musicList=this.myMusicList;
-                        this.thisMusicType=id;
-                        this.thisMusicIndex=0;
-                        this.thisListPage=1;
-                        this._getInfo();
-                        this.top=0;
-                        this.o=0;
-                        this.wordIndex=0;
-                        this.wordsTop=0;
-                        this.currentProgress='0%';
-                        if(!this.playState){
-                            $('.control_icon').click();
+        _getMusicType(id) {
+            if (this.thisMusicType !== id) {
+                this.notPlay = []
+                if (id === -1) {
+                    if (this.myMusicList.length !== 0) {
+                        this.musicList = this.myMusicList
+                        this.thisMusicType = id
+                        this.thisMusicIndex = 0
+                        this.thisListPage = 1
+                        this._getInfo()
+                        this.resetLyricState()
+                        if (!this.playState) {
+                            this.togglePlay()
                         }
-                    }else{//自定义库没有歌曲 提示需要搜索才可以添加
-                        this.MusicAlert('没有歌曲,需要自己添加');
+                    } else {
+                        this.MusicAlert('没有歌曲,需要自己添加')
                     }
-                }else if(id === myMusicId){
-                    getMyMusic(id).then((res)=>{this.getMusicDetail(res, id)})
-                }else{
-                    getHotMusic(id).then((res)=>{this.getMusicDetail(res, id)})
+                } else if (id === myMusicId) {
+                    getMyMusic(id).then((res) => this.getMusicDetail(res, id))
+                } else {
+                    getHotMusic(id).then((res) => this.getMusicDetail(res, id))
                 }
             }
         },
-        getMusicDetail(res, id){
-            this.musicList=res.data.playlist.tracks.splice(0,200);
-            this.thisMusicType=id;
-            this.thisMusicIndex=0;
-            this.thisListPage=1;
-            this._getInfo();
-            this.top=0;
-            this.o=0;
-            this.wordIndex=0;
-            this.wordsTop=0;
-            this.currentProgress='0%';
-            if(!this.playState){
-                $('.control_icon').click();
+        getMusicDetail(res, id) {
+            this.musicList = res.data.playlist.tracks.slice(0, 200)
+            this.thisMusicType = id
+            this.thisMusicIndex = 0
+            this.thisListPage = 1
+            this._getInfo()
+            this.resetLyricState()
+            if (!this.playState) {
+                this.togglePlay()
             }
         },
-        _getInfo(){
-            getMusicUrl(this.musicList[this.thisMusicIndex].id).then((res)=>{
-                if(res.data.data[0].url==null || res.data.data[0].url=='' || res.data.data[0].url==undefined){
-                    if(this.notPlay.length!=this.musicList.length){
-
-                        let nextIndex=this.thisMusicIndex+1;
-                        if(this.notPlay.indexOf(this.thisMusicIndex)==-1){
-                            this.notPlay.push(this.thisMusicIndex);
+        _getInfo() {
+            getMusicUrl(this.musicList[this.thisMusicIndex].id).then((res) => {
+                const url = res.data.data[0].url
+                if (url === null || url === '' || url === undefined) {
+                    if (this.notPlay.length !== this.musicList.length) {
+                        const currentIndex = this.thisMusicIndex
+                        const nextIndex = (currentIndex + 1) % this.musicList.length
+                        if (this.notPlay.indexOf(currentIndex) === -1) {
+                            this.notPlay.push(currentIndex)
                         }
-                        this.MusicAlert(`${this.musicList[this.thisMusicIndex].name}因为一些原因不能播放`);
-                        this.ListPlay(nextIndex);//寻找下一首歌  直到找到
-
-                        //提示这首歌不能放
-                    }else{
-                        //遍历完没有找到
-                        console.log('not');
-                        this.MusicAlert('此列表所有歌都不能播放');
+                        this.MusicAlert(`${this.musicList[currentIndex].name}因为一些原因不能播放`)
+                        this.ListPlay(nextIndex)
+                    } else {
+                        this.MusicAlert('此列表所有歌都不能播放')
                     }
-                }else{
-                    this.musicUrl=res.data.data[0].url.replace('http://','https://');
-                    this.musicImg=this.musicList[this.thisMusicIndex].al.picUrl.replace('http://','https://')+'?param=300y300';
-                    this.musicTitle=this.musicList[this.thisMusicIndex].name;
-                    let name_arr=[];
-                    this.musicList[this.thisMusicIndex].ar.forEach((i)=>{
-                        name_arr.push(i.name);
-                    })
-                    this.musicName=name_arr.join('/');
-                    getWords(this.musicList[this.thisMusicIndex].id).then((res)=>{
-                        if(!res.data.nolyric){
-                            let info=this.Cut(res.data.lrc.lyric);
-                            this.musicWords=info.wordArr;
-                            this.wordsTime=info.timeArr;
+                } else {
+                    const track = this.musicList[this.thisMusicIndex]
+                    this.musicUrl = url.replace(/^http:\/\//, 'https://')
+                    this.musicImg = track.al.picUrl.replace(/^http:\/\//, 'https://') + '?param=300y300'
+                    this.musicTitle = track.name
+                    this.musicName = track.ar.map(i => i.name).join('/')
+
+                    getWords(track.id).then((res) => {
+                        if (!res.data.nolyric && res.data.lrc && res.data.lrc.lyric) {
+                            const info = this.Cut(res.data.lrc.lyric)
+                            this.musicWords = info.wordArr
+                            this.wordsTime = info.timeArr
+                        } else {
+                            this.musicWords = []
+                            this.wordsTime = []
                         }
                     })
-                    getHotTalk(this.musicList[this.thisMusicIndex].id).then((res)=>{
-                        let count=0;
-                        this.hotTalkList=res.data.hotComments.splice(0,3);
-                        this.hotTalkList.forEach(e=>{
-                            count+=e.content.length;
-                            e.user.avatarUrl=e.user.avatarUrl+'?param=50y50';
+
+                    getHotTalk(track.id).then((res) => {
+                        const comments = (res.data.hotComments || []).slice(0, 3)
+                        let count = 0
+                        comments.forEach(e => {
+                            count += e.content.length
+                            e.user.avatarUrl = e.user.avatarUrl + '?param=50y50'
                         })
-                        if(count>=200){
-                            this.hotTalkList=this.hotTalkList.slice(0,2);
-                        }
+                        this.hotTalkList = count >= 200 ? comments.slice(0, 2) : comments
                     })
                 }
             })
         },
-        Ltrim(s){
-            return s.replace(/(^\s*)/g, "");
-        },
-        Rtrim(s){
-            return s.replace(/(\s*$)/g, "");
-        },
-        //歌词截取函数
-        Cut(str){
-            let timeArr=[];
-            let wordArr=[];
-            timeArr=str.split('[');
-            timeArr.splice(0,1);
-            for(let i=0;i<timeArr.length;i++){
-                let cut=timeArr[i].split(']');
-                let time=cut[0].split('.')[0].split(':');
-                timeArr[i]=Number.parseInt(time[0])*60+Number.parseInt(time[1]);
-                timeArr[i]=isNaN(timeArr[i]) ? 0 : timeArr[i]; //处理NaN
-                wordArr[i]=this.Rtrim(this.Ltrim(cut[1]));
+        // 歌词截取函数：LRC 时间戳 mm:ss.xxx → 秒，保留毫秒精度
+        Cut(str) {
+            const lines = str.split('[')
+            lines.shift()
+            const timeArr = []
+            const wordArr = []
+            for (let i = 0; i < lines.length; i++) {
+                const cut = lines[i].split(']')
+                const parts = cut[0].split(':')
+                const minutes = Number.parseInt(parts[0], 10)
+                const seconds = Number.parseFloat(parts[1])
+                let total = minutes * 60 + seconds
+                if (isNaN(total)) total = 0
+                timeArr.push(total)
+                wordArr.push((cut[1] || '').trim())
             }
-            return {timeArr:timeArr,wordArr:wordArr}
+            return { timeArr, wordArr }
         },
-        Player(){
-            let self=this;
-            let player=$('#music')[0];
-            let playerTimer=setInterval(timer,1000);
-            // $('body').on('click',()=>{
-            //     $('body').unbind('click');
-            // })
-            function timer(){
-                self.currentProgress=`${(player.currentTime/player.duration)*100}%`
-                //接着这里写歌词滚动
-                if(player.currentTime>=self.wordsTime[self.o+1]){
-                    self.top+=Number.parseInt($('.music_word').eq(self.o).height()+Number.parseInt($('.music_word').eq(self.o).css('marginTop')));
-                    if(self.top>=$('.music_words').height()/2-11){  //开始滚动的高度
-                        self.wordsTop+=-Number.parseInt($('.music_word').eq(self.o).height()+Number.parseInt($('.music_word').eq(self.o).css('marginTop')));
+        resetLyricState() {
+            this.top = 0
+            this.o = 0
+            this.wordIndex = 0
+            this.wordsTop = 0
+            this.currentProgress = '0%'
+        },
+        togglePlay() {
+            const audio = this.$refs.audio
+            if (!audio) return
+            if (this.playState) {
+                audio.pause()
+                this.playState = false
+                this.playIcon = this.play
+            } else {
+                audio.play()
+                this.playState = true
+                this.playIcon = this.pause
+            }
+        },
+        onTimeUpdate() {
+            if (this.isDraggingProgress) return
+            const audio = this.$refs.audio
+            if (!audio || !audio.duration) return
+            this.currentProgress = `${(audio.currentTime / audio.duration) * 100}%`
+
+            const lyricLines = this.$refs.lyricLines || []
+            const lyricBox = this.$refs.lyricBox
+            const containerHeight = lyricBox ? lyricBox.offsetHeight : 160
+            // 用 while 处理一次回调跨多行的情况
+            while (this.o + 1 < this.wordsTime.length && audio.currentTime >= this.wordsTime[this.o + 1]) {
+                const lineEl = lyricLines[this.o]
+                if (lineEl) {
+                    const marginTop = parseInt(getComputedStyle(lineEl).marginTop, 10) || 0
+                    const lineHeight = lineEl.offsetHeight + marginTop
+                    this.top += lineHeight
+                    if (this.top >= containerHeight / 2 - 11) {
+                        this.wordsTop -= lineHeight
                     }
-                    self.wordIndex=self.o+1;
-                    self.o++;
                 }
-                if(player.currentTime>=player.duration){    //切歌
-                    if(self.musicList.length!=1){  //只有一首歌  重复播放
-                        if(self.musicState==0)
-                        {
-                            self.thisMusicIndex=self.thisMusicIndex>=self.musicList.length-1 ? 0 : self.thisMusicIndex+1;
-                            self._getInfo();
-                        }
+                this.wordIndex = this.o + 1
+                this.o++
+            }
+        },
+        onAudioEnded() {
+            // loop=true 时不会触发；此处只处理列表循环
+            if (this.musicList.length > 1) {
+                this.thisMusicIndex = this.thisMusicIndex >= this.musicList.length - 1 ? 0 : this.thisMusicIndex + 1
+                this._getInfo()
+            } else {
+                const audio = this.$refs.audio
+                if (audio) audio.play()
+            }
+            this.resetLyricState()
+        },
+        handleProgressDown(ev) {
+            const audio = this.$refs.audio
+            const progressEl = this.$refs.progress
+            if (!audio || !audio.duration || !progressEl) return
+
+            this.isDraggingProgress = true
+            const compute = (clientX) => {
+                const rect = progressEl.getBoundingClientRect()
+                const pro = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width))
+                this.currentProgress = `${pro * 100}%`
+                return pro
+            }
+            let pro = compute(ev.clientX)
+
+            this._onMouseMove = (e) => { pro = compute(e.clientX) }
+            this._onMouseUp = () => {
+                document.removeEventListener('mousemove', this._onMouseMove)
+                document.removeEventListener('mouseup', this._onMouseUp)
+                this._onMouseMove = null
+                this._onMouseUp = null
+
+                audio.currentTime = audio.duration * pro
+                this.alignLyricToTime(audio.currentTime)
+                this.isDraggingProgress = false
+
+                if (audio.currentTime >= audio.duration) {
+                    this.resetLyricState()
+                }
+                audio.play()
+                this.playState = true
+                this.playIcon = this.pause
+            }
+            // 先解绑再绑定，避免多次拖动叠加
+            document.removeEventListener('mousemove', this._onMouseMove)
+            document.removeEventListener('mouseup', this._onMouseUp)
+            document.addEventListener('mousemove', this._onMouseMove)
+            document.addEventListener('mouseup', this._onMouseUp)
+        },
+        alignLyricToTime(currentTime) {
+            // 找最大 i 使 wordsTime[i] <= currentTime
+            let newO = 0
+            for (let i = 0; i < this.wordsTime.length; i++) {
+                if (currentTime >= this.wordsTime[i]) newO = i
+                else break
+            }
+            const lyricLines = this.$refs.lyricLines || []
+            const lyricBox = this.$refs.lyricBox
+            const containerHeight = lyricBox ? lyricBox.offsetHeight : 160
+            if (newO > this.o) {
+                for (let i = this.o; i < newO; i++) {
+                    const el = lyricLines[i]
+                    if (!el) continue
+                    const marginTop = parseInt(getComputedStyle(el).marginTop, 10) || 0
+                    const h = el.offsetHeight + marginTop
+                    this.top += h
+                    if (this.top >= containerHeight / 2 - 11) {
+                        this.wordsTop -= h
                     }
-                    player.play();
-                    self.top=0;
-                    self.o=0;
-                    self.wordIndex=0;
-                    self.wordsTop=0;
-                    self.currentProgress='0%';
+                }
+            } else if (newO < this.o) {
+                for (let i = this.o - 1; i >= newO; i--) {
+                    const el = lyricLines[i]
+                    if (!el) continue
+                    const marginTop = parseInt(getComputedStyle(el).marginTop, 10) || 0
+                    const h = el.offsetHeight + marginTop
+                    if (this.top >= containerHeight / 2 - 11) {
+                        this.wordsTop += h
+                    }
+                    this.top -= h
                 }
             }
-            //进度条控制
-            $('.progress').on('mousedown',(ev)=>{
-                console.log()
-                let e=ev||event;
-                let pro=((e.clientX-$('.progress').offset().left)/$('.progress').width())
-                clearInterval(playerTimer);
-                this.currentProgress=`${pro*100}%`
-                $(document).on('mousemove',(ev)=>{
-                    let e=ev||event;
-                    pro=((e.clientX-$('.progress').offset().left)/$('.progress').width())
-                    this.currentProgress=`${pro*100}%`
-                })
-                $(document).on('mouseup',()=>{
-                    player.currentTime=player.duration*pro;
-                    let c_arr=[...this.wordsTime];
-                    c_arr.push(player.currentTime);
-                    c_arr.sort((l,r)=>{
-                        return l-r
-                    });
-                    let now_o=c_arr.indexOf(player.currentTime)-1;
-                    let diff_h=0;
-                    if(this.o<now_o){
-                        for(let i=this.o;i<now_o;i++){
-                            diff_h+=-Number.parseInt($('.music_word').eq(i).height()+Number.parseInt($('.music_word').eq(i).css('marginTop')))
-                        }
-                    }else{
-                        for(let i=now_o;i<this.o;i++){
-                            diff_h+=Number.parseInt($('.music_word').eq(i).height()+Number.parseInt($('.music_word').eq(i).css('marginTop')))
-                        }
-                    }
-                    this.wordsTop+=diff_h;
-                    self.wordIndex=this.o=now_o;
-                    clearInterval(playerTimer);
-                    playerTimer=setInterval(timer,1000);
-                    this.playState=true;
-                    this.playIcon=this.pause;
-                    if(player.currentTime>=player.duration){
-                        this.top=0;
-                        this.o=0;
-                        this.wordIndex=0;
-                        this.wordsTop=0;
-                        this.currentProgress='0%';
-                    }
-                    player.play();
-                    $(document).unbind('mousemove');
-                    $(document).unbind('mouseup');
-                })
-            })
-            //播放暂停按钮控制
-            $('.control_icon').on('click',()=>{
-                if(this.playState){
-                    player.pause();
-                    this.playState=false;
-                    this.playIcon=this.play;
-                    clearInterval(playerTimer);
-                }else{
-                    player.play();
-                    this.playState=true;
-                    this.playIcon=this.pause;
-                    clearInterval(playerTimer);
-                    playerTimer=setInterval(timer,1000);
-                }
-            });
-        },
-        Contorl(){
-            let player=$('#music')[0];
-            player.currentTime=100;
+            this.o = newO
+            this.wordIndex = newO
         }
-    },
+    }
 }
 </script>
+
 <style scoped>
 @import url('./player.css');
 @import url('./playermobile.css');
