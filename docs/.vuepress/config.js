@@ -41,7 +41,6 @@ module.exports = {
         ['link', {rel: 'apple-touch-icon', sizes: '180x180', href: '/img/site/apple-touch-icon-180x180.png'}],
         // bump axios from 0.26.1 to 1.11.0
         ["script", {}, "window.global = window; window.process = window.process || { env: { NODE_ENV: 'production' } };"],
-        ["script", {"defer": true, "language": "javascript", "type": "text/javascript", "src": "/js/jquery.min.js"}],
         ["script", {"defer": true, "language": "javascript", "type": "text/javascript", "src": "/js/cwd.js"}],
         ["script", {"defer": true, "language": "javascript", "type": "text/javascript", "src": "/js/MouseClickEffect.js"}],
         // Google Analytics (GA4)
