@@ -1,7 +1,5 @@
 import axios from 'axios'
 
-// dev 时走 vuepress devServer 反向代理（避开第三方 API 因缓存 CORS 头导致的跨域错误），
-// prod 时直接请求第三方域名
 const baseUrl = 'https://music.bree.de5.net/'
 
 // 获取歌词
@@ -24,9 +22,9 @@ export const getHotMusic = (id) =>
 export const getMyMusic = (id) =>
     axios.get(baseUrl + 'playlist/detail', { params: { id } })
 
-// 获取搜索建议
+// 获取搜索建议（用新版 cloudsearch；旧版 /search 已被上游返回乱序结果）
 export const getSearchSuggest = (key) =>
-    axios.get(baseUrl + 'search', { params: { keywords: key, limit: 8 } })
+    axios.get(baseUrl + 'cloudsearch', { params: { keywords: key, limit: 8 } })
 
 // 获取歌曲热门评论
 export const getHotTalk = (id) =>
