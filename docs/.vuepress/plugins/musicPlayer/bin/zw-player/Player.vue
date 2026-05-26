@@ -79,7 +79,7 @@
                     <p class="music_title">{{musicTitle}}</p>
                     <p class="music_intro">歌手: {{musicName}}</p>
                     <ul class="music_words" ref="lyricBox" @wheel.prevent="handleLyricWheel">
-                        <div class="music_words_box" :style="{top:wordsTop+'px'}">
+                        <div class="music_words_box" :style="{ top: wordsTop + 'px', transition: isUserScrolling ? 'none' : '' }">
                             <li v-for="(item,index) in musicWords" :key="index" ref="lyricLines" class="music_word" :class="{word_highlight:wordIndex==index}">{{item}}</li>
                         </div>
                     </ul>
@@ -116,6 +116,10 @@ import talkicon1 from './img/talkicon1.png'
 import talkicon2 from './img/talkicon2.png'
 
 const myMusicId = 3068309305
+// 手动滚动歌词后，从最后一次 wheel 事件起经过多少 ms 自动回正
+// 注意：macOS trackpad/部分鼠标有惯性滚动，停手后系统仍会派发 wheel ~1-2s，
+// 这段时间 timer 会被反复重置，所以实际感知 = 惯性 + 此值 + transition(0.5s)
+const LYRIC_SCROLL_RESUME_MS = 1500
 
 export default {
     name: 'Player',
@@ -503,7 +507,7 @@ export default {
             this.top = cumTop
             this.wordsTop = cumWordsTop
         },
-        // 鼠标滚轮自由浏览歌词；停手 3 秒后自动恢复跟随播放进度
+        // 鼠标滚轮自由浏览歌词；停手 ？ 秒后自动恢复跟随播放进度
         handleLyricWheel(ev) {
             const lyricLines = this.$refs.lyricLines || []
             const lyricBox = this.$refs.lyricBox
@@ -515,7 +519,10 @@ export default {
                 totalHeight += lyricLines[i].offsetHeight + marginTop
             }
             const containerHeight = lyricBox.offsetHeight
-            const minWordsTop = Math.min(0, containerHeight - totalHeight)
+            // 与自动同步一致：滚动下限让最后一行可以停在容器中线（halfMark），
+            // 避免最后一行紧贴容器底部被下方控件视觉遮挡
+            const halfMark = containerHeight / 2 - 11
+            const minWordsTop = Math.min(0, halfMark - totalHeight)
 
             const next = this.wordsTop - ev.deltaY
             this.wordsTop = Math.max(minWordsTop, Math.min(0, next))
@@ -525,7 +532,7 @@ export default {
             this._userScrollTimer = setTimeout(() => {
                 this.isUserScrolling = false
                 this.recalcLyricScroll()
-            }, 3000)
+            }, LYRIC_SCROLL_RESUME_MS)
         }
     }
 }
