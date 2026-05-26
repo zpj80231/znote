@@ -1,30 +1,21 @@
 const { path } = require('@vuepress/shared-utils')
-// global.navigator = {
-//     userAgent: 'node.js'
-// }
 
-module.exports = (options, context) => ({
-  define () {
-  	// const { icon, detailsStyle, visibilityHeight } = options
-    return {
-      // ICON: icon || 'reco-up',
-      // DETAILS_STYLE: detailsStyle || {
-      //   right: '1rem',
-      //   bottom: '9rem',
-      //   width: '2.5rem',
-      //   height: '2.5rem',
-      //   'border-radius': '.25rem',
-      //   'line-height': '2.5rem',
-      //   //backgroundColor: 'rgba(231, 234, 241,.5)',
-      //   'font-size': '14px',
-      //   'font-weight': '500'
-      // },
-      // VISIBILITY_HEIGHT: visibilityHeight || 400
-    }
-  },
-  name: 'vuepress-plugin-musicPlayer',
-  enhanceAppFiles: [
-    path.resolve(__dirname, './bin/enhanceAppFile.js')
-  ],
-  globalUIComponents: 'musicPlayer'
-})
+module.exports = (options = {}, context) => {
+  if (!options.apiUrl || !options.devProxyPrefix) {
+    throw new Error('[musicPlayer] 必须从 plugins 配置传入 apiUrl 与 devProxyPrefix')
+  }
+  return {
+    name: 'vuepress-plugin-musicPlayer',
+    // 通过 webpack DefinePlugin 把配置注入到前端，前端可直接以标识符 MUSIC_API_URL / MUSIC_API_DEV_PROXY_PREFIX 引用
+    define () {
+      return {
+        MUSIC_API_URL: options.apiUrl,
+        MUSIC_API_DEV_PROXY_PREFIX: options.devProxyPrefix
+      }
+    },
+    enhanceAppFiles: [
+      path.resolve(__dirname, './bin/enhanceAppFile.js')
+    ],
+    globalUIComponents: 'musicPlayer'
+  }
+}
