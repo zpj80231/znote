@@ -29,6 +29,7 @@ module.exports = {
             children: [
                 'frontend/EChartsStudy', 'frontend/js-json', 'frontend/viaStart', 'frontend/vue-demo',
                 'frontend/reco-info', 'frontend/vuepress-plugin-boxx', 'frontend/TCP&UDP',
+                'frontend/bob-plugin-microsoft-tts',
             ]
         },
         {
