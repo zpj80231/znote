@@ -26,9 +26,6 @@ importers:
       dayjs:
         specifier: ^1.11.20
         version: 1.11.20
-      jquery:
-        specifier: 3.7.1
-        version: 3.7.1
       js-yaml:
         specifier: 4.1.1
         version: 4.1.1
@@ -3702,9 +3699,6 @@ packages:
 
   javascript-stringify@2.1.0:
     resolution: {integrity: sha512-JVAfqNPTvNq3sB/VHQJAFxN/sPgKnsKrCwyRt15zwNCdrMMJDdcEOdubuy+DuJYYdm0ox1J4uzEuYKkN+9yhVg==}
-
-  jquery@3.7.1:
-    resolution: {integrity: sha512-m4avr8yL8kmFN8psrbFFFmB/If14iN5o9nw/NgnnM+kybDJpRsAynV2BsfpTYrTRysYUdADVD7CkUUizgkpLfg==}
 
   js-tokens@4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
@@ -10505,8 +10499,6 @@ snapshots:
   javascript-stringify@1.6.0: {}
 
   javascript-stringify@2.1.0: {}
-
-  jquery@3.7.1: {}
 
   js-tokens@4.0.0: {}
 

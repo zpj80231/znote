@@ -20,7 +20,7 @@
                                     <ul class="search_list" v-if="musicSearchVal!=''">
                                         <li v-for="item in musicSearchList" :key="item.id" @click="ListAdd(item)">
                                             <span class="music_search_name">{{item.name}}</span>
-                                            <span class="music_search_ar">{{item.artists[0].name}}</span>
+                                            <span class="music_search_ar">{{item.ar[0].name}}</span>
                                         </li>
                                     </ul>
                                 </transition>
@@ -78,7 +78,7 @@
                     <div class="dis_list" @click="DisList">···</div>
                     <p class="music_title">{{musicTitle}}</p>
                     <p class="music_intro">歌手: {{musicName}}</p>
-                    <ul class="music_words" ref="lyricBox">
+                    <ul class="music_words" ref="lyricBox" @wheel.prevent="handleLyricWheel">
                         <div class="music_words_box" :style="{top:wordsTop+'px'}">
                             <li v-for="(item,index) in musicWords" :key="index" ref="lyricLines" class="music_word" :class="{word_highlight:wordIndex==index}">{{item}}</li>
                         </div>
@@ -162,8 +162,10 @@ export default {
             musicAlertTimer: null,
             hotTalkList: [],
             isDraggingProgress: false,
+            isUserScrolling: false,
             _onMouseMove: null,
-            _onMouseUp: null
+            _onMouseUp: null,
+            _userScrollTimer: null
         }
     },
     computed: {
@@ -203,6 +205,7 @@ export default {
     },
     beforeDestroy() {
         clearTimeout(this.musicAlertTimer)
+        clearTimeout(this._userScrollTimer)
         const audio = this.$refs.audio
         if (audio) {
             audio.removeEventListener('timeupdate', this.onTimeUpdate)
@@ -374,6 +377,10 @@ export default {
             this.wordIndex = 0
             this.wordsTop = 0
             this.currentProgress = '0%'
+            // 切歌时清空歌词数据，避免上一首 audio 仍在跑、新歌词未到达时，
+            // timeupdate 在旧 wordsTime 上推进 o，导致新歌词显示从中间开始
+            this.musicWords = []
+            this.wordsTime = []
         },
         togglePlay() {
             const audio = this.$refs.audio
@@ -404,7 +411,8 @@ export default {
                     const marginTop = parseInt(getComputedStyle(lineEl).marginTop, 10) || 0
                     const lineHeight = lineEl.offsetHeight + marginTop
                     this.top += lineHeight
-                    if (this.top >= containerHeight / 2 - 11) {
+                    // 用户手动滚动期间，仅更新当前高亮行，不修改 wordsTop（由 recalc 在停手后统一对齐）
+                    if (!this.isUserScrolling && this.top >= containerHeight / 2 - 11) {
                         this.wordsTop -= lineHeight
                     }
                 }
@@ -468,34 +476,56 @@ export default {
                 if (currentTime >= this.wordsTime[i]) newO = i
                 else break
             }
-            const lyricLines = this.$refs.lyricLines || []
-            const lyricBox = this.$refs.lyricBox
-            const containerHeight = lyricBox ? lyricBox.offsetHeight : 160
-            if (newO > this.o) {
-                for (let i = this.o; i < newO; i++) {
-                    const el = lyricLines[i]
-                    if (!el) continue
-                    const marginTop = parseInt(getComputedStyle(el).marginTop, 10) || 0
-                    const h = el.offsetHeight + marginTop
-                    this.top += h
-                    if (this.top >= containerHeight / 2 - 11) {
-                        this.wordsTop -= h
-                    }
-                }
-            } else if (newO < this.o) {
-                for (let i = this.o - 1; i >= newO; i--) {
-                    const el = lyricLines[i]
-                    if (!el) continue
-                    const marginTop = parseInt(getComputedStyle(el).marginTop, 10) || 0
-                    const h = el.offsetHeight + marginTop
-                    if (this.top >= containerHeight / 2 - 11) {
-                        this.wordsTop += h
-                    }
-                    this.top -= h
-                }
-            }
             this.o = newO
             this.wordIndex = newO
+            this.recalcLyricScroll()
+        },
+        // 根据当前 wordIndex 从头累加每行高度，重算 top 与 wordsTop。
+        // 用于进度条拖动后对齐、以及用户手动滚动结束后恢复同步。
+        recalcLyricScroll() {
+            const lyricLines = this.$refs.lyricLines || []
+            const lyricBox = this.$refs.lyricBox
+            if (!lyricBox) return
+            const containerHeight = lyricBox.offsetHeight
+            const halfMark = containerHeight / 2 - 11
+            let cumTop = 0
+            let cumWordsTop = 0
+            for (let i = 0; i < this.wordIndex; i++) {
+                const el = lyricLines[i]
+                if (!el) continue
+                const marginTop = parseInt(getComputedStyle(el).marginTop, 10) || 0
+                const h = el.offsetHeight + marginTop
+                cumTop += h
+                if (cumTop >= halfMark) {
+                    cumWordsTop -= h
+                }
+            }
+            this.top = cumTop
+            this.wordsTop = cumWordsTop
+        },
+        // 鼠标滚轮自由浏览歌词；停手 3 秒后自动恢复跟随播放进度
+        handleLyricWheel(ev) {
+            const lyricLines = this.$refs.lyricLines || []
+            const lyricBox = this.$refs.lyricBox
+            if (!lyricBox || lyricLines.length === 0) return
+
+            let totalHeight = 0
+            for (let i = 0; i < lyricLines.length; i++) {
+                const marginTop = parseInt(getComputedStyle(lyricLines[i]).marginTop, 10) || 0
+                totalHeight += lyricLines[i].offsetHeight + marginTop
+            }
+            const containerHeight = lyricBox.offsetHeight
+            const minWordsTop = Math.min(0, containerHeight - totalHeight)
+
+            const next = this.wordsTop - ev.deltaY
+            this.wordsTop = Math.max(minWordsTop, Math.min(0, next))
+
+            this.isUserScrolling = true
+            clearTimeout(this._userScrollTimer)
+            this._userScrollTimer = setTimeout(() => {
+                this.isUserScrolling = false
+                this.recalcLyricScroll()
+            }, 3000)
         }
     }
 }
