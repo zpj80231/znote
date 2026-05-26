@@ -146,31 +146,57 @@
     height: 60px;
     position: relative;
     margin: auto;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
-.control_button{
+.control_buttons{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+.control_volume{
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+}
+.control_side{
     width: 14px;
     height: 14px;
-    position: absolute;
-    left: 20px;
-    bottom: 15px;
-
-}
-.control_icon{
-    height: 100%;
     cursor: pointer;
+    color: rgba(255, 255, 255, 0.85);
+    transition: color .2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
 }
-.progress{
-    width: 150px;
+.control_side:hover{
+    color: #fff;
+}
+.volume_slider{
+    width: 50px;
     height: 4px;
     border-radius: 10px;
     background-color: rgb(194,194,196);
     cursor: pointer;
-    margin-top: 18px;
-    position: absolute;
-    left: 0px;
-    right: 0px;
-    margin: auto;
-    bottom: 20px;
+    position: relative;
+}
+.volume_slider_c{
+    height: 100%;
+    background-color: rgb(232,60,60);
+    border-radius: 10px;
+    transition: width .1s;
+}
+.progress{
+    flex: 1;
+    height: 4px;
+    border-radius: 10px;
+    background-color: rgb(194,194,196);
+    cursor: pointer;
+    position: relative;
 }
 .progress_c{
     width: 50%;

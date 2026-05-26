@@ -85,14 +85,50 @@
                     </ul>
                 </div>
                 <div class="control_box">
-                    <div class="control_button" @click="togglePlay">
-                        <img :src="playIcon" alt="" class="control_icon">
+                    <div class="control_buttons">
+                        <div class="control_side control_prev" @click="PlayPrev" title="上一首">
+                            <svg viewBox="0 0 24 24" width="14" height="14">
+                                <polygon points="19,5 19,19 8,12" fill="currentColor"/>
+                                <rect x="5" y="5" width="3" height="14" fill="currentColor"/>
+                            </svg>
+                        </div>
+                        <div class="control_side control_play" @click="togglePlay" :title="playState ? '暂停' : '播放'">
+                            <svg v-if="playState" viewBox="0 0 24 24" width="14" height="14">
+                                <rect x="6" y="4" width="4" height="16" fill="currentColor"/>
+                                <rect x="14" y="4" width="4" height="16" fill="currentColor"/>
+                            </svg>
+                            <svg v-else viewBox="0 0 24 24" width="14" height="14">
+                                <polygon points="6,4 6,20 20,12" fill="currentColor"/>
+                            </svg>
+                        </div>
+                        <div class="control_side control_next" @click="PlayNext" title="下一首">
+                            <svg viewBox="0 0 24 24" width="14" height="14">
+                                <polygon points="5,5 5,19 16,12" fill="currentColor"/>
+                                <rect x="16" y="5" width="3" height="14" fill="currentColor"/>
+                            </svg>
+                        </div>
                     </div>
                     <div class="progress" ref="progress" @mousedown="handleProgressDown">
                         <div class="progress_c" :style="{width:currentProgress}">
                             <div class="progress_circle">
                                 <div class="progress_circle_c"></div>
                             </div>
+                        </div>
+                    </div>
+                    <div class="control_volume">
+                        <div class="control_side" @click="toggleMute" :title="(muted || volume === 0) ? '取消静音' : '静音'">
+                            <svg v-if="muted || volume === 0" viewBox="0 0 24 24" width="14" height="14">
+                                <polygon points="3,9 3,15 7,15 12,20 12,4 7,9" fill="currentColor"/>
+                                <line x1="16" y1="9" x2="22" y2="15" stroke="currentColor" stroke-width="2"/>
+                                <line x1="22" y1="9" x2="16" y2="15" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                            <svg v-else viewBox="0 0 24 24" width="14" height="14">
+                                <polygon points="3,9 3,15 7,15 12,20 12,4 7,9" fill="currentColor"/>
+                                <path d="M16 8 Q20 12 16 16" stroke="currentColor" stroke-width="2" fill="none"/>
+                            </svg>
+                        </div>
+                        <div class="volume_slider" ref="volumeSlider" @mousedown="handleVolumeDown">
+                            <div class="volume_slider_c" :style="{width: (muted ? 0 : volume * 100) + '%'}"></div>
                         </div>
                     </div>
                 </div>
@@ -105,8 +141,6 @@
 <script>
 import { getWords, getMusicInfo, getMusicUrl, getHotMusic, getMyMusic, getSearchSuggest, getHotTalk } from './api/music'
 import pan from './img/pan.png'
-import play from './img/play.png'
-import pause from './img/pause.png'
 import add from './img/add.png'
 import shlter from './img/list_pan.png'
 import listPlay from './img/list_play_hover.png'
@@ -128,9 +162,8 @@ export default {
             visible: false,
             o: 0,
             top: 0,
-            pan, play, pause, add, shlter, listPlay, state0, state1, talkicon1, talkicon2,
+            pan, add, shlter, listPlay, state0, state1, talkicon1, talkicon2,
             playState: true,
-            playIcon: pause,
             musicImg: '',
             musicUrl: '',
             musicWords: [],
@@ -167,6 +200,9 @@ export default {
             hotTalkList: [],
             isDraggingProgress: false,
             isUserScrolling: false,
+            volume: 1,
+            muted: false,
+            lastVolume: 1,
             _onMouseMove: null,
             _onMouseUp: null,
             _userScrollTimer: null
@@ -190,7 +226,19 @@ export default {
                     }
                 })
             }
+        },
+        volume(val) {
+            const audio = this.$refs.audio
+            if (audio) audio.volume = val
+        },
+        muted(val) {
+            const audio = this.$refs.audio
+            if (audio) audio.muted = val
         }
+    },
+    created() {
+        // 不放 data 是为了避免 Vue 把它做响应式（仅作版本号用）
+        this._playToken = 0
     },
     mounted() {
         getMyMusic(myMusicId).then(res => {
@@ -199,6 +247,8 @@ export default {
                 this.$nextTick(() => {
                     const audio = this.$refs.audio
                     if (audio) {
+                        audio.volume = this.volume
+                        audio.muted = this.muted
                         audio.addEventListener('timeupdate', this.onTimeUpdate)
                         audio.addEventListener('ended', this.onAudioEnded)
                     }
@@ -277,6 +327,48 @@ export default {
         DisActive() {
             this.disActive = !this.disActive
         },
+        PlayPrev() {
+            if (this.musicList.length === 0) return
+            const prev = this.thisMusicIndex - 1
+            const newIndex = prev < 0 ? this.musicList.length - 1 : prev
+            this.ListPlay(newIndex)
+        },
+        PlayNext() {
+            if (this.musicList.length === 0) return
+            const next = this.thisMusicIndex + 1
+            const newIndex = next >= this.musicList.length ? 0 : next
+            this.ListPlay(newIndex)
+        },
+        toggleMute() {
+            if (this.muted || this.volume === 0) {
+                this.muted = false
+                if (this.volume === 0) {
+                    this.volume = this.lastVolume > 0 ? this.lastVolume : 0.5
+                }
+            } else {
+                this.lastVolume = this.volume
+                this.muted = true
+            }
+        },
+        handleVolumeDown(ev) {
+            const slider = this.$refs.volumeSlider
+            if (!slider) return
+            const compute = (clientX) => {
+                const rect = slider.getBoundingClientRect()
+                const v = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width))
+                this.volume = v
+                if (v > 0 && this.muted) this.muted = false
+                return v
+            }
+            compute(ev.clientX)
+            const onMove = (e) => compute(e.clientX)
+            const onUp = () => {
+                document.removeEventListener('mousemove', onMove)
+                document.removeEventListener('mouseup', onUp)
+            }
+            document.addEventListener('mousemove', onMove)
+            document.addEventListener('mouseup', onUp)
+        },
         _getMusicType(id) {
             if (this.thisMusicType !== id) {
                 this.notPlay = []
@@ -313,28 +405,35 @@ export default {
             }
         },
         _getInfo() {
-            getMusicUrl(this.musicList[this.thisMusicIndex].id).then((res) => {
+            // 用 token 防止快速连续切歌时旧请求 resolve 把新数据覆盖；
+            // 全程用本地 idx/track 而不是 this.thisMusicIndex（resolve 时可能已变）
+            const token = ++this._playToken
+            const idx = this.thisMusicIndex
+            const track = this.musicList[idx]
+            if (!track) return
+
+            getMusicUrl(track.id).then((res) => {
+                if (token !== this._playToken) return
                 const url = res.data.data[0].url
                 if (url === null || url === '' || url === undefined) {
                     if (this.notPlay.length !== this.musicList.length) {
-                        const currentIndex = this.thisMusicIndex
-                        const nextIndex = (currentIndex + 1) % this.musicList.length
-                        if (this.notPlay.indexOf(currentIndex) === -1) {
-                            this.notPlay.push(currentIndex)
+                        const nextIndex = (idx + 1) % this.musicList.length
+                        if (this.notPlay.indexOf(idx) === -1) {
+                            this.notPlay.push(idx)
                         }
-                        this.MusicAlert(`${this.musicList[currentIndex].name}因为一些原因不能播放`)
+                        this.MusicAlert(`${track.name}因为一些原因不能播放`)
                         this.ListPlay(nextIndex)
                     } else {
                         this.MusicAlert('此列表所有歌都不能播放')
                     }
                 } else {
-                    const track = this.musicList[this.thisMusicIndex]
                     this.musicUrl = url.replace(/^http:\/\//, 'https://')
                     this.musicImg = track.al.picUrl.replace(/^http:\/\//, 'https://') + '?param=300y300'
                     this.musicTitle = track.name
                     this.musicName = track.ar.map(i => i.name).join('/')
 
                     getWords(track.id).then((res) => {
+                        if (token !== this._playToken) return
                         if (!res.data.nolyric && res.data.lrc && res.data.lrc.lyric) {
                             const info = this.Cut(res.data.lrc.lyric)
                             this.musicWords = info.wordArr
@@ -346,6 +445,7 @@ export default {
                     })
 
                     getHotTalk(track.id).then((res) => {
+                        if (token !== this._playToken) return
                         const comments = (res.data.hotComments || []).slice(0, 3)
                         let count = 0
                         comments.forEach(e => {
@@ -357,6 +457,7 @@ export default {
                 }
             })
         },
+
         // 歌词截取函数：LRC 时间戳 mm:ss.xxx → 秒，保留毫秒精度
         Cut(str) {
             const lines = str.split('[')
@@ -392,11 +493,9 @@ export default {
             if (this.playState) {
                 audio.pause()
                 this.playState = false
-                this.playIcon = this.play
             } else {
                 audio.play()
                 this.playState = true
-                this.playIcon = this.pause
             }
         },
         onTimeUpdate() {
@@ -465,7 +564,6 @@ export default {
                 }
                 audio.play()
                 this.playState = true
-                this.playIcon = this.pause
             }
             // 先解绑再绑定，避免多次拖动叠加
             document.removeEventListener('mousemove', this._onMouseMove)
