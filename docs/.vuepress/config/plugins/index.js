@@ -1,5 +1,6 @@
 const path = require('path')
 const yaml = require('js-yaml')
+const api = require('../api')
 const CARD_LIST = 'cardList'
 const CARD_IMG_LIST = 'cardImgList'
 const siteUrl = process.env.SITE_URL || 'https://bree.de5.net'
@@ -98,7 +99,10 @@ module.exports = [
     // ['vuepress-plugin-code-copy', {align: "top", staticIcon: false}],
 
     require('../../plugins/detailsOpenFlag'),
-    require('../../plugins/musicPlayer'),
+    [require('../../plugins/musicPlayer'), {
+        apiUrl: api.MUSIC_API_URL,
+        devProxyPrefix: api.MUSIC_API_DEV_PROXY_PREFIX
+    }],
     require('../../plugins/notification'),
     require('../../plugins/enhancedSearch'),
     require('../../plugins/codeCopy'),

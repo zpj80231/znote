@@ -3,6 +3,7 @@ const nav = require('./config/nav/')
 const sidebar = require('./config/sidebar/')
 const plugins = require('./config/plugins/')
 const htmlModules = require('./config/htmlModules')
+const { MUSIC_API_URL, MUSIC_API_DEV_PROXY_PREFIX } = require('./config/api')
 
 module.exports = {
     // 打包目录
@@ -137,6 +138,17 @@ module.exports = {
         },
     },
     plugins,
+    // dev 把音乐 API 反代，绕开第三方 CDN 缓存 CORS 头导致的跨域错误
+    devServer: {
+        proxy: {
+            [MUSIC_API_DEV_PROXY_PREFIX]: {
+                target: MUSIC_API_URL,
+                changeOrigin: true,
+                secure: true,
+                pathRewrite: { [`^${MUSIC_API_DEV_PROXY_PREFIX}`]: '' }
+            }
+        }
+    },
     markdown: {
         // 代码块高亮：```js {2,4-6}
         lineNumbers: true,
