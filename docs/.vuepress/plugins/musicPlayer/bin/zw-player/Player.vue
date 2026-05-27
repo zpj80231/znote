@@ -116,8 +116,8 @@
                         </div>
                     </div>
                     <div class="control_volume">
-                        <div class="control_side" @click="toggleMute" :title="(muted || volume === 0) ? '取消静音' : '静音'">
-                            <svg v-if="muted || volume === 0" viewBox="0 0 24 24" width="14" height="14">
+                        <div class="control_side control_vol_btn" ref="volumeBtn" @click="toggleVolumePopup" :title="volume === 0 ? '已静音' : '音量 ' + Math.round(volume * 100) + '%'">
+                            <svg v-if="volume === 0" viewBox="0 0 24 24" width="14" height="14">
                                 <polygon points="3,9 3,15 7,15 12,20 12,4 7,9" fill="currentColor"/>
                                 <line x1="16" y1="9" x2="22" y2="15" stroke="currentColor" stroke-width="2"/>
                                 <line x1="22" y1="9" x2="16" y2="15" stroke="currentColor" stroke-width="2"/>
@@ -127,9 +127,13 @@
                                 <path d="M16 8 Q20 12 16 16" stroke="currentColor" stroke-width="2" fill="none"/>
                             </svg>
                         </div>
-                        <div class="volume_slider" ref="volumeSlider" @mousedown="handleVolumeDown">
-                            <div class="volume_slider_c" :style="{width: (muted ? 0 : volume * 100) + '%'}"></div>
-                        </div>
+                        <transition name="volume_popup_fade">
+                            <div v-if="showVolumePopup" class="volume_popup" ref="volumePopup">
+                                <div class="volume_slider_vertical" ref="volumeSlider" @mousedown="handleVolumeDown">
+                                    <div class="volume_slider_fill" :style="{height: (volume * 100) + '%'}"></div>
+                                </div>
+                            </div>
+                        </transition>
                     </div>
                 </div>
             </div>
@@ -154,6 +158,8 @@ const myMusicId = 3068309305
 // 注意：macOS trackpad/部分鼠标有惯性滚动，停手后系统仍会派发 wheel ~1-2s，
 // 这段时间 timer 会被反复重置，所以实际感知 = 惯性 + 此值 + transition(0.5s)
 const LYRIC_SCROLL_RESUME_MS = 1500
+// 音量持久化的 localStorage key
+const VOLUME_STORAGE_KEY = 'znote.musicPlayer.volume'
 
 export default {
     name: 'Player',
@@ -200,12 +206,12 @@ export default {
             hotTalkList: [],
             isDraggingProgress: false,
             isUserScrolling: false,
-            volume: 1,
-            muted: false,
-            lastVolume: 1,
+            volume: 0.5,
+            showVolumePopup: false,
             _onMouseMove: null,
             _onMouseUp: null,
-            _userScrollTimer: null
+            _userScrollTimer: null,
+            _onDocMouseDown: null
         }
     },
     computed: {
@@ -230,10 +236,7 @@ export default {
         volume(val) {
             const audio = this.$refs.audio
             if (audio) audio.volume = val
-        },
-        muted(val) {
-            const audio = this.$refs.audio
-            if (audio) audio.muted = val
+            try { localStorage.setItem(VOLUME_STORAGE_KEY, String(val)) } catch (e) {}
         }
     },
     created() {
@@ -241,6 +244,15 @@ export default {
         this._playToken = 0
     },
     mounted() {
+        // 从 localStorage 恢复音量（区间外或非法值忽略，保留默认 0.5）
+        try {
+            const stored = localStorage.getItem(VOLUME_STORAGE_KEY)
+            if (stored !== null) {
+                const v = parseFloat(stored)
+                if (!isNaN(v) && v >= 0 && v <= 1) this.volume = v
+            }
+        } catch (e) {}
+
         getMyMusic(myMusicId).then(res => {
             if (this.isPc() && res.data.code === 200) {
                 this.visible = true
@@ -248,7 +260,6 @@ export default {
                     const audio = this.$refs.audio
                     if (audio) {
                         audio.volume = this.volume
-                        audio.muted = this.muted
                         audio.addEventListener('timeupdate', this.onTimeUpdate)
                         audio.addEventListener('ended', this.onAudioEnded)
                     }
@@ -267,6 +278,7 @@ export default {
         }
         if (this._onMouseMove) document.removeEventListener('mousemove', this._onMouseMove)
         if (this._onMouseUp) document.removeEventListener('mouseup', this._onMouseUp)
+        if (this._onDocMouseDown) document.removeEventListener('mousedown', this._onDocMouseDown)
     },
     methods: {
         isPc() {
@@ -339,29 +351,43 @@ export default {
             const newIndex = next >= this.musicList.length ? 0 : next
             this.ListPlay(newIndex)
         },
-        toggleMute() {
-            if (this.muted || this.volume === 0) {
-                this.muted = false
-                if (this.volume === 0) {
-                    this.volume = this.lastVolume > 0 ? this.lastVolume : 0.5
+        toggleVolumePopup() {
+            if (this.showVolumePopup) {
+                this.closeVolumePopup()
+                return
+            }
+            this.showVolumePopup = true
+            // popup 在下一帧才挂到 DOM，需要 $nextTick 后绑外点监听
+            this.$nextTick(() => {
+                this._onDocMouseDown = (e) => {
+                    const popup = this.$refs.volumePopup
+                    const btn = this.$refs.volumeBtn
+                    if (popup && popup.contains(e.target)) return
+                    if (btn && btn.contains(e.target)) return
+                    this.closeVolumePopup()
                 }
-            } else {
-                this.lastVolume = this.volume
-                this.muted = true
+                document.addEventListener('mousedown', this._onDocMouseDown)
+            })
+        },
+        closeVolumePopup() {
+            this.showVolumePopup = false
+            if (this._onDocMouseDown) {
+                document.removeEventListener('mousedown', this._onDocMouseDown)
+                this._onDocMouseDown = null
             }
         },
+        // 竖向音量条：底部 = 0%、顶部 = 100%
         handleVolumeDown(ev) {
             const slider = this.$refs.volumeSlider
             if (!slider) return
-            const compute = (clientX) => {
+            const compute = (clientY) => {
                 const rect = slider.getBoundingClientRect()
-                const v = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width))
+                const v = Math.max(0, Math.min(1, (rect.bottom - clientY) / rect.height))
                 this.volume = v
-                if (v > 0 && this.muted) this.muted = false
                 return v
             }
-            compute(ev.clientX)
-            const onMove = (e) => compute(e.clientX)
+            compute(ev.clientY)
+            const onMove = (e) => compute(e.clientY)
             const onUp = () => {
                 document.removeEventListener('mousemove', onMove)
                 document.removeEventListener('mouseup', onUp)
