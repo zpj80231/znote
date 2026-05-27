@@ -87,22 +87,22 @@
                 <div class="control_box">
                     <div class="control_buttons">
                         <div class="control_side control_prev" @click="PlayPrev" title="上一首">
-                            <svg viewBox="0 0 24 24" width="14" height="14">
+                            <svg viewBox="0 0 24 24" width="18" height="18">
                                 <polygon points="19,5 19,19 8,12" fill="currentColor"/>
                                 <rect x="5" y="5" width="3" height="14" fill="currentColor"/>
                             </svg>
                         </div>
                         <div class="control_side control_play" @click="togglePlay" :title="playState ? '暂停' : '播放'">
-                            <svg v-if="playState" viewBox="0 0 24 24" width="14" height="14">
+                            <svg v-if="playState" viewBox="0 0 24 24" width="18" height="18">
                                 <rect x="6" y="4" width="4" height="16" fill="currentColor"/>
                                 <rect x="14" y="4" width="4" height="16" fill="currentColor"/>
                             </svg>
-                            <svg v-else viewBox="0 0 24 24" width="14" height="14">
+                            <svg v-else viewBox="0 0 24 24" width="18" height="18">
                                 <polygon points="6,4 6,20 20,12" fill="currentColor"/>
                             </svg>
                         </div>
                         <div class="control_side control_next" @click="PlayNext" title="下一首">
-                            <svg viewBox="0 0 24 24" width="14" height="14">
+                            <svg viewBox="0 0 24 24" width="18" height="18">
                                 <polygon points="5,5 5,19 16,12" fill="currentColor"/>
                                 <rect x="16" y="5" width="3" height="14" fill="currentColor"/>
                             </svg>
@@ -117,18 +117,19 @@
                     </div>
                     <div class="control_volume">
                         <div class="control_side control_vol_btn" ref="volumeBtn" @click="toggleVolumePopup" :title="volume === 0 ? '已静音' : '音量 ' + Math.round(volume * 100) + '%'">
-                            <svg v-if="volume === 0" viewBox="0 0 24 24" width="14" height="14">
+                            <svg v-if="volume === 0" viewBox="0 0 24 24" width="18" height="18">
                                 <polygon points="3,9 3,15 7,15 12,20 12,4 7,9" fill="currentColor"/>
                                 <line x1="16" y1="9" x2="22" y2="15" stroke="currentColor" stroke-width="2"/>
                                 <line x1="22" y1="9" x2="16" y2="15" stroke="currentColor" stroke-width="2"/>
                             </svg>
-                            <svg v-else viewBox="0 0 24 24" width="14" height="14">
+                            <svg v-else viewBox="0 0 24 24" width="18" height="18">
                                 <polygon points="3,9 3,15 7,15 12,20 12,4 7,9" fill="currentColor"/>
                                 <path d="M16 8 Q20 12 16 16" stroke="currentColor" stroke-width="2" fill="none"/>
                             </svg>
                         </div>
                         <transition name="volume_popup_fade">
                             <div v-if="showVolumePopup" class="volume_popup" ref="volumePopup">
+                                <div class="volume_value">{{ Math.round(volume * 100) }}%</div>
                                 <div class="volume_slider_vertical" ref="volumeSlider" @mousedown="handleVolumeDown">
                                     <div class="volume_slider_fill" :style="{height: (volume * 100) + '%'}"></div>
                                 </div>
