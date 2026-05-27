@@ -18,7 +18,7 @@
 
         <div
           class="sidebar-mask"
-          @click="toggleSidebar(false)"></div>
+          @click="toggleSidebar(true)"></div>
 
         <Sidebar
           :items="sidebarItems"
@@ -62,7 +62,7 @@
 
           <div
             class="sidebar-mask"
-            @click="toggleSidebar(false)"></div>
+            @click="toggleSidebar(true)"></div>
 
           <Sidebar
             :items="sidebarItems"
