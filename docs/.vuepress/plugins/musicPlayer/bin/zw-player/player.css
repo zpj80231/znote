@@ -318,6 +318,10 @@
     color: rgba(225,225,225,0.9);
     cursor: pointer;
     font-size: 20px;
+    /* 同级的 music_list 是后出现的 absolute 元素会默认覆盖在上层，
+       视窗较窄时（如 f12 占空间）music_list 会延伸到 close 所在区域，
+       导致点击穿透。提高 z-index 让 close 始终可点。 */
+    z-index: 10;
 }
 .music_list{
     width: 1320px;
