@@ -20,7 +20,7 @@ const sidebarTop = `
   </a>
 </div> `
 
-module.exports = {
+export default {
   // 放在页面文章顶部，如 pageTop
   pageT: '',
   // 未配置 默认所有页面显示, article: 仅文章显示, custom: 仅自定义页显示

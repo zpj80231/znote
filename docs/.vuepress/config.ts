@@ -1,17 +1,11 @@
-const path = require('path')
-const nav = require('./config/nav')
-const sidebar = require('./config/sidebar')
-const plugins = require('./config/plugins')
-const htmlModules = require('./config/htmlModules')
-const {
-    CWD_SERVER_URL,
-    GOOGLE_ANALYTICS_SCRIPT_URL,
-    MUSIC_API_URL,
-    MUSIC_API_DEV_PROXY_PREFIX,
-    WWADS_SCRIPT_URL
-} = require('./config/api')
+import nav from './config/nav'
+import sidebar from './config/sidebar'
+import plugins from './config/plugins'
+import htmlModules from './config/htmlModules'
+import api from './config/api'
+import markdownItDisableUrlEncode from 'markdown-it-disable-url-encode'
 
-module.exports = {
+export default {
     // 打包目录
     // dest: 'gb-pages',
     base: process.env.VUEPRESS_BASE || '/znote/',
@@ -51,7 +45,7 @@ module.exports = {
         ["script", {"defer": true, "language": "javascript", "type": "text/javascript", "src": "/js/cwd.js"}],
         ["script", {"defer": true, "language": "javascript", "type": "text/javascript", "src": "/js/MouseClickEffect.js"}],
         // Google Analytics (GA4)
-        ["script", {async: true, src: GOOGLE_ANALYTICS_SCRIPT_URL}],
+        ["script", {async: true, src: api.scripts.googleAnalytics}],
         ["script", {}, `
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
@@ -76,7 +70,7 @@ module.exports = {
             ? [['meta', {name: 'wwads-cn-verify', content: process.env.WWADS_VERIFY}]]
             : [],
         process.env.WWADS_ENABLE === 'true'
-            ? [['script', {async: true, src: WWADS_SCRIPT_URL, type: 'text/javascript'}]]
+            ? [['script', {async: true, src: api.scripts.wwads, type: 'text/javascript'}]]
             : []
     ),
     shouldPrefetch: false,
@@ -139,19 +133,28 @@ module.exports = {
         // },
         cwdConfig: {
             siteId: 'znote',
-            serverUrl: CWD_SERVER_URL,
+            serverUrl: api.services.cwd,
             customCssUrl: '/znote/css/cwd-custom.css'
         },
     },
     plugins,
+    extraWatchFiles: [
+        '.vuepress/config.ts',
+        '.vuepress/config/*.ts'
+    ],
+    configureWebpack: config => {
+        if (config.resolve && Array.isArray(config.resolve.extensions)) {
+            config.resolve.extensions.push('.ts')
+        }
+    },
     // dev 把音乐 API 反代，绕开第三方 CDN 缓存 CORS 头导致的跨域错误
     devServer: {
         proxy: {
-            [MUSIC_API_DEV_PROXY_PREFIX]: {
-                target: MUSIC_API_URL,
+            [api.music.devProxyPrefix]: {
+                target: api.music.url,
                 changeOrigin: true,
                 secure: true,
-                pathRewrite: { [`^${MUSIC_API_DEV_PROXY_PREFIX}`]: '' }
+                pathRewrite: { [`^${api.music.devProxyPrefix}`]: '' }
             }
         }
     },
@@ -164,8 +167,8 @@ module.exports = {
         toc: {
             includeLevel: [2, 3, 4]
         },
-        extendMarkdown: md => {
-            md.use(require("markdown-it-disable-url-encode"));
+        extendMarkdown: (md) => {
+            md.use(markdownItDisableUrlEncode);
         }
     },
 

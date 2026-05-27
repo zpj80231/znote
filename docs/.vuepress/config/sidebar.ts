@@ -1,5 +1,5 @@
 //侧边栏
-module.exports = {
+export default {
     '/views/': [
         '',
         {

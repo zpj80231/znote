@@ -1,13 +1,24 @@
-const path = require('path')
-const yaml = require('js-yaml')
-const api = require('./api')
+import yaml from 'js-yaml'
+import dayjs from 'dayjs'
+import utc from 'dayjs/plugin/utc.js'
+import { createRequire } from 'module'
+import seoPlugin from '@mr-hope/vuepress-plugin-seo'
+import api from './api'
+
 const CARD_LIST = 'cardList'
 const CARD_IMG_LIST = 'cardImgList'
-const siteUrl = api.SITE_URL
-const siteBase = api.SITE_BASE
-const siteBaseUrl = api.SITE_BASE_URL
+const siteUrl = api.site.url
+const siteBase = api.site.base
+const siteBaseUrl = api.site.baseUrl
+const requirePlugin = createRequire(
+    import.meta.url.endsWith('/config/plugins.ts')
+        ? import.meta.url
+        : new URL('./config/plugins.ts', import.meta.url)
+)
 
-module.exports = [
+dayjs.extend(utc)
+
+export default [
     ['container', {
         type: 'details',
         before: info => `<details class="custom-block details"><summary>${info}</summary>`,
@@ -69,22 +80,19 @@ module.exports = [
         baseURL: siteBaseUrl.replace(/\/$/, ''),
         stripExtension: false
     }],
-    [require('@mr-hope/vuepress-plugin-seo'), {
+    [seoPlugin, {
         hostname: siteUrl,
         author: 'z',
         autoDescription: true,
         fallBackImage: `${siteBaseUrl}vuepress/znote.png`,
         isArticle: page => Boolean(page._filePath && !page.frontmatter.home)
     }],
-    [require('../plugins/robots'), {
+    [requirePlugin('../plugins/robots'), {
         host: siteUrl,
         sitemap: `${siteBase}sitemap.xml`
     }],
     ['@vuepress/last-updated', {
         transformer: (timestamp, lang) => {
-            const dayjs = require('dayjs')
-            const utc = require('dayjs/plugin/utc')
-            dayjs.extend(utc)
             return dayjs(timestamp).utcOffset(480).format('YYYY/MM/DD HH:mm:ss');
         }
     }],
@@ -98,16 +106,16 @@ module.exports = [
     // ['vuepress-plugin-fulltext-search'],
     // ['vuepress-plugin-code-copy', {align: "top", staticIcon: false}],
 
-    require('../plugins/detailsOpenFlag'),
-    [require('../plugins/musicPlayer'), {
-        apiUrl: api.MUSIC_API_URL,
-        devProxyPrefix: api.MUSIC_API_DEV_PROXY_PREFIX
+    requirePlugin('../plugins/detailsOpenFlag'),
+    [requirePlugin('../plugins/musicPlayer'), {
+        apiUrl: api.music.url,
+        devProxyPrefix: api.music.devProxyPrefix
     }],
-    require('../plugins/notification'),
-    require('../plugins/enhancedSearch'),
-    require('../plugins/codeCopy'),
-    require('../plugins/cwd'),
-    require('../plugins/codeExpand'),
+    requirePlugin('../plugins/notification'),
+    requirePlugin('../plugins/enhancedSearch'),
+    requirePlugin('../plugins/codeCopy'),
+    requirePlugin('../plugins/cwd'),
+    requirePlugin('../plugins/codeExpand'),
 
 ]
 
