@@ -54,7 +54,7 @@
     methods: {
       getProjects() {
         this.loading = true;
-        httpGet(api.GITHUB_REPOS_API_URL).then(res => {
+        httpGet(api.services.githubRepos).then(res => {
           this.loading = false;
           // 过滤掉私有的项目, 暂不过滤掉 fork 项目 && !item.fork
           const projects = filter(res, item => !item.private);

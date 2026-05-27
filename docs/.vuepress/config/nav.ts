@@ -1,5 +1,5 @@
 //导航栏
-module.exports = [
+export default [
     {text: '主页', link: '/index.html', icon: 'reco-home'},
     {
         text: '其它', icon: 'reco-document',
