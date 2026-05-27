@@ -96,10 +96,6 @@ export default [
             return dayjs(timestamp).utcOffset(480).format('YYYY/MM/DD HH:mm:ss');
         }
     }],
-    // ['vuepress-plugin-copyright',{
-    //     minLength: 100,
-    //     clipboardComponent: path.resolve(__dirname, '../components/Copyright.vue')
-    // },],
     ['vuepress-plugin-boxx'],
     ['vuepress-plugin-mermaidjs'],
     ['vuepress-plugin-smooth-scroll'],

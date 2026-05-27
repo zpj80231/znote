@@ -23,8 +23,6 @@ features:
 footer: MIT Licensed | Copyright © 2018-present Evan You
 ---
 
-[//]: # (<Clock/>)
-
 ::: tip 人的一生能有几天
 
 问一问，人的一生能有几天 <br/>
@@ -135,57 +133,13 @@ export default {
 .home .hero .description {
     color: #476582 !important;
 }
-.wrap {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 200px;
-    min-height: 10vh;
-    position: fixed;
-    top: -114%;
-    left: -1%;
-    background: url(https://img.shields.io/github/stars/zpj80231/znote?style=social) right,url(https://img.shields.io/github/forks/zpj80231/znote?style=social) right;
-    background-repeat: no-repeat, no-repeat;
-    background-position-y: 20%, 20%;
-    background-position-x: 86%, 98%;
-}
-
-@media screen and (max-width: 780px) and (min-width: 541px){
-  .wrap {
-    top:-133%;
-    background: none;
-  }
-  .clock {
-    max-width: 230px !important;
-    max-height: 230px !important;
-    margin-top: 65% !important;
-  }
-  .home .hero img {
-    /*max-width: 520px !important;*/
-  }
-}
-
 @media screen and (max-width: 540px) and (min-width: 481px){
-  .wrap {
-    background: none;
-  }
-  .clock {
-    max-width: 200px !important;
-    max-height: 200px !important;
-    margin-top: -10% !important;
-  }
   .home .hero img {
     max-width: 380px !important;
   }
 }
 
 @media screen and (max-width: 480px) and (min-width: 0px){
-  .wrap {
-    top:-103%;
-    transform: scale(0.68,0.58);
-    background: none;
-  }
   .home .hero img {    
     max-width: 100% !important;
   }
@@ -197,20 +151,5 @@ export default {
     margin: -12px;
     margin-left: 0px;
   }
-  .clock {
-    background: rgba(0, 0, 0, 0) none repeat scroll !important;
-    background-image: none !important;
-  }
-}
-.clock {
-  width: 300px !important;
-  height: 300px !important;
-  margin-top: 12%;
-  transition: all 2s;
-}
-.clock:hover {
-  transform: scale(0.55) !important;
-  transition: all 2s;
 }
 </style>
-
