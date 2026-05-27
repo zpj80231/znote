@@ -3,9 +3,9 @@ const yaml = require('js-yaml')
 const api = require('../api')
 const CARD_LIST = 'cardList'
 const CARD_IMG_LIST = 'cardImgList'
-const siteUrl = process.env.SITE_URL || 'https://bree.de5.net'
-const siteBase = process.env.SITE_BASE || '/znote/'
-const siteBaseUrl = `${siteUrl}${siteBase}`.replace(/\/+$/, '/')
+const siteUrl = api.SITE_URL
+const siteBase = api.SITE_BASE
+const siteBaseUrl = api.SITE_BASE_URL
 
 module.exports = [
     ['container', {
