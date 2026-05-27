@@ -184,8 +184,5 @@ A：Edge TTS 免费稳定，适合日常使用，但不支持情感风格；Azur
 
 - [wangwangit/tts](https://github.com/wangwangit/tts)：Azure 认知服务签名协议的原始实现参考
 - [rany2/edge-tts](https://github.com/rany2/edge-tts)：Edge Read Aloud 协议参考
-  [rany2/edge-tts](https://github.com/rany2/edge-tts) ：Edge 朗读协议参考
 - [bobtranslate.com](https://bobtranslate.com/)：Bob 插件平台
-  [bobtranslate.com](https://bobtranslate.com/) ：Bob 插件平台
 - [Linux.do](https://linux.do/)：Linux.do 社区
-  [Linux.do](https://linux.do/) ：Linux.do 社区
