@@ -3,7 +3,13 @@ const nav = require('./config/nav/')
 const sidebar = require('./config/sidebar/')
 const plugins = require('./config/plugins/')
 const htmlModules = require('./config/htmlModules')
-const { MUSIC_API_URL, MUSIC_API_DEV_PROXY_PREFIX } = require('./config/api')
+const {
+    CWD_SERVER_URL,
+    GOOGLE_ANALYTICS_SCRIPT_URL,
+    MUSIC_API_URL,
+    MUSIC_API_DEV_PROXY_PREFIX,
+    WWADS_SCRIPT_URL
+} = require('./config/api')
 
 module.exports = {
     // 打包目录
@@ -45,7 +51,7 @@ module.exports = {
         ["script", {"defer": true, "language": "javascript", "type": "text/javascript", "src": "/js/cwd.js"}],
         ["script", {"defer": true, "language": "javascript", "type": "text/javascript", "src": "/js/MouseClickEffect.js"}],
         // Google Analytics (GA4)
-        ["script", {async: true, src: "https://www.googletagmanager.com/gtag/js?id=G-NCYBBYN93V"}],
+        ["script", {async: true, src: GOOGLE_ANALYTICS_SCRIPT_URL}],
         ["script", {}, `
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
@@ -70,7 +76,7 @@ module.exports = {
             ? [['meta', {name: 'wwads-cn-verify', content: process.env.WWADS_VERIFY}]]
             : [],
         process.env.WWADS_ENABLE === 'true'
-            ? [['script', {async: true, src: 'https://cdn.wwads.cn/js/makemoney.js', type: 'text/javascript'}]]
+            ? [['script', {async: true, src: WWADS_SCRIPT_URL, type: 'text/javascript'}]]
             : []
     ),
     shouldPrefetch: false,
@@ -133,7 +139,7 @@ module.exports = {
         // },
         cwdConfig: {
             siteId: 'znote',
-            serverUrl: 'https://cwd.bree.de5.net',
+            serverUrl: CWD_SERVER_URL,
             customCssUrl: '/znote/css/cwd-custom.css'
         },
     },

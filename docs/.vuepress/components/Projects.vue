@@ -35,6 +35,7 @@
   import { httpGet } from "./utils/fetch.js";
   import ProjectItem from "./ProjectItem";
   import { filter, orderBy } from "lodash";
+  import api from "../config/api";
   export default {
     name: "Projects",
     components: {
@@ -53,7 +54,7 @@
     methods: {
       getProjects() {
         this.loading = true;
-        httpGet("https://api.github.com/users/zpj80231/repos").then(res => {
+        httpGet(api.GITHUB_REPOS_API_URL).then(res => {
           this.loading = false;
           // 过滤掉私有的项目, 暂不过滤掉 fork 项目 && !item.fork
           const projects = filter(res, item => !item.private);

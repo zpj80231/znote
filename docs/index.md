@@ -52,8 +52,6 @@ footer: MIT Licensed | Copyright © 2018-present Evan You
 
 :::
 
-<!-- <CanvasNest color='0,23,255' zIndex='-2'></CanvasNest> -->
-
 <script>
 export default {
   data() {
