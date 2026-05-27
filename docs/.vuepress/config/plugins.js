@@ -1,6 +1,6 @@
 const path = require('path')
 const yaml = require('js-yaml')
-const api = require('../api')
+const api = require('./api')
 const CARD_LIST = 'cardList'
 const CARD_IMG_LIST = 'cardImgList'
 const siteUrl = api.SITE_URL
@@ -76,7 +76,7 @@ module.exports = [
         fallBackImage: `${siteBaseUrl}vuepress/znote.png`,
         isArticle: page => Boolean(page._filePath && !page.frontmatter.home)
     }],
-    [require('../../plugins/robots'), {
+    [require('../plugins/robots'), {
         host: siteUrl,
         sitemap: `${siteBase}sitemap.xml`
     }],
@@ -90,7 +90,7 @@ module.exports = [
     }],
     // ['vuepress-plugin-copyright',{
     //     minLength: 100,
-    //     clipboardComponent: path.resolve(__dirname, '../../components/Copyright.vue')
+    //     clipboardComponent: path.resolve(__dirname, '../components/Copyright.vue')
     // },],
     ['vuepress-plugin-boxx'],
     ['vuepress-plugin-mermaidjs'],
@@ -98,16 +98,16 @@ module.exports = [
     // ['vuepress-plugin-fulltext-search'],
     // ['vuepress-plugin-code-copy', {align: "top", staticIcon: false}],
 
-    require('../../plugins/detailsOpenFlag'),
-    [require('../../plugins/musicPlayer'), {
+    require('../plugins/detailsOpenFlag'),
+    [require('../plugins/musicPlayer'), {
         apiUrl: api.MUSIC_API_URL,
         devProxyPrefix: api.MUSIC_API_DEV_PROXY_PREFIX
     }],
-    require('../../plugins/notification'),
-    require('../../plugins/enhancedSearch'),
-    require('../../plugins/codeCopy'),
-    require('../../plugins/cwd'),
-    require('../../plugins/codeExpand'),
+    require('../plugins/notification'),
+    require('../plugins/enhancedSearch'),
+    require('../plugins/codeCopy'),
+    require('../plugins/cwd'),
+    require('../plugins/codeExpand'),
 
 ]
 

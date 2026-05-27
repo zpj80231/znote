@@ -1,7 +1,7 @@
 const path = require('path')
-const nav = require('./config/nav/')
-const sidebar = require('./config/sidebar/')
-const plugins = require('./config/plugins/')
+const nav = require('./config/nav')
+const sidebar = require('./config/sidebar')
+const plugins = require('./config/plugins')
 const htmlModules = require('./config/htmlModules')
 const {
     CWD_SERVER_URL,
