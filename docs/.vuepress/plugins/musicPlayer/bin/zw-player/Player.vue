@@ -67,7 +67,7 @@
             </div>
         </transition>
         <div class="bbox" :class="{bbox_active:disActive}">
-            <div class="pan" :style="{backgroundImage:'url('+pan+')'}" :class="{pan_active:disActive}" @click="DisActive">
+            <div class="pan" :style="{backgroundImage:'url('+pan+')'}" :class="{pan_active:disActive, pan_playing:playState}" @click="DisActive">
                 <img :src="musicImg" alt="" class="pan_c">
             </div>
             <div class="box" :style="{backgroundImage:'url('+musicImg+')'}" :class="{box_active:disActive}" @dblclick="DisList">
@@ -138,7 +138,7 @@
                     </div>
                 </div>
             </div>
-            <audio id="music" ref="audio" autoplay :src="musicUrl" :loop="musicState===1"></audio>
+            <audio id="music" ref="audio" autoplay :src="musicUrl" :loop="musicState===1" @play="onAudioPlay" @pause="onAudioPause" @error="onAudioPause"></audio>
         </div>
     </div>
 </template>
@@ -458,6 +458,7 @@ export default {
                     this.musicImg = track.al.picUrl.replace(/^http:\/\//, 'https://') + '?param=300y300'
                     this.musicTitle = track.name
                     this.musicName = track.ar.map(i => i.name).join('/')
+                    this.$nextTick(() => this.ensureAudioPlay())
 
                     getWords(track.id).then((res) => {
                         if (token !== this._playToken) return
@@ -519,11 +520,32 @@ export default {
             if (!audio) return
             if (this.playState) {
                 audio.pause()
-                this.playState = false
             } else {
-                audio.play()
-                this.playState = true
+                this.ensureAudioPlay()
             }
+        },
+        ensureAudioPlay() {
+            const audio = this.$refs.audio
+            if (!audio || !this.musicUrl) return
+            this.playState = true
+            const playPromise = audio.play()
+            if (playPromise && typeof playPromise.catch === 'function') {
+                playPromise
+                    .then(() => {
+                        this.playState = true
+                    })
+                    .catch(() => {
+                        this.playState = false
+                    })
+            } else {
+                this.playState = !audio.paused
+            }
+        },
+        onAudioPlay() {
+            this.playState = true
+        },
+        onAudioPause() {
+            this.playState = false
         },
         onTimeUpdate() {
             if (this.isDraggingProgress) return
@@ -557,7 +579,7 @@ export default {
                 this._getInfo()
             } else {
                 const audio = this.$refs.audio
-                if (audio) audio.play()
+                if (audio) this.ensureAudioPlay()
             }
             this.resetLyricState()
         },
@@ -589,8 +611,7 @@ export default {
                 if (audio.currentTime >= audio.duration) {
                     this.resetLyricState()
                 }
-                audio.play()
-                this.playState = true
+                this.ensureAudioPlay()
             }
             // 先解绑再绑定，避免多次拖动叠加
             document.removeEventListener('mousemove', this._onMouseMove)

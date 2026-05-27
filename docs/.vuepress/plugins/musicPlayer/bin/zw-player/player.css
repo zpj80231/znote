@@ -89,10 +89,14 @@
     top: -300px;
     padding: 16px;
     animation: pan 10s linear infinite;
+    animation-play-state: paused;
     z-index: 103;
     transition: all .5s;
     cursor: pointer;
     border-radius: 100%;
+}
+.pan_playing{
+    animation-play-state: running;
 }
 .pan:hover{
     box-shadow: 0px 0px 10px rgb(100,100,100);
