@@ -15,32 +15,33 @@ const cnIpPool = [
     '114.114.114.114',  // 114 DNS
     '119.29.29.29'      // 腾讯 DNS
 ]
+// 每次请求随机挑选一个 realIP，减少固定 IP 触发地区或风控问题的概率。
 const pickRealIP = () => cnIpPool[Math.floor(Math.random() * cnIpPool.length)]
 
 // 获取歌词
 export const getWords = (id) =>
     axios.get(baseUrl + 'lyric', { params: { id, realIP: pickRealIP() } })
 
-// 获取歌曲详情
+// 获取歌曲详情，用于把搜索结果补全成播放器列表项需要的歌曲结构。
 export const getMusicInfo = (id) =>
     axios.get(baseUrl + 'song/detail', { params: { ids: id, realIP: pickRealIP() } })
 
-// 获取歌曲 url
+// 获取歌曲 url；后续播放器会把 http 转成 https 避免混合内容问题。
 export const getMusicUrl = (id) =>
     axios.get(baseUrl + 'song/url', { params: { id, realIP: pickRealIP() } })
 
-// 获取热门歌曲
+// 获取榜单歌曲列表。
 export const getHotMusic = (id) =>
     axios.get(baseUrl + 'playlist/detail', { params: { id, realIP: pickRealIP() } })
 
-// 获取歌单歌曲
+// 获取默认歌单歌曲列表。
 export const getMyMusic = (id) =>
     axios.get(baseUrl + 'playlist/detail', { params: { id, realIP: pickRealIP() } })
 
-// 获取搜索建议
+// 获取搜索建议，限制 8 条避免搜索弹层过长。
 export const getSearchSuggest = (key) =>
     axios.get(baseUrl + 'cloudsearch', { params: { keywords: key, limit: 8, realIP: pickRealIP() } })
 
-// 获取歌曲热门评论
+// 获取歌曲热门评论，播放器侧会截取前几条展示。
 export const getHotTalk = (id) =>
     axios.get(baseUrl + 'comment/music', { params: { id, limit: 8, realIP: pickRealIP() } })

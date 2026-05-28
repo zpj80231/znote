@@ -138,7 +138,7 @@
                     </div>
                 </div>
             </div>
-            <audio id="music" ref="audio" autoplay :src="musicUrl" :loop="musicState===1" @play="onAudioPlay" @pause="onAudioPause" @error="onAudioPause"></audio>
+            <audio id="music" ref="audio" :src="musicUrl" :loop="musicState===1" @play="onAudioPlay" @pause="onAudioPause" @error="onAudioError"></audio>
         </div>
     </div>
 </template>
@@ -153,40 +153,55 @@ import state0 from './img/state_0.png'
 import state1 from './img/state_1.png'
 import talkicon1 from './img/talkicon1.png'
 import talkicon2 from './img/talkicon2.png'
+import {
+    DEFAULT_PLAY_STATE,
+    DEFAULT_VOLUME,
+    getStoredPlaybackState,
+    getStoredVolume,
+    setStoredPlaybackState,
+    setStoredVolume
+} from './playerStorage'
 
+// 默认加载的网易云歌单 ID。
 const myMusicId = 3068309305
 // 手动滚动歌词后，从最后一次 wheel 事件起经过多少 ms 自动回正
 // 注意：macOS trackpad/部分鼠标有惯性滚动，停手后系统仍会派发 wheel ~1-2s，
 // 这段时间 timer 会被反复重置，所以实际感知 = 惯性 + 此值 + transition(0.5s)
 const LYRIC_SCROLL_RESUME_MS = 1500
-// 音量持久化的 localStorage key
-const VOLUME_STORAGE_KEY = 'znote.musicPlayer.volume'
-
 export default {
     name: 'Player',
     data() {
         return {
+            // API 可用且当前设备是桌面端时才显示播放器。
             visible: false,
+            // 歌词推进状态：o 是当前歌词行游标，top 是已滚过的歌词高度。
             o: 0,
             top: 0,
+            // 图片资源放进响应式数据，模板可直接绑定。
             pan, add, shlter, listPlay, state0, state1, talkicon1, talkicon2,
-            playState: true,
+            // 播放状态会从 localStorage 恢复，无本地值时默认播放。
+            playState: DEFAULT_PLAY_STATE,
+            // 当前歌曲基础信息。
             musicImg: '',
             musicUrl: '',
             musicWords: [],
             musicTitle: '',
             musicName: '',
+            // 歌词和进度条状态。
             wordsTime: [],
             wordsTop: 0,
             wordIndex: 0,
             currentProgress: '0%',
+            // 当前列表、用户临时添加列表和列表分页状态。
             musicList: [],
             myMusicList: [],
             thisMusicIndex: 1,
+            // 播放器展开状态、歌曲列表弹层状态和列表悬停按钮状态。
             disActive: false,
             listIsDis: false,
             listButtonActiveIndex: -1,
             thisListPage: 1,
+            // 内置榜单类型；-1 表示用户临时添加的 My Songs。
             musicTypeList: [
                 { name: '热歌榜', id: 3778678 },
                 { name: '新歌榜', id: 3779629 },
@@ -196,19 +211,24 @@ export default {
                 { name: 'My Songs', id: -1 }
             ],
             thisMusicType: -1,
+            // 记录当前列表中不可播放的歌曲索引，避免死循环切换。
             notPlay: [],
             musicState: 0, // 0 列表循环  1 单曲循环
             musicStateButton: state1,
+            // 搜索输入、搜索候选和轻提示状态。
             musicSearchVal: '',
             musicSearchList: [],
             musicAlertVal: '',
             musicAlertState: false,
             musicAlertTimer: null,
+            // 当前歌曲热门评论。
             hotTalkList: [],
+            // 用户交互状态：拖动进度、手动滚动歌词、音量弹层。
             isDraggingProgress: false,
             isUserScrolling: false,
-            volume: 0.5,
+            volume: DEFAULT_VOLUME,
             showVolumePopup: false,
+            // DOM 级事件监听句柄，销毁或关闭弹层时用于准确解绑。
             _onMouseMove: null,
             _onMouseUp: null,
             _userScrollTimer: null,
@@ -216,11 +236,13 @@ export default {
         }
     },
     computed: {
+        // 当前分页展示 10 首歌，避免一次渲染完整榜单。
         thisMusicList() {
             return this.musicList.slice((this.thisListPage - 1) * 10, this.thisListPage * 10)
         }
     },
     watch: {
+        // 搜索框有输入时实时请求候选，清空输入时同步清空候选列表。
         musicSearchVal() {
             if (this.musicSearchVal === '') {
                 this.musicSearchList = []
@@ -234,10 +256,10 @@ export default {
                 })
             }
         },
+        // 音量变化只同步到 audio；本地持久化只在用户拖动音量条时触发。
         volume(val) {
             const audio = this.$refs.audio
             if (audio) audio.volume = val
-            try { localStorage.setItem(VOLUME_STORAGE_KEY, String(val)) } catch (e) {}
         }
     },
     created() {
@@ -245,31 +267,32 @@ export default {
         this._playToken = 0
     },
     mounted() {
-        // 从 localStorage 恢复音量（区间外或非法值忽略，保留默认 0.5）
-        try {
-            const stored = localStorage.getItem(VOLUME_STORAGE_KEY)
-            if (stored !== null) {
-                const v = parseFloat(stored)
-                if (!isNaN(v) && v >= 0 && v <= 1) this.volume = v
-            }
-        } catch (e) {}
-
-        getMyMusic(myMusicId).then(res => {
-            if (this.isPc() && res.data.code === 200) {
-                this.visible = true
-                this.$nextTick(() => {
-                    const audio = this.$refs.audio
-                    if (audio) {
-                        audio.volume = this.volume
-                        audio.addEventListener('timeupdate', this.onTimeUpdate)
-                        audio.addEventListener('ended', this.onAudioEnded)
-                    }
-                    this._getMusicType(myMusicId)
-                })
-            }
-        })
+        // 先探测默认歌单是否可用；只在桌面端显示这个悬浮播放器。
+        getMyMusic(myMusicId)
+            .then(res => {
+                if (this.isPc() && res.data.code === 200) {
+                    // 网络探测成功后才读取本地状态，避免异常访问刷新本地有效期。
+                    this.playState = getStoredPlaybackState()
+                    this.volume = getStoredVolume()
+                    this.visible = true
+                    this.$nextTick(() => {
+                        const audio = this.$refs.audio
+                        if (audio) {
+                            // timeupdate/ended 用原生事件监听，避免模板上事件过多。
+                            audio.volume = this.volume
+                            audio.addEventListener('timeupdate', this.onTimeUpdate)
+                            audio.addEventListener('ended', this.onAudioEnded)
+                        }
+                        this._getMusicType(myMusicId)
+                    })
+                }
+            })
+            .catch(() => {
+                // 网络不可达或接口异常时保持不加载播放器，也不读写本地状态。
+            })
     },
     beforeDestroy() {
+        // 清理定时器和 document/audio 监听，避免页面切换后残留回调。
         clearTimeout(this.musicAlertTimer)
         clearTimeout(this._userScrollTimer)
         const audio = this.$refs.audio
@@ -282,10 +305,12 @@ export default {
         if (this._onDocMouseDown) document.removeEventListener('mousedown', this._onDocMouseDown)
     },
     methods: {
+        // 移动端空间有限且自动播放限制更多，因此只在桌面端启用。
         isPc() {
             const flag = navigator.userAgent.match(/(phone|pod|iPhone|iPod|ios|Android|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)
             return !flag
         },
+        // 统一控制播放器内短提示文案，重复触发时重置隐藏计时。
         MusicAlert(val) {
             this.musicAlertState = true
             this.musicAlertVal = val
@@ -295,6 +320,7 @@ export default {
                 this.musicAlertVal = ''
             }, 2000)
         },
+        // 搜索结果加入 My Songs；首次添加时立即切到 My Songs 列表。
         ListAdd(obj) {
             getMusicInfo(obj.id).then((res) => {
                 this.musicSearchVal = ''
@@ -307,6 +333,7 @@ export default {
                 this.MusicAlert('添加成功')
             })
         },
+        // 切换列表循环/单曲循环，同时切换列表面板上的状态图标。
         MusicStateChange() {
             if (this.musicState === 0) {
                 this.musicState = 1
@@ -318,40 +345,47 @@ export default {
                 this.MusicAlert('已切换为列表循环模式')
             }
         },
+        // 打开或关闭完整歌曲列表面板。
         DisList() {
             this.listIsDis = !this.listIsDis
         },
+        // 歌曲列表分页：true 上一页，false 下一页。
         ListChange(isLast) {
             this.thisListPage += isLast ? -1 : 1
         },
-        ListPlay(id) {
+        // 从列表显式播放某首歌；只有用户触发时才把“播放”状态写回本地。
+        ListPlay(id, shouldPersist = true) {
             if (this.thisMusicIndex !== id) {
                 this.thisMusicIndex = id > this.musicList.length - 1 ? 0 : id
+                this.playState = true
+                if (shouldPersist) setStoredPlaybackState(true)
                 this._getInfo()
                 this.resetLyricState()
-                if (!this.playState) {
-                    this.togglePlay()
-                }
             }
         },
+        // 记录当前悬停行，用于显示行内播放/添加按钮。
         ButtonActive(id) {
             this.listButtonActiveIndex = id
         },
+        // 展开或收起小播放器详情面板。
         DisActive() {
             this.disActive = !this.disActive
         },
+        // 上一首；到达列表开头时回到最后一首。
         PlayPrev() {
             if (this.musicList.length === 0) return
             const prev = this.thisMusicIndex - 1
             const newIndex = prev < 0 ? this.musicList.length - 1 : prev
             this.ListPlay(newIndex)
         },
+        // 下一首；到达列表末尾时回到第一首。
         PlayNext() {
             if (this.musicList.length === 0) return
             const next = this.thisMusicIndex + 1
             const newIndex = next >= this.musicList.length ? 0 : next
             this.ListPlay(newIndex)
         },
+        // 打开音量弹层，并监听外部点击自动关闭。
         toggleVolumePopup() {
             if (this.showVolumePopup) {
                 this.closeVolumePopup()
@@ -370,6 +404,7 @@ export default {
                 document.addEventListener('mousedown', this._onDocMouseDown)
             })
         },
+        // 关闭音量弹层并解绑外部点击监听。
         closeVolumePopup() {
             this.showVolumePopup = false
             if (this._onDocMouseDown) {
@@ -385,6 +420,7 @@ export default {
                 const rect = slider.getBoundingClientRect()
                 const v = Math.max(0, Math.min(1, (rect.bottom - clientY) / rect.height))
                 this.volume = v
+                setStoredVolume(v)
                 return v
             }
             compute(ev.clientY)
@@ -396,6 +432,7 @@ export default {
             document.addEventListener('mousemove', onMove)
             document.addEventListener('mouseup', onUp)
         },
+        // 切换歌单类型；My Songs 使用内存列表，其余类型请求远程歌单。
         _getMusicType(id) {
             if (this.thisMusicType !== id) {
                 this.notPlay = []
@@ -407,9 +444,6 @@ export default {
                         this.thisListPage = 1
                         this._getInfo()
                         this.resetLyricState()
-                        if (!this.playState) {
-                            this.togglePlay()
-                        }
                     } else {
                         this.MusicAlert('没有歌曲,需要自己添加')
                     }
@@ -420,6 +454,7 @@ export default {
                 }
             }
         },
+        // 接收歌单详情响应，重置分页和当前播放索引后加载第一首歌。
         getMusicDetail(res, id) {
             this.musicList = res.data.playlist.tracks.slice(0, 200)
             this.thisMusicType = id
@@ -427,10 +462,8 @@ export default {
             this.thisListPage = 1
             this._getInfo()
             this.resetLyricState()
-            if (!this.playState) {
-                this.togglePlay()
-            }
         },
+        // 加载当前歌曲的播放地址、封面、歌词和热门评论。
         _getInfo() {
             // 用 token 防止快速连续切歌时旧请求 resolve 把新数据覆盖；
             // 全程用本地 idx/track 而不是 this.thisMusicIndex（resolve 时可能已变）
@@ -443,23 +476,28 @@ export default {
                 if (token !== this._playToken) return
                 const url = res.data.data[0].url
                 if (url === null || url === '' || url === undefined) {
+                    // 当前歌曲无可用地址时跳到下一首，直到整个列表都不可播。
                     if (this.notPlay.length !== this.musicList.length) {
                         const nextIndex = (idx + 1) % this.musicList.length
                         if (this.notPlay.indexOf(idx) === -1) {
                             this.notPlay.push(idx)
                         }
                         this.MusicAlert(`${track.name}因为一些原因不能播放`)
-                        this.ListPlay(nextIndex)
+                        this.ListPlay(nextIndex, false)
                     } else {
                         this.MusicAlert('此列表所有歌都不能播放')
                     }
                 } else {
+                    // 播放地址和封面统一转 https，避免站点 https 下出现混合内容。
                     this.musicUrl = url.replace(/^http:\/\//, 'https://')
                     this.musicImg = track.al.picUrl.replace(/^http:\/\//, 'https://') + '?param=300y300'
                     this.musicTitle = track.name
                     this.musicName = track.ar.map(i => i.name).join('/')
-                    this.$nextTick(() => this.ensureAudioPlay())
+                    if (this.playState) {
+                        this.$nextTick(() => this.ensureAudioPlay())
+                    }
 
+                    // 歌词和评论与播放地址并行加载；token 失效时丢弃旧响应。
                     getWords(track.id).then((res) => {
                         if (token !== this._playToken) return
                         if (!res.data.nolyric && res.data.lrc && res.data.lrc.lyric) {
@@ -505,6 +543,7 @@ export default {
             return { timeArr, wordArr }
         },
         resetLyricState() {
+            // 切换歌曲或拖到末尾时，将歌词、高亮和进度恢复到起点。
             this.top = 0
             this.o = 0
             this.wordIndex = 0
@@ -515,15 +554,19 @@ export default {
             this.musicWords = []
             this.wordsTime = []
         },
+        // 播放按钮入口：根据当前状态决定暂停或尝试播放。
         togglePlay() {
             const audio = this.$refs.audio
             if (!audio) return
             if (this.playState) {
+                setStoredPlaybackState(false)
                 audio.pause()
             } else {
+                setStoredPlaybackState(true)
                 this.ensureAudioPlay()
             }
         },
+        // 封装 audio.play()，兼容现代浏览器返回 Promise 的自动播放拦截场景。
         ensureAudioPlay() {
             const audio = this.$refs.audio
             if (!audio || !this.musicUrl) return
@@ -535,18 +578,26 @@ export default {
                         this.playState = true
                     })
                     .catch(() => {
+                        // 浏览器策略或资源异常导致播放失败时，只回落界面状态，不覆盖用户本地意图。
                         this.playState = false
                     })
             } else {
                 this.playState = !audio.paused
             }
         },
+        // audio 原生 play 事件只同步界面状态；持久化只在用户操作入口触发。
         onAudioPlay() {
             this.playState = true
         },
+        // audio 原生 pause 事件只同步界面状态，避免异常暂停覆盖用户意图。
         onAudioPause() {
             this.playState = false
         },
+        // 资源异常只影响当前 UI 状态，不写入本地播放偏好。
+        onAudioError() {
+            this.playState = false
+        },
+        // 播放进度推进时同步进度条和歌词高亮。
         onTimeUpdate() {
             if (this.isDraggingProgress) return
             const audio = this.$refs.audio
@@ -572,6 +623,7 @@ export default {
                 this.o++
             }
         },
+        // 当前歌曲结束后按列表循环逻辑切到下一首。
         onAudioEnded() {
             // loop=true 时不会触发；此处只处理列表循环
             if (this.musicList.length > 1) {
@@ -583,6 +635,7 @@ export default {
             }
             this.resetLyricState()
         },
+        // 拖动进度条时只更新 UI，松手后再写入 audio.currentTime。
         handleProgressDown(ev) {
             const audio = this.$refs.audio
             const progressEl = this.$refs.progress
@@ -619,6 +672,7 @@ export default {
             document.addEventListener('mousemove', this._onMouseMove)
             document.addEventListener('mouseup', this._onMouseUp)
         },
+        // 外部修改播放时间后，将歌词游标移动到对应行。
         alignLyricToTime(currentTime) {
             // 找最大 i 使 wordsTime[i] <= currentTime
             let newO = 0
