@@ -797,7 +797,7 @@ export default {
                     this.resetLyricState()
                 }
                 this.savePlaybackProgress()
-                this.ensureAudioPlay()
+                if (this.playState) this.ensureAudioPlay()
             }
             // 先解绑再绑定，避免多次拖动叠加
             document.removeEventListener('mousemove', this._onMouseMove)
