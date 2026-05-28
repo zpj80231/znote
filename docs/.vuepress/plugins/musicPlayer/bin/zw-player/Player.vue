@@ -172,6 +172,8 @@ const myMusicId = 3068309305
 const LYRIC_SCROLL_RESUME_MS = 1500
 // 播放中节流保存进度，避免 timeupdate 高频写 localStorage。
 const PROGRESS_SAVE_INTERVAL_MS = 5000
+// 获取歌曲播放地址最多等待 5 秒，超时后自动跳到下一首。
+const MUSIC_URL_LOAD_TIMEOUT_MS = 5000
 // 恢复进度如果贴近歌曲末尾，留出缓冲，避免刷新后立刻触发 ended 切到下一首。
 const RESTORE_END_GUARD_SECONDS = 3
 export default {
@@ -279,6 +281,7 @@ export default {
         this._pendingRestoreTime = null
         this._isTrackLoading = false
         this._isRestoringPlayback = false
+        this._musicUrlLoadTimer = null
     },
     mounted() {
         // 先探测默认歌单是否可用；只在桌面端显示这个悬浮播放器。
@@ -315,6 +318,7 @@ export default {
         this.savePlaybackProgress()
         clearTimeout(this.musicAlertTimer)
         clearTimeout(this._userScrollTimer)
+        this.clearMusicUrlLoadTimer()
         const audio = this.$refs.audio
         if (audio) {
             audio.removeEventListener('timeupdate', this.onTimeUpdate)
@@ -509,35 +513,51 @@ export default {
             if (byId >= 0) return byId
             return progress.trackIndex >= 0 && progress.trackIndex < this.musicList.length ? progress.trackIndex : -1
         },
+        clearMusicUrlLoadTimer() {
+            if (!this._musicUrlLoadTimer) return
+            clearTimeout(this._musicUrlLoadTimer)
+            this._musicUrlLoadTimer = null
+        },
+        autoSkipToNextTrack(idx, token, message) {
+            if (token !== this._playToken || this.musicList.length === 0) return
+            if (this.notPlay.indexOf(idx) === -1) {
+                this.notPlay.push(idx)
+            }
+            if (this.notPlay.length >= this.musicList.length) {
+                this.MusicAlert('此列表所有歌都不能播放')
+                return
+            }
+
+            const nextIndex = (idx + 1) % this.musicList.length
+            this.thisMusicIndex = nextIndex
+            this._pendingRestoreTime = null
+            this._isRestoringPlayback = false
+            this.savePlaybackProgressForIndex(nextIndex, 0)
+            this.resetLyricState()
+            if (message) this.MusicAlert(message)
+            this._getInfo()
+        },
         // 加载当前歌曲的播放地址、封面、歌词和热门评论。
         _getInfo() {
             // 用 token 防止快速连续切歌时旧请求 resolve 把新数据覆盖；
             // 全程用本地 idx/track 而不是 this.thisMusicIndex（resolve 时可能已变）
+            this.clearMusicUrlLoadTimer()
             const token = ++this._playToken
             const idx = this.thisMusicIndex
             const track = this.musicList[idx]
             if (!track) return
 
+            this._musicUrlLoadTimer = setTimeout(() => {
+                this._musicUrlLoadTimer = null
+                this.autoSkipToNextTrack(idx, token, `${track.name}获取超时，已自动跳到下一首`)
+            }, MUSIC_URL_LOAD_TIMEOUT_MS)
+
             getMusicUrl(track.id).then((res) => {
                 if (token !== this._playToken) return
+                this.clearMusicUrlLoadTimer()
                 const url = res.data.data[0].url
                 if (url === null || url === '' || url === undefined) {
-                    if (this._isRestoringPlayback) {
-                        // 刷新恢复时当前歌曲临时无地址，只保留本地记录的歌曲和播放状态，不自动污染到下一首。
-                        this.MusicAlert(`${track.name}暂时不能播放，已保留上次播放状态`)
-                        return
-                    }
-                    // 当前歌曲无可用地址时跳到下一首，直到整个列表都不可播。
-                    if (this.notPlay.length !== this.musicList.length) {
-                        const nextIndex = (idx + 1) % this.musicList.length
-                        if (this.notPlay.indexOf(idx) === -1) {
-                            this.notPlay.push(idx)
-                        }
-                        this.MusicAlert(`${track.name}因为一些原因不能播放`)
-                        this.ListPlay(nextIndex, false)
-                    } else {
-                        this.MusicAlert('此列表所有歌都不能播放')
-                    }
+                    this.MusicAlert(`${track.name}因为一些原因不能播放`)
                 } else {
                     // 播放地址和封面统一转 https，避免站点 https 下出现混合内容。
                     this._isTrackLoading = true
@@ -574,6 +594,10 @@ export default {
                         this.hotTalkList = count >= 200 ? comments.slice(0, 2) : comments
                     })
                 }
+            }).catch(() => {
+                if (token !== this._playToken) return
+                this.clearMusicUrlLoadTimer()
+                this.MusicAlert(`${track.name}获取失败`)
             })
         },
 
