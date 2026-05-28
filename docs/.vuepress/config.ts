@@ -1,7 +1,7 @@
 import nav from './config/nav'
 import sidebar from './config/sidebar'
 import plugins from './config/plugins'
-import htmlModules from './config/htmlModules'
+import htmlModules from './config/slots'
 import api from './config/api'
 import markdownItDisableUrlEncode from 'markdown-it-disable-url-encode'
 
