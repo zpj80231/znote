@@ -156,8 +156,10 @@ import talkicon2 from './img/talkicon2.png'
 import {
     DEFAULT_PLAY_STATE,
     DEFAULT_VOLUME,
+    getStoredPlaybackProgress,
     getStoredPlaybackState,
     getStoredVolume,
+    setStoredPlaybackProgress,
     setStoredPlaybackState,
     setStoredVolume
 } from './playerStorage'
@@ -168,6 +170,10 @@ const myMusicId = 3068309305
 // 注意：macOS trackpad/部分鼠标有惯性滚动，停手后系统仍会派发 wheel ~1-2s，
 // 这段时间 timer 会被反复重置，所以实际感知 = 惯性 + 此值 + transition(0.5s)
 const LYRIC_SCROLL_RESUME_MS = 1500
+// 播放中节流保存进度，避免 timeupdate 高频写 localStorage。
+const PROGRESS_SAVE_INTERVAL_MS = 5000
+// 恢复进度如果贴近歌曲末尾，留出缓冲，避免刷新后立刻触发 ended 切到下一首。
+const RESTORE_END_GUARD_SECONDS = 3
 export default {
     name: 'Player',
     data() {
@@ -196,6 +202,8 @@ export default {
             musicList: [],
             myMusicList: [],
             thisMusicIndex: 1,
+            // 网络探测成功后读取的上次播放歌曲和进度。
+            pendingPlaybackProgress: null,
             // 播放器展开状态、歌曲列表弹层状态和列表悬停按钮状态。
             disActive: false,
             listIsDis: false,
@@ -232,7 +240,9 @@ export default {
             _onMouseMove: null,
             _onMouseUp: null,
             _userScrollTimer: null,
-            _onDocMouseDown: null
+            _onDocMouseDown: null,
+            _onBeforeUnload: null,
+            _onVisibilityChange: null
         }
     },
     computed: {
@@ -265,6 +275,10 @@ export default {
     created() {
         // 不放 data 是为了避免 Vue 把它做响应式（仅作版本号用）
         this._playToken = 0
+        this._lastProgressSaveAt = 0
+        this._pendingRestoreTime = null
+        this._isTrackLoading = false
+        this._isRestoringPlayback = false
     },
     mounted() {
         // 先探测默认歌单是否可用；只在桌面端显示这个悬浮播放器。
@@ -274,6 +288,7 @@ export default {
                     // 网络探测成功后才读取本地状态，避免异常访问刷新本地有效期。
                     this.playState = getStoredPlaybackState()
                     this.volume = getStoredVolume()
+                    this.pendingPlaybackProgress = getStoredPlaybackProgress()
                     this.visible = true
                     this.$nextTick(() => {
                         const audio = this.$refs.audio
@@ -283,7 +298,11 @@ export default {
                             audio.addEventListener('timeupdate', this.onTimeUpdate)
                             audio.addEventListener('ended', this.onAudioEnded)
                         }
-                        this._getMusicType(myMusicId)
+                        this.bindProgressPersistenceEvents()
+                        const restoreMusicType = this.pendingPlaybackProgress && this.pendingPlaybackProgress.musicType !== -1
+                            ? this.pendingPlaybackProgress.musicType
+                            : myMusicId
+                        this._getMusicType(restoreMusicType)
                     })
                 }
             })
@@ -293,6 +312,7 @@ export default {
     },
     beforeDestroy() {
         // 清理定时器和 document/audio 监听，避免页面切换后残留回调。
+        this.savePlaybackProgress()
         clearTimeout(this.musicAlertTimer)
         clearTimeout(this._userScrollTimer)
         const audio = this.$refs.audio
@@ -303,6 +323,8 @@ export default {
         if (this._onMouseMove) document.removeEventListener('mousemove', this._onMouseMove)
         if (this._onMouseUp) document.removeEventListener('mouseup', this._onMouseUp)
         if (this._onDocMouseDown) document.removeEventListener('mousedown', this._onDocMouseDown)
+        if (this._onBeforeUnload) window.removeEventListener('beforeunload', this._onBeforeUnload)
+        if (this._onVisibilityChange) document.removeEventListener('visibilitychange', this._onVisibilityChange)
     },
     methods: {
         // 移动端空间有限且自动播放限制更多，因此只在桌面端启用。
@@ -356,6 +378,7 @@ export default {
         // 从列表显式播放某首歌；只有用户触发时才把“播放”状态写回本地。
         ListPlay(id, shouldPersist = true) {
             if (this.thisMusicIndex !== id) {
+                if (shouldPersist) this._isRestoringPlayback = false
                 this.thisMusicIndex = id > this.musicList.length - 1 ? 0 : id
                 this.playState = true
                 if (shouldPersist) setStoredPlaybackState(true)
@@ -412,6 +435,16 @@ export default {
                 this._onDocMouseDown = null
             }
         },
+        // 绑定页面生命周期保存点，刷新/切后台前尽量落盘当前进度。
+        bindProgressPersistenceEvents() {
+            if (this._onBeforeUnload || this._onVisibilityChange) return
+            this._onBeforeUnload = () => this.savePlaybackProgress()
+            this._onVisibilityChange = () => {
+                if (document.visibilityState === 'hidden') this.savePlaybackProgress()
+            }
+            window.addEventListener('beforeunload', this._onBeforeUnload)
+            document.addEventListener('visibilitychange', this._onVisibilityChange)
+        },
         // 竖向音量条：底部 = 0%、顶部 = 100%
         handleVolumeDown(ev) {
             const slider = this.$refs.volumeSlider
@@ -458,10 +491,23 @@ export default {
         getMusicDetail(res, id) {
             this.musicList = res.data.playlist.tracks.slice(0, 200)
             this.thisMusicType = id
-            this.thisMusicIndex = 0
+            const restoredIndex = this.getRestoredTrackIndex(id)
+            this.thisMusicIndex = restoredIndex >= 0 ? restoredIndex : 0
+            this._pendingRestoreTime = restoredIndex >= 0 ? this.pendingPlaybackProgress.currentTime : null
+            this._isRestoringPlayback = restoredIndex >= 0
+            this.pendingPlaybackProgress = null
             this.thisListPage = 1
             this._getInfo()
             this.resetLyricState()
+        },
+        // 根据上次保存的 trackId 优先恢复歌曲；找不到时再用索引兜底。
+        getRestoredTrackIndex(id) {
+            const progress = this.pendingPlaybackProgress
+            if (!progress || progress.musicType !== id || this.musicList.length === 0) return -1
+            const trackId = Number(progress.trackId)
+            const byId = this.musicList.findIndex(item => Number(item.id) === trackId)
+            if (byId >= 0) return byId
+            return progress.trackIndex >= 0 && progress.trackIndex < this.musicList.length ? progress.trackIndex : -1
         },
         // 加载当前歌曲的播放地址、封面、歌词和热门评论。
         _getInfo() {
@@ -476,6 +522,11 @@ export default {
                 if (token !== this._playToken) return
                 const url = res.data.data[0].url
                 if (url === null || url === '' || url === undefined) {
+                    if (this._isRestoringPlayback) {
+                        // 刷新恢复时当前歌曲临时无地址，只保留本地记录的歌曲和播放状态，不自动污染到下一首。
+                        this.MusicAlert(`${track.name}暂时不能播放，已保留上次播放状态`)
+                        return
+                    }
                     // 当前歌曲无可用地址时跳到下一首，直到整个列表都不可播。
                     if (this.notPlay.length !== this.musicList.length) {
                         const nextIndex = (idx + 1) % this.musicList.length
@@ -489,13 +540,15 @@ export default {
                     }
                 } else {
                     // 播放地址和封面统一转 https，避免站点 https 下出现混合内容。
+                    this._isTrackLoading = true
                     this.musicUrl = url.replace(/^http:\/\//, 'https://')
                     this.musicImg = track.al.picUrl.replace(/^http:\/\//, 'https://') + '?param=300y300'
                     this.musicTitle = track.name
                     this.musicName = track.ar.map(i => i.name).join('/')
-                    if (this.playState) {
-                        this.$nextTick(() => this.ensureAudioPlay())
-                    }
+                    this.$nextTick(() => {
+                        this.markCurrentAudioReady(token)
+                        if (this.playState) this.ensureAudioPlay()
+                    })
 
                     // 歌词和评论与播放地址并行加载；token 失效时丢弃旧响应。
                     getWords(track.id).then((res) => {
@@ -554,19 +607,101 @@ export default {
             this.musicWords = []
             this.wordsTime = []
         },
+        // 把恢复出来的秒数写回 audio；等待 metadata 后再设置可避免浏览器忽略 currentTime。
+        restorePendingAudioTime() {
+            const audio = this.$refs.audio
+            const pendingTime = this._pendingRestoreTime
+            if (!audio || pendingTime === null || pendingTime === undefined) return
+            const apply = () => {
+                const duration = Number(audio.duration)
+                const maxRestoreTime = Number.isFinite(duration) && duration > 0
+                    ? Math.max(0, duration - RESTORE_END_GUARD_SECONDS)
+                    : pendingTime
+                audio.currentTime = Number.isFinite(duration) && duration > 0
+                    ? Math.min(pendingTime, maxRestoreTime)
+                    : pendingTime
+                this.alignLyricToTime(audio.currentTime)
+                this._pendingRestoreTime = null
+            }
+            if (audio.readyState >= 1) {
+                apply()
+            } else {
+                audio.addEventListener('loadedmetadata', apply, { once: true })
+            }
+        },
+        // 新音频 metadata 就绪后，audio.currentTime 才能安全地和当前歌曲索引绑定。
+        markCurrentAudioReady(token) {
+            const audio = this.$refs.audio
+            if (!audio) {
+                this._isTrackLoading = false
+                return
+            }
+            const ready = () => {
+                if (token !== this._playToken) return
+                this._isTrackLoading = false
+                this.restorePendingAudioTime()
+            }
+            if (audio.readyState >= 1) {
+                ready()
+            } else {
+                audio.addEventListener('loadedmetadata', ready, { once: true })
+            }
+        },
+        // 生成当前歌曲进度快照；异常和无歌曲时返回 null，避免污染本地状态。
+        getPlaybackProgressSnapshot(currentTime) {
+            if (this._isTrackLoading) return null
+            const audio = this.$refs.audio
+            const track = this.musicList[this.thisMusicIndex]
+            const time = currentTime === undefined ? audio && audio.currentTime : currentTime
+            if (!track || !Number.isFinite(Number(time))) return null
+            return {
+                musicType: this.thisMusicType,
+                trackId: track.id,
+                trackIndex: this.thisMusicIndex,
+                currentTime: Math.max(0, Number(time))
+            }
+        },
+        // 不读取 audio.currentTime，专门用于切歌边界保存“某首歌从 0 秒开始”。
+        savePlaybackProgressForIndex(trackIndex, currentTime) {
+            if (!this.visible) return
+            const track = this.musicList[trackIndex]
+            if (!track) return
+            setStoredPlaybackProgress({
+                musicType: this.thisMusicType,
+                trackId: track.id,
+                trackIndex,
+                currentTime
+            })
+        },
+        // 立即保存当前歌曲进度；只在播放器已正常加载后调用。
+        savePlaybackProgress(currentTime) {
+            if (!this.visible) return
+            const progress = this.getPlaybackProgressSnapshot(currentTime)
+            if (progress) setStoredPlaybackProgress(progress)
+        },
+        // 播放中节流保存进度，减少 localStorage 写入频率。
+        savePlaybackProgressThrottled() {
+            const now = Date.now()
+            if (now - this._lastProgressSaveAt < PROGRESS_SAVE_INTERVAL_MS) return
+            this._lastProgressSaveAt = now
+            this.savePlaybackProgress()
+        },
         // 播放按钮入口：根据当前状态决定暂停或尝试播放。
         togglePlay() {
             const audio = this.$refs.audio
             if (!audio) return
+            this._isRestoringPlayback = false
             if (this.playState) {
+                this.playState = false
                 setStoredPlaybackState(false)
                 audio.pause()
             } else {
+                this.playState = true
                 setStoredPlaybackState(true)
                 this.ensureAudioPlay()
             }
         },
-        // 封装 audio.play()，兼容现代浏览器返回 Promise 的自动播放拦截场景。
+        // 封装 audio.play()；playState 只表达本地用户意图，播放失败不能把 playing 改成 paused。
         ensureAudioPlay() {
             const audio = this.$refs.audio
             if (!audio || !this.musicUrl) return
@@ -574,35 +709,28 @@ export default {
             const playPromise = audio.play()
             if (playPromise && typeof playPromise.catch === 'function') {
                 playPromise
-                    .then(() => {
-                        this.playState = true
-                    })
                     .catch(() => {
-                        // 浏览器策略或资源异常导致播放失败时，只回落界面状态，不覆盖用户本地意图。
-                        this.playState = false
+                        // 浏览器策略或资源异常只影响真实音频，不覆盖本地 playing 状态。
                     })
-            } else {
-                this.playState = !audio.paused
             }
         },
-        // audio 原生 play 事件只同步界面状态；持久化只在用户操作入口触发。
+        // audio 原生 play 事件不改 playState；playState 必须和本地用户意图一致。
         onAudioPlay() {
-            this.playState = true
         },
-        // audio 原生 pause 事件只同步界面状态，避免异常暂停覆盖用户意图。
+        // audio 原生 pause 事件不改 playState，避免刷新/异常暂停把本地 playing 显示成 paused。
         onAudioPause() {
-            this.playState = false
         },
-        // 资源异常只影响当前 UI 状态，不写入本地播放偏好。
+        // 资源异常不改 playState，也不写本地进度，避免下次刷新继承错误状态。
         onAudioError() {
-            this.playState = false
         },
         // 播放进度推进时同步进度条和歌词高亮。
         onTimeUpdate() {
             if (this.isDraggingProgress) return
             const audio = this.$refs.audio
             if (!audio || !audio.duration) return
+            if (this._isRestoringPlayback) this._isRestoringPlayback = false
             this.currentProgress = `${(audio.currentTime / audio.duration) * 100}%`
+            this.savePlaybackProgressThrottled()
 
             const lyricLines = this.$refs.lyricLines || []
             const lyricBox = this.$refs.lyricBox
@@ -625,11 +753,14 @@ export default {
         },
         // 当前歌曲结束后按列表循环逻辑切到下一首。
         onAudioEnded() {
+            if (this._isTrackLoading || this._isRestoringPlayback) return
             // loop=true 时不会触发；此处只处理列表循环
             if (this.musicList.length > 1) {
                 this.thisMusicIndex = this.thisMusicIndex >= this.musicList.length - 1 ? 0 : this.thisMusicIndex + 1
+                this.savePlaybackProgressForIndex(this.thisMusicIndex, 0)
                 this._getInfo()
             } else {
+                this.savePlaybackProgressForIndex(this.thisMusicIndex, 0)
                 const audio = this.$refs.audio
                 if (audio) this.ensureAudioPlay()
             }
@@ -660,10 +791,12 @@ export default {
                 audio.currentTime = audio.duration * pro
                 this.alignLyricToTime(audio.currentTime)
                 this.isDraggingProgress = false
+                this._isRestoringPlayback = false
 
                 if (audio.currentTime >= audio.duration) {
                     this.resetLyricState()
                 }
+                this.savePlaybackProgress()
                 this.ensureAudioPlay()
             }
             // 先解绑再绑定，避免多次拖动叠加

@@ -5,6 +5,7 @@ export const DEFAULT_PLAY_STATE = true
 // 音量和播放状态
 export const VOLUME_STORAGE_KEY = 'musicPlayer.volume'
 export const PLAYBACK_STATE_STORAGE_KEY = 'musicPlayer.playState'
+export const PLAYBACK_PROGRESS_STORAGE_KEY = 'musicPlayer.playbackProgress'
 
 // 本地状态采用滑动过期：每次成功读取都会续期 15 天。
 export const STORAGE_TTL_MS = 15 * 24 * 60 * 60 * 1000
@@ -120,4 +121,45 @@ export function setStoredPlaybackState(isPlaying, storage, now = Date.now()) {
         createStoredValue(isPlaying ? PLAYBACK_STATE_PLAYING : PLAYBACK_STATE_PAUSED, now),
         storage
     )
+}
+
+// 标准化歌曲进度对象，避免把非法值写入 localStorage。
+function normalizePlaybackProgress(progress) {
+    if (!progress || typeof progress !== 'object') return null
+    const musicType = Number(progress.musicType)
+    const trackId = Number(progress.trackId)
+    const trackIndex = Number(progress.trackIndex)
+    const currentTime = Number(progress.currentTime)
+    if (![musicType, trackId, trackIndex, currentTime].every(Number.isFinite)) return null
+    if (trackIndex < 0 || currentTime < 0) return null
+    return {
+        musicType,
+        trackId,
+        trackIndex,
+        currentTime
+    }
+}
+
+// 读取上次播放的歌曲和进度；无值、过期或格式非法时返回 null。
+export function getStoredPlaybackProgress(storage, now = Date.now()) {
+    const value = getStoredValue(
+        PLAYBACK_PROGRESS_STORAGE_KEY,
+        null,
+        item => normalizePlaybackProgress(item) !== null,
+        storage,
+        now
+    )
+    return normalizePlaybackProgress(value)
+}
+
+// 保存当前歌曲和播放进度，并刷新 15 天有效期。
+export function setStoredPlaybackProgress(progress, storage, now = Date.now()) {
+    const normalized = normalizePlaybackProgress(progress)
+    if (!normalized) return
+    writeStorageItem(PLAYBACK_PROGRESS_STORAGE_KEY, createStoredValue(normalized, now), storage)
+}
+
+// 歌曲进度彻底失效时主动清除，避免恢复到已播放完的旧位置。
+export function removeStoredPlaybackProgress(storage) {
+    removeStorageItem(PLAYBACK_PROGRESS_STORAGE_KEY, storage)
 }
