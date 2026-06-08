@@ -5,6 +5,11 @@
 </template>
 
 <script>
+const { Prism, loadPrismLanguages } = require('./prismLanguages')
+const { highlightCodeBlocks } = require('./highlightCodeBlocks')
+
+loadPrismLanguages()
+
 export default {
   name: 'CwdComments',
   props: {
@@ -234,12 +239,24 @@ export default {
         widget.classList.add(`theme-${theme}`)
       }
     },
+    highlightCommentCodeBlocks(shadowRoot) {
+      const highlight = () => {
+        highlightCodeBlocks(shadowRoot, Prism)
+      }
+
+      if (typeof window !== 'undefined' && typeof window.requestAnimationFrame === 'function') {
+        window.requestAnimationFrame(highlight)
+      } else {
+        setTimeout(highlight, 0)
+      }
+    },
     observeShadowRoot(shadowRoot) {
       const shadowObserver = new MutationObserver(() => {
         this.updateInputsPlaceholder(shadowRoot)
         this.addThemeClassToShadowRoot(shadowRoot)
         this.setupFormValidation(shadowRoot)
         this.injectEmojiPicker(shadowRoot)
+        this.highlightCommentCodeBlocks(shadowRoot)
       })
       shadowObserver.observe(shadowRoot, {
         childList: true,
@@ -247,6 +264,7 @@ export default {
       })
       this.setupFormValidation(shadowRoot)
       this.injectEmojiPicker(shadowRoot)
+      this.highlightCommentCodeBlocks(shadowRoot)
     },
     injectEmojiPicker(shadowRoot) {
       const textarea = shadowRoot.querySelector('textarea')
