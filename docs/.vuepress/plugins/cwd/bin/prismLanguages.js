@@ -1,4 +1,9 @@
+const globalScope = typeof globalThis !== 'undefined' ? globalThis : {}
+globalScope.Prism = globalScope.Prism || {}
+globalScope.Prism.manual = true
+
 const Prism = require('prismjs')
+Prism.manual = true
 
 const SUPPORTED_PRISM_LANGUAGES = [
   'markup',
