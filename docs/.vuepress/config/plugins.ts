@@ -93,7 +93,7 @@ export default [
     }],
     ['@vuepress/last-updated', {
         transformer: (timestamp, lang) => {
-            return dayjs(timestamp).utcOffset(480).format('YYYY/MM/DD HH:mm:ss');
+            return dayjs(timestamp).utcOffset(480).format('YYYY/MM/DD');
         }
     }],
     ['vuepress-plugin-boxx'],
