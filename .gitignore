@@ -10,9 +10,6 @@ docs/.vuepress/dist/
 # idea
 .idea/
 
-# trae
-.trae/
-
 # npm
 node_modules
 node_modules/
@@ -23,3 +20,20 @@ yarn-error.log
 
 # mac
 *.DS_Store
+
+# AI IDE
+.cursor/
+.trae/
+.windsurf/
+.cline/
+.roo/
+.continue/
+.augment/
+.claude/
+.gemini/
+.opencode/
+.goose/
+.crush/
+.copilot/
+.aider*
+.ai/
