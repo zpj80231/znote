@@ -47,7 +47,9 @@ isShowComments: true
 
 ### 2.3 非正式激活（推荐）🌟
 
-- 参考项目说明即可：[https://github.com/zpj80231/idea-set.git](https://github.com/zpj80231/idea-set.git)
+- 参考项目说明即可：
+  - ~~[https://github.com/zpj80231/idea-set.git](https://github.com/zpj80231/idea-set.git)~~ （已被 DMCA）
+  - [https://gitea.998043.xyz/ace/idea-set](https://gitea.998043.xyz/ace/idea-set)
 - 激活后只需定期更新仓库即可，这样你能一直获取到最新功能。当然，有能力的还是推荐购买正版激活。
 
 ### 2.4 非正式激活-支持功能列表
