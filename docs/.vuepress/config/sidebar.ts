@@ -83,6 +83,7 @@ export default {
                 'source/code/spring/spring-source-13', 'source/code/spring/spring-source-14',
                 'source/code/spring/spring-source-15',
                 'source/code/jdbc/jdbc-pool-source-01',
+                'source/code/breephone/breephone',
             ]
         },
         {
