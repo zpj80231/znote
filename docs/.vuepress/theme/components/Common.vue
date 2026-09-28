@@ -451,4 +451,12 @@ export default {
 .fade-enter, .fade-leave-to {
   opacity: 0;
 }
+
+// 首屏加载遮罩在淡出的 0.5s 里，opacity 已经衰减到 0（看上去已经没了），
+// 但它仍然铺满视口且 pointer-events 是 auto（z-index 22，连导航栏都盖住），
+// 于是这 0.5s 内的点击全部被它吃掉：点右侧目录/链接没有任何反应，hash 也不变。
+// 淡出期间让它不参与命中测试即可。
+.loading-wrapper.fade-leave-active, .loading-wrapper.fade-leave-to {
+  pointer-events: none;
+}
 </style>
