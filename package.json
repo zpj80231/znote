@@ -1,7 +1,7 @@
 {
 	"name": "znote",
 	"version": "1.4.0",
-	"description": "VuePress 静态布局 Blog，清新+ 简洁+。",
+	"description": "VuePress \u9759\u6001\u5e03\u5c40 Blog\uff0c\u6e05\u65b0+ \u7b80\u6d01+\u3002",
 	"homepage": "https://bree.de5.net/znote/",
 	"license": "MIT",
 	"keywords": [
@@ -49,5 +49,10 @@
 		"core-js": "^3.49.0",
 		"tslib": "^2.8.1",
 		"vuepress-plugin-canonical": "^1.0.0"
+	},
+	"pnpm": {
+		"overrides": {
+			"dompurify": "3.4.13"
+		}
 	}
 }
