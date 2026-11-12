@@ -305,4 +305,23 @@ body {
 .repo-link
   display none !important
 
+// 搜索框边框：主题那条规则用了未定义的 --borderColor（驼峰），回退成 #ccc，暗色下偏白刺眼
+// 状态顺序：默认(中性) -> hover(中性，仅轻微加深) -> focus(主题绿 + 光晕)；focus 规则必须放在最后，
+// 否则 hover 会盖掉聚焦色。
+.navbar .search-box input
+  border-color var(--search-border, #eaecef)
+  transition border-color .2s ease, box-shadow .2s ease
+  &:hover
+    border-color var(--search-border-hover, #c0c4cc)
+
+@media (prefers-color-scheme: dark)
+  .navbar .search-box input
+    border-color var(--search-border, rgba(255, 255, 255, .16))
+    &:hover
+      border-color var(--search-border-hover, rgba(255, 255, 255, .26))
+
+.navbar .search-box input:focus
+  border-color $accentColor
+  box-shadow 0 0 0 3px var(--search-focus-ring, rgba($accentColor, .15))
+
 @require './markdown-container'
