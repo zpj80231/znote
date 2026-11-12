@@ -100,7 +100,7 @@ isShowComments: true
     <em>Thanks for you!</em>
 </p>
 
-<link rel="stylesheet" href="https://ico.z01.com/zico.min.css">
+<link rel="stylesheet" :href="$withBase('/zico/zico.min.css')">
 
 <style lang="stylus" scoped> 
 
