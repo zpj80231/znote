@@ -172,10 +172,14 @@ const myMusicId = 3068309305
 const LYRIC_SCROLL_RESUME_MS = 1500
 // 播放中节流保存进度，避免 timeupdate 高频写 localStorage。
 const PROGRESS_SAVE_INTERVAL_MS = 5000
-// 获取歌曲播放地址最多等待 5 秒，超时后自动跳到下一首。
+// 获取歌曲播放地址的总等待时间，超时就跳下一首。
+// 别往上加：这只是在等接口返回地址，不是等音频加载，等太久用户只觉得"点了没反应"。
+// 也别压到 3s 以下：正常一次就要 1~2s，换 IP 重试还得占掉几次。
 const MUSIC_URL_LOAD_TIMEOUT_MS = 5000
 // 恢复进度如果贴近歌曲末尾，留出缓冲，避免刷新后立刻触发 ended 切到下一首。
 const RESTORE_END_GUARD_SECONDS = 3
+// "正在加载音频"的标志最多保持这么久；慢网或坏链导致 metadata 不来时到点强制放开，不把切歌堵死
+const TRACK_LOADING_GUARD_MS = 10000
 export default {
     name: 'Player',
     data() {
@@ -282,6 +286,10 @@ export default {
         this._isTrackLoading = false
         this._isRestoringPlayback = false
         this._musicUrlLoadTimer = null
+        this._trackLoadingTimer = null
+        this._autoplayArmed = false
+        this._autoplayResumeHandler = null
+        this._consecutiveFailures = 0
     },
     mounted() {
         // 先探测默认歌单是否可用；只在桌面端显示这个悬浮播放器。
@@ -319,6 +327,12 @@ export default {
         clearTimeout(this.musicAlertTimer)
         clearTimeout(this._userScrollTimer)
         this.clearMusicUrlLoadTimer()
+        this.clearTrackLoadingGuard()
+        if (this._autoplayResumeHandler) {
+            document.removeEventListener('pointerdown', this._autoplayResumeHandler, true)
+            document.removeEventListener('keydown', this._autoplayResumeHandler, true)
+            this._autoplayResumeHandler = null
+        }
         const audio = this.$refs.audio
         if (audio) {
             audio.removeEventListener('timeupdate', this.onTimeUpdate)
@@ -527,6 +541,14 @@ export default {
                 this.MusicAlert('此列表所有歌都不能播放')
                 return
             }
+            // 连着失败好几首就不再跳了：网络一断，这套逻辑能一口气把 200 首刷完
+            this._consecutiveFailures += 1
+            if (this._consecutiveFailures >= 5) {
+                this.MusicAlert('连续几首都放不了，可能是网络或音源问题，先停这儿')
+                this.playState = false
+                setStoredPlaybackState(false)
+                return
+            }
 
             const nextIndex = (idx + 1) % this.musicList.length
             this.thisMusicIndex = nextIndex
@@ -555,12 +577,16 @@ export default {
             getMusicUrl(track.id).then((res) => {
                 if (token !== this._playToken) return
                 this.clearMusicUrlLoadTimer()
-                const url = res.data.data[0].url
-                if (url === null || url === '' || url === undefined) {
+                const first = res.data.data && res.data.data[0]
+                const url = first && first.url
+                if (!url) {
+                    // 换过几个 IP 还是空音源（版权/风控），这首就是放不了。
+                    // 只弹提示不切歌的话播放器会停在这儿干等，看起来就是"播完卡住了"
                     this.MusicAlert(`${track.name}因为一些原因不能播放`)
+                    this.autoSkipToNextTrack(idx, token, '')
                 } else {
                     // 播放地址和封面统一转 https，避免站点 https 下出现混合内容。
-                    this._isTrackLoading = true
+                    this.markTrackLoading()
                     this.musicUrl = url.replace(/^http:\/\//, 'https://')
                     this.musicImg = track.al.picUrl.replace(/^http:\/\//, 'https://') + '?param=300y300'
                     this.musicTitle = track.name
@@ -598,6 +624,7 @@ export default {
                 if (token !== this._playToken) return
                 this.clearMusicUrlLoadTimer()
                 this.MusicAlert(`${track.name}获取失败`)
+                this.autoSkipToNextTrack(idx, token, '')
             })
         },
 
@@ -653,15 +680,32 @@ export default {
                 audio.addEventListener('loadedmetadata', apply, { once: true })
             }
         },
+        // 标记"正在加载这首歌"。给个兜底：metadata 迟迟不来（慢网/坏链）时到点强制放开，
+        // 不然这个标志会一直挂着，切歌期间的进度就被当成无效、永远不写 localStorage
+        markTrackLoading() {
+            this._isTrackLoading = true
+            clearTimeout(this._trackLoadingTimer)
+            this._trackLoadingTimer = setTimeout(() => {
+                this._trackLoadingTimer = null
+                this._isTrackLoading = false
+            }, TRACK_LOADING_GUARD_MS)
+        },
+        clearTrackLoadingGuard() {
+            if (!this._trackLoadingTimer) return
+            clearTimeout(this._trackLoadingTimer)
+            this._trackLoadingTimer = null
+        },
         // 新音频 metadata 就绪后，audio.currentTime 才能安全地和当前歌曲索引绑定。
         markCurrentAudioReady(token) {
             const audio = this.$refs.audio
             if (!audio) {
+                this.clearTrackLoadingGuard()
                 this._isTrackLoading = false
                 return
             }
             const ready = () => {
                 if (token !== this._playToken) return
+                this.clearTrackLoadingGuard()
                 this._isTrackLoading = false
                 this.restorePendingAudioTime()
             }
@@ -710,12 +754,13 @@ export default {
             this._lastProgressSaveAt = now
             this.savePlaybackProgress()
         },
-        // 播放按钮入口：根据当前状态决定暂停或尝试播放。
+        // 播放按钮入口。看 audio 的真实 paused，别看 playState：
+        // 自动播放被浏览器拦下时 playState 仍是 true，照它走第一次点击只会把状态翻成"暂停"，用户得点两下才出声
         togglePlay() {
             const audio = this.$refs.audio
             if (!audio) return
             this._isRestoringPlayback = false
-            if (this.playState) {
+            if (!audio.paused) {
                 this.playState = false
                 setStoredPlaybackState(false)
                 audio.pause()
@@ -726,26 +771,67 @@ export default {
             }
         },
         // 封装 audio.play()；playState 只表达本地用户意图，播放失败不能把 playing 改成 paused。
-        ensureAudioPlay() {
+        ensureAudioPlay(canRetry = true) {
             const audio = this.$refs.audio
             if (!audio || !this.musicUrl) return
             this.playState = true
             const playPromise = audio.play()
             if (playPromise && typeof playPromise.catch === 'function') {
                 playPromise
-                    .catch(() => {
-                        // 浏览器策略或资源异常只影响真实音频，不覆盖本地 playing 状态。
+                    .catch((err) => {
+                        // 刷新后没有用户手势，浏览器直接拒（NotAllowedError）：
+                        // 挂个一次性监听，等第一次点击/按键再补播，不然界面显示在播、其实一声没有
+                        if (canRetry && err && err.name === 'NotAllowedError') {
+                            this.armAutoplayResume()
+                        }
                     })
             }
         },
+        // 自动播放被拦时，等用户第一次交互再补一次 play；补失败就不再重挂，免得每次点击都白跑一趟
+        armAutoplayResume() {
+            if (this._autoplayArmed) return
+            this._autoplayArmed = true
+            const resume = (ev) => {
+                // 点在播放器里面就先放过：这里是捕获阶段，抢在播放键的 click 之前开播的话，
+                // 轮到按钮判断时 audio 已经在播，一次点击就被它当成"暂停"了
+                if (ev && ev.target && this.$el && this.$el.contains(ev.target)) return
+                document.removeEventListener('pointerdown', resume, true)
+                document.removeEventListener('keydown', resume, true)
+                this._autoplayResumeHandler = null
+                this._autoplayArmed = false
+                const audio = this.$refs.audio
+                // 这期间用户自己点了暂停（playState 已翻成 false）就别自作主张开播
+                if (audio && audio.paused && this.playState) this.ensureAudioPlay(false)
+            }
+            // 存一份引用，beforeDestroy 里要摘掉，别把这个闭包留在 document 上
+            this._autoplayResumeHandler = resume
+            document.addEventListener('pointerdown', resume, true)
+            document.addEventListener('keydown', resume, true)
+        },
         // audio 原生 play 事件不改 playState；playState 必须和本地用户意图一致。
         onAudioPlay() {
+            // 真唱起来了，说明音源和网络都正常，把连续失败计数清零
+            this._consecutiveFailures = 0
+            // 唱起来了说明这首没问题，从失败名单摘掉；否则它一直留在 notPlay 里，
+            // 攒够整个列表就会误报"此列表所有歌都不能播放"
+            const idx = this.thisMusicIndex
+            if (this.notPlay.indexOf(idx) !== -1) {
+                this.notPlay = this.notPlay.filter(i => i !== idx)
+            }
         },
         // audio 原生 pause 事件不改 playState，避免刷新/异常暂停把本地 playing 显示成 paused。
         onAudioPause() {
         },
-        // 资源异常不改 playState，也不写本地进度，避免下次刷新继承错误状态。
+        // 音频加载失败时浏览器不会再给别的回调：不收尾就会一直卡在"加载中"，连 ended 都进不来
         onAudioError() {
+            if (!this.musicUrl) return
+            this._isTrackLoading = false
+            if (!this.playState) return
+            this.autoSkipToNextTrack(
+                this.thisMusicIndex,
+                this._playToken,
+                `${this.musicTitle || '当前歌曲'}播放失败，已跳到下一首`
+            )
         },
         // 播放进度推进时同步进度条和歌词高亮。
         onTimeUpdate() {
@@ -777,7 +863,11 @@ export default {
         },
         // 当前歌曲结束后按列表循环逻辑切到下一首。
         onAudioEnded() {
-            if (this._isTrackLoading || this._isRestoringPlayback) return
+            // 能收到 ended 说明音频确实放完了，卡住的加载/恢复标志在这里一并清掉。
+            // 原先是这两个标志为 true 就直接 return，只要有一个残留成 true（加载超时、音频报错、
+            // 恢复进度后用户一直没让它播），往后每次播完都会被静默吞掉 —— 表现就是"歌放完了不切下一首"
+            this._isTrackLoading = false
+            this._isRestoringPlayback = false
             // loop=true 时不会触发；此处只处理列表循环
             if (this.musicList.length > 1) {
                 this.thisMusicIndex = this.thisMusicIndex >= this.musicList.length - 1 ? 0 : this.thisMusicIndex + 1
