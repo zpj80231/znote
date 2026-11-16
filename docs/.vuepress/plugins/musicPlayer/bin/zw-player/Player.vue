@@ -290,6 +290,7 @@ export default {
         this._autoplayArmed = false
         this._autoplayResumeHandler = null
         this._consecutiveFailures = 0
+        this._lastPositionSync = 0
     },
     mounted() {
         // 先探测默认歌单是否可用；只在桌面端显示这个悬浮播放器。
@@ -310,6 +311,7 @@ export default {
                             audio.addEventListener('ended', this.onAudioEnded)
                         }
                         this.bindProgressPersistenceEvents()
+                        this.setupMediaSession()
                         const restoreMusicType = this.pendingPlaybackProgress && this.pendingPlaybackProgress.musicType !== -1
                             ? this.pendingPlaybackProgress.musicType
                             : myMusicId
@@ -337,6 +339,14 @@ export default {
         if (audio) {
             audio.removeEventListener('timeupdate', this.onTimeUpdate)
             audio.removeEventListener('ended', this.onAudioEnded)
+        }
+        if (navigator && navigator.mediaSession) {
+            // 不摘干净的话，播放器销毁后媒体键还指在这个实例上，按了没反应还查不出原因
+            const actions = ['play', 'pause', 'previoustrack', 'nexttrack', 'seekbackward', 'seekforward']
+            actions.forEach((action) => {
+                try { navigator.mediaSession.setActionHandler(action, null) } catch (e) { /* 忽略不支持的 action */ }
+            })
+            try { navigator.mediaSession.metadata = null } catch (e) { /* 忽略 */ }
         }
         if (this._onMouseMove) document.removeEventListener('mousemove', this._onMouseMove)
         if (this._onMouseUp) document.removeEventListener('mouseup', this._onMouseUp)
@@ -462,6 +472,75 @@ export default {
             }
             window.addEventListener('beforeunload', this._onBeforeUnload)
             document.addEventListener('visibilitychange', this._onVisibilityChange)
+        },
+        // 媒体键（macOS 的 F7/F8/F9、控制中心、蓝牙耳机线控）走的不是 keydown，
+        // 系统会把按键路由给"当前在播的媒体应用"，网页只能声明自己是那个应用 —— 也就是这套 API。
+        // 注册完 Safari/Chrome 会把本站挂进系统的"正在播放"，媒体键才开始有反应。
+        setupMediaSession() {
+            const ms = navigator && navigator.mediaSession
+            if (!ms || typeof ms.setActionHandler !== 'function') return
+            const bind = (action, handler) => {
+                // 不支持某个 action 时浏览器会抛 TypeError，别让它把整个初始化带崩
+                try { ms.setActionHandler(action, handler) } catch (e) { /* 忽略不支持的 action */ }
+            }
+            bind('play', () => {
+                this.playState = true
+                setStoredPlaybackState(true)
+                this.ensureAudioPlay()
+            })
+            bind('pause', () => {
+                this.playState = false
+                setStoredPlaybackState(false)
+                const audio = this.$refs.audio
+                if (audio) audio.pause()
+            })
+            bind('previoustrack', () => this.PlayPrev())
+            bind('nexttrack', () => this.PlayNext())
+            bind('seekbackward', (d) => this.nudgeAudioTime(-((d && d.seekOffset) || 10)))
+            bind('seekforward', (d) => this.nudgeAudioTime((d && d.seekOffset) || 10))
+            this.updateMediaMetadata()
+        },
+        // 把当前曲目推给系统，控制中心/触控栏才显示歌名和封面
+        updateMediaMetadata() {
+            const ms = navigator && navigator.mediaSession
+            if (!ms || typeof window.MediaMetadata !== 'function') return
+            try {
+                ms.metadata = new window.MediaMetadata({
+                    title: this.musicTitle || 'znote',
+                    artist: this.musicName || '',
+                    album: 'znote',
+                    artwork: this.musicImg ? [{ src: this.musicImg, sizes: '300x300' }] : []
+                })
+            } catch (e) { /* 老浏览器构造失败就跳过，不影响播放 */ }
+        },
+        // playbackState 不跟着 audio 事件走是不行的：系统据此判断媒体键该按"播放"还是"暂停"处理
+        syncMediaPlaybackState(state) {
+            const ms = navigator && navigator.mediaSession
+            if (!ms) return
+            try { ms.playbackState = state } catch (e) { /* 不支持就算了 */ }
+        },
+        // 控制中心那根进度条要靠这个喂，timeupdate 太密，只在超过阈值时更新
+        syncMediaPosition() {
+            const ms = navigator && navigator.mediaSession
+            const audio = this.$refs.audio
+            if (!ms || typeof ms.setPositionState !== 'function' || !audio) return
+            const duration = Number(audio.duration)
+            if (!Number.isFinite(duration) || duration <= 0) return
+            const now = Date.now()
+            if (this._lastPositionSync && now - this._lastPositionSync < 2000) return
+            this._lastPositionSync = now
+            try {
+                ms.setPositionState({
+                    duration,
+                    playbackRate: audio.playbackRate || 1,
+                    position: Math.min(audio.currentTime, duration)
+                })
+            } catch (e) { /* 参数越界时浏览器会抛，忽略即可 */ }
+        },
+        nudgeAudioTime(offset) {
+            const audio = this.$refs.audio
+            if (!audio || !Number.isFinite(audio.duration)) return
+            audio.currentTime = Math.max(0, Math.min(audio.duration, audio.currentTime + offset))
         },
         // 竖向音量条：底部 = 0%、顶部 = 100%
         handleVolumeDown(ev) {
@@ -591,6 +670,7 @@ export default {
                     this.musicImg = track.al.picUrl.replace(/^http:\/\//, 'https://') + '?param=300y300'
                     this.musicTitle = track.name
                     this.musicName = track.ar.map(i => i.name).join('/')
+                    this.updateMediaMetadata()
                     this.$nextTick(() => {
                         this.markCurrentAudioReady(token)
                         if (this.playState) this.ensureAudioPlay()
@@ -810,6 +890,7 @@ export default {
         },
         // audio 原生 play 事件不改 playState；playState 必须和本地用户意图一致。
         onAudioPlay() {
+            this.syncMediaPlaybackState('playing')
             // 真唱起来了，说明音源和网络都正常，把连续失败计数清零
             this._consecutiveFailures = 0
             // 唱起来了说明这首没问题，从失败名单摘掉；否则它一直留在 notPlay 里，
@@ -821,6 +902,7 @@ export default {
         },
         // audio 原生 pause 事件不改 playState，避免刷新/异常暂停把本地 playing 显示成 paused。
         onAudioPause() {
+            this.syncMediaPlaybackState('paused')
         },
         // 音频加载失败时浏览器不会再给别的回调：不收尾就会一直卡在"加载中"，连 ended 都进不来
         onAudioError() {
@@ -841,6 +923,7 @@ export default {
             if (this._isRestoringPlayback) this._isRestoringPlayback = false
             this.currentProgress = `${(audio.currentTime / audio.duration) * 100}%`
             this.savePlaybackProgressThrottled()
+            this.syncMediaPosition()
 
             const lyricLines = this.$refs.lyricLines || []
             const lyricBox = this.$refs.lyricBox
